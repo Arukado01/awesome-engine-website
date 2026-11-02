@@ -1,103 +1,47 @@
-# Registro de validación
+# Validación y estado de entrega
 
-Revisión independiente de contenido e infraestructura realizada el **1 de noviembre de 2026**, zona America/Bogota. Este registro separa las comprobaciones ejecutadas de las que requieren una build final, navegador o servicios externos.
+El sitio es independiente del motor. La referencia técnica auditada es `5a6dfacd86414c4cdfaa7157b533330f173a3126`; los cambios locales se etiquetan por separado.
 
-## Contenido técnico
+## Comprobaciones aprobadas
 
-| Comprobación ejecutada | Resultado observado |
+| Área | Evidencia |
 | --- | --- |
-| Lectura del núcleo, managers, escenas, efectos, configuración y herramientas del motor | Arquitectura documentada contra `5a6dfacd86414c4cdfaa7157b533330f173a3126`. |
-| Diferencia entre HEAD y árbol local | AudioGroup, SpriteAnimator, SweptAabb y refactorización de cooldown identificados como cambios locales, no releases. |
-| Frontmatter de documentación | Nueve guías con `title`, `description`, `category` y órdenes numéricos únicos 1–9. |
-| Referencias de código de las guías y auditoría | 35 destinos de permalinks comprobados contra objetos Git del SHA de referencia. Esta comprobación es local; no representa 35 peticiones HTTP. |
-| Destinos entre guías Markdown | Todos los enlaces `/docs/<guía>/` examinados tienen un archivo correspondiente. |
-| Historial de mejoras | Los 14 commits de `src/data/updates.ts` existen y sus fechas ISO coinciden exactamente con `%aI` de Git. |
-| Descripciones de cambios relevantes | Se revisaron diffs de posprocesado, partículas, sincronización de pausa y límite de frames/sonido de Runner. No se atribuyen mejoras porcentuales sin mediciones. |
-| Clasificación y límites en páginas | Se conserva el alcance 2D; no se anuncia ECS, editor, física general, multiplataforma certificada o releases inexistentes. |
-| Búsqueda de guías e historial | La normalización de acentos convierte `Configuración` en `configuracion` con las expresiones usadas en ambas páginas. |
+| Contenido | Nueve guías, 35 referencias de código comprobadas contra objetos Git, 14 commits y fechas de historial auténticos. |
+| Frontend | TypeScript, ESLint, cinco pruebas de contenido y build de 17 páginas aprobados. |
+| Backend | TypeScript, ESLint, 20 pruebas y build aprobados. Las pruebas usan SMTP y CAPTCHA controlados, sin envío real. |
+| Navegador | 24 pruebas Playwright aprobadas en Chrome local; también ejecutadas en Chromium dentro de GitHub Actions. |
+| Responsive | Sin desbordamiento horizontal a 320, 390, 768, 1440 y 1920 px en las rutas representativas. |
+| Interacciones | Menú móvil, teclado, filtros, búsquedas, estados vacíos, 404, temas claro/oscuro/sistema y persistencia. |
+| Accesibilidad | Axe con WCAG 2 A/AA y 2.1 A/AA, siete rutas en claro y oscuro, sin infracciones detectadas. No equivale a una certificación de accesibilidad. |
+| Contacto | Ocho pruebas de navegador con respuestas controladas verifican validación, éxito condicionado, error, timeout, CAPTCHA e idempotencia. |
+| Medios | Diez capturas PNG y cuatro videos H.264; ffprobe y decodificación completa sin errores. Reproducción en escritorio, 390 px y 768 px; galerías con foco y teclado. |
+| Dependencias | npm audit sin vulnerabilidades conocidas en frontend y backend durante la entrega. |
+| Privacidad del repositorio | Sin secretos, credenciales, .env reales, ejecutables del motor ni originales privados de grabación versionados. |
 
-La revisión de juegos confirmó las afirmaciones de Plaguefront y su repositorio público `Arukado01/Plagefront`. La captura y el inventario final de medios se verifican por separado: este control no acredita la duración ni reproducción de videos que todavía estaban incorporándose.
+Se corrigieron los diagnósticos encontrados: tipado de callbacks de pruebas, expresión de validación, fecha dinámica del historial, índice móvil de guías, distinción visual de enlaces y nombre accesible de la marca. La suite no omite esos controles para obtener un resultado favorable.
 
-## HTML estático disponible al revisar
+## Rendimiento
 
-Se recorrió el `dist` que existía antes de los dos ajustes de documentación indicados abajo. La inspección de HTML generado comprobó referencias locales de `href`, `src` y `poster`, fragmentos, IDs, títulos y metadatos:
+Lighthouse sobre la build de producción servida localmente, emulación móvil: **rendimiento 99, accesibilidad 100, buenas prácticas 100 y SEO 100**. El informe completo se conserva fuera de los archivos públicos en `.capture-work/qa/lighthouse-mobile.report.html` y `.json`. Son mediciones de laboratorio de una ejecución; el rendimiento real depende del dispositivo y la conexión.
 
-- **17 páginas HTML**.
-- **539 referencias locales y fragmentos**.
-- **5 elementos de imagen** en esa build.
-- Sin destinos ausentes ni fragmentos rotos detectados.
-- Sin IDs duplicados detectados.
-- Un `h1` por página, idioma español, título, descripción, canonical y Open Graph presentes.
-- Los elementos de imagen examinados incluían atributo `alt`.
+Las imágenes tienen dimensiones explícitas, el hero usa WebP, las fuentes se sirven localmente y los videos usan `preload="none"`, miniaturas y H.264 con `faststart`.
 
-Estos resultados corresponden a aquella build. No sustituyen una revisión visual, un lector de pantalla ni el análisis de medios añadido posteriormente. Las referencias deben volver a comprobarse sobre el resultado final antes de publicar.
+## Publicación verificada
 
-## Ajustes derivados de la revisión
+- Proyecto Firebase: `awesome-engine-web-arukado`.
+- Sitio: https://awesome-engine-web-arukado.web.app/.
+- Repositorio público: https://github.com/Arukado01/awesome-engine-website.
+- Primera ejecución completa de CI/CD: [41390719299](https://github.com/Arukado01/awesome-engine-website/actions/runs/41390719299), commit `1390f5f359becc4410e52c169c98a9d376e935b3`: validación y despliegue Hosting aprobados.
+- El secreto de Hosting se transfirió directamente a GitHub Secrets; no se escribió una clave privada en disco.
+- Blaze confirmado activo después de la configuración manual del propietario. Firestore creado en `us-central1` con reglas que deniegan todo acceso cliente y políticas TTL para los registros del contacto.
+- La preview de PR se comprueba con la revisión de accesibilidad y documentación que acompaña este informe. El resultado queda en las ejecuciones de Actions.
 
-1. La portada mostraba una fecha fija en las tarjetas de últimas novedades. Se cambió a una fecha derivada de `entry.date`, con zona America/Bogota y elemento semántico `time`.
-2. El índice de contenido de las guías desaparecía en pantallas de hasta 1100 px. Se añadió un `details` dentro del artículo, con enlaces a sus encabezados de nivel dos, visible en ese intervalo. Conserva la navegación de escritorio.
+## Límites pendientes
 
-Los cambios están limitados a `src/pages/index.astro` y `src/layouts/Docs.astro`.
+El correo **no está habilitado**: faltan `GMAIL_APP_PASSWORD`, `TURNSTILE_SECRET_KEY` y `PUBLIC_TURNSTILE_SITE_KEY`, además del despliegue de `contact` y la confirmación de recepción real en Gmail. Firestore y los parámetros no secretos ya están preparados. Ver [CONTACT.md](CONTACT.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
 
-## Configuración de infraestructura
+No se anuncian estas pruebas como un envío real. La interfaz pública informa de la indisponibilidad y no permite simular éxito.
 
-| Comprobación ejecutada | Resultado observado |
-| --- | --- |
-| Sintaxis del workflow | YAML parseado sin errores; triggers PR, push a main y ejecución manual presentes. |
-| Dependencias de acciones | Checkout, setup-node, upload-artifact, download-artifact y Firebase Hosting fijados a SHA de 40 caracteres, resueltos mediante GitHub API. |
-| Versión de herramienta de despliegue | Firebase CLI 15.31.0 fijada en el workflow. |
-| Configuración predeterminada | `firebase.json` contiene Hosting y emulador; no declara Functions ni Firestore. |
-| Configuración opcional | `firebase.functions.json` apunta `/api/contact` a `contact` en `us-central1`, con runtime Node.js 22 y validación previa del backend. |
-| Fallback estático de contacto | Rewrite a `/api/contact-unavailable.json`; el frontend exige HTTP correcto y `ok === true`. No se toma un HTTP 200 estático como envío. |
-| Secretos de CI | El workflow exige `FIREBASE_SERVICE_ACCOUNT_AWESOME_ENGINE` y falla explícitamente si está ausente. No entrega el secreto al job de build. |
-| Límites de previews | Solo PR del mismo repositorio y actor distinto de Dependabot; forks validan sin credenciales. No usa pull_request_target ni comentarios automáticos. |
-| Reglas de datos | Firestore deniega lecturas y escrituras del cliente; el servidor se controla por IAM. |
-| Expiración | Dos políticas TTL sobre `expiresAt`, en `contactLimits` y `contactRequests`. |
-| Destino | Alias, sitio y workflow apuntan exclusivamente a `awesome-engine-web-arukado`. |
+Los videos no contienen audio: el entorno no expuso un dispositivo de captura de audio. Mantienen las dimensiones nativas, 800 × 800 en Runner y 1440 × 900 en Plaguefront. Procedencia y límites: [CAPTURE.md](CAPTURE.md).
 
-La existencia del workflow y del secreto no prueba que una ejecución remota haya terminado correctamente. El despliegue real, su URL y el resultado de GitHub Actions requieren evidencia adicional de la sesión de publicación.
-
-## Diagnósticos de código durante la revisión
-
-Se ejecutaron `npm run check` y `npm run lint` después de modificar la fecha y el índice móvil.
-
-- El primer intento de Astro check no pudo escribir su caché `.astro` desde el sandbox. Se repitió con permisos para el proyecto independiente.
-- Astro examinó 28 archivos y reportó siete errores TypeScript en callbacks `evaluate` de la nueva prueba `tests/e2e/site.spec.ts` al tratar elementos genéricos como imágenes o videos. No reportó errores en los dos archivos ajustados por esta revisión.
-- ESLint reportó `no-control-regex` en `src/scripts/contact.ts`, por una expresión que valida caracteres de control.
-- Ambos diagnósticos se entregaron para corrección. **Esta revisión no marca esos comandos como aprobados**; registrar abajo la repetición final tras corregirlos.
-
-No se ejecutó correo real desde esta revisión. Las pruebas del backend con transporte controlado y los resultados de navegador deben registrarse por sus propias ejecuciones.
-
-## Estado externo y comprobaciones pendientes
-
-El proyecto Firebase, el repositorio público y la configuración del secreto de Hosting fueron confirmados durante la preparación. El intento registrado de vincular la cuenta de facturación terminó en `Precondition check failed`; no se considera activado Blaze por ese intento.
-
-No presentar Functions, Turnstile o Gmail como operativos hasta contar con su configuración, despliegue y prueba de recepción. La alternativa estática conserva el formulario explícitamente inactivo.
-
-Pendientes para completar con resultados efectivos:
-
-- Repetición final de tipos, lint, pruebas y build tras las correcciones.
-- Revisión visual y de teclado en móvil, tablet y escritorio.
-- Temas claro, oscuro y sistema; persistencia y preferencia del dispositivo.
-- Índice móvil y enlaces de las guías después de reconstruir.
-- Galería, controles de video, error de carga y dimensiones de medios finales.
-- Formulario inválido, indisponible, sin conexión y, cuando se habilite, envío real.
-- Verificación HTTP de producción y página 404.
-- Resultado del workflow remoto de main y, si se ejercita, preview de PR.
-
-## Resultado final de navegador y publicación
-
-Reservado para incorporar únicamente las comprobaciones realizadas sobre la build y publicación definitivas, con resultados, URL o identificador de ejecución y cualquier limitación restante.
-## Validación final local
-
-- 24/24 pruebas Playwright en Chrome aprobadas: todas las páginas, enlaces e imágenes; 320, 390, 768, 1440 y 1920 px; menú y teclado; tres temas y persistencia; búsquedas, filtros, estados vacíos y 404.
-- Axe WCAG A/AA sin infracciones detectadas en las siete rutas representativas para temas claro y oscuro (control automatizado, no certificación formal).
-- Los cuatro videos H.264 se reproducen en escritorio, 390 px y 768 px; galería con diálogo, navegación y recuperación del foco aprobada.
-- 8 de las 24 pruebas usan respuestas controladas para el contacto: no acreditan entrega real por Gmail.
-- Backend: 20/20 pruebas, TypeScript, ESLint y build aprobados. Frontend: 5 pruebas de contenido aprobadas, TypeScript y ESLint sin errores.
-- npm audit: 0 vulnerabilidades en frontend y backend.
-- Proyecto Firebase y repositorio público creados. Secreto de Hosting configurado directamente en GitHub Secrets sin escribir claves en archivos.
-- Blaze confirmado activo después de configuración manual del propietario. Firestore creado en us-central1, reglas deny-all y TTL desplegados.
-- El usuario eligió finalmente el logo A del sitio y pidió sustituir al finalizar únicamente el icono PNG del motor. El original está respaldado fuera de public.
-- Pendientes: secretos Gmail/Turnstile y prueba de entrega real; ver CONTACT.md. Estado del pipeline y URL pública se registra después de su ejecución.
-
+El usuario eligió el logo A del sitio y autorizó sustituir al finalizar únicamente `Content/Textures/icon.png` del motor por su PNG transparente. El icono anterior se respalda en `.capture-work/originals/engine-icon-original.png`. No se modifican lógica, configuración ni cambios locales previos de los videojuegos.

@@ -158,4 +158,3 @@ test('rejects oversized fields, missing token, invalid UUID and non-object bodie
   const result = validateInput({ ...input, name: 'x'.repeat(81), message: 'x'.repeat(5001), requestId: '../../unsafe', turnstileToken: '' });
   assert.deepEqual(Object.keys(result.errors).sort(), ['message', 'name', 'requestId', 'turnstileToken']);
 });
-
