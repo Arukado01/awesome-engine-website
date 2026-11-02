@@ -23,7 +23,6 @@ const entranceTargets = [
   '.screenshot-gallery > figure',
   '.video-figure',
   '.timeline-entry',
-  '.roadmap-grid > *',
   '.docs-start',
   '.doc-card',
   '.contact-info',

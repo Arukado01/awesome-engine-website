@@ -4,15 +4,16 @@ import { getCollection } from 'astro:content';
 interface Props {
   title: string;
   description: string;
+  prose?: boolean;
   headings?: { depth: number; slug: string; text: string }[];
 }
-const { title, description, headings = [] } = Astro.props;
+const { title, description, headings = [], prose = true } = Astro.props;
 const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
 const categories = [...new Set(docs.map((d) => d.data.category))];
 ---
 
 <Base title={`${title} — Documentación`} description={description}>
-  <div class="container docs-layout">
+  <div class:list={['container', 'docs-layout', { 'has-toc': headings.length > 0 }]}>
     <aside class="docs-sidebar">
       <a href="/docs/" class="docs-label">
         DOCUMENTACIÓN <span>↗</span>
@@ -59,17 +60,19 @@ const categories = [...new Set(docs.map((d) => d.data.category))];
         <h1>{title}</h1>
         <p>{description}</p>
       </header>
-      {headings.some(heading => heading.depth === 2) && (
+      {headings.some((heading) => heading.depth === 2) && (
         <details class="doc-toc-mobile">
           <summary>En esta página</summary>
           <nav aria-label="Índice de esta página">
-            {headings.filter(heading => heading.depth === 2).map(heading => (
-              <a href={`#${heading.slug}`}>{heading.text}</a>
-            ))}
+            {headings
+              .filter((heading) => heading.depth === 2)
+              .map((heading) => (
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              ))}
           </nav>
         </details>
       )}
-      <div class="prose">
+      <div class={prose ? 'prose' : 'docs-directory'}>
         <slot />
       </div>
       <div class="doc-bottom">
@@ -106,9 +109,12 @@ const categories = [...new Set(docs.map((d) => d.data.category))];
 <style>
   .docs-layout {
     display: grid;
-    grid-template-columns: 220px minmax(0, 1fr) 170px;
+    grid-template-columns: 220px minmax(0, 1fr);
     gap: 48px;
     min-height: 75vh;
+  }
+  .docs-layout.has-toc {
+    grid-template-columns: 220px minmax(0, 1fr) 170px;
   }
   .docs-sidebar {
     padding: 48px 24px 48px 0;
@@ -265,7 +271,8 @@ const categories = [...new Set(docs.map((d) => d.data.category))];
     color: var(--accent);
   }
   @media (max-width: 1100px) {
-    .docs-layout {
+    .docs-layout,
+    .docs-layout.has-toc {
       grid-template-columns: 190px minmax(0, 1fr);
       gap: 36px;
     }

@@ -1,0 +1,123 @@
+---
+import '../styles/category-picker.css';
+interface Props {
+  categories: string[];
+}
+const { categories } = Astro.props;
+const options = [
+  { value: 'all', label: 'Todas las categorías' },
+  ...categories.map((value) => ({ value, label: value })),
+];
+---
+
+<div class="category-picker" id="category-picker">
+  <span class="category-label" id="category-label">
+    Categoría
+  </span>
+  <select id="update-category" aria-labelledby="category-label">
+    {options.map((option) => (
+      <option value={option.value}>{option.label}</option>
+    ))}
+  </select>
+  <button
+    class="category-trigger"
+    id="category-trigger"
+    type="button"
+    aria-label="Categoría: Todas las categorías"
+    aria-expanded="false"
+    aria-controls="category-panel"
+    hidden
+  >
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      aria-hidden="true"
+    >
+      <path d="M4 5h16M7 12h10M10 19h4" />
+    </svg>
+    <span id="category-selected">Todas las categorías</span>
+    <svg
+      class="category-chevron"
+      width="13"
+      height="13"
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="m4 6 4 4 4-4" />
+    </svg>
+  </button>
+  <div class="category-panel" id="category-panel" hidden>
+    <div class="category-search-wrap">
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m16 16 5 5" />
+      </svg>
+      <input
+        id="category-search"
+        type="search"
+        role="combobox"
+        aria-label="Buscar categoría"
+        aria-autocomplete="list"
+        aria-expanded="false"
+        aria-controls="category-options"
+        aria-describedby="category-result-count"
+        autocomplete="off"
+        spellcheck="false"
+        placeholder="Buscar categoría…"
+      />
+      <kbd aria-hidden="true">Esc</kbd>
+    </div>
+    <ul id="category-options" class="category-options" role="listbox" aria-label="Categorías">
+      {options.map((option, index) => (
+        <li
+          id={'category-option-' + index}
+          class="category-option"
+          role="option"
+          aria-selected={option.value === 'all'}
+          data-category-value={option.value}
+        >
+          <span>{option.label}</span>
+          <svg
+            class="category-check"
+            width="16"
+            height="16"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            aria-hidden="true"
+          >
+            <path d="m4 10 4 4 8-8" />
+          </svg>
+        </li>
+      ))}
+    </ul>
+    <div id="category-empty" class="category-empty" hidden>
+      <strong>Sin coincidencias</strong>
+      <span>Prueba con otra categoría.</span>
+    </div>
+    <p id="category-result-count" class="category-result-count" role="status">
+      {options.length} opciones disponibles
+    </p>
+  </div>
+</div>
+<script>
+  import '../scripts/category-picker';
+</script>

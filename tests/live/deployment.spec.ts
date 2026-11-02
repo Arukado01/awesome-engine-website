@@ -77,3 +77,27 @@ test('deployment: galería y cuatro videos se sirven y reproducen desde Hosting'
     await video.evaluate((n) => (n as HTMLVideoElement).pause());
   }
 });
+
+test('deployment: biblioteca de guías y categorías buscables funcionan en móvil', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/docs/');
+  await page.getByLabel('Buscar una guía').fill('arquitectura');
+  await expect(page.locator('[data-doc-card]:visible')).not.toHaveCount(0);
+  await page.locator('[data-doc-card]:visible').first().click();
+  await expect(page).toHaveURL(/\/docs\/[a-z-]+\/$/);
+  await page.goto('/evolucion/');
+  await expect(page.locator('#roadmap')).toHaveCount(0);
+  const trigger = page.getByRole('button', { name: /^Categoría:/ });
+  await trigger.click();
+  await page.getByRole('combobox', { name: 'Buscar categoría' }).fill('audio');
+  await page.getByRole('option', { name: 'Audio', exact: true }).click();
+  await expect(trigger).toHaveAccessibleName('Categoría: Audio');
+  await expect(page.locator('[data-update]:visible')).not.toHaveCount(0);
+  expect(
+    await page
+      .locator('[data-update]:visible')
+      .evaluateAll((nodes) => nodes.every((n) => n.getAttribute('data-category') === 'Audio')),
+  ).toBeTruthy();
+});

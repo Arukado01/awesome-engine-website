@@ -1,4 +1,27 @@
-# Awesome Engine · Sitio oficial
+<p align="center">
+  <a href="https://awesome-engine-web-arukado.web.app/">
+    <img src="public/images/og-cover.png" alt="Awesome Engine — sitio oficial y documentación del motor" width="900" />
+  </a>
+</p>
+
+<h1 align="center">Awesome Engine · Sitio oficial</h1>
+
+<p align="center">Ideas en código. Mundos en movimiento.</p>
+
+<p align="center">
+  <a href="https://github.com/Arukado01/awesome-engine-website/actions/workflows/ci-deploy.yml"><img src="https://github.com/Arukado01/awesome-engine-website/actions/workflows/ci-deploy.yml/badge.svg" alt="Validación y despliegue" /></a>
+  <img src="https://img.shields.io/badge/Astro-7-BC52EE?logo=astro&amp;logoColor=white" alt="Astro 7" />
+  <img src="https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&amp;logoColor=white" alt="TypeScript 6" />
+  <img src="https://img.shields.io/badge/Firebase-Hosting-DD2C00?logo=firebase&amp;logoColor=white" alt="Firebase Hosting" />
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licencia MIT del sitio" /></a>
+</p>
+
+<p align="center">
+  <a href="https://awesome-engine-web-arukado.web.app/">🌐 Sitio web</a> ·
+  <a href="https://awesome-engine-web-arukado.web.app/docs/">📖 Documentación</a> ·
+  <a href="https://awesome-engine-web-arukado.web.app/showcase/">🎮 Showcase</a> ·
+  <a href="https://github.com/Arukado01/AwesomeEngine">⚙️ Código del motor</a>
+</p>
 
 Sitio de presentación, documentación y evolución de **Awesome Engine**, el motor 2D en C++ de Carlos Cortina. Este proyecto web es independiente del [repositorio del motor](https://github.com/Arukado01/AwesomeEngine): no compila, modifica ni distribuye su ejecutable.
 
@@ -6,17 +29,33 @@ Sitio de presentación, documentación y evolución de **Awesome Engine**, el mo
 - **Código del sitio:** [Arukado01/awesome-engine-website](https://github.com/Arukado01/awesome-engine-website).
 - **Proyecto Firebase:** `awesome-engine-web-arukado`.
 
+## Capturas de pantalla
+
+Capturas reales de la interfaz del sitio. Los temas claro y oscuro comparten la misma estructura y las interacciones se adaptan a móvil, tablet y escritorio.
+
+[![Portada del sitio oficial, con gameplay real de Runner](docs/images/site-home.png)](https://awesome-engine-web-arukado.web.app/)
+
+| 📖 Biblioteca de guías                                                                                                            | 🔎 Historial y categorías                                                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Tarjetas de documentación con iconos y buscador](docs/images/site-docs.png)](https://awesome-engine-web-arukado.web.app/docs/) | [![Selector de categorías con búsqueda integrada](docs/images/site-history.png)](https://awesome-engine-web-arukado.web.app/evolucion/) |
+
 ## Qué incluye
 
-Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, búsqueda de documentación, metadatos sociales, sitemap y página 404.
+Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, tarjetas de documentación con iconos y hover estable, búsqueda de guías y de categorías dentro del selector de historial, metadatos sociales, sitemap y página 404.
 
 El contenido técnico se basa en la auditoría de la revisión `5a6dfacd86414c4cdfaa7157b533330f173a3126`. Las funciones observadas únicamente en el árbol local se identifican como trabajo en desarrollo. No se anuncian versiones ni capacidades sin evidencia.
 
 El formulario tiene validación y un backend preparado para Gmail SMTP, Turnstile y límites de abuso. **El envío real requiere configuración externa y despliegue del backend.** Por defecto está desactivado y nunca muestra éxito por simular un envío. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
 
-## Showcase real
+## 🎮 Showcase real
 
 Incluye 10 capturas PNG y cuatro videos H.264: Runner (35 y 25 segundos, 800 × 800) y Plaguefront (40 y 29 segundos, 1440 × 900). Las grabaciones conservan velocidad y proporciones originales y no incluyen audio. Las galerías y los reproductores están verificados en móvil, tablet y escritorio. Procedencia y comandos: [CAPTURE.md](docs/CAPTURE.md).
+
+| Runner · salto y parallax                                                                                                                                                | Plaguefront · tácticas y terreno                                                                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![Captura auténtica de Runner durante un salto](public/media/showcase/runner/screenshots/runner-jump.png)](https://awesome-engine-web-arukado.web.app/showcase/#runner) | [![Captura auténtica del tablero de Plaguefront](public/media/showcase/plagetale/screenshots/plaguefront-map.png)](https://awesome-engine-web-arukado.web.app/showcase/#plagetale) |
+
+Los videos se reproducen desde el showcase con controles, miniaturas y carga bajo demanda; estas imágenes no son mockups ni recreaciones.
 
 ## Stack
 
@@ -113,7 +152,7 @@ category: Sistemas
 
 Mantén órdenes únicos y enlaces a commits concretos del motor. Para una novedad, añade una entrada en `src/data/updates.ts` con `id`, `date`, `title`, `description`, `category`, `status`, `added`, `fixed`, `performance`, `architecture` y `source`. Conserva la fecha real y deja vacíos los apartados sin cambios demostrables. El panel se construye desde esa fuente; no necesitas duplicar componentes.
 
-`src/data/engine.ts` concentra la información de juegos, tecnologías y roadmap observado. Registrar una novedad en el sitio no hace commit ni publica cambios del motor.
+`src/data/engine.ts` concentra la información de juegos y tecnologías verificadas. Registrar una novedad en el sitio no hace commit ni publica cambios del motor.
 
 Antes de enviar una actualización, ejecuta las validaciones y revisa la página resultante en móvil y escritorio. La [auditoría](docs/ENGINE-AUDIT.md) explica la base de cada afirmación.
 
@@ -147,4 +186,4 @@ No pegues esas credenciales en código, incidencias, commits o archivos de ejemp
 El código original del sitio se publica bajo [MIT](LICENSE), copyright 2026 Carlos Cortina. Las dependencias, fuentes, capturas y recursos de terceros conservan sus licencias y atribuciones. La licencia del sitio no concede derechos adicionales sobre ellos; consulta [ASSETS.md](docs/ASSETS.md).
 
 El repositorio excluye `.env` reales, secretos locales, credenciales, dependencias instaladas, cachés y artefactos generados. Los archivos `.env.example` contienen únicamente nombres y valores ilustrativos.
-Tras cada despliegue, un job independiente y sin secretos ejecuta tres pruebas sobre la URL real de Hosting: páginas y 404, interacción móvil y reproducción de los cuatro videos. Puede repetirse con PLAYWRIGHT_BASE_URL apuntando a producción o a un canal de preview del proyecto y npm run test:live.
+Tras cada despliegue, un job independiente y sin secretos ejecuta cuatro pruebas sobre la URL real de Hosting: páginas y 404, interacción móvil, guías y categorías buscables, y reproducción de los cuatro videos. Puede repetirse con PLAYWRIGHT_BASE_URL apuntando a producción o a un canal de preview del proyecto y npm run test:live.

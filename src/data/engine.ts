@@ -87,37 +87,3 @@ export const technologies = [
     role: 'Efectos de bloom, glitch, inversión de color y monitor.',
   },
 ] as const;
-
-/** Trabajo observado en el árbol local; todavía no forma parte del commit público auditado.
- * No hay metas futuras ni fechas de lanzamiento documentadas en el repositorio.
- */
-export const roadmap: {
-  title: string;
-  status: 'development' | 'planned' | 'experimental';
-  description: string;
-  evidence?: string;
-}[] = [
-  {
-    title: 'Animación de sprites reutilizable',
-    status: 'development',
-    description:
-      'La copia local incorpora SpriteAnimator y adapta Runner. Pendiente de commit y publicación; todavía no está disponible en la revisión pública auditada.',
-    evidence: 'Árbol local: Engine/Include/Graphics/SpriteAnimator.h; Games/Source/Runner.cpp.',
-  },
-  {
-    title: 'Audio agrupado por escena',
-    status: 'development',
-    description:
-      'AudioGroup reúne sonidos y música para controlar reproducción, pausa y limpieza. Se observa integrado localmente en Runner y Bounce, sin commit publicado.',
-    evidence:
-      'Árbol local: Engine/Include/Managers/AudioGroup.h; Engine/Source/Managers/AudioGroup.cpp.',
-  },
-  {
-    title: 'Colisiones continuas compartidas',
-    status: 'development',
-    description:
-      'El utilitario SweptAabb se reutiliza en las colisiones de Runner y Bounce. Es una integración local pendiente de publicación, no un sistema físico general.',
-    evidence:
-      'Árbol local: Engine/Include/Utils/SweptAabb.h; Games/Source/Bounce.cpp; Games/Source/Runner.cpp.',
-  },
-];

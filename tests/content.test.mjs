@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { updates } from '../src/data/updates.ts';
-import { games, roadmap, technologies } from '../src/data/engine.ts';
+import { games, technologies } from '../src/data/engine.ts';
 test('el historial conserva commits únicos, fuentes y fechas descendentes', () => {
   assert.ok(updates.length >= 10);
   assert.equal(new Set(updates.map((u) => u.id)).size, updates.length);
@@ -23,7 +23,6 @@ test('la información del motor mantiene alcance y estados verificables', () => 
   assert.equal(games.length, 7);
   assert.equal(new Set(games.map((g) => g.id)).size, 7);
   assert.ok(technologies.some((t) => t.name === 'SFML' && t.version === '3.1.0'));
-  assert.ok(roadmap.every((r) => r.status === 'development' && r.evidence));
 });
 test('las nueve guías tienen orden único, enlaces de fuente y destinos internos existentes', () => {
   const names = readdirSync('src/content/docs').filter((x) => x.endsWith('.md'));

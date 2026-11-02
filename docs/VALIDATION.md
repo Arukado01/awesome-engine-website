@@ -9,7 +9,7 @@ El sitio es independiente del motor. La referencia técnica auditada es `5a6dfac
 | Contenido                  | Nueve guías, 35 referencias de código comprobadas contra objetos Git, 14 commits y fechas de historial auténticos.                                                |
 | Frontend                   | TypeScript, ESLint, cinco pruebas de contenido y build de 17 páginas aprobados.                                                                                   |
 | Backend                    | TypeScript, ESLint, 20 pruebas y build aprobados. Las pruebas usan SMTP y CAPTCHA controlados, sin envío real.                                                    |
-| Navegador                  | 27 casos Playwright verificados en Chrome local. GitHub Actions ejecuta la suite completa en Chromium para cada revisión.                                         |
+| Navegador                  | 28 casos Playwright verificados en Chrome local. GitHub Actions ejecuta la suite completa en Chromium para cada revisión.                                         |
 | Responsive                 | Sin desbordamiento horizontal a 320, 390, 768, 1440 y 1920 px en las rutas representativas.                                                                       |
 | Interacciones              | Menú móvil, teclado, filtros, búsquedas, estados vacíos, 404, temas claro/oscuro/sistema y persistencia.                                                          |
 | Accesibilidad              | Axe con WCAG 2 A/AA y 2.1 A/AA, siete rutas en claro y oscuro, sin infracciones detectadas. No equivale a una certificación de accesibilidad.                     |
@@ -50,10 +50,12 @@ La primera prueba de PR detectó un runner con Node 22.23.3, inferior al mínimo
 
 La comprobación de rutas se contrastó con git ls-tree: el icono está versionado como Content/Textures/Icon.png; la discrepancia real de mayúsculas está en Engine/Include/utils frente a los includes Utils. La documentación no atribuye al icono un problema de portabilidad inexistente en Git.
 
-Las pruebas de navegador ahora construyen y sirven una copia estática aislada en .e2e-dist. Esto elimina recargas HMR durante la inspección de páginas y mantiene dist intacto para el despliegue. La suite actual contiene 27 casos, incluidos el control por teclado del selector y la cancelación de animaciones al activar movimiento reducido.
+Las pruebas de navegador ahora construyen y sirven una copia estática aislada en .e2e-dist. Esto elimina recargas HMR durante la inspección de páginas y mantiene dist intacto para el despliegue. La suite actual contiene 28 casos, incluidos el control por teclado del selector y la cancelación de animaciones al activar movimiento reducido.
 
 La preview de la PR 1 se desplegó correctamente en la ejecución 41391530941. Se añade verificación posterior sobre la URL real en un job independiente sin credenciales de despliegue, aplicable tanto a main como a previews. No se confunde la suite local con esta verificación remota.
 
 El selector de tema utiliza un panel con iconos y radios nativos, conserva la preferencia y permite cierre por Escape y clic fuera. Se revisó visualmente en claro, oscuro y 320 px. Las entradas escalonadas se reproducen una vez al aparecer cada sección; las secuencias decorativas duran menos de cinco segundos y no cambian las capturas ni la velocidad de los videos. El contenido permanece visible sin JavaScript.
 
 Se añadió una regresión con scripts de carga demorada: lo escrito antes de inicializar el buscador debe conservarse y aplicarse tanto en Documentación como en Evolución. La prueba reprodujo el fallo antes del cambio y aprobó después de sincronizar los valores al inicializar y restaurar la página.
+
+Revisión visual de documentación: tarjetas con iconos, bordes y hover sin desplazamiento, separadas del estilo de los artículos. El selector de categorías incorpora búsqueda sin tildes, teclado, estado vacío y restablecimiento. Revisado a 320, 390 y 768 px y con Axe en claro y oscuro. Se retiró íntegramente el roadmap público (bloque, enlace, estilos y datos) por indicación del propietario. Los README incluyen el logo y capturas reales; los recursos están dentro de cada repositorio.

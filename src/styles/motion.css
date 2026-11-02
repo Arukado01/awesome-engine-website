@@ -28,7 +28,6 @@
   }
   .feature,
   .latest-update,
-  .doc-card,
   .system-row,
   .button,
   .gallery-trigger {
@@ -40,8 +39,7 @@
   }
   .feature:hover,
   .feature:focus-visible,
-  .latest-update:hover,
-  .doc-card:hover {
+  .latest-update:hover {
     transform: translateY(-5px);
   }
   .button:hover {

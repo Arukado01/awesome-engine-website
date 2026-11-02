@@ -60,6 +60,7 @@ for (const width of [320, 390, 768, 1440, 1920])
     for (const route of [
       '/',
       '/motor/',
+      '/docs/',
       '/docs/arquitectura/',
       '/evolucion/',
       '/contacto/',
@@ -109,12 +110,16 @@ test('búsquedas, filtros y estados vacíos', async ({ page }) => {
   await page.getByLabel('Buscar una guía').fill('zzzzsinresultados');
   await expect(page.locator('#docs-empty')).toBeVisible();
   await page.goto('/evolucion/');
-  await page.getByLabel('Categoría', { exact: true }).selectOption('Juegos');
+  await page.getByRole('button', { name: /^Categoría:/ }).click();
+  await page.getByRole('option', { name: 'Juegos', exact: true }).click();
   await expect(page.locator('[data-update]:visible')).not.toHaveCount(0);
   await page.getByLabel('Buscar una mejora').fill('zzzzsinresultados');
   await expect(page.locator('#updates-empty')).toBeVisible();
   await page.getByRole('button', { name: 'Restablecer filtros' }).click();
   await expect(page.locator('[data-update]:visible')).toHaveCount(14);
+  await expect(
+    page.getByRole('button', { name: 'Categoría: Todas las categorías', exact: true }),
+  ).toBeVisible();
   await page.locator('.timeline-entry summary').first().click();
   await expect(page.locator('.change-details').first()).toBeVisible();
 });
@@ -315,4 +320,54 @@ test('los filtros conservan lo escrito antes de que termine de cargar JavaScript
       await page.unrouteAll({ behavior: 'wait' });
     }
   }
+});
+
+test('categorías: búsqueda dentro del selector, teclado, vacío y cierre en móvil', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/evolucion/');
+  const trigger = page.getByRole('button', { name: /^Categoría:/ });
+  await trigger.focus();
+  await page.keyboard.press('ArrowDown');
+  const search = page.getByRole('combobox', { name: 'Buscar categoría' });
+  await expect(search).toBeFocused();
+  await search.fill('graficos');
+  await expect(page.getByRole('option', { name: 'Gráficos', exact: true })).toBeVisible();
+  await expect(page.getByRole('option')).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await expect(trigger).toHaveAccessibleName('Categoría: Gráficos');
+  await expect(trigger).toBeFocused();
+  await expect(page.locator('#category-panel')).toBeHidden();
+  await expect(page.locator('[data-update]:visible')).not.toHaveCount(0);
+  expect(
+    await page
+      .locator('[data-update]:visible')
+      .evaluateAll((nodes) => nodes.every((n) => n.getAttribute('data-category') === 'Gráficos')),
+  ).toBeTruthy();
+  await trigger.click();
+  await search.fill('zzzz-sin-categoria');
+  await expect(page.locator('#category-empty')).toBeVisible();
+  await expect(page.getByRole('option')).toHaveCount(0);
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+  for (const theme of ['Claro', 'Oscuro']) {
+    await chooseTheme(page, theme);
+    await trigger.click();
+    const box = await page.locator('#category-panel').boundingBox();
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(320);
+    const axe = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze();
+    expect(axe.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) }))).toEqual(
+      [],
+    );
+    await page.keyboard.press('Tab');
+    await expect(page.locator('#category-panel')).toBeHidden();
+  }
+  await trigger.click();
+  await page.getByRole('option', { name: 'Todas las categorías', exact: true }).click();
+  await expect(page.locator('[data-update]:visible')).toHaveCount(14);
 });

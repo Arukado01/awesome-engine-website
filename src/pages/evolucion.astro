@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import CategoryPicker from '../components/CategoryPicker.astro';
 import { updates } from '../data/updates';
-import { roadmap } from '../data/engine';
 const categories = [...new Set(updates.map((u) => u.category))];
 const date = (value: string) =>
   new Date(value).toLocaleDateString('es-CO', {
@@ -33,24 +33,17 @@ const date = (value: string) =>
         <a class="button primary" href="#historial">
           Explorar historial <span>↓</span>
         </a>
-        <a class="button" href="#roadmap">
-          Ver roadmap <span>→</span>
-        </a>
       </div>
     </div>
   </section>
   <section class="section container history-layout" id="historial">
     <aside class="history-sidebar">
       <span class="eyebrow">FILTRAR HISTORIAL</span>
-      <label for="update-search">Buscar una mejora</label>
-      <input id="update-search" type="search" placeholder="Nombre o commit…" />
-      <label for="update-category">Categoría</label>
-      <select id="update-category">
-        <option value="all">Todas las categorías</option>
-        {categories.map((c) => (
-          <option value={c}>{c}</option>
-        ))}
-      </select>
+      <div class="history-search">
+        <label for="update-search">Buscar una mejora</label>
+        <input id="update-search" type="search" placeholder="Nombre o commit…" />
+      </div>
+      <CategoryPicker categories={categories} />
       <p class="history-note">
         Los identificadores corresponden a commits reales, no a versiones de lanzamiento. Las fechas
         conservan la zona horaria de Colombia.
@@ -119,52 +112,6 @@ const date = (value: string) =>
       </div>
     </div>
   </section>
-  <section class="section roadmap-section" id="roadmap">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">ROADMAP / ESTADO ACTUAL</span>
-          <h2>Lo que se está construyendo.</h2>
-        </div>
-        <p>
-          Trabajo observado en la copia local del motor. Estos cambios todavía no forman parte de la
-          revisión pública auditada.
-        </p>
-      </div>
-      <div class="roadmap-grid">
-        {roadmap.map((item, i) => (
-          <article>
-            <span class="mono">0{i + 1} / INTEGRACIÓN LOCAL</span>
-            <h3>{item.title}</h3>
-            <span class="pill dev">En desarrollo</span>
-            <p>{item.description}</p>
-            <details>
-              <summary>Ver evidencia</summary>
-              <p class="mono">{item.evidence}</p>
-            </details>
-          </article>
-        ))}
-      </div>
-      <div class="roadmap-notes">
-        <div>
-          <span class="eyebrow">EXPERIMENTAL</span>
-          <h3>Glitch e inversión.</h3>
-          <p>
-            Las clases y shaders existen, pero no están conectados al pipeline activo.
-            “Experimental” describe aquí esa situación; no es una etiqueta de release del autor.
-          </p>
-        </div>
-        <div>
-          <span class="eyebrow">PRÓXIMAS METAS</span>
-          <h3>Un espacio para lo que viene.</h3>
-          <p>
-            No hay objetivos futuros ni fechas publicados en el repositorio auditado. Se
-            incorporarán cuando queden definidos y respaldados por una fuente.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
 </Base>
 <script>
   const search = document.querySelector<HTMLInputElement>('#update-search');
@@ -197,7 +144,10 @@ const date = (value: string) =>
   window.addEventListener('pageshow', filter);
   document.querySelector('#reset-filters')?.addEventListener('click', () => {
     if (search) search.value = '';
-    if (category) category.value = 'all';
+    if (category) {
+      category.value = 'all';
+      category.dispatchEvent(new window.Event('change', { bubbles: true }));
+    }
     filter();
     search?.focus();
   });
@@ -213,14 +163,13 @@ const date = (value: string) =>
     top: 120px;
     align-self: start;
   }
-  .history-sidebar label {
+  .history-search label {
     display: block;
     font-size: 11px;
     margin: 22px 0 8px;
     color: var(--muted);
   }
-  .history-sidebar input,
-  .history-sidebar select {
+  .history-search input {
     width: 100%;
     background: var(--surface);
     color: var(--text);
@@ -332,57 +281,6 @@ const date = (value: string) =>
     font-size: 11px;
     margin: 16px 0 8px;
   }
-  .roadmap-section {
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-  }
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-  }
-  .roadmap-grid article {
-    border-top: 2px solid var(--warning);
-    padding-top: 24px;
-  }
-  .roadmap-grid .mono {
-    font-size: 9px;
-    color: var(--muted);
-  }
-  .roadmap-grid h3 {
-    font-size: 26px;
-    margin: 24px 0 18px;
-  }
-  .roadmap-grid p {
-    font-size: 12px;
-    line-height: 1.9;
-    margin: 20px 0;
-  }
-  .roadmap-grid summary {
-    cursor: pointer;
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .roadmap-grid details p {
-    font-size: 10px;
-    overflow-wrap: anywhere;
-  }
-  .roadmap-notes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 70px;
-    border-top: 1px solid var(--border);
-    padding-top: 48px;
-    margin-top: 48px;
-  }
-  .roadmap-notes h3 {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-  .roadmap-notes p {
-    font-size: 12px;
-    line-height: 1.9;
-  }
   .empty-state button {
     margin-top: 20px;
   }
@@ -403,15 +301,6 @@ const date = (value: string) =>
     .timeline-meta {
       gap: 12px;
     }
-    .roadmap-grid {
-      gap: 20px;
-    }
-    .roadmap-grid h3 {
-      font-size: 23px;
-    }
-    .roadmap-notes {
-      gap: 35px;
-    }
   }
   @media (max-width: 640px) {
     .history-layout {
@@ -430,13 +319,12 @@ const date = (value: string) =>
     .history-sidebar > .text-link {
       grid-column: 1/-1;
     }
-    .history-sidebar label {
-      grid-row: 2;
-    }
-    .history-sidebar input,
-    .history-sidebar select {
-      grid-row: 3;
+    .history-search {
       min-width: 0;
+    }
+    .history-search input {
+      min-width: 0;
+      min-height: 44px;
     }
     .history-sidebar .history-note {
       margin-top: 20px;
@@ -446,17 +334,6 @@ const date = (value: string) =>
     }
     .timeline-meta {
       font-size: 9px;
-    }
-    .roadmap-grid,
-    .roadmap-notes {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .roadmap-grid h3 {
-      font-size: 27px;
-    }
-    .roadmap-notes {
-      padding-top: 32px;
     }
     .change-details {
       padding: 14px 18px;
