@@ -1,0 +1,121 @@
+[
+  {
+    "id": "runner",
+    "name": "Runner",
+    "description": "Una carrera entre plataformas, obstáculos y una ciudad con parallax. Animación de sprites, partículas y audio acompañan cada salto y deslizamiento.",
+    "systems": [
+      "Renderizado 2D",
+      "Animación de sprites",
+      "Parallax",
+      "Partículas",
+      "Colisiones",
+      "Entrada y audio"
+    ],
+    "source": "https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Games/Source/Runner.cpp",
+    "screenshots": [
+      {
+        "src": "/media/showcase/runner/screenshots/runner-jump.png",
+        "title": "Salto entre obstáculos",
+        "alt": "Fotograma real de Runner con el personaje saltando sobre una plataforma y un obstáculo aéreo naranja."
+      },
+      {
+        "src": "/media/showcase/runner/screenshots/runner-city.png",
+        "title": "La ciudad en movimiento",
+        "alt": "Captura nativa de Runner: personaje, HUD de distancia, plataformas y fondos urbanos con parallax."
+      },
+      {
+        "src": "/media/showcase/runner/screenshots/runner-gameplay.png",
+        "title": "Obstáculos aéreos",
+        "alt": "Captura real de Runner con dos obstáculos naranjas sobre el recorrido y edificios en varias capas."
+      },
+      {
+        "src": "/media/showcase/runner/screenshots/runner-obstacles.png",
+        "title": "Carrera y plataformas",
+        "alt": "Fotograma real de Runner durante un salto, con obstáculos terrestres y la distancia recorrida en el HUD."
+      },
+      {
+        "src": "/media/showcase/runner/screenshots/runner-gameover.png",
+        "title": "Fin de partida y reinicio",
+        "alt": "Pantalla real Game Over de Runner mostrando distancia de 63 y cuenta atrás para reiniciar."
+      }
+    ],
+    "videos": [
+      {
+        "src": "/media/showcase/runner/videos/runner-gameplay.mp4",
+        "poster": "/media/showcase/runner/thumbnails/runner-gameplay.png",
+        "title": "Gameplay · carrera y obstáculos",
+        "duration": 35,
+        "audio": false
+      },
+      {
+        "src": "/media/showcase/runner/videos/runner-systems.mp4",
+        "poster": "/media/showcase/runner/thumbnails/runner-systems.png",
+        "title": "Escenario, HUD y reinicio",
+        "duration": 25,
+        "audio": false
+      }
+    ],
+    "width": 800,
+    "height": 800
+  },
+  {
+    "id": "plagetale",
+    "name": "Plaguefront",
+    "description": "La frontera gris: un juego táctico por turnos construido sobre AwesomeEngine. Dos ejércitos disputan un tablero hexagonal con alturas, edificios y un territorio que conserva las consecuencias del combate.",
+    "systems": [
+      "Tablero hexagonal",
+      "Turnos e IA",
+      "Rutas por terreno",
+      "Cámara axonométrica",
+      "Combate y habilidades",
+      "Economía y captura",
+      "Guardado JSON"
+    ],
+    "source": "https://github.com/Arukado01/Plagefront",
+    "screenshots": [
+      {
+        "src": "/media/showcase/plagetale/screenshots/plaguefront-orders.png",
+        "title": "Órdenes y movimiento",
+        "alt": "Captura nativa de Plaguefront con Saber después de moverse, estadísticas y panel de órdenes."
+      },
+      {
+        "src": "/media/showcase/plagetale/screenshots/plaguefront-armies.png",
+        "title": "Preparar la campaña",
+        "alt": "Preparación real de Plaguefront con selector de escenario, dificultad y cinco clases por ejército."
+      },
+      {
+        "src": "/media/showcase/plagetale/screenshots/plaguefront-map.png",
+        "title": "Un territorio compartido",
+        "alt": "Vista general real del tablero hexagonal de Plaguefront, con río, puentes, edificios y ambos ejércitos."
+      },
+      {
+        "src": "/media/showcase/plagetale/screenshots/plaguefront-abilities.png",
+        "title": "Habilidades de la unidad",
+        "alt": "Panel real de habilidades de Rider junto al tablero y sus estadísticas, con disponibilidad contextual de las acciones."
+      },
+      {
+        "src": "/media/showcase/plagetale/screenshots/plaguefront-menu.png",
+        "title": "La frontera gris",
+        "alt": "Menú real de Plaguefront con un castillo medieval de pixel art y las opciones de juego."
+      }
+    ],
+    "videos": [
+      {
+        "src": "/media/showcase/plagetale/videos/plaguefront-gameplay.mp4",
+        "poster": "/media/showcase/plagetale/thumbnails/plaguefront-gameplay.png",
+        "title": "Campaña y primer movimiento",
+        "duration": 40,
+        "audio": false
+      },
+      {
+        "src": "/media/showcase/plagetale/videos/plaguefront-tactics.mp4",
+        "poster": "/media/showcase/plagetale/thumbnails/plaguefront-tactics.png",
+        "title": "Órdenes, rutas y habilidades",
+        "duration": 29,
+        "audio": false
+      }
+    ],
+    "width": 1440,
+    "height": 900
+  }
+]

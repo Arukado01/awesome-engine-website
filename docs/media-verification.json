@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-01",
+  "timezone": "America/Bogota",
+  "videos": [
+    {
+      "path": "/media/showcase/runner/videos/runner-gameplay.mp4",
+      "sha256": "6853540e48c377fc507678b8817825042ef928e5c58bd0d4c0c148d089c1b4e0",
+      "bytes": 5570046,
+      "duration": 35.0,
+      "width": 800,
+      "height": 800,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "frameRate": "30/1",
+      "audioStreams": 0,
+      "fullDecode": "passed"
+    },
+    {
+      "path": "/media/showcase/runner/videos/runner-systems.mp4",
+      "sha256": "e7957798e5af8b57ae912dc1ed3b4c0ed4a241c7943f6a49565109d7c3140e34",
+      "bytes": 3493457,
+      "duration": 25.0,
+      "width": 800,
+      "height": 800,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "frameRate": "30/1",
+      "audioStreams": 0,
+      "fullDecode": "passed"
+    },
+    {
+      "path": "/media/showcase/plagetale/videos/plaguefront-gameplay.mp4",
+      "sha256": "fd68e08383034feafce4ebfa7d258b0a7563e792c9eaf01f037625c69bd1997d",
+      "bytes": 1943780,
+      "duration": 40.0,
+      "width": 1440,
+      "height": 900,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "frameRate": "30/1",
+      "audioStreams": 0,
+      "fullDecode": "passed"
+    },
+    {
+      "path": "/media/showcase/plagetale/videos/plaguefront-tactics.mp4",
+      "sha256": "c054d4710008171d6be672502d973f8ca63f9d51d714e41f82667e527efc1f8c",
+      "bytes": 1353735,
+      "duration": 29.0,
+      "width": 1440,
+      "height": 900,
+      "codec": "h264",
+      "pixelFormat": "yuv420p",
+      "frameRate": "30/1",
+      "audioStreams": 0,
+      "fullDecode": "passed"
+    }
+  ],
+  "visualReview": "Contact sheets at intervals of 3–5 seconds plus individual PNG inspection; no foreign windows in final footage."
+}
