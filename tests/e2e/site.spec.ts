@@ -73,21 +73,59 @@ for (const width of [320, 390, 768, 1440, 1920])
       ).toBeTruthy();
     }
   });
-test('temas claro, oscuro y sistema persisten y reaccionan al dispositivo', async ({ page }) => {
+test('temas claro, oscuro y sistema sincronizan la cabecera móvil y el navegador', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  async function expectPalette(theme: 'light' | 'dark') {
+    const color = theme === 'light' ? 'rgb(247, 247, 250)' : 'rgb(16, 18, 24)';
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+      'content',
+      theme === 'light' ? '#f7f7fa' : '#101218',
+    );
+    for (const selector of ['html', '.site-header', '#main-nav'])
+      await expect(page.locator(selector)).toHaveCSS('background-color', color);
+    await expect(page.locator('html')).toHaveCSS('color-scheme', theme);
+  }
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
+  await expectPalette('dark');
   await chooseTheme(page, 'Claro');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expectPalette('light');
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expectPalette('light');
+  await page.getByRole('button', { name: 'Abrir navegación' }).click();
+  await expect(page.locator('#main-nav')).toBeVisible();
+  await expectPalette('light');
+  await page.keyboard.press('Escape');
   await chooseTheme(page, 'Oscuro');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await chooseTheme(page, 'Sistema');
+  await expectPalette('dark');
   await page.emulateMedia({ colorScheme: 'light' });
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expectPalette('dark');
+  await chooseTheme(page, 'Sistema');
+  await expectPalette('light');
   await page.emulateMedia({ colorScheme: 'dark' });
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expectPalette('dark');
+  await page.emulateMedia({ colorScheme: 'light' });
+  await expectPalette('light');
 });
+
+test('el color móvil guardado se aplica antes de cargar los scripts externos', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await page.addInitScript(() => localStorage.setItem('ae-theme', 'light'));
+  await page.route('**/*', async (route) => {
+    if (route.request().resourceType() === 'script') await route.abort();
+    else await route.continue();
+  });
+  await page.goto('/');
+  await expect(page.locator('#theme-picker')).toBeHidden();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f7f7fa');
+  await expect(page.locator('.site-header')).toHaveCSS('background-color', 'rgb(247, 247, 250)');
+});
+
 test('menú móvil y navegación por teclado', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');

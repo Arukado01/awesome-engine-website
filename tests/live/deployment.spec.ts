@@ -34,14 +34,37 @@ test('deployment: páginas, scripts, assets y 404 reales', async ({ page, reques
 });
 test('deployment: temas persistentes y menú móvil bajo los headers públicos', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ colorScheme: 'dark' });
+  async function expectPalette(theme: 'light' | 'dark') {
+    await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+      'content',
+      theme === 'light' ? '#f7f7fa' : '#101218',
+    );
+    await expect(page.locator('.site-header')).toHaveCSS(
+      'background-color',
+      theme === 'light' ? 'rgb(247, 247, 250)' : 'rgb(16, 18, 24)',
+    );
+  }
+  async function chooseTheme(name: string) {
+    await page.getByRole('button', { name: /^Cambiar tema/ }).click();
+    await page.getByRole('radio', { name, exact: true }).check();
+    await page.keyboard.press('Escape');
+  }
   await page.goto('/');
-  await page.getByRole('button', { name: /^Cambiar tema/ }).click();
-  await page.getByRole('radio', { name: 'Claro', exact: true }).check();
-  await page.keyboard.press('Escape');
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await chooseTheme('Claro');
+  await expectPalette('light');
   await page.reload();
-  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expectPalette('light');
+  await chooseTheme('Oscuro');
+  await expectPalette('dark');
+  await chooseTheme('Sistema');
+  await page.emulateMedia({ colorScheme: 'light' });
+  await expectPalette('light');
+  await page.emulateMedia({ colorScheme: 'dark' });
+  await expectPalette('dark');
   await page.getByRole('button', { name: 'Abrir navegación' }).click();
+  await expect(page.locator('#main-nav')).toHaveCSS('background-color', 'rgb(16, 18, 24)');
   await page.locator('#main-nav').getByRole('link', { name: 'Documentación' }).click();
   await expect(page).toHaveURL(/\/docs\/$/);
   await page.getByLabel('Buscar una guía').fill('zzzz-no-results');
@@ -50,6 +73,7 @@ test('deployment: temas persistentes y menú móvil bajo los headers públicos',
     await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
   ).toBeTruthy();
 });
+
 test('deployment: galería y cuatro videos se sirven y reproducen desde Hosting', async ({
   page,
 }) => {

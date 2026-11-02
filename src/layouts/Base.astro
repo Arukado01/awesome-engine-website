@@ -27,7 +27,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="theme-color" content="#101218" />
+    <meta name="theme-color" content="#101218" data-dark="#101218" data-light="#f7f7fa" />
     <title>{title} · Awesome Engine</title>
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow'} />
@@ -60,19 +60,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL('/images/og-cover.png', Astro.site)} />
     <script is:inline>
+      let preference = 'system';
       try {
-        const t = localStorage.getItem('ae-theme') || 'system';
-        document.documentElement.dataset.theme =
-          t === 'system'
-            ? matchMedia('(prefers-color-scheme: dark)').matches
-              ? 'dark'
-              : 'light'
-            : t;
+        const saved = localStorage.getItem('ae-theme');
+        if (saved === 'light' || saved === 'dark') preference = saved;
       } catch {
-        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light';
+        /* Follow the device when storage is unavailable. */
       }
+      const resolved =
+        preference === 'system'
+          ? matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+          : preference;
+      document.documentElement.dataset.theme = resolved;
+      const browserTheme = document.querySelector('meta[name="theme-color"]');
+      if (browserTheme) browserTheme.content = browserTheme.dataset[resolved];
     </script>
   </head>
   <body>

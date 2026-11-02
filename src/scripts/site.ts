@@ -14,8 +14,11 @@ try {
   /* Private browsing still gets an in-memory choice. */
 }
 function applyTheme() {
-  document.documentElement.dataset.theme =
-    theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
+  const resolved = theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
+  document.documentElement.dataset.theme = resolved;
+  const browserTheme = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+  const color = browserTheme?.dataset[resolved];
+  if (browserTheme && color) browserTheme.content = color;
   themeOptions.forEach((option) => {
     option.checked = option.value === theme;
   });
