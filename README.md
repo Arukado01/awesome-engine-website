@@ -29,6 +29,24 @@ Sitio de presentación, documentación y evolución de **Awesome Engine**, el mo
 - **Código del sitio:** [Arukado01/awesome-engine-website](https://github.com/Arukado01/awesome-engine-website).
 - **Proyecto Firebase:** `awesome-engine-web-arukado`.
 
+## Idiomas
+
+La interfaz, las nueve guías, el historial, el showcase y los mensajes de los controles están disponibles en siete idiomas:
+
+| Idioma             | Ruta   |
+| ------------------ | ------ |
+| Español            | `/`    |
+| English            | `/en/` |
+| Português (Brasil) | `/pt/` |
+| Français           | `/fr/` |
+| Deutsch            | `/de/` |
+| 日本語             | `/ja/` |
+| 简体中文           | `/zh/` |
+
+El selector del encabezado permite buscar un idioma y conserva la página y sus anclas. Las rutas determinan el idioma; no hay redirecciones automáticas ni servicios externos de traducción. Cada página se genera con contenido traducido, `lang`, canonical y alternativas `hreflang`. Las imágenes y los videos originales se comparten entre idiomas.
+
+[![Selector de siete idiomas con búsqueda integrada](docs/images/site-languages.png)](https://awesome-engine-web-arukado.web.app/en/)
+
 ## Capturas de pantalla
 
 Capturas reales de la interfaz del sitio. Los temas claro y oscuro comparten la misma estructura y las interacciones se adaptan a móvil, tablet y escritorio.
@@ -124,7 +142,9 @@ src/
   pages/              Rutas y documentos renderizados
   styles/             Tokens y estilos
   scripts/            Interacciones y formulario
-  content/docs/       Guías Markdown con frontmatter
+  content/docs/       Nueve guías originales en español
+  content/docs-localized/  Las mismas guías en otros seis idiomas
+  i18n/               Catálogos, mensajes, rutas y localización HTML
   data/engine.ts      Juegos, tecnologías y trabajo en desarrollo
   data/updates.ts     Historial central de mejoras
 public/               Imágenes, favicon y recursos estáticos
@@ -136,6 +156,16 @@ docs/                 Auditoría, procedencia y operación
 ```
 
 `firebase.json` publica exclusivamente Hosting. `firebase.functions.json` es la configuración alternativa para habilitar el backend de forma explícita. Ningún workflow despliega funciones ni cambia facturación automáticamente.
+
+## Mantener las traducciones
+
+- `src/i18n/locales.ts` define los siete idiomas y sus rutas.
+- `src/i18n/catalogs/es.json` contiene los textos fuente; los otros seis JSON mantienen las mismas claves y traducen sus valores. Conserva placeholders como `{count}` y `{label}`.
+- `src/middleware.ts` aplica los catálogos durante el renderizado estático. El parser HTML traduce texto y atributos accesibles, sin modificar código, scripts ni recursos. No se descarga el catálogo completo al navegador.
+- `src/i18n/ui-messages.json` y `client.ts` suministran los mensajes de interacción y plurales localizados.
+- Las guías se traducen como Markdown completo en `src/content/docs-localized/<idioma>/`. Conserva nombres de archivo, código y fuentes; los alias de encabezados españoles permiten cambiar de idioma sin perder el punto de lectura.
+- Tras añadir texto al sitio, compila, actualiza el catálogo fuente con `node scripts/extract-i18n.mjs`, completa los seis catálogos y vuelve a compilar. La comprobación posterior a la compilación detecta frases o páginas sin traducción. Si la primera compilación falla por texto nuevo, ya habrá escrito el HTML necesario para la extracción.
+- Ejecuta `npm test` y `npm run test:e2e` antes de publicar.
 
 ## Actualizar documentación y novedades
 

@@ -1,3 +1,4 @@
+import { ui } from '../i18n/client';
 declare global {
   interface Window {
     aeCaptchaReady?: () => void;
@@ -17,10 +18,10 @@ const limits: Record<FieldName, readonly [number, number]> = {
   message: [20, 5000],
 };
 const labels: Record<FieldName, string> = {
-  name: 'Escribe un nombre de 2 a 80 caracteres.',
-  email: 'Escribe un correo electrónico válido.',
-  subject: 'El asunto debe tener entre 3 y 160 caracteres.',
-  message: 'El mensaje debe tener entre 20 y 5000 caracteres.',
+  name: ui('nameError'),
+  email: ui('emailError'),
+  subject: ui('subjectError'),
+  message: ui('messageError'),
 };
 const button = document.querySelector<HTMLButtonElement>('#contact-submit');
 const newAttempt = document.querySelector<HTMLButtonElement>('#contact-new-attempt');
@@ -75,10 +76,10 @@ function updateControls() {
     const label = button.querySelector('span');
     if (label)
       label.textContent = inFlight
-        ? 'Enviando mensaje…'
+        ? ui('sending')
         : uncertainty === 'network'
-          ? 'Comprobar el mismo envío'
-          : 'Enviar mensaje';
+          ? ui('retrySame')
+          : ui('send');
   }
   if (newAttempt) {
     newAttempt.hidden = uncertainty === null;
@@ -116,13 +117,11 @@ window.aeCaptchaReady = () => {
 window.aeCaptchaError = () => {
   captchaLoadingDone();
   const error = document.querySelector('#captcha-error');
-  if (error)
-    error.textContent =
-      'No pudimos cargar la verificación. Revisa tu conexión y vuelve a intentarlo.';
+  if (error) error.textContent = ui('captchaError');
 };
 window.aeCaptchaExpired = () => {
   const error = document.querySelector('#captcha-error');
-  if (error) error.textContent = 'La verificación expiró. Completa una nueva verificación.';
+  if (error) error.textContent = ui('captchaExpired');
 };
 
 if (enabled && document.querySelector('.cf-turnstile')) {
@@ -146,9 +145,7 @@ if (enabled && document.querySelector('.cf-turnstile')) {
 
 newAttempt?.addEventListener('click', () => {
   if (inFlight) return;
-  const confirmed = window.confirm(
-    'Gmail podría haber recibido tu mensaje anterior. Iniciar otro envío puede duplicarlo. ¿Quieres iniciar un nuevo intento de todos modos?',
-  );
+  const confirmed = window.confirm(ui('duplicateConfirm'));
   if (!confirmed) return;
   uncertainty = null;
   requestId = crypto.randomUUID();
@@ -163,18 +160,18 @@ form?.addEventListener('submit', async (event) => {
   if (inFlight || uncertainty === 'delivery') return;
   const valid = fields.map(validateField).every(Boolean);
   if (!valid) {
-    showStatus('Revisa los campos indicados antes de enviar.', 'error');
+    showStatus(ui('invalidFields'), 'error');
     form.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
     return;
   }
   if (!enabled) {
-    showStatus('El envío todavía no está disponible. No se ha enviado tu mensaje.', 'error');
+    showStatus(ui('contactDisabled'), 'error');
     return;
   }
   const data = new FormData(form);
   const token = String(data.get('cf-turnstile-response') || '');
   if (!token) {
-    showStatus('Completa la verificación de seguridad antes de enviar.', 'error');
+    showStatus(ui('captchaRequired'), 'error');
     return;
   }
   const payload = {
@@ -186,10 +183,7 @@ form?.addEventListener('submit', async (event) => {
   };
   const fingerprint = JSON.stringify(payload);
   if (uncertainty && previousPayload !== fingerprint) {
-    showStatus(
-      'Conserva el mensaje anterior para comprobar su envío. Para cambiarlo, utiliza «Iniciar otro envío» y confirma el riesgo de duplicarlo.',
-      'error',
-    );
+    showStatus(ui('keepMessage'), 'error');
     return;
   }
   if (previousPayload && previousPayload !== fingerprint) requestId = crypto.randomUUID();
@@ -215,23 +209,34 @@ form?.addEventListener('submit', async (event) => {
         for (const [key, value] of Object.entries(result.errors)) {
           if (fields.includes(key as FieldName)) {
             const error = document.querySelector(`#${key}-error`);
-            if (error) error.textContent = String(value);
+            if (error)
+              error.textContent =
+                document.documentElement.lang === 'es' ? String(value) : labels[key as FieldName];
             fieldElement(key as FieldName)?.setAttribute('aria-invalid', 'true');
           }
         }
       }
       showStatus(
-        typeof result.message === 'string'
+        document.documentElement.lang === 'es' && typeof result.message === 'string'
           ? result.message
-          : 'No pudimos enviar el mensaje. Inténtalo de nuevo más tarde.',
+          : ui(
+              result.code === 'delivery_uncertain'
+                ? 'deliveryUncertain'
+                : result.code === 'request_in_progress'
+                  ? 'requestInProgress'
+                  : response.status === 429
+                    ? 'rateLimit'
+                    : response.status === 403
+                      ? 'securityError'
+                      : result.errors
+                        ? 'invalidFields'
+                        : 'sendError',
+            ),
         'error',
       );
       return;
     }
-    showStatus(
-      'Tu mensaje fue aceptado por el servicio de correo. Gracias por escribir.',
-      'success',
-    );
+    showStatus(ui('sendSuccess'), 'success');
     uncertainty = null;
     form.reset();
     requestId = crypto.randomUUID();
@@ -241,10 +246,7 @@ form?.addEventListener('submit', async (event) => {
   } catch {
     // Timeout, offline and non-JSON proxy errors can all hide a successful SMTP send.
     markUncertain('network');
-    showStatus(
-      'No pudimos confirmar el envío. Conservamos tu mensaje y su identificador. Puedes completar otra verificación y comprobar el mismo envío. Iniciar otro intento podría duplicarlo.',
-      'error',
-    );
+    showStatus(ui('sendUncertain'), 'error');
   } finally {
     inFlight = false;
     updateControls();

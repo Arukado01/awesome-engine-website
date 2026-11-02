@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getLocale } from '../i18n/locales';
 
 const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
 const enabled = import.meta.env.PUBLIC_CONTACT_ENABLED === 'true' && Boolean(siteKey.trim());
@@ -143,6 +144,9 @@ const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '/api/contact';
             class="cf-turnstile"
             data-sitekey={siteKey}
             data-action="contact"
+            data-language={
+              getLocale(Astro.url.pathname) === 'zh' ? 'zh-cn' : getLocale(Astro.url.pathname)
+            }
             data-theme="auto"
             data-callback="aeCaptchaReady"
             data-error-callback="aeCaptchaError"

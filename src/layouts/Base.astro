@@ -1,5 +1,8 @@
 ---
 import Header from '../components/Header.astro';
+import { getLocale, locales, localeInfo, localizedPath } from '../i18n/locales';
+import uiMessages from '../i18n/ui-messages.json';
+const locale = getLocale(Astro.url.pathname);
 import Footer from '../components/Footer.astro';
 import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
@@ -20,7 +23,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="es" data-theme="dark">
+<html lang={localeInfo[locale].html} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -29,9 +32,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow'} />
     <link rel="canonical" href={canonical} />
+    {!noindex &&
+      locales.map((code) => (
+        <link
+          rel="alternate"
+          hreflang={localeInfo[code].html}
+          href={new URL(localizedPath(Astro.url.pathname, code), Astro.site)}
+        />
+      ))}
+    {!noindex && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={new URL(localizedPath(Astro.url.pathname, 'es'), Astro.site)}
+      />
+    )}
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="es_CO" />
+    <meta property="og:locale" content={localeInfo[locale].og} />
     <meta property="og:site_name" content="Awesome Engine" />
     <meta property="og:title" content={`${title} · Awesome Engine`} />
     <meta property="og:description" content={description} />
@@ -58,6 +76,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </script>
   </head>
   <body>
+    <script
+      is:inline
+      type="application/json"
+      id="ui-messages"
+      set:html={JSON.stringify(uiMessages).replace(/</g, '\\u003c')}
+    />
     <a href="#main" class="skip-link">
       Saltar al contenido
     </a>

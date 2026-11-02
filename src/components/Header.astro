@@ -1,5 +1,8 @@
 ---
 import Logo from './Logo.astro';
+import LanguagePicker from './LanguagePicker.astro';
+import { withoutLocale } from '../i18n/locales';
+const currentPath = withoutLocale(Astro.url.pathname);
 import '../styles/theme-control.css';
 const themes = [
   {
@@ -39,7 +42,7 @@ const links = [
     </a>
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       {links.map((l) => (
-        <a href={l.href} aria-current={Astro.url.pathname.startsWith(l.href) ? 'page' : undefined}>
+        <a href={l.href} aria-current={currentPath.startsWith(l.href) ? 'page' : undefined}>
           {l.label}
         </a>
       ))}
@@ -48,6 +51,7 @@ const links = [
       </a>
     </nav>
     <div class="header-actions">
+      <LanguagePicker />
       <div class="theme-picker" id="theme-picker" hidden>
         <button
           class="theme-trigger"

@@ -1,10 +1,11 @@
+import { ui } from '../i18n/client';
 type Theme = 'system' | 'dark' | 'light';
 const media = window.matchMedia('(prefers-color-scheme: dark)');
 const picker = document.querySelector<HTMLElement>('#theme-picker');
 const trigger = document.querySelector<HTMLButtonElement>('#theme-trigger');
 const panel = document.querySelector<HTMLElement>('#theme-panel');
 const themeOptions = [...document.querySelectorAll<HTMLInputElement>('input[name="theme"]')];
-const themeLabels = { system: 'Sistema', dark: 'Oscuro', light: 'Claro' };
+const themeLabels = { system: ui('system'), dark: ui('dark'), light: ui('light') };
 let theme: Theme = 'system';
 try {
   const saved = localStorage.getItem('ae-theme');
@@ -75,13 +76,13 @@ const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const nav = document.querySelector<HTMLElement>('#main-nav');
 function closeMenu() {
   toggle?.setAttribute('aria-expanded', 'false');
-  toggle?.setAttribute('aria-label', 'Abrir navegación');
+  toggle?.setAttribute('aria-label', ui('menuOpen'));
   nav?.classList.remove('is-open');
 }
 toggle?.addEventListener('click', () => {
   const open = toggle.getAttribute('aria-expanded') !== 'true';
   toggle.setAttribute('aria-expanded', String(open));
-  toggle.setAttribute('aria-label', open ? 'Cerrar navegación' : 'Abrir navegación');
+  toggle.setAttribute('aria-label', open ? ui('menuClose') : ui('menuOpen'));
   nav?.classList.toggle('is-open', open);
 });
 document.addEventListener('keydown', (event) => {
@@ -91,19 +92,19 @@ document.addEventListener('keydown', (event) => {
   }
 });
 nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
-window.matchMedia('(min-width: 901px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 1101px)').addEventListener('change', closeMenu);
 document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) =>
   button.addEventListener('click', async () => {
     const text = button.closest('.code-wrap')?.querySelector('code')?.textContent;
     if (!text) return;
     try {
       await navigator.clipboard.writeText(text);
-      button.textContent = 'Copiado ✓';
+      button.textContent = ui('copied');
     } catch {
-      button.textContent = 'Selecciona y copia el código';
+      button.textContent = ui('copyError');
     }
     setTimeout(() => {
-      button.textContent = 'Copiar';
+      button.textContent = ui('copy');
     }, 2500);
   }),
 );

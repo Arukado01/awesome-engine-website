@@ -1,0 +1,33 @@
+---
+import { locales } from '../../i18n/locales';
+import Home from '../index.astro';
+import Motor from '../motor.astro';
+import Showcase from '../showcase.astro';
+import History from '../evolucion.astro';
+import Contact from '../contacto.astro';
+import Privacy from '../privacidad.astro';
+import NotFound from '../404.astro';
+import DocsIndex from '../docs/index.astro';
+export function getStaticPaths() {
+  return locales
+    .filter((locale) => locale !== 'es')
+    .flatMap((locale) =>
+      [undefined, 'motor', 'showcase', 'evolucion', 'contacto', 'privacidad', 'docs', '404'].map(
+        (page) => ({ params: { locale, page } }),
+      ),
+    );
+}
+const pages = {
+  home: Home,
+  motor: Motor,
+  showcase: Showcase,
+  evolucion: History,
+  contacto: Contact,
+  privacidad: Privacy,
+  docs: DocsIndex,
+  '404': NotFound,
+};
+const Page = pages[(Astro.params.page || 'home') as keyof typeof pages];
+---
+
+<Page />

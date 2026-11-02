@@ -1,3 +1,4 @@
+import { ui } from '../i18n/client';
 const dialog = document.querySelector<HTMLDialogElement>('#gallery-dialog');
 const title = document.querySelector('#gallery-title');
 const image = document.querySelector<HTMLImageElement>('#gallery-image');
@@ -11,7 +12,7 @@ function showImage() {
   if (!item || !image) return;
   image.src = item.dataset.src || '';
   image.alt = item.dataset.alt || '';
-  if (title) title.textContent = item.dataset.title || 'Captura del juego';
+  if (title) title.textContent = item.dataset.title || ui('screenshot');
   if (caption) caption.textContent = item.dataset.alt || '';
   if (count) count.textContent = `${index + 1} / ${selected.length}`;
 }

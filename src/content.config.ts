@@ -10,4 +10,13 @@ const docs = defineCollection({
     category: z.string(),
   }),
 });
-export const collections = { docs };
+const docsLocalized = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/docs-localized' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    order: z.number(),
+    category: z.string(),
+  }),
+});
+export const collections = { docs, docsLocalized };

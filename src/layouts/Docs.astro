@@ -1,6 +1,9 @@
 ---
 import Base from './Base.astro';
-import { getCollection } from 'astro:content';
+import { getDocs } from '../i18n/docs';
+import { getLocale, withoutLocale } from '../i18n/locales';
+import { translate } from '../i18n/server';
+const locale = getLocale(Astro.url.pathname);
 interface Props {
   title: string;
   description: string;
@@ -8,11 +11,14 @@ interface Props {
   headings?: { depth: number; slug: string; text: string }[];
 }
 const { title, description, headings = [], prose = true } = Astro.props;
-const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+const docs = await getDocs(locale);
 const categories = [...new Set(docs.map((d) => d.data.category))];
 ---
 
-<Base title={`${title} — Documentación`} description={description}>
+<Base
+  title={`${translate(locale, title)} — ${translate(locale, 'Documentación')}`}
+  description={description}
+>
   <div class:list={['container', 'docs-layout', { 'has-toc': headings.length > 0 }]}>
     <aside class="docs-sidebar">
       <a href="/docs/" class="docs-label">
@@ -30,8 +36,12 @@ const categories = [...new Set(docs.map((d) => d.data.category))];
                 .filter((d) => d.data.category === category)
                 .map((doc) => (
                   <a
-                    href={`/docs/${doc.id}/`}
-                    aria-current={Astro.url.pathname === `/docs/${doc.id}/` ? 'page' : undefined}
+                    href={`/docs/${doc.slug}/`}
+                    aria-current={
+                      withoutLocale(Astro.url.pathname) === `/docs/${doc.slug}/`
+                        ? 'page'
+                        : undefined
+                    }
                   >
                     {doc.data.title}
                   </a>

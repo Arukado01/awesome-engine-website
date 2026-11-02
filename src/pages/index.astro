@@ -1,17 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getLocale, localeInfo } from '../i18n/locales';
+const currentLocale = localeInfo[getLocale(Astro.url.pathname)].html;
 import '../styles/home.css';
 import Pipeline from '../components/Pipeline.astro';
 import { updates } from '../data/updates';
 const latest = updates.slice(0, 3);
-const updateDate = new Intl.DateTimeFormat('es-CO', {
+const updateDate = new Intl.DateTimeFormat(currentLocale, {
   day: '2-digit',
   month: 'short',
   year: 'numeric',
   timeZone: 'America/Bogota',
 });
 const formatUpdateDate = (value: string) =>
-  updateDate.format(new Date(value)).toLocaleUpperCase('es-CO');
+  updateDate.format(new Date(value)).toLocaleUpperCase(currentLocale);
 ---
 
 <Base title="Ideas en código. Mundos en movimiento.">

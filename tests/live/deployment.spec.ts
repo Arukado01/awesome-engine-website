@@ -101,3 +101,35 @@ test('deployment: biblioteca de guías y categorías buscables funcionan en móv
       .evaluateAll((nodes) => nodes.every((n) => n.getAttribute('data-category') === 'Audio')),
   ).toBeTruthy();
 });
+
+test('deployment: idiomas, guías y enlaces de repositorios publicados', async ({
+  page,
+  request,
+}) => {
+  const languages = { en: 'en', pt: 'pt-BR', fr: 'fr', de: 'de', ja: 'ja', zh: 'zh-Hans' };
+  for (const [locale, lang] of Object.entries(languages)) {
+    for (const route of ['/', '/motor/', '/docs/renderizado/']) {
+      const response = await request.get('/' + locale + route);
+      expect(response.status(), locale + route).toBe(200);
+      const html = await response.text();
+      expect(html).toContain('lang="' + lang + '"');
+      expect(html).toContain('/' + locale + '/docs/');
+      expect(html).not.toContain('Herramientas concretas.');
+      if (route === '/motor/') {
+        expect((html.match(/class="text-link technology-link"/g) || []).length).toBe(8);
+        expect(html).toContain('https://github.com/SFML/SFML');
+        expect(html).toContain('https://gitlab.kitware.com/cmake/cmake');
+      }
+    }
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/en/docs/renderizado/?from=language#views-and-coordinates');
+  await page.locator('#language-picker summary').click();
+  await page.locator('#language-search').fill('日本語');
+  await expect(page.locator('[data-locale-link]:visible')).toHaveCount(1);
+  await page.locator('[data-locale-link="ja"]').click();
+  await expect(page).toHaveURL(/\/ja\/docs\/renderizado\/\?from=language#vistas-y-coordenadas$/);
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ja');
+  await expect(page.locator('.doc-header h1')).not.toHaveText('Renderizado y efectos');
+  await expect(page.locator('#vistas-y-coordenadas')).toHaveCount(1);
+});

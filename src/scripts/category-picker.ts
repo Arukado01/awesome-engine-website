@@ -1,3 +1,4 @@
+import { ui, plural } from '../i18n/client';
 const picker = document.querySelector<HTMLElement>('#category-picker');
 const select = document.querySelector<HTMLSelectElement>('#update-category');
 const trigger = document.querySelector<HTMLButtonElement>('#category-trigger');
@@ -31,16 +32,15 @@ if (picker && select && trigger && panel && input && selectedLabel && empty && c
     });
     const visible = visibleOptions();
     empty!.hidden = visible.length > 0;
-    count!.textContent =
-      visible.length + (visible.length === 1 ? ' opción disponible' : ' opciones disponibles');
+    count!.textContent = plural('optionsOne', 'optionsOther', visible.length);
     setActive(
       visible.find((option) => option.dataset.categoryValue === select!.value) || visible[0],
     );
   }
   function syncSelection() {
-    const label = select!.selectedOptions[0]?.textContent || 'Todas las categorías';
+    const label = select!.selectedOptions[0]?.textContent || ui('allCategories');
     selectedLabel!.textContent = label;
-    trigger!.setAttribute('aria-label', 'Categoría: ' + label);
+    trigger!.setAttribute('aria-label', ui('categoryLabel', { label }));
     trigger!.title = label;
     options.forEach((option) =>
       option.setAttribute('aria-selected', String(option.dataset.categoryValue === select!.value)),

@@ -1,6 +1,8 @@
 ---
 import Docs from '../../layouts/Docs.astro';
-import { getCollection } from 'astro:content';
+import { getDocs } from '../../i18n/docs';
+import { getLocale } from '../../i18n/locales';
+const locale = getLocale(Astro.url.pathname);
 const guideIcons: Record<string, string> = {
   introduccion:
     'M4 5h6a3 3 0 0 1 3 3v13a4 4 0 0 0-4-2H4V5Zm16 0h-5a2 2 0 0 0-2 2v14a4 4 0 0 1 4-2h3V5Z',
@@ -13,7 +15,7 @@ const guideIcons: Record<string, string> = {
   'entrada-audio': 'M4 8h16v11H4zM7 12h4M9 10v4M16 12h1M18 15h1M12 8V4',
   problemas: 'M9 8V5h6v3M6 9h12v10H6zM3 11h3m12 0h3M3 17h3m12 0h3M9 12v4m6-4v4',
 };
-const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+const docs = await getDocs(locale);
 ---
 
 <Docs
@@ -50,7 +52,7 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
     {docs.map((doc, i) => (
       <a
         class="doc-card"
-        href={`/docs/${doc.id}/`}
+        href={`/docs/${doc.slug}/`}
         data-doc-card
         data-search={`${doc.data.title} ${doc.data.description} ${doc.body}`}
       >
@@ -66,7 +68,7 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <path d={guideIcons[doc.id] || guideIcons.introduccion} />
+              <path d={guideIcons[doc.slug] || guideIcons.introduccion} />
             </svg>
           </span>
           <span class="doc-number" aria-hidden="true">
@@ -106,6 +108,7 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
     presentan como una versión publicada.
   </div>
   <script>
+    import { plural } from '../../i18n/client';
     const input = document.querySelector<HTMLInputElement>('#docs-search');
     const cards = [...document.querySelectorAll<HTMLElement>('[data-doc-card]')];
     const count = document.querySelector('#search-count');
@@ -122,8 +125,7 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
         c.hidden = !normalize(c.dataset.search || '').includes(q);
         if (!c.hidden) found++;
       });
-      if (count)
-        count.textContent = `${found} ${found === 1 ? 'guía encontrada' : 'guías encontradas'}`;
+      if (count) count.textContent = plural('guidesOne', 'guidesOther', found);
       if (empty) empty.hidden = found > 0;
     }
     input?.addEventListener('input', filter);

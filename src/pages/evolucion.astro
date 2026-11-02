@@ -1,10 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
+import { getLocale, localeInfo } from '../i18n/locales';
+const currentLocale = localeInfo[getLocale(Astro.url.pathname)].html;
 import CategoryPicker from '../components/CategoryPicker.astro';
 import { updates } from '../data/updates';
 const categories = [...new Set(updates.map((u) => u.category))];
 const date = (value: string) =>
-  new Date(value).toLocaleDateString('es-CO', {
+  new Date(value).toLocaleDateString(currentLocale, {
     day: '2-digit',
     month: 'short',
     year: 'numeric',
@@ -114,6 +116,7 @@ const date = (value: string) =>
   </section>
 </Base>
 <script>
+  import { plural } from '../i18n/client';
   const search = document.querySelector<HTMLInputElement>('#update-search');
   const category = document.querySelector<HTMLSelectElement>('#update-category');
   const entries = [...document.querySelectorAll<HTMLElement>('[data-update]')];
@@ -135,7 +138,7 @@ const date = (value: string) =>
       if (!e.hidden) n++;
     });
     if (empty) empty.hidden = n > 0;
-    if (count) count.textContent = `${n} ${n === 1 ? 'actualización' : 'actualizaciones'}`;
+    if (count) count.textContent = plural('updatesOne', 'updatesOther', n);
   }
   search?.addEventListener('input', filter);
   category?.addEventListener('change', filter);
