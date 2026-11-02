@@ -5,6 +5,7 @@ import '@fontsource-variable/space-grotesk';
 import '@fontsource-variable/inter';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import '../styles/motion.css';
 interface Props {
   title: string;
   description?: string;
@@ -67,6 +68,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Footer />
     <script>
       import '../scripts/site';
+      import '../scripts/motion';
     </script>
   </body>
 </html>

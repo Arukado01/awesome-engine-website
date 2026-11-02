@@ -1,27 +1,71 @@
 type Theme = 'system' | 'dark' | 'light';
 const media = window.matchMedia('(prefers-color-scheme: dark)');
-const selector = document.querySelector<HTMLSelectElement>('#theme-select');
+const picker = document.querySelector<HTMLElement>('#theme-picker');
+const trigger = document.querySelector<HTMLButtonElement>('#theme-trigger');
+const panel = document.querySelector<HTMLElement>('#theme-panel');
+const themeOptions = [...document.querySelectorAll<HTMLInputElement>('input[name="theme"]')];
+const themeLabels = { system: 'Sistema', dark: 'Oscuro', light: 'Claro' };
 let theme: Theme = 'system';
 try {
   const saved = localStorage.getItem('ae-theme');
   if (saved === 'light' || saved === 'dark') theme = saved;
 } catch {
-  /* private browsing */
+  /* Private browsing still gets an in-memory choice. */
 }
 function applyTheme() {
   document.documentElement.dataset.theme =
     theme === 'system' ? (media.matches ? 'dark' : 'light') : theme;
+  themeOptions.forEach((option) => {
+    option.checked = option.value === theme;
+  });
+  const label = trigger?.querySelector('.theme-current');
+  if (label) label.textContent = themeLabels[theme];
+  trigger?.querySelectorAll<SVGElement>('[data-theme-icon]').forEach((icon) => {
+    icon.dataset.active = String(icon.dataset.themeIcon === theme);
+  });
 }
-if (selector) {
-  selector.value = theme;
-  selector.addEventListener('change', () => {
-    theme = selector.value as Theme;
-    try {
-      localStorage.setItem('ae-theme', theme);
-    } catch {
-      /* theme still works in memory */
+function closeTheme(restoreFocus = false) {
+  if (!panel || panel.hidden) return;
+  panel.hidden = true;
+  trigger?.setAttribute('aria-expanded', 'false');
+  if (restoreFocus) trigger?.focus();
+}
+applyTheme();
+if (picker && trigger && panel) {
+  picker.hidden = false;
+  trigger.addEventListener('click', () => {
+    if (!panel.hidden) {
+      closeTheme(true);
+      return;
     }
-    applyTheme();
+    panel.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    themeOptions.find((option) => option.checked)?.focus({ preventScroll: true });
+  });
+  themeOptions.forEach((option) =>
+    option.addEventListener('change', () => {
+      if (!option.checked) return;
+      theme = option.value as Theme;
+      try {
+        localStorage.setItem('ae-theme', theme);
+      } catch {
+        /* Keep choice in memory. */
+      }
+      applyTheme();
+    }),
+  );
+  document.addEventListener('pointerdown', (event) => {
+    if (event.target instanceof window.Node && !picker.contains(event.target)) closeTheme();
+  });
+  picker.addEventListener('focusout', (event) => {
+    if (event.relatedTarget instanceof window.Node && !picker.contains(event.relatedTarget))
+      closeTheme();
+  });
+  picker.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !panel.hidden) {
+      event.stopPropagation();
+      closeTheme(true);
+    }
   });
 }
 media.addEventListener('change', () => {

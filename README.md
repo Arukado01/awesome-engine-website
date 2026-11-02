@@ -8,7 +8,7 @@ Sitio de presentación, documentación y evolución de **Awesome Engine**, el mo
 
 ## Qué incluye
 
-Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema, navegación adaptable, búsqueda de documentación, metadatos sociales, sitemap y página 404.
+Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, búsqueda de documentación, metadatos sociales, sitemap y página 404.
 
 El contenido técnico se basa en la auditoría de la revisión `5a6dfacd86414c4cdfaa7157b533330f173a3126`. Las funciones observadas únicamente en el árbol local se identifican como trabajo en desarrollo. No se anuncian versiones ni capacidades sin evidencia.
 
@@ -138,7 +138,7 @@ El workflow valida pull requests y pushes a `main`. Tras validar `main`, desplie
 - Clave privada de Turnstile en `TURNSTILE_SECRET_KEY` y site key pública para el navegador.
 - Parámetros `SMTP_USER` y `ALLOWED_ORIGINS` del backend.
 - Backend desplegado y prueba de recepción en `carlosjcortinam@gmail.com`.
-Blaze está activo por autorización del propietario. Firestore ya se creó con reglas privadas y TTL; aún no se ha desplegado la función de correo porque faltan secretos reales.
+  Blaze está activo por autorización del propietario. Firestore ya se creó con reglas privadas y TTL; aún no se ha desplegado la función de correo porque faltan secretos reales.
 
 No pegues esas credenciales en código, incidencias, commits o archivos de ejemplo. La integración preparada no equivale a un envío confirmado.
 
@@ -147,3 +147,4 @@ No pegues esas credenciales en código, incidencias, commits o archivos de ejemp
 El código original del sitio se publica bajo [MIT](LICENSE), copyright 2026 Carlos Cortina. Las dependencias, fuentes, capturas y recursos de terceros conservan sus licencias y atribuciones. La licencia del sitio no concede derechos adicionales sobre ellos; consulta [ASSETS.md](docs/ASSETS.md).
 
 El repositorio excluye `.env` reales, secretos locales, credenciales, dependencias instaladas, cachés y artefactos generados. Los archivos `.env.example` contienen únicamente nombres y valores ilustrativos.
+Tras cada despliegue, un job independiente y sin secretos ejecuta tres pruebas sobre la URL real de Hosting: páginas y 404, interacción móvil y reproducción de los cuatro videos. Puede repetirse con PLAYWRIGHT_BASE_URL apuntando a producción o a un canal de preview del proyecto y npm run test:live.
