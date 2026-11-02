@@ -4,7 +4,7 @@ El endpoint `contact` usa Firebase Functions v2, Node.js 22, Nodemailer y **Gmai
 
 ## Estado y requisitos pendientes
 
-La función de contacto está desplegada en Firebase con Gmail SMTP, Turnstile y los orígenes autorizados. Blaze está activo y Firestore tiene reglas privadas y TTL. El propietario confirmó la recepción real de un mensaje de prueba el 2 de noviembre de 2026. Los correos usan plantillas HTML con alternativa en texto. Tras confirmar el envío principal, el servidor intenta enviar al remitente una copia de confirmación en el idioma elegido; si falla, no repite ni invalida el correo principal. Las pruebas automatizadas usan adaptadores controlados y no envían correo.
+La función de contacto está desplegada en Firebase con Gmail SMTP, Turnstile y los orígenes autorizados. Blaze está activo y Firestore tiene reglas privadas y TTL. El propietario confirmó la recepción real del mensaje y de la copia de confirmación el 2 de noviembre de 2026. La fecha visible en ambos correos utiliza la zona horaria America/Bogota. Los correos usan plantillas HTML con alternativa en texto. Tras confirmar el envío principal, el servidor intenta enviar al remitente una copia de confirmación en el idioma elegido; si falla, no repite ni invalida el correo principal. Las pruebas automatizadas usan adaptadores controlados y no envían correo.
 
 Requisitos:
 

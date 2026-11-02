@@ -38,7 +38,7 @@ Las imágenes tienen dimensiones explícitas, el hero usa WebP, las fuentes se s
 
 ## Límites pendientes
 
-La función `contact` está desplegada con los secretos configurados y el dominio personalizado autorizado. Sus pruebas automatizadas no envían correo real; el propietario confirmó la recepción de una prueba de extremo a extremo el 2 de noviembre de 2026. Ver [CONTACT.md](CONTACT.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
+La función `contact` está desplegada con los secretos configurados y el dominio personalizado autorizado. Sus pruebas automatizadas no envían correo real; el propietario confirmó la recepción tanto del correo principal como de la copia al remitente en una prueba de extremo a extremo el 2 de noviembre de 2026. Ver [CONTACT.md](CONTACT.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
 
 Los videos no contienen audio: el entorno no expuso un dispositivo de captura de audio. Mantienen las dimensiones nativas, 800 × 800 en Runner y 1440 × 900 en Plaguefront. Procedencia y límites: [CAPTURE.md](CAPTURE.md).
 

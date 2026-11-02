@@ -24,6 +24,9 @@ test('owner mail retains reply-to and safely escapes all submitted HTML', () => 
   assert.ok(!mail.html.includes('<script>alert(1)</script>'));
   assert.ok(!mail.html.includes('<img src=x onerror=alert(1)>'));
   assert.equal(mail.headers['X-Awesome-Engine-Request'], input.requestId);
+  assert.match(mail.text, /08:30.*Bogotá/);
+  assert.ok(mail.html.includes('awesome-engine-logo-dark.png'));
+  assert.ok(!mail.text.includes(' UTC'));
 });
 
 test('confirmation is addressed to the visitor with a complete copy and localized text', () => {
@@ -59,4 +62,16 @@ test('both emails produce multipart text and HTML with the intended reply-to hea
     assert.match(mime, /Reply-To:/i);
   }
   transport.close();
+});
+
+test('the displayed date uses Bogota time when UTC is on the following day', () => {
+  const mail = buildContactEmail(input, Date.UTC(2026, 10, 2, 3, 15), 'carlosjcortinam@gmail.com', 'owner');
+  assert.match(mail.text, /22:15.*Bogotá/);
+  assert.match(mail.text, /01.*nov.*2026/i);
+});
+
+
+test('confirmation formats midnight in Bogota without an hour 24', () => {
+  const mail = buildContactEmail(input, Date.UTC(2026, 10, 2, 5, 30), 'carlosjcortinam@gmail.com', 'confirmation');
+  assert.match(mail.text, /00:30.*Bogotá/);
 });
