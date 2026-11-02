@@ -94,8 +94,25 @@ if ('IntersectionObserver' in window) {
   );
   document.querySelectorAll(entranceTargets).forEach((element) => observer.observe(element));
 }
-// A keyboard user reaching an element never has to wait for an entrance to finish.
+// Finish entrances for keyboard focus only. Moving a pointer target between
+// pointerdown and pointerup would prevent its native click (for example, summary).
+let keyboardNavigation = false;
+document.addEventListener(
+  'keydown',
+  () => {
+    keyboardNavigation = true;
+  },
+  true,
+);
+document.addEventListener(
+  'pointerdown',
+  () => {
+    keyboardNavigation = false;
+  },
+  true,
+);
 document.addEventListener('focusin', () => {
+  if (!keyboardNavigation) return;
   active.forEach((animation) => {
     const target = (animation.effect as KeyframeEffect | null)?.target;
     if (target instanceof window.Element && target.contains(document.activeElement))
