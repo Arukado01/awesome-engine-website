@@ -19,4 +19,4 @@ functions/.env.*
 !functions/.env.example
 functions/.secret.local
 !functions/.secret.local.example
-
+.e2e-dist/

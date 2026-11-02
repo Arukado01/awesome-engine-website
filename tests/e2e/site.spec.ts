@@ -1,5 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+async function chooseTheme(page: Page, name: string) {
+  await page.getByRole('button', { name: /^Cambiar tema/ }).click();
+  await page.getByRole('radio', { name, exact: true }).check();
+  await page.keyboard.press('Escape');
+}
 const routes = [
   '/',
   '/motor/',
@@ -70,14 +75,13 @@ for (const width of [320, 390, 768, 1440, 1920])
 test('temas claro, oscuro y sistema persisten y reaccionan al dispositivo', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'dark' });
   await page.goto('/');
-  const select = page.getByRole('combobox', { name: 'Tema visual' });
-  await select.selectOption('light');
+  await chooseTheme(page, 'Claro');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
-  await select.selectOption('dark');
+  await chooseTheme(page, 'Oscuro');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await select.selectOption('system');
+  await chooseTheme(page, 'Sistema');
   await page.emulateMedia({ colorScheme: 'light' });
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
   await page.emulateMedia({ colorScheme: 'dark' });
@@ -135,6 +139,7 @@ test('formulario deshabilitado informa y valida campos sin enviar solicitudes', 
 });
 for (const theme of ['light', 'dark'])
   test(`accesibilidad WCAG AA en tema ${theme}`, async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
     for (const route of [
       '/',
       '/motor/',
@@ -145,9 +150,9 @@ for (const theme of ['light', 'dark'])
       '/showcase/',
     ]) {
       await page.goto(route);
-      await page.getByRole('combobox', { name: 'Tema visual' }).selectOption(theme);
+      await chooseTheme(page, theme === 'light' ? 'Claro' : 'Oscuro');
       const results = await new AxeBuilder({ page })
-        .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
         .analyze();
       expect(
         results.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => n.target) })),
@@ -213,3 +218,73 @@ for (const width of [390, 768]) {
     }
   });
 }
+
+test('selector de tema: teclado, cierre, foco y panel accesible en móvil', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 780 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/contacto/');
+  const trigger = page.getByRole('button', { name: /^Cambiar tema/ });
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('radiogroup', { name: 'Tema visual' })).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Sistema', exact: true })).toBeFocused();
+  await page.keyboard.press('ArrowDown');
+  await expect(page.getByRole('radio', { name: 'Oscuro', exact: true })).toBeChecked();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  const bounds = await page.locator('#theme-panel').boundingBox();
+  expect(bounds!.x).toBeGreaterThanOrEqual(0);
+  expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(320);
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze();
+  expect(results.violations.map((v) => v.id)).toEqual([]);
+  await page.keyboard.press('Escape');
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await trigger.click();
+  await page.locator('.page-intro .lead').click();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+});
+
+test('entradas visibles al cargar y recorrer la página, con movimiento reducido respetado', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect
+    .poll(() =>
+      page
+        .locator('.hero')
+        .evaluate(
+          (el) =>
+            el.getAnimations({ subtree: true }).filter((a) => a.playState === 'running').length,
+        ),
+    )
+    .toBeGreaterThan(0);
+  await page.locator('.feature-render').scrollIntoViewIfNeeded();
+  await expect
+    .poll(() =>
+      page
+        .locator('.feature-render')
+        .evaluate(
+          (el) =>
+            el.getAnimations({ subtree: true }).filter((a) => a.playState === 'running').length,
+        ),
+    )
+    .toBeGreaterThan(0);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect
+    .poll(() =>
+      page.evaluate(() => document.getAnimations().filter((a) => a.playState === 'running').length),
+    )
+    .toBe(0);
+  await page.reload();
+  await expect(page.locator('h1')).toBeVisible();
+  await page.locator('.pipeline').scrollIntoViewIfNeeded();
+  await expect(page.locator('.pipeline')).toBeVisible();
+  expect(
+    await page.evaluate(
+      () => document.getAnimations().filter((a) => a.playState === 'running').length,
+    ),
+  ).toBe(0);
+});

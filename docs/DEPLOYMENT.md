@@ -18,7 +18,7 @@ El alias local está en `.firebaserc`. Los comandos incluyen `--project` para qu
 
 ## 1. Preparación y validación
 
-Usa Node.js 22.22.0 o posterior de la rama 22 y Firebase CLI 15.31.0, la versión fijada en CI.
+Usa Node.js 22.23.4 o posterior de la rama 22 y Firebase CLI 15.31.0, la versión fijada en CI.
 
 ```sh
 npm ci

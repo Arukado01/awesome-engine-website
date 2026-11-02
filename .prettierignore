@@ -6,4 +6,4 @@ functions/lib
 scripts/*.local.mjs
 package-lock.json
 functions/package-lock.json
-public/media
+public/media.e2e-dist

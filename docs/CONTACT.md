@@ -4,7 +4,7 @@ El endpoint `contact` usa Firebase Functions v2, Node.js 22, Nodemailer y **Gmai
 
 ## Estado y requisitos pendientes
 
-El código, pruebas y configuración están preparados. **El envío real permanece deshabilitado hasta configurar los secretos y desplegar el backend.** No se ha enviado correo de prueba desde esta implementación. La autorización posterior del usuario permite usar Blaze para el proyecto dedicado, pero la activación efectiva y el despliegue deben comprobarse en el informe de entrega.
+El código, pruebas y configuración están preparados. **El envío real permanece deshabilitado hasta configurar los secretos y desplegar el backend.** No se ha enviado correo de prueba desde esta implementación. Blaze está activo y Firestore ya tiene reglas privadas y TTL desplegados. Falta aportar los secretos reales, desplegar la función y comprobar la recepción en Gmail.
 
 Requisitos:
 
@@ -21,17 +21,17 @@ La aceptación SMTP no garantiza llegada a la bandeja de entrada: confirmar rece
 Desde la raíz del sitio, establecer los secretos mediante prompts interactivos:
 
 ```sh
-firebase functions:secrets:set GMAIL_APP_PASSWORD --project YOUR_PROJECT_ID
-firebase functions:secrets:set TURNSTILE_SECRET_KEY --project YOUR_PROJECT_ID
+firebase functions:secrets:set GMAIL_APP_PASSWORD --project awesome-engine-web-arukado
+firebase functions:secrets:set TURNSTILE_SECRET_KEY --project awesome-engine-web-arukado
 ```
 
 Nunca escribir valores secretos en comandos, GitHub, YAML, frontend o archivos versionados. No crear valores ficticios para conseguir que el despliegue pase.
 
-Copiar `functions/.env.example` a `functions/.env.YOUR_PROJECT_ID` y configurar los parámetros no secretos:
+Copiar `functions/.env.example` a `functions/.env.awesome-engine-web-arukado` y configurar los parámetros no secretos:
 
 ```dotenv
 SMTP_USER=carlosjcortinam@gmail.com
-ALLOWED_ORIGINS=https://your-project-id.web.app,https://your-project-id.firebaseapp.com
+ALLOWED_ORIGINS=https://awesome-engine-web-arukado.web.app,https://awesome-engine-web-arukado.firebaseapp.com
 ```
 
 Los archivos reales `.env.*` y `.secret.local` deben estar ignorados por Git. La clave pública `PUBLIC_TURNSTILE_SITE_KEY` pertenece al entorno de compilación del frontend. La CSP debe permitir `https://challenges.cloudflare.com` para scripts, frames y conexiones del widget.
@@ -126,7 +126,7 @@ Una vez configurados secretos, Firestore y entorno:
 
 ```sh
 npm run check --prefix functions
-firebase deploy --config firebase.functions.json --only firestore:rules,functions:contact --project YOUR_PROJECT_ID
+firebase deploy --config firebase.functions.json --only firestore:rules,functions:contact --project awesome-engine-web-arukado
 # Habilitar el frontend con su site key y endpoint, compilar y desplegar Hosting con la configuración de Functions.
 ```
 
@@ -140,6 +140,3 @@ Enviar una sola prueba identificada desde el formulario público. Comprobar `201
 - [Nodemailer: Gmail](https://nodemailer.com/guides/using-gmail)
 - [Nodemailer: errores SMTP](https://nodemailer.com/errors)
 - [Cloudflare: validación Turnstile](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
-
-
-

@@ -1,5 +1,26 @@
 ---
 import Logo from './Logo.astro';
+import '../styles/theme-control.css';
+const themes = [
+  {
+    value: 'system',
+    label: 'Sistema',
+    detail: 'Como tu dispositivo',
+    path: 'M3 4h18v12H3z M8 20h8 M12 16v4',
+  },
+  {
+    value: 'dark',
+    label: 'Oscuro',
+    detail: 'Para crear sin distracciones',
+    path: 'M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z',
+  },
+  {
+    value: 'light',
+    label: 'Claro',
+    detail: 'Un poco más de luz',
+    path: 'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8 M12 2v2 M12 20v2 M2 12h2 M20 12h2 M5 5l2 2 M17 17l2 2 M5 19l2-2 M17 7l2-2',
+  },
+];
 const links = [
   { href: '/motor/', label: 'El motor' },
   { href: '/showcase/', label: 'Showcase' },
@@ -13,7 +34,7 @@ const links = [
     <a class="brand" href="/" aria-label="Awesome Engine, inicio">
       <Logo />
       <span>
-        AWESOME<span class="brand-sub">ENGINE</span>
+        AWESOME <span class="brand-sub">ENGINE</span>
       </span>
     </a>
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
@@ -27,26 +48,96 @@ const links = [
       </a>
     </nav>
     <div class="header-actions">
-      <label class="theme-control">
-        <span class="sr-only">Tema visual</span>
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          aria-hidden="true"
+      <div class="theme-picker" id="theme-picker" hidden>
+        <button
+          class="theme-trigger"
+          id="theme-trigger"
+          type="button"
+          aria-expanded="false"
+          aria-controls="theme-panel"
         >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />
-        </svg>
-        <select id="theme-select" aria-label="Tema visual">
-          <option value="system">Sistema</option>
-          <option value="dark">Oscuro</option>
-          <option value="light">Claro</option>
-        </select>
-      </label>
+          {themes.map((t) => (
+            <svg
+              data-theme-icon={t.value}
+              data-active={String(t.value === 'system')}
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d={t.path} />
+            </svg>
+          ))}
+          <span class="sr-only">Cambiar tema: </span>
+          <span class="theme-current">Sistema</span>
+          <svg
+            class="theme-chevron"
+            width="12"
+            height="12"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path d="m4 6 4 4 4-4" />
+          </svg>
+        </button>
+        <div class="theme-panel" id="theme-panel" hidden>
+          <span class="theme-panel-title" aria-hidden="true">
+            TU ESPACIO, TU ESTILO
+          </span>
+          <div role="radiogroup" aria-label="Tema visual" class="theme-options">
+            {themes.map((t) => (
+              <label class="theme-option">
+                <input
+                  class="theme-radio"
+                  type="radio"
+                  name="theme"
+                  value={t.value}
+                  checked={t.value === 'system'}
+                  aria-label={t.label}
+                  aria-describedby={'theme-description-' + t.value}
+                />
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d={t.path} />
+                </svg>
+                <span class="theme-option-copy">
+                  <span>{t.label}</span>
+                  <small id={'theme-description-' + t.value}>{t.detail}</small>
+                </span>
+                <svg
+                  class="theme-check"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  aria-hidden="true"
+                >
+                  <path d="m4 10 4 4 8-8" />
+                </svg>
+              </label>
+            ))}
+          </div>
+        </div>
+      </div>
       <a
         class="github-link"
         href="https://github.com/Arukado01/AwesomeEngine"

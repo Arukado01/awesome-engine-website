@@ -31,7 +31,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
           cache: npm
           cache-dependency-path: |
             package-lock.json
@@ -111,7 +111,7 @@ jobs:
       - name: Set up deployment runtime
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
       - name: Require the Hosting deployment credential
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AWESOME_ENGINE }}
@@ -141,6 +141,8 @@ jobs:
           echo '[Production website](https://awesome-engine-web-arukado.web.app)' >> "$GITHUB_STEP_SUMMARY"
 
   preview:
+    outputs:
+      url: ${{ steps.hosting.outputs.details_url }}
     name: Deploy a preview for a trusted pull request
     needs: validate
     if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
@@ -162,7 +164,7 @@ jobs:
       - name: Set up deployment runtime
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: '22'
+          node-version-file: '.nvmrc'
       - name: Require the Hosting deployment credential
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AWESOME_ENGINE }}
@@ -187,3 +189,38 @@ jobs:
           PREVIEW_URL: ${{ steps.hosting.outputs.details_url }}
         shell: bash
         run: printf '[Open the preview](%s) (expires in 7 days). Contact submission stays disabled on previews.\n' "$PREVIEW_URL" >> "$GITHUB_STEP_SUMMARY"
+
+  verify-deployment:
+    name: Verify the deployed website in a browser
+    needs: [deploy, preview]
+    if: always() && (needs.deploy.result == 'success' || needs.preview.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    env:
+      PLAYWRIGHT_BASE_URL: ${{ needs.deploy.result == 'success' && 'https://awesome-engine-web-arukado.web.app' || needs.preview.outputs.url }}
+    steps:
+      - name: Check out verification code without deployment credentials
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Set up the verified Node runtime
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install test dependencies
+        run: npm ci
+      - name: Install the browser
+        run: npx playwright install --with-deps chromium
+      - name: Test actual pages, interaction and video playback on Hosting
+        run: npm run test:live
+      - name: Keep deployed-site diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: deployed-browser-diagnostics
+          path: test-results/live/
+          if-no-files-found: ignore
+          retention-days: 7

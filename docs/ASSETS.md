@@ -43,3 +43,8 @@ Los diagramas de arquitectura y el logotipo vectorial elaborados para este sitio
 ## Identidad visual aprobada
 
 El usuario eligió expresamente el símbolo A diseñado para el sitio y su paleta lavanda. La fuente vectorial es public/images/awesome-engine-mark.svg; su derivado PNG transparente de 512 × 512 es public/images/awesome-engine-logo.png. El favicon y Open Graph emplean el mismo diseño. Al finalizar la entrega se sustituye únicamente Content/Textures/icon.png del motor, por petición explícita del usuario. El icono anterior se conserva fuera de los archivos públicos en .capture-work/originals/engine-icon-original.png.
+
+## Fuentes del sitio
+
+Inter y Space Grotesk se sirven localmente mediante Fontsource y conservan SIL Open Font License 1.1. Los textos completos, incluidos sus avisos de autoría, se distribuyen en public/fonts/OFL-Inter.txt y public/fonts/OFL-SpaceGrotesk.txt.
+

@@ -107,4 +107,3 @@ export const contact = onRequest({
   if (result.retryAfter) response.set('Retry-After', String(result.retryAfter));
   response.status(result.status).json(result.body);
 });
-

@@ -7,7 +7,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4321',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4323',
     headless: true,
     channel: process.env.CI ? undefined : 'chrome',
     screenshot: 'only-on-failure',
@@ -15,9 +15,14 @@ export default defineConfig({
   webServer: process.env.PLAYWRIGHT_BASE_URL
     ? undefined
     : {
-        command: 'npm run dev -- --port 4321',
-        url: 'http://127.0.0.1:4321',
-        reuseExistingServer: !process.env.CI,
-        timeout: 30000,
+        command: 'npm run build && npm run preview -- --port 4323 --ignore-lock',
+        url: 'http://127.0.0.1:4323',
+        reuseExistingServer: false,
+        timeout: 60000,
+        env: {
+          AE_E2E_BUILD: 'true',
+          PUBLIC_CONTACT_ENABLED: 'false',
+          PUBLIC_TURNSTILE_SITE_KEY: '',
+        },
       },
 });

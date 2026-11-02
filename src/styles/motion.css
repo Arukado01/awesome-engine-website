@@ -1,0 +1,141 @@
+/* Small, finite sequences: no autoplaying gameplay, scroll hijacking or motion dependency. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero h1 > span {
+    background: linear-gradient(100deg, var(--accent) 25%, var(--mint) 48%, var(--accent) 72%);
+    background-size: 240% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: title-light 3s ease-out 1;
+  }
+  .hero .status-dot {
+    animation: status-pulse 1.3s ease-out 3;
+  }
+  .feature.motion-entered .cube-one {
+    animation: cube-float 3.8s ease-in-out 1;
+  }
+  .feature.motion-entered .cube-two {
+    animation: cube-float 3.8s ease-in-out 0.15s 1;
+  }
+  .feature.motion-entered .scene-tabs span {
+    animation: cycle-step 900ms ease-out 1;
+  }
+  .feature.motion-entered .scene-tabs span:nth-child(2) {
+    animation-delay: 220ms;
+  }
+  .feature.motion-entered .scene-tabs span:nth-child(3) {
+    animation-delay: 440ms;
+  }
+  .feature,
+  .latest-update,
+  .doc-card,
+  .system-row,
+  .button,
+  .gallery-trigger {
+    transition:
+      transform 250ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background 200ms ease,
+      border-color 200ms ease,
+      box-shadow 250ms ease;
+  }
+  .feature:hover,
+  .feature:focus-visible,
+  .latest-update:hover,
+  .doc-card:hover {
+    transform: translateY(-5px);
+  }
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px #0001;
+  }
+  .button:active {
+    transform: translateY(0);
+  }
+  .feature .feature-arrow {
+    display: inline-block;
+    transition: transform 250ms ease;
+  }
+  .feature:hover .feature-arrow {
+    transform: translate(3px, -3px);
+  }
+  .feature-input:hover kbd,
+  .feature-input:focus-visible kbd {
+    animation: key-press 700ms ease-out 1;
+  }
+  .feature-input kbd:nth-child(2) {
+    animation-delay: 80ms;
+  }
+  .feature-input kbd:nth-child(3) {
+    animation-delay: 160ms;
+  }
+  .feature-input kbd:nth-child(4) {
+    animation-delay: 240ms;
+  }
+  dialog[open] {
+    animation: panel-enter 230ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  dialog[open]::backdrop {
+    animation: backdrop-enter 230ms ease both;
+  }
+  .main-nav.is-open {
+    animation: panel-enter 200ms ease-out both;
+  }
+  @keyframes title-light {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: 0 0;
+    }
+  }
+  @keyframes status-pulse {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--mint) 40%, transparent);
+    }
+    90%,
+    100% {
+      box-shadow: 0 0 0 7px transparent;
+    }
+  }
+  @keyframes cube-float {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -18px;
+    }
+  }
+  @keyframes cycle-step {
+    40% {
+      background: var(--surface-2);
+      color: var(--accent);
+      translate: 0 -4px;
+    }
+  }
+  @keyframes key-press {
+    35% {
+      transform: translateY(4px);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+  }
+  @keyframes panel-enter {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes backdrop-enter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}

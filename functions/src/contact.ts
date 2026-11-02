@@ -143,5 +143,3 @@ export async function handleContact(request: ContactRequest, deps: ContactDepend
   if (delivery === 'rejected') return failure(502, 'Gmail rechazó el envío. Conserva tu mensaje e inténtalo más tarde.', undefined, 'smtp_rejected');
   return failure(502, 'No pudimos confirmar si Gmail aceptó el mensaje. Para evitar duplicados, este intento no se reenviará. Espera una respuesta antes de iniciar otro.', undefined, 'delivery_uncertain');
 }
-
-
