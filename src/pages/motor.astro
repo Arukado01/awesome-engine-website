@@ -209,6 +209,16 @@ const systems = [
             <strong>{t.name}</strong>
             <span class="mono">{t.version}</span>
             <p>{t.role}</p>
+            <a
+              class="text-link technology-link"
+              href={t.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t.linkLabel} de ${t.name} (se abre en una pestaña nueva)`}
+              title="Se abre en una pestaña nueva"
+            >
+              {t.linkLabel} <span aria-hidden="true">↗</span>
+            </a>
           </div>
         ))}
       </div>
@@ -393,6 +403,15 @@ const systems = [
     gap: 12px;
     padding: 25px 0;
     border-top: 1px solid var(--border);
+  }
+  .technology-link {
+    grid-column: 1/-1;
+    justify-self: start;
+    min-height: 44px;
+    max-width: 100%;
+    gap: 12px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
   .technology-list strong {
     font: 500 24px var(--font-display);

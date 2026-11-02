@@ -62,28 +62,60 @@ export const games = [
 ] as const;
 
 export const technologies = [
-  { name: 'C++', version: '20', role: 'Lenguaje del motor y de las escenas de juego.' },
-  { name: 'SFML', version: '3.1.0', role: 'Ventana, eventos, gráficos 2D, entradas y audio.' },
-  { name: 'TGUI', version: '1.13.0', role: 'Interfaz gráfica con el backend SFML_GRAPHICS.' },
+  {
+    name: 'C++',
+    version: '20',
+    role: 'Lenguaje del motor y de las escenas de juego.',
+    url: 'https://github.com/cplusplus/draft',
+    linkLabel: 'Borrador del estándar',
+  },
+  {
+    name: 'SFML',
+    version: '3.1.0',
+    role: 'Ventana, eventos, gráficos 2D, entradas y audio.',
+    url: 'https://github.com/SFML/SFML',
+    linkLabel: 'Consultar repositorio',
+  },
+  {
+    name: 'TGUI',
+    version: '1.13.0',
+    role: 'Interfaz gráfica con el backend SFML_GRAPHICS.',
+    url: 'https://github.com/texus/TGUI',
+    linkLabel: 'Consultar repositorio',
+  },
   {
     name: 'CMake',
     version: '3.28+',
     role: 'Configuración, compilación y descarga de dependencias con FetchContent.',
+    url: 'https://gitlab.kitware.com/cmake/cmake',
+    linkLabel: 'Consultar repositorio',
   },
   {
     name: 'nlohmann/json',
     version: '3.12.0',
     role: 'Configuración y persistencia en archivos JSON.',
+    url: 'https://github.com/nlohmann/json',
+    linkLabel: 'Consultar repositorio',
   },
-  { name: 'spdlog', version: '1.16.0', role: 'Registro de eventos y diagnóstico.' },
+  {
+    name: 'spdlog',
+    version: '1.16.0',
+    role: 'Registro de eventos y diagnóstico.',
+    url: 'https://github.com/gabime/spdlog',
+    linkLabel: 'Consultar repositorio',
+  },
   {
     name: 'magic_enum',
     version: '0.9.8',
     role: 'Utilidades de reflexión para enumeraciones de C++.',
+    url: 'https://github.com/Neargye/magic_enum',
+    linkLabel: 'Consultar repositorio',
   },
   {
     name: 'GLSL',
     version: 'Shaders',
     role: 'Efectos de bloom, glitch, inversión de color y monitor.',
+    url: 'https://github.com/KhronosGroup/GLSL',
+    linkLabel: 'Especificación',
   },
 ] as const;
