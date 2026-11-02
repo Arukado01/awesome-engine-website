@@ -1,0 +1,388 @@
+---
+import Base from '../layouts/Base.astro';
+
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '';
+const enabled = import.meta.env.PUBLIC_CONTACT_ENABLED === 'true' && Boolean(siteKey.trim());
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT || '/api/contact';
+---
+
+<Base
+  title="Contacto"
+  description="Hablemos de Awesome Engine. Envía una pregunta, comparte una idea o reporta un problema del sitio."
+>
+  <section class="page-intro">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <span>Contacto</span>
+      </div>
+      <span class="eyebrow">ABRAMOS LA CONVERSACIÓN</span>
+      <h1>
+        Una idea empieza
+        <br />
+        con un mensaje.
+      </h1>
+      <p class="lead">
+        Preguntas sobre el motor, propuestas o algo que podemos mejorar. Este es el lugar para
+        hablarlo.
+      </p>
+    </div>
+  </section>
+  <section class="section container contact-layout">
+    <div class="contact-info">
+      <span class="eyebrow">HABLEMOS DE AWESOME ENGINE</span>
+      <h2>
+        De desarrollador
+        <br />a desarrollador.
+      </h2>
+      <p>Tu mensaje llegará a Carlos Cortina, desarrollador de Awesome Engine.</p>
+      <div class="contact-channel">
+        <span>CORREO DE CONTACTO</span>
+        <a href="mailto:carlosjcortinam@gmail.com">carlosjcortinam@gmail.com ↗</a>
+      </div>
+      <div class="contact-channel">
+        <span>CÓDIGO Y CONTRIBUCIONES</span>
+        <a href="https://github.com/Arukado01/AwesomeEngine">Awesome Engine en GitHub ↗</a>
+      </div>
+      <p class="privacy-note">
+        Tus datos se usan para responder a esta conversación.{' '}
+        <a href="/privacidad/">Consulta la información de privacidad.</a>
+      </p>
+    </div>
+    <form id="contact-form" data-enabled={String(enabled)} data-endpoint={endpoint} novalidate>
+      <h2 class="form-title">Escribe tu mensaje</h2>
+      {!enabled && (
+        <div class="contact-notice" role="status">
+          <strong>El envío desde el formulario aún no está disponible.</strong>
+          <span>
+            Puedes escribir al correo de contacto. Publicaremos aquí la confirmación cuando el
+            servicio esté habilitado.
+          </span>
+        </div>
+      )}
+      <div class="form-row">
+        <div class="field">
+          <label for="name">
+            Nombre <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            required
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+            placeholder="Tu nombre"
+            aria-describedby="name-error"
+          />
+          <span class="field-error" id="name-error"></span>
+        </div>
+        <div class="field">
+          <label for="email">
+            Correo electrónico <span aria-hidden="true">*</span>
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            maxlength="254"
+            autocomplete="email"
+            placeholder="tu@correo.com"
+            aria-describedby="email-error"
+          />
+          <span class="field-error" id="email-error"></span>
+        </div>
+      </div>
+      <div class="field">
+        <label for="subject">
+          Asunto <span aria-hidden="true">*</span>
+        </label>
+        <input
+          id="subject"
+          name="subject"
+          required
+          minlength="3"
+          maxlength="160"
+          placeholder="¿Sobre qué quieres hablar?"
+          aria-describedby="subject-error"
+        />
+        <span class="field-error" id="subject-error"></span>
+      </div>
+      <div class="field">
+        <label for="message">
+          Mensaje <span aria-hidden="true">*</span>
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          minlength="20"
+          maxlength="5000"
+          rows="6"
+          placeholder="Cuéntanos tu idea o pregunta…"
+          aria-describedby="message-error message-count"
+        ></textarea>
+        <div class="message-meta">
+          <span class="field-error" id="message-error"></span>
+          <span id="message-count">0 / 5000</span>
+        </div>
+      </div>
+      <div class="honeypot" aria-hidden="true">
+        <label for="website">Deja este campo vacío</label>
+        <input id="website" name="website" tabindex="-1" autocomplete="off" />
+      </div>
+      {enabled && siteKey && (
+        <div class="captcha-shell">
+          <div id="captcha-loading" class="captcha-loading" role="status">
+            <span class="skeleton"></span>
+            <span>Preparando verificación de seguridad…</span>
+          </div>
+          <div
+            class="cf-turnstile"
+            data-sitekey={siteKey}
+            data-action="contact"
+            data-theme="auto"
+            data-callback="aeCaptchaReady"
+            data-error-callback="aeCaptchaError"
+            data-expired-callback="aeCaptchaExpired"
+          ></div>
+          <p class="field-error" id="captcha-error" role="status"></p>
+        </div>
+      )}
+      <p class="form-policy">
+        Al enviar, aceptas que usemos estos datos para responderte. No se suscribirá tu correo a
+        ninguna lista.
+      </p>
+      <button
+        class="button primary submit-button"
+        id="contact-submit"
+        type="submit"
+        disabled={!enabled}
+      >
+        <span>Enviar mensaje</span>
+        <span aria-hidden="true">↗</span>
+      </button>
+      <div
+        id="form-status"
+        class="form-status"
+        role="status"
+        aria-live="polite"
+        tabindex="-1"
+        hidden
+      ></div>
+      <button id="contact-new-attempt" type="button" class="button secondary new-attempt" hidden>
+        Iniciar otro envío
+      </button>
+      <noscript>
+        <p class="contact-notice">
+          Este formulario necesita JavaScript para validar y enviar tu mensaje de forma segura.
+        </p>
+      </noscript>
+    </form>
+  </section>
+
+  <script>
+    import '../scripts/contact';
+  </script>
+</Base>
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 100px;
+  }
+  .contact-info h2 {
+    font-size: 38px;
+    margin-bottom: 24px;
+  }
+  .contact-info > p {
+    font-size: 13px;
+    line-height: 1.9;
+    max-width: 320px;
+  }
+  .contact-channel {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .contact-channel > span {
+    font: 9px var(--font-mono);
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .contact-channel a {
+    font-size: 13px;
+    color: var(--accent);
+    overflow-wrap: anywhere;
+  }
+  .contact-info > .privacy-note {
+    font-size: 11px;
+    margin-top: 28px;
+  }
+  .privacy-note a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .form-title {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+  .contact-notice {
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--warning);
+    border-radius: 4px;
+    margin-bottom: 24px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .contact-notice strong {
+    display: block;
+    color: var(--text);
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .field {
+    margin-bottom: 22px;
+  }
+  .field label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 9px;
+  }
+  .field label span {
+    color: var(--accent);
+  }
+  .field input,
+  .field textarea {
+    display: block;
+    width: 100%;
+    padding: 13px 14px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13px;
+    resize: vertical;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
+  }
+  .field input[aria-invalid='true'],
+  .field textarea[aria-invalid='true'] {
+    border-color: var(--danger);
+  }
+  .field-error {
+    display: block;
+    font-size: 11px;
+    color: var(--danger);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .message-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 20px;
+  }
+  .message-meta > span:last-child {
+    flex-shrink: 0;
+    font: 9px var(--font-mono);
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .honeypot {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-policy {
+    font-size: 10px;
+    line-height: 1.8;
+    max-width: 470px;
+    margin-bottom: 22px;
+  }
+  .new-attempt {
+    margin-top: 14px;
+  }
+  .submit-button {
+    min-width: 200px;
+    justify-content: space-between;
+  }
+  .form-status {
+    margin-top: 22px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 13px;
+    background: var(--surface);
+  }
+  .form-status.error {
+    color: var(--danger);
+    border-color: var(--danger);
+  }
+  .form-status.success {
+    color: var(--mint);
+    border-color: var(--mint);
+  }
+  .captcha-shell {
+    min-height: 85px;
+    margin-bottom: 20px;
+  }
+  .captcha-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .captcha-loading .skeleton {
+    height: 55px;
+    max-width: 300px;
+  }
+  @media (max-width: 900px) {
+    .contact-layout {
+      gap: 45px;
+      grid-template-columns: 1fr 1.3fr;
+    }
+    .contact-info h2 {
+      font-size: 30px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+  @media (max-width: 640px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+    .contact-info h2 {
+      font-size: 34px;
+    }
+    .contact-info > p {
+      max-width: none;
+    }
+    .new-attempt {
+      margin-top: 14px;
+    }
+    .submit-button {
+      width: 100%;
+    }
+  }
+</style>

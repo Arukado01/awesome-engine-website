@@ -1,0 +1,220 @@
+---
+import Docs from '../../layouts/Docs.astro';
+import { getCollection } from 'astro:content';
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Docs
+  title="Conoce tu motor."
+  description="De la primera compilación al pipeline de renderizado. Guías basadas en el código real de Awesome Engine."
+>
+  <div class="docs-start">
+    <span class="eyebrow">TU PRIMER PASO</span>
+    <h2>Compila. Ejecuta. Explora.</h2>
+    <p>Prepara CMake y un compilador C++20. Las dependencias se resuelven con FetchContent.</p>
+    <a class="button primary" href="/docs/instalacion/">
+      Guía de instalación <span>→</span>
+    </a>
+  </div>
+  <label class="search-label" for="docs-search">
+    Buscar una guía
+  </label>
+  <div class="search-box">
+    <span aria-hidden="true">⌕</span>
+    <input
+      id="docs-search"
+      type="search"
+      placeholder="Escenas, audio, configuración…"
+      autocomplete="off"
+      aria-describedby="search-count"
+    />
+    <kbd aria-hidden="true">/</kbd>
+  </div>
+  <p class="search-count" id="search-count" role="status">
+    {docs.length} guías disponibles
+  </p>
+  <div class="doc-grid">
+    {docs.map((doc, i) => (
+      <a
+        class="doc-card"
+        href={`/docs/${doc.id}/`}
+        data-doc-card
+        data-search={`${doc.data.title} ${doc.data.description} ${doc.body}`}
+      >
+        <span class="doc-index">
+          {String(i + 1).padStart(2, '0')} / {doc.data.category}
+        </span>
+        <h3>
+          {doc.data.title}
+          <span>↗</span>
+        </h3>
+        <p>{doc.data.description}</p>
+      </a>
+    ))}
+  </div>
+  <div class="empty-state" id="docs-empty" hidden>
+    <h3>No encontramos esa guía.</h3>
+    <p>Prueba con «renderizado», «recursos» o «escenas».</p>
+  </div>
+  <div class="notice">
+    <strong>Documentación con contexto.</strong> La revisión pública de referencia es{' '}
+    <code>5a6dfac</code>. Las integraciones locales pendientes se identifican por separado; no se
+    presentan como una versión publicada.
+  </div>
+  <script>
+    const input = document.querySelector<HTMLInputElement>('#docs-search');
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-doc-card]')];
+    const count = document.querySelector('#search-count');
+    const empty = document.querySelector<HTMLElement>('#docs-empty');
+    const normalize = (s: string) =>
+      s
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase();
+    input?.addEventListener('input', () => {
+      const q = normalize(input.value.trim());
+      let found = 0;
+      cards.forEach((c) => {
+        c.hidden = !normalize(c.dataset.search || '').includes(q);
+        if (!c.hidden) found++;
+      });
+      if (count)
+        count.textContent = `${found} ${found === 1 ? 'guía encontrada' : 'guías encontradas'}`;
+      if (empty) empty.hidden = found > 0;
+    });
+    document.addEventListener('keydown', (e) => {
+      if (
+        e.key === '/' &&
+        !(e.target instanceof HTMLInputElement) &&
+        !(e.target instanceof HTMLTextAreaElement)
+      ) {
+        e.preventDefault();
+        input?.focus();
+      }
+    });
+  </script>
+</Docs>
+<style>
+  .docs-start {
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 36px;
+  }
+  .docs-start h2 {
+    margin: 0 0 16px;
+    font-size: 28px;
+  }
+  .docs-start p {
+    font-size: 13px;
+  }
+  .docs-start .eyebrow {
+    font-size: 9px;
+  }
+  .docs-start .button {
+    text-decoration: none;
+    color: var(--on-accent);
+    font-size: 12px;
+  }
+  .search-label {
+    display: block;
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    padding: 10px 14px;
+    border-radius: 6px;
+  }
+  .search-box:focus-within {
+    border-color: var(--accent);
+  }
+  .search-box > span {
+    font-size: 25px;
+  }
+  .search-box input {
+    background: none;
+    border: 0;
+    color: var(--text);
+    width: 100%;
+    min-width: 0;
+    font-size: 13px;
+    padding: 3px;
+  }
+  .search-box input:focus-visible {
+    outline: 0;
+  }
+  .search-box kbd {
+    border: 1px solid var(--border);
+    padding: 0 7px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+  .search-count {
+    font-size: 10px;
+    margin: 8px 0 20px;
+  }
+  .doc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .prose .doc-card {
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 22px;
+    color: var(--text);
+    display: block;
+  }
+  .prose .doc-card[hidden] {
+    display: none;
+  }
+  .doc-card:hover {
+    border-color: var(--accent);
+    background: var(--surface);
+  }
+  .doc-index {
+    font: 9px var(--font-mono);
+    color: var(--muted);
+  }
+  .doc-card h3 {
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 18px 0 12px;
+    letter-spacing: -0.03em;
+  }
+  .doc-card h3 span {
+    color: var(--accent);
+  }
+  .doc-card p {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+  .empty-state {
+    margin-bottom: 28px;
+  }
+  .prose .notice {
+    font-size: 12px;
+  }
+  @media (max-width: 640px) {
+    .doc-grid {
+      grid-template-columns: 1fr;
+    }
+    .docs-start {
+      padding: 22px;
+    }
+    .docs-start h2 {
+      font-size: 25px;
+    }
+  }
+</style>

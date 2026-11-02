@@ -1,0 +1,72 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '../styles/tokens.css';
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  noindex?: boolean;
+}
+const {
+  title,
+  description = 'Awesome Engine: un motor de videojuegos 2D en C++20 y SFML. Explora su arquitectura, sus juegos y su evolución.',
+  noindex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101218" />
+    <title>{title} · Awesome Engine</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? 'noindex,follow' : 'index,follow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:site_name" content="Awesome Engine" />
+    <meta property="og:title" content={`${title} · Awesome Engine`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/images/og-cover.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} · Awesome Engine`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/images/og-cover.png', Astro.site)} />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('ae-theme') || 'system';
+        document.documentElement.dataset.theme =
+          t === 'system'
+            ? matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+            : t;
+      } catch {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">
+      Saltar al contenido
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import '../scripts/site';
+    </script>
+  </body>
+</html>

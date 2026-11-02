@@ -1,0 +1,637 @@
+---
+import Base from '../layouts/Base.astro';
+import { games } from '../data/engine';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+interface MediaGame {
+  id: string;
+  name: string;
+  description: string;
+  systems: string[];
+  source: string;
+  screenshots: { src: string; title: string; alt: string }[];
+  videos: { src: string; poster: string; title: string; duration: number; audio: boolean }[];
+  width: number;
+  height: number;
+}
+const manifest = join(process.cwd(), 'src/data/showcase-media.json');
+const showcase: MediaGame[] = existsSync(manifest)
+  ? JSON.parse(readFileSync(manifest, 'utf8').replace(/^\uFEFF/, ''))
+  : [];
+---
+
+<Base
+  title="Showcase — Juegos en movimiento"
+  description="Capturas y grabaciones auténticas de Runner y Plaguefront ejecutándose con Awesome Engine. Explora sus mecánicas, entornos y sistemas."
+>
+  <section class="page-intro">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <span>Showcase</span>
+      </div>
+      <span class="eyebrow">HECHO CON AWESOME ENGINE</span>
+      <h1>
+        Del código
+        <br />
+        <span class="muted">a una partida real.</span>
+      </h1>
+      <div class="showcase-intro-row">
+        <p class="lead">
+          Juegos ejecutándose. Escenarios que se mueven. Cada imagen y cada video de esta galería
+          provienen de una ejecución real.
+        </p>
+        <div class="showcase-shortcuts">
+          {showcase.map((g) => (
+            <a class="button small" href={`#${g.id}`}>
+              {g.name} <span>↓</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  {showcase.map((game, index) => (
+    <section class="section container game-showcase" id={game.id}>
+      <div class="game-heading">
+        <div>
+          <span class="eyebrow">0{index + 1} / SHOWCASE</span>
+          <h2>{game.name}</h2>
+        </div>
+        <span class="pill live">Captura de ejecución real</span>
+      </div>
+      <div class="game-overview">
+        <div class="game-featured">
+          <button
+            class="gallery-trigger featured-trigger"
+            data-gallery={game.id}
+            data-src={game.screenshots[0]?.src}
+            data-title={game.screenshots[0]?.title}
+            data-alt={game.screenshots[0]?.alt}
+            aria-label={`Ampliar ${game.screenshots[0]?.title}`}
+          >
+            <img
+              src={game.screenshots[0]?.src}
+              width={game.width}
+              height={game.height}
+              alt={game.screenshots[0]?.alt}
+              loading="lazy"
+            />
+            <span class="expand-image" aria-hidden="true">
+              ⤢
+            </span>
+          </button>
+        </div>
+        <div class="game-description">
+          <span class="mono">EL JUEGO</span>
+          <p>{game.description}</p>
+          <h3>Sistemas en acción</h3>
+          <ul class="system-tags">
+            {game.systems.map((s) => (
+              <li>{s}</li>
+            ))}
+          </ul>
+          <p class="capture-note">
+            Grabado en resolución nativa {game.width} × {game.height}. Se conserva la relación de
+            aspecto del juego.
+          </p>
+          {game.source && (
+            <a class="text-link" href={game.source}>
+              Explorar proyecto <span>↗</span>
+            </a>
+          )}
+        </div>
+      </div>
+      <div class="gallery-heading">
+        <h3>Dentro del juego</h3>
+        <span>Selecciona una captura para ampliarla</span>
+      </div>
+      <div class="screenshot-gallery">
+        {game.screenshots.slice(1).map((s, i) => (
+          <figure>
+            <button
+              class="gallery-trigger"
+              data-gallery={game.id}
+              data-src={s.src}
+              data-title={s.title}
+              data-alt={s.alt}
+              aria-label={`Ampliar ${s.title}`}
+            >
+              <img
+                src={s.src}
+                alt={s.alt}
+                width={game.width}
+                height={game.height}
+                loading="lazy"
+                decoding="async"
+              />
+              <span class="expand-image" aria-hidden="true">
+                ⤢
+              </span>
+            </button>
+            <figcaption>
+              <span class="mono">{String(i + 2).padStart(2, '0')}</span>
+              {s.title}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      {game.videos.length > 0 && (
+        <div class="video-section">
+          <div class="gallery-heading">
+            <h3>En movimiento</h3>
+            <span>Gameplay auténtico · Velocidad original</span>
+          </div>
+          <div class="video-grid">
+            {game.videos.map((v, i) => (
+              <figure class="video-figure">
+                <div class="video-wrap">
+                  <video
+                    controls
+                    playsinline
+                    preload="none"
+                    poster={v.poster}
+                    width={game.width}
+                    height={game.height}
+                    aria-label={`${game.name}: ${v.title}`}
+                    aria-describedby={`${game.id}-video-${i}`}
+                  >
+                    <source src={v.src} type="video/mp4" />
+                    Tu navegador no admite este reproductor. <a href={v.src}>Descargar video MP4</a>
+                    .
+                  </video>
+                  <div class="video-loading" hidden role="status">
+                    <span class="skeleton"></span>
+                    <span>Cargando video…</span>
+                  </div>
+                  <p class="video-error" hidden role="alert">
+                    No pudimos cargar este video. Comprueba tu conexión o{' '}
+                    <a href={v.src}>abre el archivo MP4</a>.
+                  </p>
+                </div>
+                <figcaption id={`${game.id}-video-${i}`}>
+                  <strong>{v.title}</strong>
+                  <span>
+                    {v.duration} s · H.264{!v.audio ? ' · Sin audio' : ''}
+                  </span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
+    </section>
+  ))}
+  {showcase.length === 0 && (
+    <section class="section container">
+      <div class="empty-state">
+        <h2>Preparando las grabaciones.</h2>
+        <p>Las capturas se incorporan después de verificar las ejecuciones reales de cada juego.</p>
+      </div>
+    </section>
+  )}
+  <section class="section catalogue-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ESCENAS DEL REPOSITORIO</span>
+          <h2>Siete formas de explorar el motor.</h2>
+        </div>
+        <p>
+          Cada escena resuelve un tipo de juego distinto. El código permite seguir sus decisiones,
+          mecánicas y sistemas.
+        </p>
+      </div>
+      <div class="game-catalogue">
+        {games.map((game, i) => (
+          <details>
+            <summary>
+              <span class="mono">0{i + 1}</span>
+              <h3>{game.name}</h3>
+              <span class="game-genre">{game.genre}</span>
+              <span class="details-sign">+</span>
+            </summary>
+            <div class="game-detail">
+              <p>{game.description}</p>
+              <a class="text-link" href={game.source}>
+                Ver implementación <span>↗</span>
+              </a>
+            </div>
+          </details>
+        ))}
+      </div>
+      <p class="catalogue-note">
+        Las siete escenas están registradas en SceneFactory. Plaguefront es un proyecto
+        independiente que utiliza el motor.
+      </p>
+    </div>
+  </section>
+  <dialog id="gallery-dialog" aria-labelledby="gallery-title">
+    <div class="dialog-head">
+      <h2 id="gallery-title">Captura del juego</h2>
+      <button type="button" id="gallery-close" aria-label="Cerrar galería">
+        Cerrar ×
+      </button>
+    </div>
+    <img id="gallery-image" class="dialog-image" src="/images/runner-hero.webp" alt="" />
+    <div class="gallery-controls">
+      <button class="button small" id="gallery-prev" aria-label="Captura anterior">
+        ← Anterior
+      </button>
+      <span id="gallery-count" class="mono" aria-live="polite"></span>
+      <button class="button small" id="gallery-next" aria-label="Captura siguiente">
+        Siguiente →
+      </button>
+    </div>
+    <p class="dialog-caption" id="gallery-caption"></p>
+  </dialog>
+  <script>
+    import '../scripts/showcase';
+  </script>
+</Base>
+<style>
+  .showcase-intro-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .showcase-intro-row .lead {
+    margin-bottom: 0;
+  }
+  .showcase-shortcuts {
+    display: flex;
+    flex-shrink: 0;
+    gap: 12px;
+  }
+  .game-showcase {
+    scroll-margin-top: 100px;
+  }
+  .game-showcase + .game-showcase {
+    border-top: 1px solid var(--border);
+  }
+  .game-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+  .game-heading h2 {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+  }
+  .game-overview {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .game-featured {
+    min-width: 0;
+  }
+  .gallery-trigger {
+    display: block;
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0;
+    border-radius: 7px;
+    overflow: hidden;
+    width: 100%;
+    color: var(--text);
+  }
+  .gallery-trigger:hover {
+    border-color: var(--accent);
+  }
+  .gallery-trigger img {
+    width: 100%;
+    height: auto;
+    transition: filter 180ms;
+  }
+  .gallery-trigger:hover img {
+    filter: brightness(1.06);
+  }
+  .featured-trigger img {
+    max-height: 600px;
+    object-fit: contain;
+    background: #070a12;
+  }
+  .expand-image {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #ffffff45;
+    border-radius: 4px;
+    background: #101218d9;
+    color: #f2f2f5;
+    font-size: 22px;
+  }
+  .game-description > .mono {
+    color: var(--accent);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+  .game-description > p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin: 22px 0 32px;
+  }
+  .game-description h3 {
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+  .system-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+  }
+  .system-tags li {
+    padding: 6px 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .game-description > .capture-note {
+    font-size: 10px;
+    margin-block: 28px;
+    color: var(--muted);
+  }
+  .gallery-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 40px 0 22px;
+  }
+  .gallery-heading h3 {
+    font-size: 23px;
+  }
+  .gallery-heading > span {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .screenshot-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .screenshot-gallery figure {
+    margin: 0;
+  }
+  .screenshot-gallery img {
+    aspect-ratio: 16/10;
+    object-fit: contain;
+    background: #080b12;
+  }
+  .screenshot-gallery figcaption {
+    display: flex;
+    gap: 12px;
+    font-size: 11px;
+    margin-top: 12px;
+    color: var(--muted);
+  }
+  .screenshot-gallery figcaption .mono {
+    color: var(--accent);
+    font-size: 9px;
+    margin-top: 3px;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .video-figure {
+    margin: 0;
+    min-width: 0;
+  }
+  .video-wrap {
+    position: relative;
+  }
+  .video-wrap video {
+    width: 100%;
+    height: auto;
+    background: #080a11;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    max-height: 500px;
+  }
+  .video-figure figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 15px;
+    align-items: center;
+  }
+  .video-figure strong {
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .video-figure figcaption > span {
+    font: 9px var(--font-mono);
+    color: var(--muted);
+  }
+  .video-loading {
+    position: absolute;
+    inset: 35% 20% auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 11px;
+    pointer-events: none;
+  }
+  .video-loading .skeleton {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .video-error {
+    padding: 16px;
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 12px;
+    border: 1px solid var(--danger);
+    border-radius: 5px;
+  }
+  .video-error a {
+    text-decoration: underline;
+  }
+  .catalogue-section {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .game-catalogue details {
+    border-top: 1px solid var(--border);
+  }
+  .game-catalogue details:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .game-catalogue summary {
+    display: grid;
+    grid-template-columns: 40px 1fr 1fr 24px;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  .game-catalogue summary::-webkit-details-marker {
+    display: none;
+  }
+  .game-catalogue summary .mono {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .game-catalogue summary h3 {
+    font-size: 24px;
+  }
+  .game-catalogue summary:hover h3 {
+    color: var(--accent);
+  }
+  .game-genre {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .details-sign {
+    font-size: 22px;
+    text-align: center;
+    color: var(--accent);
+  }
+  .game-catalogue details[open] .details-sign {
+    transform: rotate(45deg);
+  }
+  .game-detail {
+    padding: 0 64px 30px;
+    max-width: 760px;
+  }
+  .game-detail p {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .game-detail .text-link {
+    font-size: 11px;
+  }
+  .catalogue-note {
+    font-size: 11px;
+    margin-top: 24px;
+  }
+  .gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding-top: 18px;
+  }
+  .dialog-head h2 {
+    font-size: 22px;
+    letter-spacing: -0.03em;
+  }
+  .gallery-controls .button {
+    font-size: 11px;
+  }
+  .gallery-controls .mono {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  @media (max-width: 900px) {
+    .game-overview {
+      gap: 30px;
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .game-description > p {
+      font-size: 13px;
+    }
+    .showcase-intro-row {
+      align-items: start;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .screenshot-gallery {
+      gap: 16px;
+    }
+    .video-grid {
+      gap: 20px;
+    }
+    .video-figure figcaption {
+      align-items: start;
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+  @media (max-width: 640px) {
+    .game-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .game-overview {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .game-description > p {
+      font-size: 14px;
+    }
+    .gallery-heading {
+      align-items: start;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .screenshot-gallery {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 12px;
+    }
+    .screenshot-gallery figcaption {
+      font-size: 10px;
+      gap: 8px;
+    }
+    .video-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .game-catalogue summary {
+      grid-template-columns: 25px 1fr 20px;
+      gap: 15px;
+    }
+    .game-genre {
+      grid-column: 2;
+      font-size: 10px;
+    }
+    .details-sign {
+      grid-column: 3;
+      grid-row: 1;
+    }
+    .game-catalogue summary h3 {
+      font-size: 24px;
+    }
+    .game-detail {
+      padding: 0 0 24px 40px;
+    }
+    .dialog-head h2 {
+      font-size: 18px;
+    }
+    .dialog-head button {
+      font-size: 11px;
+      padding: 6px 10px;
+    }
+    .gallery-controls {
+      gap: 10px;
+    }
+    .gallery-controls .button {
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+    .gallery-controls .mono {
+      font-size: 9px;
+    }
+  }
+</style>

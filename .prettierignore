@@ -1,0 +1,9 @@
+node_modules
+dist
+.astro
+.capture-work
+functions/lib
+scripts/*.local.mjs
+package-lock.json
+functions/package-lock.json
+public/media

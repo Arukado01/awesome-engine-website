@@ -1,0 +1,462 @@
+---
+import Base from '../layouts/Base.astro';
+import { updates } from '../data/updates';
+import { roadmap } from '../data/engine';
+const categories = [...new Set(updates.map((u) => u.category))];
+const date = (value: string) =>
+  new Date(value).toLocaleDateString('es-CO', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'America/Bogota',
+  });
+---
+
+<Base
+  title="Evolución y mejora continua"
+  description="Un historial auténtico de Awesome Engine: cambios, mejoras, correcciones y desarrollo pendiente, con enlaces a cada commit."
+>
+  <section class="page-intro">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <span>Evolución</span>
+      </div>
+      <span class="eyebrow">MEJORA CONTINUA / DEVELOPMENT LOG</span>
+      <h1>Cada cambio cuenta.</h1>
+      <p class="lead">
+        La historia del motor, un commit a la vez. Nuevos sistemas, juegos, correcciones y
+        decisiones de arquitectura con una fuente que puedes consultar.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#historial">
+          Explorar historial <span>↓</span>
+        </a>
+        <a class="button" href="#roadmap">
+          Ver roadmap <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section container history-layout" id="historial">
+    <aside class="history-sidebar">
+      <span class="eyebrow">FILTRAR HISTORIAL</span>
+      <label for="update-search">Buscar una mejora</label>
+      <input id="update-search" type="search" placeholder="Nombre o commit…" />
+      <label for="update-category">Categoría</label>
+      <select id="update-category">
+        <option value="all">Todas las categorías</option>
+        {categories.map((c) => (
+          <option value={c}>{c}</option>
+        ))}
+      </select>
+      <p class="history-note">
+        Los identificadores corresponden a commits reales, no a versiones de lanzamiento. Las fechas
+        conservan la zona horaria de Colombia.
+      </p>
+      <p id="update-count" role="status" class="mono">
+        {updates.length} actualizaciones
+      </p>
+      <a class="text-link" href="https://github.com/Arukado01/AwesomeEngine/commits/main/">
+        Historial en GitHub <span>↗</span>
+      </a>
+    </aside>
+    <div class="timeline">
+      {updates.map((entry) => (
+        <article
+          class="timeline-entry"
+          id={entry.id}
+          data-update
+          data-category={entry.category}
+          data-search={`${entry.title} ${entry.description} ${entry.id}`}
+        >
+          <div class="timeline-marker"></div>
+          <div class="timeline-meta">
+            <time datetime={entry.date}>{date(entry.date)}</time>
+            <code>{entry.id}</code>
+            <span class="pill live">Implementada</span>
+          </div>
+          <h2>{entry.title}</h2>
+          <span class="timeline-category">{entry.category}</span>
+          <p>{entry.description}</p>
+          <details>
+            <summary>
+              Ver cambios <span>+</span>
+            </summary>
+            <div class="change-details">
+              {[
+                ['Funcionalidades agregadas', entry.added],
+                ['Correcciones', entry.fixed],
+                ['Rendimiento', entry.performance],
+                ['Arquitectura', entry.architecture],
+              ].map(
+                ([title, items]) =>
+                  (items as string[]).length > 0 && (
+                    <div>
+                      <h3>{title}</h3>
+                      <ul>
+                        {(items as string[]).map((item) => (
+                          <li>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ),
+              )}
+              <a class="text-link" href={entry.source}>
+                Consultar commit <span>↗</span>
+              </a>
+            </div>
+          </details>
+        </article>
+      ))}
+      <div id="updates-empty" class="empty-state" hidden>
+        <h3>Sin resultados.</h3>
+        <p>No hay actualizaciones que coincidan con esos filtros.</p>
+        <button id="reset-filters" class="button small">
+          Restablecer filtros
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="section roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ROADMAP / ESTADO ACTUAL</span>
+          <h2>Lo que se está construyendo.</h2>
+        </div>
+        <p>
+          Trabajo observado en la copia local del motor. Estos cambios todavía no forman parte de la
+          revisión pública auditada.
+        </p>
+      </div>
+      <div class="roadmap-grid">
+        {roadmap.map((item, i) => (
+          <article>
+            <span class="mono">0{i + 1} / INTEGRACIÓN LOCAL</span>
+            <h3>{item.title}</h3>
+            <span class="pill dev">En desarrollo</span>
+            <p>{item.description}</p>
+            <details>
+              <summary>Ver evidencia</summary>
+              <p class="mono">{item.evidence}</p>
+            </details>
+          </article>
+        ))}
+      </div>
+      <div class="roadmap-notes">
+        <div>
+          <span class="eyebrow">EXPERIMENTAL</span>
+          <h3>Glitch e inversión.</h3>
+          <p>
+            Las clases y shaders existen, pero no están conectados al pipeline activo.
+            “Experimental” describe aquí esa situación; no es una etiqueta de release del autor.
+          </p>
+        </div>
+        <div>
+          <span class="eyebrow">PRÓXIMAS METAS</span>
+          <h3>Un espacio para lo que viene.</h3>
+          <p>
+            No hay objetivos futuros ni fechas publicados en el repositorio auditado. Se
+            incorporarán cuando queden definidos y respaldados por una fuente.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+<script>
+  const search = document.querySelector<HTMLInputElement>('#update-search');
+  const category = document.querySelector<HTMLSelectElement>('#update-category');
+  const entries = [...document.querySelectorAll<HTMLElement>('[data-update]')];
+  const empty = document.querySelector<HTMLElement>('#updates-empty');
+  const count = document.querySelector('#update-count');
+  const normalize = (s: string) =>
+    s
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  function filter() {
+    let n = 0;
+    const q = normalize(search?.value || '');
+    entries.forEach((e) => {
+      e.hidden = !(
+        normalize(e.dataset.search || '').includes(q) &&
+        (!category || category.value === 'all' || category.value === e.dataset.category)
+      );
+      if (!e.hidden) n++;
+    });
+    if (empty) empty.hidden = n > 0;
+    if (count) count.textContent = `${n} ${n === 1 ? 'actualización' : 'actualizaciones'}`;
+  }
+  search?.addEventListener('input', filter);
+  category?.addEventListener('change', filter);
+  document.querySelector('#reset-filters')?.addEventListener('click', () => {
+    if (search) search.value = '';
+    if (category) category.value = 'all';
+    filter();
+    search?.focus();
+  });
+</script>
+<style>
+  .history-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 100px;
+  }
+  .history-sidebar {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+  .history-sidebar label {
+    display: block;
+    font-size: 11px;
+    margin: 22px 0 8px;
+    color: var(--muted);
+  }
+  .history-sidebar input,
+  .history-sidebar select {
+    width: 100%;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .history-note {
+    font-size: 11px;
+    line-height: 1.9;
+    margin-top: 26px;
+  }
+  .history-sidebar > .mono {
+    margin-block: 24px;
+    color: var(--accent);
+    font-size: 10px;
+  }
+  .history-sidebar .text-link {
+    font-size: 11px;
+  }
+  .timeline {
+    padding-left: 34px;
+    border-left: 1px solid var(--border);
+  }
+  .timeline-entry {
+    position: relative;
+    padding-bottom: 44px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 120px;
+  }
+  .timeline-entry:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+  .timeline-marker {
+    position: absolute;
+    left: -40px;
+    top: 7px;
+    width: 11px;
+    height: 11px;
+    background: var(--bg);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+  }
+  .timeline-meta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font: 10px var(--font-mono);
+  }
+  .timeline-meta code {
+    color: var(--accent);
+  }
+  .timeline-entry h2 {
+    font-size: 30px;
+    margin: 22px 0 12px;
+  }
+  .timeline-category {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--accent);
+  }
+  .timeline-entry > p {
+    font-size: 13px;
+    margin: 16px 0 20px;
+    max-width: 650px;
+    line-height: 1.8;
+  }
+  .timeline-entry summary {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--muted);
+    padding: 12px 0;
+  }
+  .timeline-entry summary:hover {
+    color: var(--accent);
+  }
+  .timeline-entry summary span {
+    font-size: 19px;
+    line-height: 1;
+  }
+  .timeline-entry details[open] summary span {
+    transform: rotate(45deg);
+  }
+  .change-details {
+    padding: 16px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+  .change-details h3 {
+    font-size: 15px;
+    margin: 12px 0;
+  }
+  .change-details ul {
+    padding-left: 18px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+  .change-details .text-link {
+    font-size: 11px;
+    margin: 16px 0 8px;
+  }
+  .roadmap-section {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .roadmap-grid article {
+    border-top: 2px solid var(--warning);
+    padding-top: 24px;
+  }
+  .roadmap-grid .mono {
+    font-size: 9px;
+    color: var(--muted);
+  }
+  .roadmap-grid h3 {
+    font-size: 26px;
+    margin: 24px 0 18px;
+  }
+  .roadmap-grid p {
+    font-size: 12px;
+    line-height: 1.9;
+    margin: 20px 0;
+  }
+  .roadmap-grid summary {
+    cursor: pointer;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .roadmap-grid details p {
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+  .roadmap-notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    border-top: 1px solid var(--border);
+    padding-top: 48px;
+    margin-top: 48px;
+  }
+  .roadmap-notes h3 {
+    font-size: 24px;
+    margin-bottom: 18px;
+  }
+  .roadmap-notes p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+  .empty-state button {
+    margin-top: 20px;
+  }
+  @media (max-width: 900px) {
+    .history-layout {
+      gap: 40px;
+      grid-template-columns: 200px 1fr;
+    }
+    .timeline {
+      padding-left: 24px;
+    }
+    .timeline-marker {
+      left: -30px;
+    }
+    .timeline-entry h2 {
+      font-size: 26px;
+    }
+    .timeline-meta {
+      gap: 12px;
+    }
+    .roadmap-grid {
+      gap: 20px;
+    }
+    .roadmap-grid h3 {
+      font-size: 23px;
+    }
+    .roadmap-notes {
+      gap: 35px;
+    }
+  }
+  @media (max-width: 640px) {
+    .history-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .history-sidebar {
+      position: static;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 16px;
+    }
+    .history-sidebar .eyebrow,
+    .history-note,
+    .history-sidebar > .mono,
+    .history-sidebar > .text-link {
+      grid-column: 1/-1;
+    }
+    .history-sidebar label {
+      grid-row: 2;
+    }
+    .history-sidebar input,
+    .history-sidebar select {
+      grid-row: 3;
+      min-width: 0;
+    }
+    .history-sidebar .history-note {
+      margin-top: 20px;
+    }
+    .timeline-entry h2 {
+      font-size: 26px;
+    }
+    .timeline-meta {
+      font-size: 9px;
+    }
+    .roadmap-grid,
+    .roadmap-notes {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .roadmap-grid h3 {
+      font-size: 27px;
+    }
+    .roadmap-notes {
+      padding-top: 32px;
+    }
+    .change-details {
+      padding: 14px 18px;
+    }
+  }
+</style>

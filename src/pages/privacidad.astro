@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Privacidad">
+  <section class="page-intro">
+    <div class="container">
+      <span class="eyebrow">INFORMACIÓN DEL SITIO</span>
+      <h1>Privacidad y contacto.</h1>
+      <p class="lead">Información sobre el tratamiento de los datos en este sitio.</p>
+    </div>
+  </section>
+  <article class="container section privacy prose">
+    <h2>Responsable y finalidad</h2>
+    <p>
+      Carlos Cortina, contacto:{' '}
+      <a href="mailto:carlosjcortinam@gmail.com">carlosjcortinam@gmail.com</a>. El formulario
+      solicita nombre, correo, asunto y mensaje exclusivamente para atender consultas sobre Awesome
+      Engine.
+    </p>
+    <h2>Estado del formulario</h2>
+    <p>
+      La página de contacto indica si el servicio está habilitado. Cuando está deshabilitado, el
+      sitio no envía los datos que escribas. Cuando está habilitado, los datos se transmiten
+      mediante una conexión HTTPS a Firebase Functions y se entregan al correo de contacto mediante
+      Gmail SMTP.
+    </p>
+    <h2>Protección contra abuso</h2>
+    <p>
+      El formulario configurado utiliza Cloudflare Turnstile para verificar los envíos. El servidor
+      comprueba el origen y los campos, y mantiene registros técnicos temporales con un
+      identificador de intento y una representación de la dirección IP mediante un hash. No guarda
+      el contenido del mensaje en la base de datos de limitación de envíos.
+    </p>
+    <h2>Conservación y solicitudes</h2>
+    <p>
+      Los mensajes recibidos permanecen en el buzón para gestionar la conversación. Puedes solicitar
+      acceso, corrección o eliminación escribiendo al correo de contacto. Los registros técnicos del
+      formulario tienen fecha de expiración; su limpieza requiere la política TTL indicada en la
+      documentación de despliegue.
+    </p>
+    <h2>Preferencias locales</h2>
+    <p>
+      El tema elegido se conserva en el almacenamiento local de tu navegador con la clave{' '}
+      <code>ae-theme</code>. No se utiliza para identificarte. Este sitio no incorpora analítica
+      publicitaria ni listas de suscripción.
+    </p>
+    <h2>Proveedores y enlaces</h2>
+    <p>
+      Firebase Hosting sirve el sitio y puede procesar información técnica de las solicitudes.
+      Cuando están habilitados, Gmail y Cloudflare intervienen en el envío y la protección del
+      formulario. Los enlaces a GitHub te llevan a un servicio con su propia política de privacidad.
+    </p>
+    <p class="muted">Última revisión: 1 de noviembre de 2026.</p>
+  </article>
+</Base>
+<style>
+  .privacy {
+    max-width: 820px;
+  }
+  .privacy h2:first-child {
+    margin-top: 0;
+  }
+</style>

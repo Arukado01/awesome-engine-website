@@ -1,0 +1,485 @@
+---
+import Base from '../layouts/Base.astro';
+import Pipeline from '../components/Pipeline.astro';
+import { technologies } from '../data/engine';
+const systems = [
+  [
+    'Renderizado y vistas',
+    'Sprites, formas y texto sobre sf::RenderTexture. Vistas con sf::View y posprocesado bloom + monitor.',
+    'renderizado',
+  ],
+  [
+    'Escenas y ciclo de vida',
+    'Start, Update, Render, OnEvent, OnPause y OnCleanup. Cambio de escena diferido y reinicio.',
+    'escenas',
+  ],
+  [
+    'Recursos y memoria',
+    'Cachés de texturas, sonidos y fuentes. RAII, contenedores estándar y ownership con unique_ptr.',
+    'recursos',
+  ],
+  [
+    'Entrada y audio',
+    'Acciones con múltiples bindings. Teclado, ratón y gamepad; música, efectos y volumen global.',
+    'entrada-audio',
+  ],
+  [
+    'Interfaz y herramientas',
+    'TGUI, overlay de pausa, cursor personalizado, capturas PNG con F12 y diagnóstico con spdlog.',
+    'arquitectura',
+  ],
+  [
+    'Configuración y guardado',
+    'Configuración de ventana, tiempo y audio en JSON. Persistencia local de puntuaciones y estado.',
+    'configuracion',
+  ],
+];
+---
+
+<Base
+  title="El motor"
+  description="Arquitectura, sistemas, tecnologías y límites reales de Awesome Engine, verificados en su código fuente."
+>
+  <section class="page-intro">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <span>El motor</span>
+      </div>
+      <span class="eyebrow">C++20 · SFML · CÓDIGO ABIERTO</span>
+      <h1>
+        Pequeñas piezas.
+        <br />
+        <span class="muted">Posibilidades en movimiento.</span>
+      </h1>
+      <p class="lead">
+        Awesome Engine es un motor 2D organizado en escenas. Un contexto compartido reúne los
+        sistemas que cada juego utiliza, desde la entrada hasta el último cuadro.
+      </p>
+      <a
+        class="text-link"
+        href="https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126"
+      >
+        Explorar el código auditado <span>↗</span>
+      </a>
+    </div>
+  </section>
+  <section class="section container about-layout">
+    <div>
+      <span class="eyebrow">Acerca del proyecto</span>
+      <h2>
+        Una base que
+        <br />
+        puedes entender.
+      </h2>
+    </div>
+    <div>
+      <p>
+        Desarrollado por Carlos Cortina, Awesome Engine reúne lógica de juego en C++ y servicios
+        reutilizables sobre SFML. Sus siete escenas incluidas muestran cómo conectar gráficos,
+        entrada, sonido e interfaz en juegos completos y pequeños.
+      </p>
+      <p>
+        Su diseño favorece la composición: las escenas reciben un <code>EngineContext</code> y usan
+        gestores con responsabilidades concretas. El código MIT permite estudiar, modificar y
+        ampliar esa base.
+      </p>
+      <p class="small-note">
+        El repositorio aún no publica una historia de creación ni objetivos formales. Aquí
+        describimos su diseño observable y sus capacidades verificadas.
+      </p>
+    </div>
+  </section>
+  <section class="section system-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Capacidades verificadas</span>
+          <h2>Lo que ya puedes explorar.</h2>
+        </div>
+        <span class="pill live">Base pública: 5a6dfac</span>
+      </div>
+      <div class="systems">
+        {systems.map(([title, description, doc], i) => (
+          <a href={`/docs/${doc}/`} class="system-row">
+            <span class="system-number">0{i + 1}</span>
+            <h3>{title}</h3>
+            <p>{description}</p>
+            <span class="pill live">Implementada</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section container" id="arquitectura">
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">Arquitectura general</span>
+        <h2>
+          Un contexto.
+          <br />
+          Sistemas conectados.
+        </h2>
+      </div>
+      <p>
+        Los gestores viven por valor en EngineContext. SceneFactory construye y posee las escenas
+        mediante unique_ptr.
+      </p>
+    </div>
+    <div class="architecture-diagram">
+      <div class="engine-node">
+        <span class="mono">PUNTO DE ENTRADA</span>
+        <strong>main() → Engine</strong>
+        <small>ProcessEvent → Update → Render</small>
+      </div>
+      <div class="connector" aria-hidden="true"></div>
+      <div class="architecture-columns">
+        <div class="arch-node">
+          <span class="mono">CONTEXTO COMPARTIDO</span>
+          <h3>EngineContext</h3>
+          <div class="manager-grid">
+            {[
+              'Render',
+              'Resource',
+              'Audio',
+              'Input',
+              'Particle',
+              'Time',
+              'Scene',
+              'Gui',
+              'Cursor',
+              'Save',
+              'Random',
+              'Screenshot',
+              'Clipboard',
+            ].map((name) => (
+              <span>{name}</span>
+            ))}
+          </div>
+        </div>
+        <div class="arch-node">
+          <span class="mono">CICLO DE VIDA</span>
+          <h3>SceneFactory → Scene</h3>
+          <p>Bounce · Clicker · MemoryCard · TicTacToe · MineSweeper · Runner · Tetris</p>
+          <div class="scene-flow">
+            <span>Start</span>
+            <span>Update</span>
+            <span>Render</span>
+            <span>OnEvent</span>
+            <span>OnPause</span>
+            <span>OnCleanup</span>
+          </div>
+        </div>
+      </div>
+      <div class="diagram-caption">
+        Vista conceptual del código implementado ·{' '}
+        <a href="/docs/arquitectura/">Ver referencias y responsabilidades ↗</a>
+      </div>
+    </div>
+    <h3 class="pipeline-title">El viaje de un cuadro</h3>
+    <Pipeline />
+    <p class="small-note pipeline-note">
+      La interfaz y el cursor se dibujan después del posprocesado de la escena. Glitch e inversión
+      existen en el código, pero no están activos en la cadena auditada.
+    </p>
+  </section>
+  <section class="section tech-section" id="tecnologias">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">Stack del motor</span>
+          <h2>
+            Herramientas concretas.
+            <br />
+            Versiones explícitas.
+          </h2>
+        </div>
+        <a
+          class="text-link"
+          href="https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt"
+        >
+          Ver CMakeLists.txt <span>↗</span>
+        </a>
+      </div>
+      <div class="technology-list">
+        {technologies.map((t) => (
+          <div>
+            <strong>{t.name}</strong>
+            <span class="mono">{t.version}</span>
+            <p>{t.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section container limits">
+    <div>
+      <span class="eyebrow">Alcance actual</span>
+      <h2>
+        También importa
+        <br />
+        conocer los límites.
+      </h2>
+    </div>
+    <div>
+      <p>
+        La configuración de desarrollo encontrada es Windows con MinGW, Ninja y GDB. Linux y macOS
+        no están verificados; hay diferencias de mayúsculas en rutas que requieren revisión.
+      </p>
+      <p>
+        El motor no incluye editor visual, ECS, motor físico general, scripting ni exportación web o
+        móvil. Las colisiones y la física de los juegos son específicas de cada escena.
+      </p>
+      <div class="notice">
+        <strong>Una limitación conocida:</strong> el overlay solicita una escena “Menu” que no está
+        registrada. La documentación detalla este caso y otros problemas comprobados.
+      </div>
+      <a class="text-link" href="/docs/problemas/">
+        Consultar limitaciones y soluciones <span>→</span>
+      </a>
+    </div>
+  </section>
+</Base>
+<style>
+  .about-layout,
+  .limits {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 100px;
+  }
+  .about-layout p,
+  .limits p {
+    font-size: 14px;
+  }
+  .small-note {
+    font-size: 11px !important;
+    color: var(--muted);
+  }
+  .system-section,
+  .tech-section {
+    background: var(--surface);
+    border-block: 1px solid var(--border);
+  }
+  .system-row {
+    display: grid;
+    grid-template-columns: 35px 1fr 1.3fr 100px 20px;
+    align-items: center;
+    gap: 25px;
+    padding: 30px 0;
+    border-top: 1px solid var(--border);
+  }
+  .system-row:last-child {
+    border-bottom: 1px solid var(--border);
+  }
+  .system-row:hover h3 {
+    color: var(--accent);
+  }
+  .system-number {
+    font: 11px var(--font-mono);
+    color: var(--muted);
+  }
+  .system-row h3 {
+    font-size: 22px;
+  }
+  .system-row p {
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.8;
+  }
+  .system-row .pill {
+    font-size: 9px;
+    justify-self: start;
+  }
+  .architecture-diagram {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    background: var(--surface);
+  }
+  .engine-node {
+    width: 320px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid var(--accent);
+    padding: 24px;
+    border-radius: 6px;
+    display: grid;
+    gap: 14px;
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
+  }
+  .engine-node .mono,
+  .arch-node > .mono {
+    color: var(--accent);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+  .engine-node strong {
+    font: 500 24px var(--font-display);
+  }
+  .engine-node small {
+    font: 10px var(--font-mono);
+    color: var(--muted);
+  }
+  .connector {
+    width: 1px;
+    height: 40px;
+    background: var(--accent);
+    margin: auto;
+  }
+  .architecture-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    position: relative;
+  }
+  .arch-node {
+    border: 1px solid var(--border);
+    border-top-color: var(--accent);
+    padding: 28px;
+    border-radius: 6px;
+  }
+  .arch-node h3 {
+    margin: 16px 0 20px;
+    font-size: 24px;
+  }
+  .arch-node p {
+    font-size: 12px;
+    line-height: 2;
+  }
+  .manager-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .manager-grid span,
+  .scene-flow span {
+    font: 10px var(--font-mono);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 7px 10px;
+    border-radius: 3px;
+    color: var(--muted);
+  }
+  .scene-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .diagram-caption {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .diagram-caption a {
+    color: var(--accent);
+  }
+  .pipeline-title {
+    margin: 56px 0 24px;
+  }
+  .pipeline-note {
+    margin-top: 20px;
+  }
+  .technology-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 56px;
+  }
+  .technology-list > div {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    padding: 25px 0;
+    border-top: 1px solid var(--border);
+  }
+  .technology-list strong {
+    font: 500 24px var(--font-display);
+  }
+  .technology-list .mono {
+    color: var(--accent);
+    align-self: center;
+  }
+  .technology-list p {
+    grid-column: 1/-1;
+    font-size: 12px;
+  }
+  .limits .notice {
+    margin-block: 24px;
+  }
+  .limits .text-link {
+    margin-top: 8px;
+  }
+  @media (max-width: 900px) {
+    .about-layout,
+    .limits {
+      gap: 40px;
+    }
+    .system-row {
+      grid-template-columns: 25px 1fr 1.3fr 20px;
+      gap: 18px;
+    }
+    .system-row .pill {
+      display: none;
+    }
+    .architecture-diagram {
+      padding: 24px;
+    }
+    .arch-node {
+      padding: 20px;
+    }
+    .architecture-columns {
+      gap: 16px;
+    }
+    .technology-list {
+      gap: 0 30px;
+    }
+  }
+  @media (max-width: 640px) {
+    .about-layout,
+    .limits {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .system-row {
+      grid-template-columns: 24px 1fr 20px;
+      gap: 14px;
+      padding: 24px 0;
+    }
+    .system-row h3 {
+      font-size: 22px;
+    }
+    .system-row p {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .system-row > span:last-child {
+      grid-column: 3;
+      grid-row: 1;
+    }
+    .architecture-diagram {
+      padding: 20px 14px;
+    }
+    .engine-node {
+      width: 100%;
+      padding: 20px;
+    }
+    .architecture-columns {
+      grid-template-columns: 1fr;
+    }
+    .arch-node h3 {
+      font-size: 22px;
+    }
+    .diagram-caption {
+      text-align: left;
+      line-height: 1.8;
+    }
+    .technology-list {
+      grid-template-columns: 1fr;
+    }
+    .technology-list strong {
+      font-size: 22px;
+    }
+  }
+</style>

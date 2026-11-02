@@ -1,0 +1,17 @@
+{
+  "indexes": [],
+  "fieldOverrides": [
+    {
+      "ttl": true,
+      "fieldPath": "expiresAt",
+      "indexes": [],
+      "collectionGroup": "contactLimits"
+    },
+    {
+      "ttl": true,
+      "fieldPath": "expiresAt",
+      "indexes": [],
+      "collectionGroup": "contactRequests"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+---
+import Logo from './Logo.astro';
+const links = [
+  { href: '/motor/', label: 'El motor' },
+  { href: '/showcase/', label: 'Showcase' },
+  { href: '/docs/', label: 'Documentación' },
+  { href: '/evolucion/', label: 'Evolución' },
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Awesome Engine, inicio">
+      <Logo />
+      <span>
+        AWESOME<span class="brand-sub">ENGINE</span>
+      </span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={Astro.url.pathname.startsWith(l.href) ? 'page' : undefined}>
+          {l.label}
+        </a>
+      ))}
+      <a class="mobile-contact" href="/contacto/">
+        Contacto
+      </a>
+    </nav>
+    <div class="header-actions">
+      <label class="theme-control">
+        <span class="sr-only">Tema visual</span>
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2" />
+        </svg>
+        <select id="theme-select" aria-label="Tema visual">
+          <option value="system">Sistema</option>
+          <option value="dark">Oscuro</option>
+          <option value="light">Claro</option>
+        </select>
+      </label>
+      <a
+        class="github-link"
+        href="https://github.com/Arukado01/AwesomeEngine"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Código de Awesome Engine en GitHub (nueva pestaña)"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 .8a11.5 11.5 0 0 0-3.64 22.4c.57.1.78-.25.78-.55v-2.02c-3.2.69-3.87-1.35-3.87-1.35-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.95.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.25.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.24 2.75.12 3.04.74.8 1.18 1.83 1.18 3.08 0 4.42-2.69 5.39-5.25 5.68.42.36.78 1.05.78 2.13v3.03c0 .31.21.66.79.55A11.5 11.5 0 0 0 12 .8Z" />
+        </svg>
+      </a>
+      <button
+        class="menu-toggle"
+        aria-controls="main-nav"
+        aria-expanded="false"
+        aria-label="Abrir navegación"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,325 @@
+---
+import Base from './Base.astro';
+import { getCollection } from 'astro:content';
+interface Props {
+  title: string;
+  description: string;
+  headings?: { depth: number; slug: string; text: string }[];
+}
+const { title, description, headings = [] } = Astro.props;
+const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.order);
+const categories = [...new Set(docs.map((d) => d.data.category))];
+---
+
+<Base title={`${title} — Documentación`} description={description}>
+  <div class="container docs-layout">
+    <aside class="docs-sidebar">
+      <a href="/docs/" class="docs-label">
+        DOCUMENTACIÓN <span>↗</span>
+      </a>
+      <details class="docs-nav" open>
+        <summary>
+          Explorar documentación <span>⌄</span>
+        </summary>
+        <nav aria-label="Documentación técnica">
+          {categories.map((category) => (
+            <div class="docs-nav-group">
+              <span>{category}</span>
+              {docs
+                .filter((d) => d.data.category === category)
+                .map((doc) => (
+                  <a
+                    href={`/docs/${doc.id}/`}
+                    aria-current={Astro.url.pathname === `/docs/${doc.id}/` ? 'page' : undefined}
+                  >
+                    {doc.data.title}
+                  </a>
+                ))}
+            </div>
+          ))}
+          <a class="source-nav" href="https://github.com/Arukado01/AwesomeEngine">
+            Código en GitHub ↗
+          </a>
+        </nav>
+      </details>
+      <div class="docs-version">
+        <span class="status-dot"></span> Referencia: 5a6dfac
+        <br />
+        <small>1 de noviembre de 2026</small>
+      </div>
+    </aside>
+    <article class="docs-article">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a>
+        <span>/</span>
+        <a href="/docs/">Documentación</a>
+      </div>
+      <header class="doc-header">
+        <span class="eyebrow">AWESOME ENGINE / GUÍA TÉCNICA</span>
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </header>
+      {headings.some(heading => heading.depth === 2) && (
+        <details class="doc-toc-mobile">
+          <summary>En esta página</summary>
+          <nav aria-label="Índice de esta página">
+            {headings.filter(heading => heading.depth === 2).map(heading => (
+              <a href={`#${heading.slug}`}>{heading.text}</a>
+            ))}
+          </nav>
+        </details>
+      )}
+      <div class="prose">
+        <slot />
+      </div>
+      <div class="doc-bottom">
+        <span>Basado en código fuente verificado.</span>
+        <a href="/contacto/">¿Encontraste un problema? →</a>
+      </div>
+    </article>
+    {headings.length > 0 && (
+      <aside class="doc-toc">
+        <span>EN ESTA PÁGINA</span>
+        <nav aria-label="Índice de esta página">
+          {headings
+            .filter((h) => h.depth === 2)
+            .map((h) => (
+              <a href={`#${h.slug}`}>{h.text}</a>
+            ))}
+        </nav>
+        <a class="back-top" href="#main">
+          Volver arriba ↑
+        </a>
+      </aside>
+    )}
+  </div>
+  <script>
+    const nav = document.querySelector<HTMLDetailsElement>('.docs-nav');
+    const mq = window.matchMedia('(max-width: 900px)');
+    function syncNav() {
+      if (nav) nav.open = !mq.matches;
+    }
+    syncNav();
+    mq.addEventListener('change', syncNav);
+  </script>
+</Base>
+<style>
+  .docs-layout {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr) 170px;
+    gap: 48px;
+    min-height: 75vh;
+  }
+  .docs-sidebar {
+    padding: 48px 24px 48px 0;
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 86px;
+    align-self: start;
+    max-height: calc(100vh - 86px);
+    overflow: auto;
+  }
+  .docs-label {
+    font: 10px var(--font-mono);
+    letter-spacing: 0.08em;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    color: var(--accent);
+  }
+  .docs-nav summary {
+    display: none;
+  }
+  .docs-nav-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    gap: 3px;
+  }
+  .docs-nav-group > span {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    margin-bottom: 10px;
+    color: var(--muted);
+  }
+  .docs-nav-group a {
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 4px;
+    color: var(--muted);
+  }
+  .docs-nav-group a:hover {
+    color: var(--text);
+    background: var(--surface);
+  }
+  .docs-nav-group a[aria-current='page'] {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border-left: 2px solid var(--accent);
+  }
+  .source-nav {
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .docs-version {
+    font: 9px/1.9 var(--font-mono);
+    color: var(--muted);
+    padding-top: 24px;
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .docs-version small {
+    font: 9px var(--font-mono);
+  }
+  .docs-article {
+    padding-block: 48px 80px;
+    min-width: 0;
+  }
+  .doc-header {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  .doc-header h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 20px;
+  }
+  .doc-header p {
+    font-size: 14px;
+  }
+  .doc-header .eyebrow {
+    font-size: 9px;
+  }
+  .doc-toc-mobile {
+    display: none;
+    margin-bottom: 30px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  .doc-toc-mobile summary {
+    padding: 14px 16px;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .doc-toc-mobile nav {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .doc-toc-mobile nav a {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .doc-toc-mobile nav a:hover {
+    color: var(--accent);
+  }
+  .doc-toc {
+    padding-top: 100px;
+    position: sticky;
+    top: 86px;
+    align-self: start;
+  }
+  .doc-toc > span {
+    font: 9px var(--font-mono);
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .doc-toc nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+    border-left: 1px solid var(--border);
+    padding-left: 16px;
+  }
+  .doc-toc nav a {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .doc-toc nav a:hover {
+    color: var(--accent);
+  }
+  .back-top {
+    display: block;
+    font-size: 10px;
+    margin-top: 28px;
+    color: var(--accent);
+  }
+  .doc-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .doc-bottom a {
+    color: var(--accent);
+  }
+  @media (max-width: 1100px) {
+    .docs-layout {
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 36px;
+    }
+    .doc-toc {
+      display: none;
+    }
+    .doc-toc-mobile {
+      display: block;
+    }
+  }
+  @media (max-width: 900px) {
+    .docs-layout {
+      display: block;
+    }
+    .docs-sidebar {
+      position: static;
+      border-right: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+      max-height: none;
+    }
+    .docs-label {
+      margin-bottom: 16px;
+    }
+    .docs-nav summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .docs-nav[open] nav {
+      padding-top: 24px;
+    }
+    .docs-version {
+      display: none;
+    }
+    .docs-article {
+      padding-top: 30px;
+    }
+    .doc-header h1 {
+      font-size: 2.6rem;
+    }
+  }
+  @media (max-width: 640px) {
+    .doc-header h1 {
+      font-size: 2.2rem;
+    }
+    .doc-bottom {
+      flex-direction: column;
+    }
+  }
+</style>
