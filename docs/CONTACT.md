@@ -4,7 +4,7 @@ El endpoint `contact` usa Firebase Functions v2, Node.js 22, Nodemailer y **Gmai
 
 ## Estado y requisitos pendientes
 
-El código, pruebas y configuración están preparados. **El envío real permanece deshabilitado hasta configurar los secretos y desplegar el backend.** No se ha enviado correo de prueba desde esta implementación. Blaze está activo y Firestore ya tiene reglas privadas y TTL desplegados. Falta aportar los secretos reales, desplegar la función y comprobar la recepción en Gmail.
+La función de contacto está desplegada en Firebase con Gmail SMTP, Turnstile y los orígenes autorizados. Blaze está activo y Firestore tiene reglas privadas y TTL. La aceptación SMTP y la recepción real en Gmail deben verificarse mediante una prueba de extremo a extremo; las pruebas automatizadas usan adaptadores controlados y no envían correo.
 
 Requisitos:
 
@@ -31,7 +31,7 @@ Copiar `functions/.env.example` a `functions/.env.awesome-engine-web-arukado` y 
 
 ```dotenv
 SMTP_USER=carlosjcortinam@gmail.com
-ALLOWED_ORIGINS=https://awesome-engine-web-arukado.web.app,https://awesome-engine-web-arukado.firebaseapp.com
+ALLOWED_ORIGINS=https://awesome-engine-web-arukado.web.app,https://awesome-engine-web-arukado.firebaseapp.com,https://awesomeengine.tech
 ```
 
 Los archivos reales `.env.*` y `.secret.local` deben estar ignorados por Git. La clave pública `PUBLIC_TURNSTILE_SITE_KEY` pertenece al entorno de compilación del frontend. La CSP debe permitir `https://challenges.cloudflare.com` para scripts, frames y conexiones del widget.

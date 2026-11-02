@@ -38,9 +38,7 @@ Las imágenes tienen dimensiones explícitas, el hero usa WebP, las fuentes se s
 
 ## Límites pendientes
 
-El correo **no está habilitado**: faltan `GMAIL_APP_PASSWORD`, `TURNSTILE_SECRET_KEY` y `PUBLIC_TURNSTILE_SITE_KEY`, además del despliegue de `contact` y la confirmación de recepción real en Gmail. Firestore y los parámetros no secretos ya están preparados. Ver [CONTACT.md](CONTACT.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
-
-No se anuncian estas pruebas como un envío real. La interfaz pública informa de la indisponibilidad y no permite simular éxito.
+La función `contact` está desplegada con los secretos configurados y el dominio personalizado autorizado. Sus pruebas automatizadas no envían correo real; la recepción efectiva en Gmail requiere una prueba de extremo a extremo. Ver [CONTACT.md](CONTACT.md) y [DEPLOYMENT.md](DEPLOYMENT.md).
 
 Los videos no contienen audio: el entorno no expuso un dispositivo de captura de audio. Mantienen las dimensiones nativas, 800 × 800 en Runner y 1440 × 900 en Plaguefront. Procedencia y límites: [CAPTURE.md](CAPTURE.md).
 

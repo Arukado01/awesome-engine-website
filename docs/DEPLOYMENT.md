@@ -108,7 +108,7 @@ Copia `functions/.env.example` a `functions/.env.awesome-engine-web-arukado` y c
 
 ```dotenv
 SMTP_USER=carlosjcortinam@gmail.com
-ALLOWED_ORIGINS=https://awesome-engine-web-arukado.web.app,https://awesome-engine-web-arukado.firebaseapp.com
+ALLOWED_ORIGINS=https://awesome-engine-web-arukado.web.app,https://awesome-engine-web-arukado.firebaseapp.com,https://awesomeengine.tech
 ```
 
 Las variables de entorno reales están excluidas de Git. Los secretos se vinculan expresamente a la función; véase [Secret Manager para Functions](https://firebase.google.com/docs/functions/config-env).

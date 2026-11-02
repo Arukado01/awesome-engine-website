@@ -63,7 +63,7 @@ Presentación del motor, capacidades verificadas, arquitectura, galería, nueve 
 
 El contenido técnico se basa en la auditoría de la revisión `5a6dfacd86414c4cdfaa7157b533330f173a3126`. Las funciones observadas únicamente en el árbol local se identifican como trabajo en desarrollo. No se anuncian versiones ni capacidades sin evidencia.
 
-El formulario tiene validación y un backend preparado para Gmail SMTP, Turnstile y límites de abuso. **El envío real requiere configuración externa y despliegue del backend.** Por defecto está desactivado y nunca muestra éxito por simular un envío. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
+El formulario utiliza Gmail SMTP, Turnstile y límites de abuso. La función de contacto está desplegada; la recepción real debe comprobarse con una prueba de extremo a extremo. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
 
 ## 🎮 Showcase real
 
@@ -188,28 +188,21 @@ Antes de enviar una actualización, ejecuta las validaciones y revisa la página
 
 ## Desplegar Hosting
 
-Con Firebase CLI instalado y una sesión con acceso al proyecto:
+Para publicar la configuración de producción mediante el workflow existente:
 
 ```sh
-firebase login
-firebase projects:list
-npm run build
-firebase deploy --only hosting --project awesome-engine-web-arukado
+gh workflow run ci-deploy.yml --repo Arukado01/awesome-engine-website --ref main
 ```
 
-Confirma el proyecto antes de ejecutar el despliegue. Este comando usa la configuración estática y mantiene el contacto desactivado. Para habilitar correo y conservarlo en CI, sigue [DEPLOYMENT.md](docs/DEPLOYMENT.md).
+El workflow conserva la ruta del formulario cuando la variable `CONTACT_BACKEND_DEPLOYED` está activa. Para una publicación manual, consulta [DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 El workflow valida pull requests y pushes a `main`. Tras validar `main`, despliega Hosting usando el secreto de GitHub `FIREBASE_SERVICE_ACCOUNT_AWESOME_ENGINE`. Si falta, el despliegue falla con un mensaje explícito. Los pull requests del mismo repositorio pueden crear previews temporales; los forks ejecutan validación sin recibir credenciales. Las URLs de preview aparecen en el resumen de la ejecución.
 
-## Configuración pendiente para enviar correo real
+## Configuración del correo
 
-- Contraseña de aplicación de Gmail en el secreto `GMAIL_APP_PASSWORD`.
-- Clave privada de Turnstile en `TURNSTILE_SECRET_KEY` y site key pública para el navegador.
-- Parámetros `SMTP_USER` y `ALLOWED_ORIGINS` del backend.
-- Backend desplegado y prueba de recepción en `carlosjcortinam@gmail.com`.
-  Blaze está activo por autorización del propietario. Firestore ya se creó con reglas privadas y TTL; aún no se ha desplegado la función de correo porque faltan secretos reales.
+El backend usa los secretos `GMAIL_APP_PASSWORD` y `TURNSTILE_SECRET_KEY` en Firebase, y la variable pública `PUBLIC_TURNSTILE_SITE_KEY` para el widget. El workflow de producción activa el formulario mediante `CONTACT_BACKEND_DEPLOYED`. Comprueba la recepción real en Gmail después de un despliegue o cambio de credenciales.
 
-No pegues esas credenciales en código, incidencias, commits o archivos de ejemplo. La integración preparada no equivale a un envío confirmado.
+No pegues secretos en código, incidencias, commits o archivos de ejemplo.
 
 ## Licencias y recursos
 
