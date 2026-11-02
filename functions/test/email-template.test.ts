@@ -25,7 +25,8 @@ test('owner mail retains reply-to and safely escapes all submitted HTML', () => 
   assert.ok(!mail.html.includes('<img src=x onerror=alert(1)>'));
   assert.equal(mail.headers['X-Awesome-Engine-Request'], input.requestId);
   assert.match(mail.text, /08:30.*Bogotá/);
-  assert.ok(mail.html.includes('awesome-engine-logo-dark.png'));
+  assert.ok(mail.html.includes('awesome-engine-logo.png'));
+  assert.ok(mail.html.includes('background-color:#101218;padding:26px 32px'));
   assert.ok(!mail.text.includes(' UTC'));
 });
 

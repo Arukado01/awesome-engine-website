@@ -47,8 +47,8 @@ export function buildContactEmail(input: ContactInput, createdAt: number, sender
 <body style="margin:0;padding:0;background-color:#ececf2;font-family:Arial,Helvetica,sans-serif;color:#20222b;">
 <table role="presentation" style="width:100%;border-collapse:collapse;background-color:#ececf2;"><tr><td align="center" style="padding:32px 12px;">
 <table role="presentation" style="width:100%;max-width:600px;border-collapse:separate;border-spacing:0;background-color:#ffffff;border-radius:12px;overflow:hidden;">
-<tr><td style="background-color:#ffffff;padding:26px 32px;border-bottom:3px solid #c2b2ff;">
-<table role="presentation" style="border-collapse:collapse;"><tr><td style="padding-right:12px;"><img src="https://awesomeengine.tech/images/awesome-engine-logo-dark.png" width="36" height="36" alt="" style="display:block;width:36px;height:36px;border:0;"></td><td style="font-size:16px;line-height:20px;font-weight:bold;letter-spacing:0.08em;color:#101218;">AWESOME<br><span style="font-size:10px;letter-spacing:0.24em;color:#6240c3;">ENGINE</span></td></tr></table>
+<tr><td style="background-color:#101218;padding:26px 32px;border-bottom:3px solid #c2b2ff;">
+<table role="presentation" style="border-collapse:collapse;"><tr><td style="padding-right:12px;"><img src="https://awesomeengine.tech/images/awesome-engine-logo.png" width="36" height="36" alt="" style="display:block;width:36px;height:36px;border:0;"></td><td style="font-size:16px;line-height:20px;font-weight:bold;letter-spacing:0.08em;color:#f2f2f5;">AWESOME<br><span style="font-size:10px;letter-spacing:0.24em;color:#c2b2ff;">ENGINE</span></td></tr></table>
 </td></tr><tr><td style="padding:32px 32px 12px;">
 <p style="margin:0 0 12px;font-size:11px;font-weight:bold;letter-spacing:0.13em;text-transform:uppercase;color:#6240c3;">AWESOME ENGINE / CONTACT</p>
 <h1 style="margin:0 0 12px;font-size:28px;line-height:1.2;color:#20222b;">${escapeHtml(copy.title)}</h1>

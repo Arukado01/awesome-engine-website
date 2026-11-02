@@ -78,7 +78,7 @@ Los diagramas de arquitectura y el logotipo vectorial elaborados para este sitio
 
 ## Identidad visual aprobada
 
-El usuario eligió expresamente el símbolo A diseñado para el sitio y su paleta lavanda. Para los correos se genera public/images/awesome-engine-logo-dark.png con la misma forma vectorial, trazo oscuro y acento lavanda sobre fondo claro. La fuente vectorial es public/images/awesome-engine-mark.svg; su derivado PNG transparente de 512 × 512 es public/images/awesome-engine-logo.png. El favicon y Open Graph emplean el mismo diseño. Al finalizar la entrega se sustituye únicamente Content/Textures/icon.png del motor, por petición explícita del usuario. El icono anterior se conserva fuera de los archivos públicos en .capture-work/originals/engine-icon-original.png.
+El usuario eligió expresamente el símbolo A diseñado para el sitio y su paleta lavanda. Los correos utilizan la variante blanca sobre fondo oscuro. La variante con trazo oscuro y acento lavanda está disponible en public/images/awesome-engine-logo-dark.png y se utiliza en la copia local del motor. La fuente vectorial es public/images/awesome-engine-mark.svg; su derivado PNG transparente de 512 × 512 es public/images/awesome-engine-logo.png. El favicon y Open Graph emplean el mismo diseño. Al finalizar la entrega se sustituye únicamente Content/Textures/icon.png del motor, por petición explícita del usuario. El icono anterior se conserva fuera de los archivos públicos en .capture-work/originals/engine-icon-original.png.
 
 ## Fuentes del sitio
 
