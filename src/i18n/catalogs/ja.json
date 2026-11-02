@@ -641,5 +641,7 @@
   "△ CMake": "△ CMake",
   "◈ SFML": "◈ SFML",
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "試行回数が多すぎます。1時間待ってから、もう一度送信してください。",
-  "Preparando verificación de seguridad…": "セキュリティ確認を準備しています…"
+  "Preparando verificación de seguridad…": "セキュリティ確認を準備しています…",
+  "Pausar animación de Runner": "Runner のアニメーションを一時停止",
+  "Reproducir animación de Runner": "Runner のアニメーションを再生"
 }

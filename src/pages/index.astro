@@ -56,15 +56,49 @@ const formatUpdateDate = (value: string) =>
         <span>Awesome Engine / Runner</span>
         <span class="mono">2D</span>
       </div>
-      <a href="/showcase/#runner" aria-label="Ver el showcase de Runner">
-        <img
-          src="/images/runner-hero.webp"
-          width="800"
-          height="800"
-          alt="Captura real de Runner: un personaje corre entre obstáculos sobre los tejados de una ciudad iluminada."
-          fetchpriority="high"
-        />
-      </a>
+      <div class="hero-media">
+        <a href="/showcase/#runner" aria-label="Ver el showcase de Runner">
+          <img
+            id="runner-preview"
+            src="/images/runner-hero.webp"
+            data-animated-src="/images/runner-hero.gif"
+            data-poster-src="/images/runner-hero.webp"
+            width="800"
+            height="800"
+            alt="Captura real de Runner: un personaje corre entre obstáculos sobre los tejados de una ciudad iluminada."
+            fetchpriority="high"
+          />
+        </a>
+        <button
+          class="hero-motion-toggle"
+          type="button"
+          aria-controls="runner-preview"
+          aria-label="Reproducir animación de Runner"
+          data-playing="false"
+          hidden
+        >
+          <svg
+            class="hero-pause-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M6 4h4v16H6zM14 4h4v16h-4z" />
+          </svg>
+          <svg
+            class="hero-play-icon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="m7 3 14 9-14 9z" />
+          </svg>
+        </button>
+      </div>
       <figcaption>
         <span>
           <span class="status-dot"></span> EJECUTADO CON AWESOME ENGINE
@@ -335,3 +369,7 @@ const formatUpdateDate = (value: string) =>
     </div>
   </section>
 </Base>
+
+<script>
+  import '../scripts/hero-preview';
+</script>

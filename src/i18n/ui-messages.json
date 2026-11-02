@@ -36,5 +36,7 @@
   "rateLimit": "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.",
   "requestInProgress": "El envío sigue en proceso. Espera un momento y comprueba el mismo envío.",
   "deliveryUncertain": "No pudimos confirmar la entrega del mensaje. Iniciar otro envío podría duplicarlo.",
-  "securityError": "La verificación de seguridad no es válida. Complétala de nuevo."
+  "securityError": "La verificación de seguridad no es válida. Complétala de nuevo.",
+  "pauseRunner": "Pausar animación de Runner",
+  "playRunner": "Reproducir animación de Runner"
 }

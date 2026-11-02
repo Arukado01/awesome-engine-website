@@ -641,5 +641,7 @@
   "△ CMake": "△ CMake",
   "◈ SFML": "◈ SFML",
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "Você fez muitas tentativas. Aguarde uma hora antes de enviar novamente.",
-  "Preparando verificación de seguridad…": "Preparando a verificação de segurança…"
+  "Preparando verificación de seguridad…": "Preparando a verificação de segurança…",
+  "Pausar animación de Runner": "Pausar animação do Runner",
+  "Reproducir animación de Runner": "Reproduzir animação do Runner"
 }
