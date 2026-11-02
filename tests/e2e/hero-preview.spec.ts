@@ -10,7 +10,7 @@ for (const width of [390, 1440]) {
     const preview = page.locator('#runner-preview');
     const toggle = page.locator('.hero-motion-toggle');
     await preview.scrollIntoViewIfNeeded();
-    await expect(preview).toHaveAttribute('src', '/images/runner-hero.gif');
+    await expect(preview).toHaveAttribute('src', '/images/runner-hero-loop.gif');
     await expect
       .poll(() =>
         preview.evaluate(
@@ -27,16 +27,16 @@ for (const width of [390, 1440]) {
     await expect(preview).toHaveAttribute('src', '/images/runner-hero.webp');
     await expect(toggle).toHaveAccessibleName('Reproducir animaci√≥n de Runner');
     await toggle.click();
-    await expect(preview).toHaveAttribute('src', '/images/runner-hero.gif');
+    await expect(preview).toHaveAttribute('src', '/images/runner-hero-loop.gif');
     await page.locator('footer').scrollIntoViewIfNeeded();
     await expect(preview).toHaveAttribute('src', '/images/runner-hero.webp');
     await preview.scrollIntoViewIfNeeded();
-    await expect(preview).toHaveAttribute('src', '/images/runner-hero.gif');
+    await expect(preview).toHaveAttribute('src', '/images/runner-hero-loop.gif');
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await expect(preview).toHaveAttribute('src', '/images/runner-hero.webp');
     await expect(toggle).toHaveAccessibleName('Reproducir animaci√≥n de Runner');
     await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await expect(preview).toHaveAttribute('src', '/images/runner-hero.gif');
+    await expect(preview).toHaveAttribute('src', '/images/runner-hero-loop.gif');
     await toggle.click();
     await page.locator('footer').scrollIntoViewIfNeeded();
     await preview.scrollIntoViewIfNeeded();
@@ -52,7 +52,7 @@ test('el movimiento reducido evita descargar el GIF y permite reproducirlo expl√
 }) => {
   const animationRequests: string[] = [];
   page.on('request', (request) => {
-    if (request.url().endsWith('/runner-hero.gif')) animationRequests.push(request.url());
+    if (request.url().endsWith('/runner-hero-loop.gif')) animationRequests.push(request.url());
   });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/en/');
@@ -64,6 +64,6 @@ test('el movimiento reducido evita descargar el GIF y permite reproducirlo expl√
   await expect(toggle).toHaveAccessibleName('Play Runner animation');
   expect(animationRequests).toEqual([]);
   await toggle.click();
-  await expect(preview).toHaveAttribute('src', '/images/runner-hero.gif');
+  await expect(preview).toHaveAttribute('src', '/images/runner-hero-loop.gif');
   await expect(toggle).toHaveAccessibleName('Pause Runner animation');
 });
