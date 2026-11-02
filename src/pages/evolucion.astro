@@ -192,6 +192,9 @@ const date = (value: string) =>
   }
   search?.addEventListener('input', filter);
   category?.addEventListener('change', filter);
+  // Preserve input entered or restored before module initialization.
+  filter();
+  window.addEventListener('pageshow', filter);
   document.querySelector('#reset-filters')?.addEventListener('click', () => {
     if (search) search.value = '';
     if (category) category.value = 'all';

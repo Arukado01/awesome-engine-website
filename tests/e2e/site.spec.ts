@@ -288,3 +288,31 @@ test('entradas visibles al cargar y recorrer la página, con movimiento reducido
     ),
   ).toBe(0);
 });
+
+test('los filtros conservan lo escrito antes de que termine de cargar JavaScript', async ({
+  page,
+}) => {
+  for (const [path, label, empty] of [
+    ['/docs/', 'Buscar una guía', '#docs-empty'],
+    ['/evolucion/', 'Buscar una mejora', '#updates-empty'],
+  ]) {
+    let release = () => {};
+    const ready = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route('**/_astro/*.js', async (route) => {
+      await ready;
+      await route.continue();
+    });
+    try {
+      await page.goto(path, { waitUntil: 'commit' });
+      await page.getByLabel(label).fill('zzzz-network-early');
+      release();
+      await expect(page.locator(empty)).toBeVisible();
+      await expect(page.getByLabel(label)).toHaveValue('zzzz-network-early');
+    } finally {
+      release();
+      await page.unrouteAll({ behavior: 'wait' });
+    }
+  }
+});

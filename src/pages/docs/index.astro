@@ -71,8 +71,8 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
         .toLowerCase();
-    input?.addEventListener('input', () => {
-      const q = normalize(input.value.trim());
+    function filter() {
+      const q = normalize(input?.value.trim() || '');
       let found = 0;
       cards.forEach((c) => {
         c.hidden = !normalize(c.dataset.search || '').includes(q);
@@ -81,7 +81,11 @@ const docs = (await getCollection('docs')).sort((a, b) => a.data.order - b.data.
       if (count)
         count.textContent = `${found} ${found === 1 ? 'guía encontrada' : 'guías encontradas'}`;
       if (empty) empty.hidden = found > 0;
-    });
+    }
+    input?.addEventListener('input', filter);
+    // Apply any query typed or restored before the module finished loading.
+    filter();
+    window.addEventListener('pageshow', filter);
     document.addEventListener('keydown', (e) => {
       if (
         e.key === '/' &&
