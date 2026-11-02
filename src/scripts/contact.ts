@@ -180,6 +180,7 @@ form?.addEventListener('submit', async (event) => {
     subject: String(data.get('subject') || '').trim(),
     message: String(data.get('message') || '').trim(),
     website: String(data.get('website') || ''),
+    locale: document.documentElement.lang,
   };
   const fingerprint = JSON.stringify(payload);
   if (uncertainty && previousPayload !== fingerprint) {
@@ -196,7 +197,7 @@ form?.addEventListener('submit', async (event) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...payload, requestId, turnstileToken: token }),
-      signal: AbortSignal.timeout(35_000),
+      signal: AbortSignal.timeout(50_000),
     });
     const result = await response.json();
     if (!response.ok || result.ok !== true) {

@@ -643,5 +643,7 @@
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "You have made too many attempts. Wait one hour before sending again.",
   "Preparando verificación de seguridad…": "Preparing security verification…",
   "Pausar animación de Runner": "Pause Runner animation",
-  "Reproducir animación de Runner": "Play Runner animation"
+  "Reproducir animación de Runner": "Play Runner animation",
+  "Si es posible, recibirás una copia de tu mensaje por correo.": "When possible, you will receive a copy of your message by email.",
+  "También intentamos enviarte una copia de tu mensaje al correo indicado.": "We also attempt to send a copy of your message to the email address provided."
 }

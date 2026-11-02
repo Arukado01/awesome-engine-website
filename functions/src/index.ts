@@ -4,7 +4,7 @@ import { defineSecret, defineString } from 'firebase-functions/params';
 import { onRequest } from 'firebase-functions/v2/https';
 import { handleContact, HOUR_MS, MAX_BODY_BYTES, parseOrigins } from './contact.js';
 import type { Reservation } from './contact.js';
-import { sendGmail } from './gmail.js';
+import { sendGmail, sendContactConfirmation } from './gmail.js';
 
 const gmailPassword = defineSecret('GMAIL_APP_PASSWORD');
 const turnstileKey = defineSecret('TURNSTILE_SECRET_KEY');
@@ -59,7 +59,7 @@ async function finish(requestId: string, state: 'sent' | 'failed' | 'uncertain')
 export const contact = onRequest({
   region: 'us-central1',
   memory: '256MiB',
-  timeoutSeconds: 30,
+  timeoutSeconds: 45,
   minInstances: 0,
   maxInstances: 2,
   concurrency: 10,
@@ -103,6 +103,7 @@ export const contact = onRequest({
     config: { gmailPassword: gmailPassword.value(), turnstileKey: turnstileKey.value(), smtpUser: smtpUser.value(), allowedOrigins: origins },
     now: Date.now, fetch, rateLimit, reserve, finish,
     sendMail: (input, createdAt) => sendGmail(input, createdAt, smtpUser.value(), gmailPassword.value()),
+    sendConfirmation: (input, createdAt) => sendContactConfirmation(input, createdAt, smtpUser.value(), gmailPassword.value()),
   });
   if (result.retryAfter) response.set('Retry-After', String(result.retryAfter));
   response.status(result.status).json(result.body);

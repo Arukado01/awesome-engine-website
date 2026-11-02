@@ -643,5 +643,7 @@
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "尝试次数过多。请等待一小时后再发送。",
   "Preparando verificación de seguridad…": "正在准备安全验证…",
   "Pausar animación de Runner": "暂停 Runner 动画",
-  "Reproducir animación de Runner": "播放 Runner 动画"
+  "Reproducir animación de Runner": "播放 Runner 动画",
+  "Si es posible, recibirás una copia de tu mensaje por correo.": "如有可能，你会通过电子邮件收到一份消息副本。",
+  "También intentamos enviarte una copia de tu mensaje al correo indicado.": "我们也会尝试将消息副本发送到你提供的邮箱。"
 }

@@ -12,6 +12,7 @@ export interface ContactInput {
   website: string;
   turnstileToken: string;
   requestId: string;
+  locale?: string;
 }
 export interface ContactConfig {
   gmailPassword: string;
@@ -36,6 +37,7 @@ export interface ContactDependencies {
   reserve: (requestId: string, payloadHash: string, now: number) => Promise<Reservation>;
   finish: (requestId: string, state: 'sent' | 'failed' | 'uncertain') => Promise<void>;
   sendMail: (input: ContactInput, createdAt: number) => Promise<'accepted' | 'rejected' | 'uncertain'>;
+  sendConfirmation: (input: ContactInput, createdAt: number) => Promise<void>;
 }
 export interface ContactRequest {
   body: unknown;
@@ -69,6 +71,7 @@ export function validateInput(body: unknown): { input?: ContactInput; errors: Re
     name: read('name'), email: read('email').toLowerCase(), subject: read('subject'),
     message: read('message').replace(/\r\n/g, '\n'), website: read('website'),
     turnstileToken: read('turnstileToken'), requestId: read('requestId').toLowerCase(),
+    locale: read('locale').slice(0, 16),
   };
   for (const [key, min, max] of [['name', 2, 80], ['subject', 3, 160], ['message', 20, 5_000]] as const) {
     if (input[key].length < min || input[key].length > max) errors[key] = `Usa entre ${min} y ${max} caracteres.`;
@@ -139,7 +142,11 @@ export async function handleContact(request: ContactRequest, deps: ContactDepend
   catch {
     // A stale pending lease becomes uncertain, never an automatic SMTP retry.
   }
-  if (delivery === 'accepted') return success();
+  if (delivery === 'accepted') {
+    try { await deps.sendConfirmation(input, reservation.createdAt); }
+    catch { console.warn('Contact confirmation could not be delivered.'); }
+    return success();
+  }
   if (delivery === 'rejected') return failure(502, 'Gmail rechazó el envío. Conserva tu mensaje e inténtalo más tarde.', undefined, 'smtp_rejected');
   return failure(502, 'No pudimos confirmar si Gmail aceptó el mensaje. Para evitar duplicados, este intento no se reenviará. Espera una respuesta antes de iniciar otro.', undefined, 'delivery_uncertain');
 }

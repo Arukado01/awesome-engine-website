@@ -7,6 +7,7 @@ interface Submission {
   subject: string;
   message: string;
   website: string;
+  locale: string;
   requestId: string;
   turnstileToken: string;
 }
@@ -23,6 +24,7 @@ async function contactFixture(
   page: Page,
   respond: (route: Route, attempt: number) => Promise<void>,
   token = true,
+  path = '/contacto/',
 ) {
   const submissions: Submission[] = [];
   await page.route('**/api/contact', async (route) => {
@@ -64,7 +66,7 @@ async function contactFixture(
     }
     await route.fulfill({ response, body: html });
   });
-  await page.goto('/contacto/');
+  await page.goto(path);
   await expect(page.locator('#contact-submit')).toBeEnabled();
   await expect(page.locator('#captcha-loading')).toBeHidden();
   await expect(page.locator('input[name="cf-turnstile-response"]')).toHaveCount(1);
@@ -107,6 +109,7 @@ test('contacto: éxito confirmado, estado de envío y limpieza del formulario', 
   expect(submissions).toHaveLength(1);
   expect(submissions[0].name).toBe('Ana María');
   expect(submissions[0].website).toBe('');
+  expect(submissions[0].locale).toBe('es');
   expect(submissions[0].requestId).toMatch(/^[0-9a-f-]{36}$/);
 });
 
@@ -246,4 +249,13 @@ test('contacto: entrega incierta bloquea reenvío y exige confirmar un intento n
   await expect(page.locator('#form-status')).toHaveClass(/success/);
   expect(submissions).toHaveLength(2);
   expect(submissions[1].requestId).not.toBe(submissions[0].requestId);
+});
+
+test('contacto: envía el idioma elegido para la confirmación', async ({ page }) => {
+  const submissions = await contactFixture(page, accepted, true, '/en/contacto/');
+  await fillValid(page);
+  await page.locator('#contact-submit').click();
+  await expect(page.locator('#form-status')).toHaveClass(/success/);
+  expect(submissions).toHaveLength(1);
+  expect(submissions[0].locale).toBe('en');
 });

@@ -643,5 +643,7 @@
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "Vous avez effectué trop de tentatives. Attendez une heure avant de réessayer.",
   "Preparando verificación de seguridad…": "Préparation de la vérification de sécurité…",
   "Pausar animación de Runner": "Mettre en pause l’animation de Runner",
-  "Reproducir animación de Runner": "Lire l’animation de Runner"
+  "Reproducir animación de Runner": "Lire l’animation de Runner",
+  "Si es posible, recibirás una copia de tu mensaje por correo.": "Dans la mesure du possible, vous recevrez une copie de votre message par e-mail.",
+  "También intentamos enviarte una copia de tu mensaje al correo indicado.": "Nous essayons également d’envoyer une copie de votre message à l’adresse e-mail indiquée."
 }

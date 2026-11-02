@@ -643,5 +643,7 @@
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.",
   "Preparando verificación de seguridad…": "Preparando verificación de seguridad…",
   "Pausar animación de Runner": "Pausar animación de Runner",
-  "Reproducir animación de Runner": "Reproducir animación de Runner"
+  "Reproducir animación de Runner": "Reproducir animación de Runner",
+  "Si es posible, recibirás una copia de tu mensaje por correo.": "Si es posible, recibirás una copia de tu mensaje por correo.",
+  "También intentamos enviarte una copia de tu mensaje al correo indicado.": "También intentamos enviarte una copia de tu mensaje al correo indicado."
 }

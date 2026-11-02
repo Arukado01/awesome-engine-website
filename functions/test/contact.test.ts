@@ -20,6 +20,7 @@ function setup(options: { verified?: unknown; delivery?: 'accepted' | 'rejected'
     reserve: async () => ({ state: 'new', createdAt: Date.UTC(2026, 10, 1, 12) }),
     finish: async (_id, state) => { finishes.push(state); },
     sendMail: async (input, createdAt) => { mail.push({ input, createdAt }); return options.delivery ?? 'accepted'; },
+    sendConfirmation: async () => {},
     fetch: (async (url: string | URL | Request, init?: RequestInit) => {
       calls.push({ url: String(url), init });
       return Response.json(options.verified ?? { success: true, hostname: 'engine.example.com', action: 'contact' });
@@ -157,4 +158,34 @@ test('rejects oversized fields, missing token, invalid UUID and non-object bodie
   assert.ok(validateInput([]).errors.form);
   const result = validateInput({ ...input, name: 'x'.repeat(81), message: 'x'.repeat(5001), requestId: '../../unsafe', turnstileToken: '' });
   assert.deepEqual(Object.keys(result.errors).sort(), ['message', 'name', 'requestId', 'turnstileToken']);
+});
+
+test('confirmation is attempted only after the accepted primary message is recorded', async () => {
+  const { deps, request } = setup();
+  const events: string[] = [];
+  deps.sendMail = async () => { events.push('primary'); return 'accepted'; };
+  deps.finish = async (_id, state) => { events.push(state); };
+  deps.sendConfirmation = async () => { events.push('confirmation'); };
+  assert.equal((await handleContact(request, deps)).status, 201);
+  assert.deepEqual(events, ['primary', 'sent', 'confirmation']);
+});
+
+test('confirmation failure does not turn a successful primary delivery into a retry', async () => {
+  const { deps, request, finishes } = setup();
+  deps.sendConfirmation = async () => { throw new Error('simulated confirmation failure'); };
+  const result = await handleContact(request, deps);
+  assert.equal(result.status, 201);
+  assert.deepEqual(finishes, ['sent']);
+});
+
+test('confirmation is not sent when primary delivery fails or was already handled', async () => {
+  const failed = setup({ delivery: 'rejected' });
+  let confirmations = 0;
+  failed.deps.sendConfirmation = async () => { confirmations++; };
+  assert.equal((await handleContact(failed.request, failed.deps)).status, 502);
+  const repeated = setup();
+  repeated.deps.reserve = async () => ({ state: 'sent', createdAt: 0 });
+  repeated.deps.sendConfirmation = async () => { confirmations++; };
+  assert.equal((await handleContact(repeated.request, repeated.deps)).status, 201);
+  assert.equal(confirmations, 0);
 });

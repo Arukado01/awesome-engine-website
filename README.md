@@ -63,7 +63,7 @@ Presentación del motor, capacidades verificadas, arquitectura, galería, nueve 
 
 El contenido técnico se basa en la auditoría de la revisión `5a6dfacd86414c4cdfaa7157b533330f173a3126`. Las funciones observadas únicamente en el árbol local se identifican como trabajo en desarrollo. No se anuncian versiones ni capacidades sin evidencia.
 
-El formulario utiliza Gmail SMTP, Turnstile y límites de abuso. La función de contacto está desplegada; la recepción real debe comprobarse con una prueba de extremo a extremo. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
+El formulario utiliza Gmail SMTP, Turnstile y límites de abuso. La función de contacto está desplegada y el propietario confirmó la recepción de una prueba. Se envía una copia de confirmación al remitente cuando es posible. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
 
 ## 🎮 Showcase real
 

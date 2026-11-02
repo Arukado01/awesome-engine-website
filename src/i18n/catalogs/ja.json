@@ -643,5 +643,7 @@
   "Has realizado demasiados intentos. Espera una hora antes de volver a enviar.": "試行回数が多すぎます。1時間待ってから、もう一度送信してください。",
   "Preparando verificación de seguridad…": "セキュリティ確認を準備しています…",
   "Pausar animación de Runner": "Runner のアニメーションを一時停止",
-  "Reproducir animación de Runner": "Runner のアニメーションを再生"
+  "Reproducir animación de Runner": "Runner のアニメーションを再生",
+  "Si es posible, recibirás una copia de tu mensaje por correo.": "可能な場合、メッセージのコピーをメールでお送りします。",
+  "También intentamos enviarte una copia de tu mensaje al correo indicado.": "入力されたメールアドレスにもメッセージのコピーを送信するよう努めます。"
 }

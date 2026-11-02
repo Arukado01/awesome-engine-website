@@ -4,7 +4,7 @@ El endpoint `contact` usa Firebase Functions v2, Node.js 22, Nodemailer y **Gmai
 
 ## Estado y requisitos pendientes
 
-La función de contacto está desplegada en Firebase con Gmail SMTP, Turnstile y los orígenes autorizados. Blaze está activo y Firestore tiene reglas privadas y TTL. La aceptación SMTP y la recepción real en Gmail deben verificarse mediante una prueba de extremo a extremo; las pruebas automatizadas usan adaptadores controlados y no envían correo.
+La función de contacto está desplegada en Firebase con Gmail SMTP, Turnstile y los orígenes autorizados. Blaze está activo y Firestore tiene reglas privadas y TTL. El propietario confirmó la recepción real de un mensaje de prueba el 2 de noviembre de 2026. Los correos usan plantillas HTML con alternativa en texto. Tras confirmar el envío principal, el servidor intenta enviar al remitente una copia de confirmación en el idioma elegido; si falla, no repite ni invalida el correo principal. Las pruebas automatizadas usan adaptadores controlados y no envían correo.
 
 Requisitos:
 
@@ -83,7 +83,7 @@ El frontend debe tolerar respuestas de infraestructura no JSON, conservar los ca
 - Si una función termina antes de persistir el resultado, su reserva pendiente vencida también se trata como incierta. Esto prioriza evitar duplicados y puede requerir comprobación manual del correo enviado.
 - No se registran mensajes, IP ni secretos en logs de aplicación. Revisar además los logs de petición y retención de las plataformas.
 - TLS en `smtp.gmail.com:465`, certificados verificados; sin acceso de Nodemailer a archivos/URLs y sin logging SMTP. El visitante no puede cambiar destinatario, SMTP host ni credenciales.
-- Límite de 2 instancias, concurrencia 10, 256 MiB, timeout 30 segundos y cero instancias mínimas. Turnstile tiene timeout de 8 segundos; SMTP usa límites de conexión/saludo/inactividad. Una interrupción de la función conserva una reserva que no se reenvía automáticamente.
+- Límite de 2 instancias, concurrencia 10, 256 MiB, timeout 45 segundos y cero instancias mínimas. Turnstile tiene timeout de 8 segundos; SMTP usa límites de conexión/saludo/inactividad. Una interrupción de la función conserva una reserva que no se reenvía automáticamente.
 
 Configurar TTL para `expiresAt` en ambas colecciones o eliminar periódicamente los registros vencidos. Un campo `expiresAt` por sí solo **no elimina** documentos. TTL es asíncrono y puede generar operaciones facturadas; aplicarlo bajo la autorización del plan. Las ventanas de cuota y bloqueos no dependen de que TTL haya borrado documentos.
 
