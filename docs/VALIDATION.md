@@ -48,3 +48,8 @@ El usuario eligió el logo A del sitio y autorizó sustituir al finalizar única
 
 La primera prueba de PR detectó un runner con Node 22.23.3, inferior al mínimo real de Astro. Se corrigió fijando Node 22.23.4 en .nvmrc y haciendo que todos los jobs lean ese archivo; esa es la versión que aprobó el primer despliegue. No se redujo la versión mínima ni se omitió TypeScript.
 
+
+La comprobación de rutas se contrastó con git ls-tree: el icono está versionado como Content/Textures/Icon.png; la discrepancia real de mayúsculas está en Engine/Include/utils frente a los includes Utils. La documentación no atribuye al icono un problema de portabilidad inexistente en Git.
+
+Las pruebas de navegador ahora construyen y sirven una copia estática aislada en .e2e-dist. Esto elimina recargas HMR durante la inspección de páginas y mantiene dist intacto para el despliegue. La suite completa de 24 casos aprobó también en ese modo.
+

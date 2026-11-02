@@ -33,7 +33,7 @@ Un JSON inválido o una clave obligatoria ausente puede detener el arranque. Com
 
 ## Fallos en sistemas sensibles a mayúsculas
 
-La revisión auditada contiene diferencias entre rutas de Git y rutas usadas por el código. Por ejemplo, el árbol contiene `Engine/Include/utils` y varios includes usan `Utils`; el asset es `icon.png` y Engine carga `Icon.png`.
+La revisión auditada contiene diferencias entre rutas de Git y rutas usadas por el código. Por ejemplo, el árbol contiene `Engine/Include/utils` y varios includes usan `Utils`.
 
 Windows puede tolerar estas diferencias en su configuración habitual. Otros sistemas pueden rechazarlas. La documentación no acredita compatibilidad Linux/macOS ni presenta su compilación como verificada.
 

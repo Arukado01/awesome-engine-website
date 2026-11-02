@@ -74,7 +74,7 @@ La suite de navegador comprueba navegación, responsive, temas, documentación, 
 npm run test:e2e
 ```
 
-En local utiliza Chrome instalado y arranca el servidor de desarrollo automáticamente. Ejecuta estas pruebas con `PUBLIC_CONTACT_ENABLED=false` y `PUBLIC_TURNSTILE_SITE_KEY` vacío; los escenarios del formulario utilizan respuestas controladas. CI instala Chromium con `npx playwright install --with-deps chromium` y fija esas variables únicamente en el paso de pruebas, conservando la configuración de la build de producción. Los fallos adjuntan diagnósticos disponibles a la ejecución de Actions durante siete días. Las revisiones visuales manuales complementan estos controles.
+En local utiliza Chrome instalado, construye una copia estática aislada en .e2e-dist y la sirve en el puerto 4323. No depende de las recargas del servidor de desarrollo ni sobrescribe dist. Ejecuta estas pruebas con `PUBLIC_CONTACT_ENABLED=false` y `PUBLIC_TURNSTILE_SITE_KEY` vacío; los escenarios del formulario utilizan respuestas controladas. CI instala Chromium con `npx playwright install --with-deps chromium` y fija esas variables únicamente en el paso de pruebas, conservando la configuración de la build de producción. Los fallos adjuntan diagnósticos disponibles a la ejecución de Actions durante siete días. Las revisiones visuales manuales complementan estos controles.
 
 ## Organización
 

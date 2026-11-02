@@ -115,7 +115,7 @@ No se encontró matriz de CI, suite de pruebas propia del motor, empaquetado de 
 ## Limitaciones de código relevantes
 
 1. **Menu no existe en la fábrica.** Engine solicita `Menu` desde la tecla M, Select y el overlay, pero la fábrica solo registra siete juegos. La búsqueda puede terminar en assert o excepción. [Engine][engine] y [fábrica][factory].
-2. **Mayúsculas de rutas.** Git conserva `Engine/Include/utils` mientras los includes usan `Utils`; `icon.png` se carga como `Icon.png`. Puede fallar en sistemas sensibles a mayúsculas.
+2. **Mayúsculas de rutas.** Git conserva `Engine/Include/utils` mientras los includes usan `Utils`. Puede fallar en sistemas sensibles a mayúsculas.
 3. **Recursos relativos.** Configuración, shaders, fuentes y assets dependen del directorio de trabajo; debe contener `Content`.
 4. **Redimensionado incompleto.** El handler registra el nuevo tamaño, pero no recrea los targets de posprocesado.
 5. **Errores de configuración/guardado.** No hay tratamiento general de JSON inválido o esquema de validación.
