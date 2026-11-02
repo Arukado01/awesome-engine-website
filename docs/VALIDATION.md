@@ -45,3 +45,6 @@ No se anuncian estas pruebas como un envío real. La interfaz pública informa d
 Los videos no contienen audio: el entorno no expuso un dispositivo de captura de audio. Mantienen las dimensiones nativas, 800 × 800 en Runner y 1440 × 900 en Plaguefront. Procedencia y límites: [CAPTURE.md](CAPTURE.md).
 
 El usuario eligió el logo A del sitio y autorizó sustituir al finalizar únicamente `Content/Textures/icon.png` del motor por su PNG transparente. El icono anterior se respalda en `.capture-work/originals/engine-icon-original.png`. No se modifican lógica, configuración ni cambios locales previos de los videojuegos.
+
+La primera prueba de PR detectó un runner con Node 22.23.3, inferior al mínimo real de Astro. Se corrigió fijando Node 22.23.4 en .nvmrc y haciendo que todos los jobs lean ese archivo; esa es la versión que aprobó el primer despliegue. No se redujo la versión mínima ni se omitió TypeScript.
+

@@ -32,7 +32,7 @@ Las versiones reproducibles están fijadas en los dos archivos `package-lock.jso
 
 ## Preparar el entorno
 
-Requisitos: **Node.js 22.22.0 o posterior** (CI y Functions usan Node 22; desarrollo validado con Node 24), npm y Git. Firebase CLI se necesita únicamente para emulación o despliegue; la versión usada por CI es 15.31.0.
+Requisitos: **Node.js 22.23.4 o posterior** (CI y Functions usan Node 22; desarrollo validado con Node 24), npm y Git. Firebase CLI se necesita únicamente para emulación o despliegue; la versión usada por CI es 15.31.0.
 
 ```sh
 git clone https://github.com/Arukado01/awesome-engine-website.git
