@@ -16,27 +16,38 @@ Atribución sugerida: «Runner · captura real de Awesome Engine. Carlos Cortina
 
 ## GIF de Runner en la portada
 
-Creado y ajustado el **2 de noviembre de 2026, hora de Colombia**, a partir de la grabación auténtica ya publicada. El usuario pidió conectar el final con el comienzo para suavizar la repetición; se añadió un fundido cíclico entre esos fragmentos reales, sin imágenes de IA ni recreaciones del juego.
+Creado y ajustado el **2 de noviembre de 2026, hora de Colombia**, a partir de gameplay auténtico. El usuario pidió **8,5 segundos por ciclo** y una unión suave entre final e inicio. Se montaron dos fragmentos distintos de la grabación real, con fundidos breves; no se generaron imágenes con IA ni se recreó el juego.
 
-- Archivo publicado: `public/images/runner-hero-loop-5s.gif`. El ciclo dura cinco segundos, como solicitó el usuario. El nombre nuevo evita reutilizar en caché las versiones anteriores más cortas.
-- Fuente: `public/media/showcase/runner/videos/runner-gameplay.mp4`, intervalo **00:01.000–00:06.400**; corresponde al mismo intervalo de `.capture-work/runner-overview-master.mp4` en la primera toma del montaje. Procedimiento y revisión del juego en [CAPTURE.md](CAPTURE.md).
-- Contenido inspeccionado: carrera, salto, obstáculos, ciudad nocturna y HUD de Runner. No contiene la pantalla de derrota, escritorio ni ventanas externas.
-- Edición cíclica: de los 81 fotogramas fuente a 15 FPS se presentan primero los fotogramas **6–74** (tiempo fuente 1,4–6,0 s), seguidos de un fundido de **6 fotogramas / 0,4 s** entre la cola **75–80** (6,0–6,4 s) y la cabecera **0–5** (1,0–1,4 s). Los índices son base cero; los límites superiores de tiempo son exclusivos.
-- En el fundido, el peso de la cabecera es `alpha = min(3 × t, 1)`, donde `t` es su tiempo local: 0, 1/15, …, 5/15 s. Pasa de cola pura a cabecera pura. El último fotograma corresponde a la cabecera 5 y al repetir se continúa con el 6; no hay reversa, fotograma de parada ni duplicación del límite. La disolución breve sigue siendo una edición visible; no se presenta como una escena naturalmente periódica.
-- Lienzo y fotogramas: **800 × 800**, proporción original, **75 fotogramas a 15 FPS nominales**, **5 segundos por ciclo** y repetición infinita (extensión NETSCAPE2.0, loop 0). La superposición reduce la duración del ciclo de 5,4 a 5 s; **no cambia la velocidad del gameplay**.
-- Optimización: paleta de 64 colores, sin dithering y codificación de diferencias. No se reescala ni se reconstruye movimiento. GIF representa el tiempo en centésimas: alterna intervalos de 60/70 ms, cuya suma es 5000 ms. Solo se mezclan los extremos durante el fundido; no se cambia la lógica del juego.
-- Tamaño: **13.240.815 bytes** (12,63 MiB). Se conserva la resolución nativa y la legibilidad del arte; la paleta reducida puede introducir bandas suaves en el cielo oscuro.
+- Archivo publicado: `public/images/runner-hero-loop-8-5s.gif`. El nombre nuevo evita reutilizar en caché las versiones anteriores más cortas.
+- Fuente: `public/media/showcase/runner/videos/runner-gameplay.mp4`, fragmento **A: 00:00.800–00:06.300** (5,5 s) y fragmento **B: 00:09.500–00:13.500** (4 s). Ambos corresponden a los mismos intervalos de `.capture-work/runner-overview-master.mp4`, en la primera toma del montaje publicado. Procedimiento y revisión del juego en [CAPTURE.md](CAPTURE.md).
+- Se revisaron las tres tomas originales de Runner y no se encontró un tramo continuo suficientemente largo sin derrota. Esta versión es un **montaje de dos momentos reales**, no una partida continua ni la duplicación del GIF anterior. Muestra carrera, salto, obstáculos, ciudad nocturna y HUD; excluye pantallas de derrota, escritorio y ventanas externas.
+- Lienzo: **800 × 800**, sin reescalar. Salida: **102 fotogramas a 12 FPS nominales**, **8500 ms exactos por ciclo** y repetición infinita (extensión NETSCAPE2.0, loop 0).
+- La velocidad y el sentido de avance se conservan. Pasar a 12 FPS descarta cuadros de la grabación, sin ralentizar ni acelerar el gameplay. Dos solapamientos de 0,5 s reducen los 9,5 s de material seleccionado a los 8,5 s solicitados.
+
+La edición usa índices base cero a 12 FPS. A contiene 66 cuadros y B contiene 48. La secuencia de salida es:
+
+| Tramo | Fotogramas fuente | Cuadros de salida | Duración |
+|---|---|---:|---:|
+| Centro de A | A 6–59 | 54 | 4,5 s |
+| Fundido A → B | A 60–65 con B 0–5 | 6 | 0,5 s |
+| Centro de B | B 6–41 | 36 | 3 s |
+| Fundido B → A | B 42–47 con A 0–5 | 6 | 0,5 s |
+
+En cada fundido, el peso del fragmento entrante es `alpha = min(2,4 × t, 1)`, con tiempo local `t = 0, 1/12, …, 5/12` segundos. Pasa del cuadro saliente puro al entrante puro. El último cuadro del ciclo corresponde a A 5; al repetir continúa con A 6. No hay reversa, cuadro de parada ni duplicación del límite. Los fundidos son una edición visible, no una escena naturalmente periódica.
+
+- Optimización: paleta de 64 colores, sin dithering y codificación de diferencias. No se reescala ni se reconstruye movimiento. Las demoras de 80/90 ms del GIF suman exactamente **8500 ms**, sin parchear el último cuadro. Solo se mezclan los extremos durante los fundidos; no se cambia la lógica del juego.
+- Tamaño: **18.124.532 bytes** (17,29 MiB). Se conserva la resolución nativa y la legibilidad del arte; la paleta reducida puede introducir bandas suaves en el cielo oscuro.
 - La imagen estática `public/images/runner-hero.webp` y los videos originales se conservan. El sitio usa la imagen estática al pausar o respetar una preferencia de movimiento reducido.
 
-Se inspeccionó una hoja con los ocho últimos fotogramas seguidos de los ocho primeros, además de una comparación del cierre antes y después. El GIF se decodificó completo sin errores y se verificaron dimensiones, cantidad de cuadros, demoras y extensión de repetición.
+Se inspeccionaron hojas de los fragmentos originales, el ciclo completo y los ocho últimos cuadros seguidos de los ocho primeros. El GIF se decodificó completo sin errores y se verificaron dimensiones, cantidad de cuadros, demoras y extensión de repetición.
 
 Comando reproducible desde la raíz del sitio (FFmpeg 8.1.1):
 
 ```powershell
 $loopFilter = @"
-[0:v]fps=15,trim=end_frame=81,setpts=N/(15*TB),split=3[hs][ms][ts];[hs]trim=end_frame=6,setpts=PTS-STARTPTS[head];[ms]trim=start_frame=6:end_frame=75,setpts=PTS-STARTPTS[middle];[ts]trim=start_frame=75:end_frame=81,setpts=PTS-STARTPTS[tail];[tail][head]blend=all_expr='A*(1-min(T*3,1))+B*min(T*3,1)':shortest=1[join];[middle][join]concat=n=2:v=1:a=0,setpts=N/(15*TB),split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle
+[0:v]fps=12,trim=end_frame=66,setpts=N/(12*TB),split=3[ahs][ams][ats];[ahs]trim=end_frame=6,setpts=PTS-STARTPTS[ah];[ams]trim=start_frame=6:end_frame=60,setpts=PTS-STARTPTS[am];[ats]trim=start_frame=60:end_frame=66,setpts=PTS-STARTPTS[at];[1:v]fps=12,trim=end_frame=48,setpts=N/(12*TB),split=3[bhs][bms][bts];[bhs]trim=end_frame=6,setpts=PTS-STARTPTS[bh];[bms]trim=start_frame=6:end_frame=42,setpts=PTS-STARTPTS[bm];[bts]trim=start_frame=42:end_frame=48,setpts=PTS-STARTPTS[bt];[at][bh]blend=all_expr='A*(1-min(T*2.4,1))+B*min(T*2.4,1)':shortest=1[ab];[bt][ah]blend=all_expr='A*(1-min(T*2.4,1))+B*min(T*2.4,1)':shortest=1[ba];[am][ab][bm][ba]concat=n=4:v=1:a=0,setpts=N/(12*TB),split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle
 "@
-ffmpeg -hide_banner -loglevel error -y -ss 1 -t 5.4 -i public/media/showcase/runner/videos/runner-gameplay.mp4 -filter_complex $loopFilter -loop 0 public/images/runner-hero-loop-5s.gif
+ffmpeg -hide_banner -loglevel error -y -ss 0.8 -t 5.5 -i public/media/showcase/runner/videos/runner-gameplay.mp4 -ss 9.5 -t 4 -i public/media/showcase/runner/videos/runner-gameplay.mp4 -filter_complex $loopFilter -loop 0 public/images/runner-hero-loop-8-5s.gif
 ```
 
 ## Otros recursos existentes
