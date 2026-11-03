@@ -682,5 +682,10 @@
   "Animación y colisiones": "动画与碰撞",
   "8e733f0": "8e733f0",
   "Animation": "Animation",
-  "Collision": "Collision"
+  "Collision": "Collision",
+  "Tetris mejora su audio y su pantalla de derrota": "Tetris 改进音效和游戏结束画面",
+  "Música y sonido al limpiar líneas, nueva paleta, récord persistente y pantalla de derrota antes de reiniciar.": "新增音乐和消行音效、新配色、持久保存的最高分，以及重启前的游戏结束画面。",
+  "Tetris · AudioGroup": "Tetris · AudioGroup",
+  "19264a1": "19264a1",
+  "21 actualizaciones": "21 项更新"
 }

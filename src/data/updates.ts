@@ -18,6 +18,20 @@ const commit = (sha: string) => `https://github.com/Arukado01/AwesomeEngine/comm
 /** Agregar nuevas entradas al principio, conservar la fecha y enlazar la evidencia del cambio. */
 export const updates: Update[] = [
   {
+    id: '19264a1',
+    date: '2026-11-02T21:03:51-05:00',
+    title: 'Tetris mejora su audio y su pantalla de derrota',
+    description:
+      'Música y sonido al limpiar líneas, nueva paleta, récord persistente y pantalla de derrota antes de reiniciar.',
+    category: 'Juegos',
+    status: 'implemented',
+    added: ['Tetris · AudioGroup'],
+    fixed: [],
+    performance: [],
+    architecture: [],
+    source: commit('19264a196804f54b09fd50baefe23e0eb5705d0d'),
+  },
+  {
     id: 'f0e88ed',
     date: '2026-11-02T20:37:55-05:00',
     title: 'Runner y Bounce integran los gestores',
