@@ -64,7 +64,7 @@ Les raccourcis sont traités dans `EngineVisitor`. La perte du focus met la scè
 
 ## Audio de la révision de référence
 
-AudioManager expose le volume global ainsi que la position et la direction de l’écouteur via SFML. ResourceManager fournit les buffers sonores et les objets musicaux ; la scène possède les sources et contrôle leur lecture.
+AudioManager gère le volume global et les niveaux Music/Effect. ResourceManager fournit les tampons partagés et la musique ; chaque scène gère ses sources.
 
 ```cpp
 void AudioManager::SetGlobalVolume(float volume) {
@@ -72,15 +72,20 @@ void AudioManager::SetGlobalVolume(float volume) {
 }
 ```
 
-Dans cette révision, les jeux coordonnent leur propre audio dans `OnPause` et `OnCleanup`. Aucun mélangeur de bus configurable ni éditeur audio n’est documenté.
-
 <span id="trabajo-local-en-desarrollo" aria-hidden="true"></span>
 
-### Travail local en développement
+<span id="grupos-de-audio" aria-hidden="true"></span>
 
-L’audit a relevé `AudioGroup.h` et `AudioGroup.cpp` comme fichiers encore absents du commit de référence. Ils regroupent les sources par scène, distinguent les canaux Music/Effect et mémorisent celles qui étaient en lecture avant la pause.
+### Groupes audio
 
-Des changements locaux concernent aussi une horloge partagée des délais de récupération. Ces implémentations ont été observées, mais ne font pas partie des exemples publics de ce guide. N’utilisez pas ces API en pensant les trouver dans le commit lié.
+`AudioManager::CreateGroup` crée un `AudioGroup` pour les sons et la musique d’une scène. Il met en pause et reprend uniquement les sources en lecture et permet d’arrêter ou régler les canaux. Runner et Bounce l’utilisent.
+
+Conservez le groupe dans la scène pour garder ses sources ; par exemple :
+
+```cpp
+auto sound = audioGroup.AddSound(ctx.resources.AcquireSound("RunnerJump.wav"), 20.f);
+if (sound) audioGroup.Play(*sound);
+```
 
 <span id="interfaz-tgui" aria-hidden="true"></span>
 
@@ -94,8 +99,10 @@ Le panneau crée ses boutons à partir d’`OverlaySelection` avec `magic_enum`.
 
 ## Sources
 
-- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/utils/InputBindings.h).
-- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/InputManager.cpp).
-- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/GuiManager.cpp).
+- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h).
+- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp).
+- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp).
+
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).

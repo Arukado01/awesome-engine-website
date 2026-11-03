@@ -64,7 +64,7 @@ CursorManager 可以通过摇杆移动光标，并遵循 `joystickDeadzone`。�
 
 ## 参考修订中的音频
 
-AudioManager 通过 SFML 提供全局音量和监听器的位置、方向。ResourceManager 提供声音缓冲区和音乐对象；场景拥有音源并控制播放。
+AudioManager 管理全局音量和 Music/Effect 声道音量。ResourceManager 提供共享缓冲区和音乐；每个场景管理自己的音源。
 
 ```cpp
 void AudioManager::SetGlobalVolume(float volume) {
@@ -72,15 +72,20 @@ void AudioManager::SetGlobalVolume(float volume) {
 }
 ```
 
-在此修订中，各个游戏在 `OnPause` 和 `OnCleanup` 中协调自身音频。文档所述代码没有可配置的总线混音器或音频编辑器。
-
 <span id="trabajo-local-en-desarrollo" aria-hidden="true"></span>
 
-### 本地开发中的改动
+<span id="grupos-de-audio" aria-hidden="true"></span>
 
-审查时发现 `AudioGroup.h` 和 `AudioGroup.cpp` 尚未包含在参考提交中。它们按场景组织音源、区分 Music/Effect 通道，并记录暂停前正在播放的音源。
+### 音频分组
 
-本地也有关于共享冷却时钟的改动。这些实现确实存在，但不属于本指南的公开示例。不要在期望链接提交包含这些 API 的情况下使用它们。
+`AudioManager::CreateGroup` 创建 `AudioGroup`，组织场景的声音和音乐。分组只暂停和恢复之前正在播放的音源，并可停止或调整声道。Runner 和 Bounce 使用了它。
+
+在场景中保留分组以维持其音源，例如：
+
+```cpp
+auto sound = audioGroup.AddSound(ctx.resources.AcquireSound("RunnerJump.wav"), 20.f);
+if (sound) audioGroup.Play(*sound);
+```
 
 <span id="interfaz-tgui" aria-hidden="true"></span>
 
@@ -94,8 +99,10 @@ GuiManager 将 TGUI 与 SFML 窗口连接，加载 `Content/Themes/Dark.txt`，�
 
 ## 源码参考
 
-- [输入类型](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/utils/InputBindings.h)。
-- [绑定查询](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/InputManager.cpp)。
-- [手柄映射](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Utils/InputBindings.cpp)。
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/AudioManager.cpp)。
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/GuiManager.cpp)。
+- [输入类型](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h)。
+- [绑定查询](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp)。
+- [手柄映射](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp)。
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp)。
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp)。
+
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).

@@ -96,7 +96,7 @@ ChangeScene(名前)
 
 ## 実際の実装を調べる
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Games/Source/Bounce.cpp) は、ゲームクラスがコンテキストを受け取り、パドルと統計値を準備し、効果音と音楽を要求して、シーンのコールバックを利用する方法を示しています。
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) は、ゲームクラスがコンテキストを受け取り、パドルと統計値を準備し、効果音と音楽を要求して、シーンのコールバックを利用する方法を示しています。
 
 自分のコピーにシーンを追加するには、既存の分離方法に従います。宣言は `Games/Include`、実装は `Games/Source`、明示的な登録は `SceneFactory.cpp` に置きます。CMake は `GLOB_RECURSE CONFIGURE_DEPENDS` でこれらのフォルダーの `.cpp` を検出します。実行時に読み込むシーンプラグインはありません。
 
@@ -112,7 +112,7 @@ ChangeScene(名前)
 
 ## 参照ソース
 
-- [Scene の契約](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/Scene.h)。
-- [SceneFactory の登録](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [SceneManager の要求](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SceneManager.cpp)。
-- [Engine の遷移処理](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
+- [Scene の契約](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h)。
+- [SceneFactory の登録](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [SceneManager の要求](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp)。
+- [Engine の遷移処理](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。

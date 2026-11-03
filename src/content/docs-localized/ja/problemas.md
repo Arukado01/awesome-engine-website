@@ -35,7 +35,7 @@ CMake は FetchContent を使用して依存関係をダウンロードします
 
 先に `Build` ディレクトリへ移動しないでください。設定、シェーダー、テクスチャ、フォント、音声は相対パスを使います。名前がローカルのファイルと完全に一致するかも確認します。
 
-不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Content/Config.json)と比較し、想定される型を保ってください。
+不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json)と比較し、想定される型を保ってください。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -59,7 +59,7 @@ Engine は `Menu` というシーンを要求しますが、SceneFactory には�
 
 これは定義された動作です。Engine はフォーカスを失うとシーンを一時停止します。フォーカスがない間は描画を止め、クロックの更新は続けます。戻ったときにオーバーレイが表示されていれば、Resume または Escape を使ってください。
 
-公開基準リビジョンでは、各シーンが一時停止への応答を管理します。PC 上で確認された共有クールダウンクロックのリファクタリングは、まだローカルの変更でした。
+一時停止中はゲームクロックと紐付いたクールダウンが停止し、実時間のクロックは進み続けます。独立した `Cooldown` は実時間を使います。
 
 <span id="no-aparecen-los-efectos-o-cambia-su-aspecto-al-redimensionar" aria-hidden="true"></span>
 
@@ -99,7 +99,7 @@ F12 は `Content/Screenshots` に保存します。書き込み権限と空き�
 
 ## 参照ソース
 
-- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt)。
-- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
-- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp)。
+- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
+- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。

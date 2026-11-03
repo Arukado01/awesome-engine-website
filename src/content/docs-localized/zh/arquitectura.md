@@ -38,6 +38,7 @@ Engine
 ├── sf::RenderWindow
 ├── EngineContext
 │   ├── renderer · resources · particles
+│   ├── animations · collisions
 │   ├── input · cursor · gui
 │   ├── audio · time · random
 │   └── scenes · save · screenshot · clipboard
@@ -70,7 +71,13 @@ GUI 与场景参与同一个处理流程；本文描述的代码没有独立的�
 
 系统没有实现固定步长累加器。每个游戏自行决定如何使用时间增量和自己的计时器。
 
-在参考修订中，每个场景自行实现对 `OnPause` 的响应，包括音频和计时器。用于冷却计时的时钟正在进行本地重构，标为**开发中**，不属于此公开参考 API。
+`TimeManager` 区分真实时间与游戏时间。Engine 随场景暂停游戏时钟；关联的 `Cooldown` 默认使用该时钟。独立的冷却计时器使用真实时钟。
+
+关联的冷却计时器默认使用游戏时间：
+
+```cpp
+auto cooldown = ctx.time.CreateCooldown(1.f, TimeDomain::Game);
+```
 
 <span id="renderizado-y-capas" aria-hidden="true"></span>
 
@@ -98,7 +105,7 @@ Bloom → Monitor
 - 效果存储在 `unique_ptr<Effect>` 的向量中。
 - 活动场景使用不拥有对象的指针；对象仍归注册表所有。
 - 各管理器作为值成员属于 `EngineContext`。
-- ResourceManager 在映射中按值保存资源。
+- ResourceManager 按值保存纹理和字体，并使用 `shared_ptr` 共享声音缓冲区。
 
 项目使用 RAII 和标准容器，没有自定义内存管理器或通用 ECS。所有注册场景都在 `CreateScenes` 中构造，切换场景不会在每次过渡时创建新实例。
 
@@ -118,7 +125,7 @@ Bloom → Monitor
 
 ## 源码参考
 
-- [主循环](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Main.cpp)。
-- [Engine 协调逻辑](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
-- [EngineContext 定义](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h)。
-- [场景所有权](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/SceneFactory.h)。
+- [主循环](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Main.cpp)。
+- [Engine 协调逻辑](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [EngineContext 定义](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h)。
+- [场景所有权](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/SceneFactory.h)。

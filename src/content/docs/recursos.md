@@ -37,7 +37,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename) {
 
 El manager conserva la propiedad de esos objetos. Los consumidores no deben eliminar los punteros que reciben. Tampoco existe una operación pública de descarga, invalidación de caché o recarga automática.
 
-Comprueba el resultado antes de usarlo: la primera carga fallida devuelve `nullptr`. La implementación inserta la entrada antes de intentar cargar, así que una solicitud posterior del mismo nombre no vuelve a intentarlo automáticamente. Corregir un archivo ausente suele requerir reiniciar la aplicación con la implementación actual.
+Comprueba el resultado antes de usarlo. Texturas y fuentes insertan una entrada antes de cargar, por lo que un fallo puede requerir reiniciar para reintentar. `AcquireSound` inserta el buffer solo tras cargarlo y permite reintentar una carga fallida.
 
 ## Música y sonido
 
@@ -68,7 +68,7 @@ El nombre contiene la fecha y la hora con milisegundos. Se registra el resultado
 
 ## Fuentes
 
-- [Carga y caché de recursos](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ResourceManager.cpp).
-- [API de ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Managers/ResourceManager.h).
-- [Persistencia de SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp).
-- [Capturas PNG](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ScreenshotManager.cpp).
+- [Carga y caché de recursos](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ResourceManager.cpp).
+- [API de ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/ResourceManager.h).
+- [Persistencia de SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).
+- [Capturas PNG](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ScreenshotManager.cpp).

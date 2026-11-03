@@ -77,9 +77,29 @@ El límite por defecto es **128 partículas**. El vector reserva esa capacidad y
 
 La escena decide cuándo actualizar y renderizar las partículas. Engine las limpia al cambiar de escena. Runner utiliza este sistema para el polvo de movimiento.
 
+`EmitBurst` genera partículas usando `ParticleEmitterConfig` y `RandomManager`. Comprueba los rangos y limita la cantidad a la capacidad disponible.
+
+## Animación y colisiones
+
+`SpriteAnimator` avanza clips en bucle o una vez, informa los fotogramas cruzados y calcula rectángulos de una hoja de sprites. `AnimationManager` administra identificadores, grupos y pausas; Runner obtiene un animador y avanza su carrera directamente.
+
+`CollisionManager` expone `Intersect` y `Sweep` para cajas alineadas a los ejes. El barrido devuelve el tiempo de contacto, la normal y si ya existía solapamiento; Runner y Bounce lo usan en colisiones seleccionadas. No es un motor físico general.
+
+Crea y configura el animador una vez; conserva el grupo y avánzalo en cada actualización:
+
+```cpp
+const AnimationGroup group = 1;
+const AnimationHandle handle = ctx.animations.Create(group);
+ctx.animations.Configure(handle, {0, 6, 12.f}, SpritePlaybackMode::Loop);
+ctx.animations.AdvanceGroup(group, ctx.time.GetDeltaTime());
+```
+
 ## Fuentes
 
-- [Pipeline de RenderManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/RenderManager.cpp).
-- [Implementación de Bloom](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Graphics/Effects/EfflectBloom.cpp).
-- [Shader Monitor](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Content/Shaders/Monitor.frag).
-- [Partículas](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ParticleManager.cpp).
+- [Pipeline de RenderManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/RenderManager.cpp).
+- [Implementación de Bloom](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Graphics/Effects/EfflectBloom.cpp).
+- [Shader Monitor](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Shaders/Monitor.frag).
+- [Partículas](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ParticleManager.cpp).
+- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AnimationManager.h).
+- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
+- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/CollisionManager.h).

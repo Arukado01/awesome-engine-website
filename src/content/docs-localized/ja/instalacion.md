@@ -33,7 +33,7 @@ cd AwesomeEngine
 このドキュメントとまったく同じコードを確認するには、新しく取得したコピーで対象リビジョンを選択します。
 
 ```sh
-git checkout 5a6dfacd86414c4cdfaa7157b533330f173a3126
+git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
 ```
 
 最後のコマンドは作業コピーを特定のコミットに切り替えます。変更を開発する場合は、作業を始める前に自分のブランチを作成してください。各ソースへのリンクも同じリビジョンを指しているため、将来の更新との差分を比較できます。
@@ -96,6 +96,6 @@ cmake --build BuildRelease --parallel
 
 ## 参照ソース
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt)。
-- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/.vscode/tasks.json)。
-- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
+- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json)。
+- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json)。

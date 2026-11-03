@@ -41,7 +41,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename) {
 
 Le gestionnaire reste propriétaire de ces objets. Leurs utilisateurs ne doivent pas supprimer les pointeurs reçus. Il n’existe pas non plus d’opération publique de déchargement, d’invalidation du cache ou de rechargement automatique.
 
-Vérifiez le résultat avant de l’utiliser : le premier échec de chargement renvoie `nullptr`. L’implémentation insère l’entrée avant la tentative de chargement ; une demande ultérieure du même nom ne réessaie donc pas automatiquement. Avec l’implémentation actuelle, corriger un fichier manquant nécessite généralement de relancer l’application.
+Vérifiez le résultat avant utilisation. Les textures et polices insèrent une entrée avant le chargement ; un échec peut nécessiter un redémarrage. `AcquireSound` insère le tampon seulement après chargement et permet de réessayer.
 
 <span id="música-y-sonido" aria-hidden="true"></span>
 
@@ -80,7 +80,7 @@ Le nom contient la date et l’heure avec les millisecondes. Le résultat est jo
 
 ## Sources
 
-- [Chargement et cache des ressources](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ResourceManager.cpp).
-- [API de ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Managers/ResourceManager.h).
-- [Persistance de SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp).
-- [Captures PNG](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ScreenshotManager.cpp).
+- [Chargement et cache des ressources](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ResourceManager.cpp).
+- [API de ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/ResourceManager.h).
+- [Persistance de SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).
+- [Captures PNG](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ScreenshotManager.cpp).

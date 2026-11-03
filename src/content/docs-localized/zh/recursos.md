@@ -41,7 +41,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename) {
 
 管理器保留这些对象的所有权。使用方不应删除收到的指针。系统也没有公开的资源卸载、缓存失效或自动重新加载操作。
 
-使用前请检查返回值：第一次加载失败时会返回 `nullptr`。实现会在尝试加载之前插入条目，因此后续请求同名资源时不会自动重试。在当前实现下，补齐缺失文件后通常需要重启应用。
+使用前请检查结果。纹理和字体在加载前插入条目，失败后可能需要重启才能重试。`AcquireSound` 仅在成功加载后插入缓冲区，因此失败后可以重试。
 
 <span id="música-y-sonido" aria-hidden="true"></span>
 
@@ -80,7 +80,7 @@ SaveManager 在构造时读取 `Content/Save.json`；文件不存在时，从空
 
 ## 源码参考
 
-- [资源加载与缓存](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ResourceManager.cpp)。
-- [ResourceManager API](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Managers/ResourceManager.h)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp)。
-- [PNG 截图](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ScreenshotManager.cpp)。
+- [资源加载与缓存](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ResourceManager.cpp)。
+- [ResourceManager API](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/ResourceManager.h)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。
+- [PNG 截图](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ScreenshotManager.cpp)。

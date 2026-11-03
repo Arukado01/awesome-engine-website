@@ -96,7 +96,7 @@ Synchronize pause state
 
 ## Explore a real implementation
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Games/Source/Bounce.cpp) shows how a game class receives the context, prepares its paddle and statistics, requests sound and music, and uses scene callbacks.
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) shows how a game class receives the context, prepares its paddle and statistics, requests sound and music, and uses scene callbacks.
 
 To add a scene in your own copy, follow the existing separation: declaration in `Games/Include`, implementation in `Games/Source`, and explicit registration in `SceneFactory.cpp`. CMake discovers `.cpp` files in these folders with `GLOB_RECURSE CONFIGURE_DEPENDS`; there is no scene plugin loaded at runtime.
 
@@ -112,7 +112,7 @@ This documentation explicitly preserves that limitation; it does not present the
 
 ## Sources
 
-- [Scene contract](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/Scene.h).
-- [SceneFactory registry](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp).
-- [SceneManager requests](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SceneManager.cpp).
-- [Engine transitions](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp).
+- [Scene contract](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h).
+- [SceneFactory registry](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
+- [SceneManager requests](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp).
+- [Engine transitions](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).

@@ -64,7 +64,7 @@ Shortcuts are processed in `EngineVisitor`. Losing focus pauses the scene. On re
 
 ## Audio in the reference revision
 
-AudioManager exposes global volume and listener position/direction through SFML. ResourceManager supplies sound buffers and music objects; the scene owns the sources and controls playback.
+AudioManager provides global volume and Music/Effect channel levels. ResourceManager supplies shared buffers and music; each scene manages its sources.
 
 ```cpp
 void AudioManager::SetGlobalVolume(float volume) {
@@ -72,15 +72,20 @@ void AudioManager::SetGlobalVolume(float volume) {
 }
 ```
 
-In this revision, games coordinate their own audio during `OnPause` and `OnCleanup`. There is no documented configurable bus mixer or audio editor.
-
 <span id="trabajo-local-en-desarrollo" aria-hidden="true"></span>
 
-### Local work in development
+<span id="grupos-de-audio" aria-hidden="true"></span>
 
-The audit found `AudioGroup.h` and `AudioGroup.cpp` as files not yet included in the reference commit. They group sources by scene, distinguish Music/Effect channels, and remember which sources were playing before a pause.
+### Audio groups
 
-There are also local changes for a shared cooldown clock. These are observed implementations, but are not part of this guide's public examples. Do not use those APIs expecting to find them in the linked commit.
+`AudioManager::CreateGroup` creates an `AudioGroup` for a scene’s sounds and music. It pauses and resumes only the sources that were playing and can stop or adjust its channels. Runner and Bounce use it.
+
+Keep the group in the scene to retain its sources; for example:
+
+```cpp
+auto sound = audioGroup.AddSound(ctx.resources.AcquireSound("RunnerJump.wav"), 20.f);
+if (sound) audioGroup.Play(*sound);
+```
 
 <span id="interfaz-tgui" aria-hidden="true"></span>
 
@@ -94,8 +99,10 @@ The overlay creates buttons from `OverlaySelection` using `magic_enum`. Each sel
 
 ## Sources
 
-- [Input types](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/utils/InputBindings.h).
-- [Binding queries](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/InputManager.cpp).
-- [Controller mapping](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/GuiManager.cpp).
+- [Input types](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h).
+- [Binding queries](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp).
+- [Controller mapping](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp).
+
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).

@@ -4,7 +4,11 @@ import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { updates } from '../src/data/updates.ts';
 import { games, technologies } from '../src/data/engine.ts';
 test('el historial conserva commits únicos, fuentes y fechas descendentes', () => {
-  assert.ok(updates.length >= 10);
+  assert.ok(updates.length >= 16);
+  assert.deepEqual(
+    updates.slice(0, 6).map((u) => u.id),
+    ['f0e88ed', '8e733f0', '5387503', '67f81e3', '509f0bf', '315669a'],
+  );
   assert.equal(new Set(updates.map((u) => u.id)).size, updates.length);
   for (let i = 0; i < updates.length; i++) {
     const u = updates[i];
@@ -36,7 +40,7 @@ test('las nueve guías tienen orden único, enlaces de fuente y destinos interno
     orders.push(text.match(/^order:\s*(\d+)/m)?.[1]);
     assert.match(
       text,
-      /github.com\/Arukado01\/AwesomeEngine\/blob\/5a6dfacd86414c4cdfaa7157b533330f173a3126/,
+      /github.com\/Arukado01\/AwesomeEngine\/blob\/f0e88edffae35efb3cc208e8eea651d1b559cbaa/,
     );
     for (const match of text.matchAll(/\]\(\/docs\/([\w-]+)\//g))
       assert.ok(names.includes(`${match[1]}.md`), `${name}: ${match[1]}`);

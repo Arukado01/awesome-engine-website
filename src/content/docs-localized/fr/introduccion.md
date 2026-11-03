@@ -11,7 +11,7 @@ category: Premiers pas
 
 Awesome Engine est un moteur de jeux vidéo écrit en **C++20**, construit sur SFML. Son noyau relie les scènes aux services de rendu, de ressources, d’entrée, d’audio, d’interface et de persistance. Les jeux du dépôt montrent comment utiliser ces services en C++.
 
-Cette documentation prend pour référence le [commit `5a6dfac`](https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126). Elle décrit le contenu de cette révision ; les changements observés uniquement dans l’arborescence locale sont signalés comme **en développement**.
+Cette documentation prend pour référence publique le [commit `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa).
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -46,7 +46,7 @@ Ces systèmes sont reliés par `EngineContext`. Chaque jeu implémente l’inter
 | Expérimental | Le code existe, mais son intégration est désactivée ou ne participe pas au fonctionnement normal décrit. |
 | Planifié | Une intention documentée par le projet est nécessaire. Aucune fonctionnalité ne reçoit ce statut sans cette preuve. |
 
-`AudioGroup`, `SpriteAnimator`, `SweptAabb` et l’horloge partagée des délais de récupération ont été observés dans le travail local. Ces API ne sont pas disponibles en clonant la révision de référence.
+`AudioGroup`, `SpriteAnimator`, `CollisionManager`, `SweptAabb` et les horloges partagées sont inclus dans la révision publique de référence.
 
 <span id="alcance-de-la-plataforma" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Ces systèmes sont reliés par `EngineContext`. Chaque jeu implémente l’inter
 
 Le dépôt comprend une configuration de travail pour **Windows avec MinGW, Ninja et GDB**. L’audit ne valide pas la compilation ou l’exécution sous Linux, macOS, sur mobile ou dans un navigateur. Les bibliothèques utilisées ne suffisent pas, à elles seules, à affirmer une compatibilité complète du moteur.
 
-Le code du moteur est sous [licence MIT](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/LICENSE.md). Les intitulés de l’historique correspondent à de vrais commits, et non à des versions de publication inventées.
+Le code du moteur est sous [licence MIT](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md). Les intitulés de l’historique correspondent à de vrais commits, et non à des versions de publication inventées.
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## Sources
 
-- [Dépendances et options de compilation](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt).
-- [Enregistrement des scènes](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp).
-- [Services d’EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h).
+- [Dépendances et options de compilation](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
+- [Enregistrement des scènes](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
+- [Services d’EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).

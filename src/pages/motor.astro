@@ -20,8 +20,28 @@ const systems = [
   ],
   [
     'Entrada y audio',
-    'Acciones con múltiples bindings. Teclado, ratón y gamepad; música, efectos y volumen global.',
+    'Acciones con múltiples bindings. Teclado, ratón y gamepad; grupos de música y efectos por escena.',
     'entrada-audio',
+  ],
+  [
+    'Animación de sprites',
+    'Clips, eventos de fotograma y grupos de animación reutilizables.',
+    'renderizado',
+  ],
+  [
+    'Colisiones 2D',
+    'Intersección y barrido continuo de cajas alineadas a los ejes.',
+    'renderizado',
+  ],
+  [
+    'Partículas y ráfagas',
+    'Emisores configurables, velocidad, duración y límite de partículas.',
+    'renderizado',
+  ],
+  [
+    'Tiempo y pausa',
+    'Relojes de juego y tiempo real; temporizadores vinculados a la pausa.',
+    'arquitectura',
   ],
   [
     'Interfaz y herramientas',
@@ -59,7 +79,7 @@ const systems = [
       </p>
       <a
         class="text-link"
-        href="https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126"
+        href="https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa"
       >
         Explorar el código auditado <span>↗</span>
       </a>
@@ -98,12 +118,12 @@ const systems = [
           <span class="eyebrow">Capacidades verificadas</span>
           <h2>Lo que ya puedes explorar.</h2>
         </div>
-        <span class="pill live">Base pública: 5a6dfac</span>
+        <span class="pill live">Base pública: f0e88ed</span>
       </div>
       <div class="systems">
         {systems.map(([title, description, doc], i) => (
           <a href={`/docs/${doc}/`} class="system-row">
-            <span class="system-number">0{i + 1}</span>
+            <span class="system-number">{String(i + 1).padStart(2, '0')}</span>
             <h3>{title}</h3>
             <p>{description}</p>
             <span class="pill live">Implementada</span>
@@ -146,6 +166,8 @@ const systems = [
               'Audio',
               'Input',
               'Particle',
+              'Animation',
+              'Collision',
               'Time',
               'Scene',
               'Gui',
@@ -198,7 +220,7 @@ const systems = [
         </div>
         <a
           class="text-link"
-          href="https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt"
+          href="https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt"
         >
           Ver CMakeLists.txt <span>↗</span>
         </a>

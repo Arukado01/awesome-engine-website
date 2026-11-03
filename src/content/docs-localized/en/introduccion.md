@@ -11,7 +11,7 @@ category: Getting started
 
 Awesome Engine is a game engine written in **C++20**, built on SFML. Its core connects scenes to rendering, resource, input, audio, interface, and persistence services. The games in the repository show how to use these services from C++ code.
 
-This documentation uses [commit `5a6dfac`](https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126) as its reference. It describes the contents of that revision; changes observed only in the local working tree are marked as **in development**.
+This documentation uses [commit `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa) as its public reference.
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -46,7 +46,7 @@ These systems connect through `EngineContext`. Each game implements the `Scene` 
 | Experimental | The code exists, but its integration is disabled or is not part of the normal flow described here. |
 | Planned | Requires a documented intention from the project. Features are not assigned this status without that evidence. |
 
-`AudioGroup`, `SpriteAnimator`, `SweptAabb`, and the shared cooldown clock were observed as local work. Do not expect those APIs when cloning the reference revision.
+`AudioGroup`, `SpriteAnimator`, `CollisionManager`, `SweptAabb`, and the shared clocks are included in the public reference revision.
 
 <span id="alcance-de-la-plataforma" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ These systems connect through `EngineContext`. Each game implements the `Scene` 
 
 The repository includes a working configuration for **Windows with MinGW, Ninja, and GDB**. The audit does not establish successful builds or execution on Linux, macOS, mobile devices, or browsers. The libraries used are not enough on their own to claim full engine compatibility.
 
-The engine code is under the [MIT license](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/LICENSE.md). History entry names correspond to real commits, not invented release versions.
+The engine code is under the [MIT license](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md). History entry names correspond to real commits, not invented release versions.
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## Sources
 
-- [Dependencies and build options](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt).
-- [Scene registration](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp).
-- [EngineContext services](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h).
+- [Dependencies and build options](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
+- [Scene registration](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
+- [EngineContext services](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).

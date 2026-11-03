@@ -64,7 +64,7 @@ CursorManager は `joystickDeadzone` を考慮してスティックでカーソ�
 
 ## 基準リビジョンの音声
 
-AudioManager は SFML を通じて、全体音量とリスナーの位置・向きを公開します。ResourceManager はサウンドバッファーと音楽オブジェクトを提供します。シーンが音源を所有し、再生を制御します。
+AudioManager は全体音量と Music/Effect チャンネルの音量を管理します。ResourceManager は共有バッファーと音楽を提供し、各シーンが音源を管理します。
 
 ```cpp
 void AudioManager::SetGlobalVolume(float volume) {
@@ -72,15 +72,20 @@ void AudioManager::SetGlobalVolume(float volume) {
 }
 ```
 
-このリビジョンでは、各ゲームが `OnPause` と `OnCleanup` の中で自分の音声を調整します。設定可能なバスミキサーや音声エディターは確認されていません。
-
 <span id="trabajo-local-en-desarrollo" aria-hidden="true"></span>
 
-### 開発中のローカル作業
+<span id="grupos-de-audio" aria-hidden="true"></span>
 
-調査時点では、`AudioGroup.h` と `AudioGroup.cpp` はまだ基準コミットに含まれていないファイルでした。シーン単位で音源をまとめ、Music/Effect チャンネルを区別し、一時停止の前に再生されていた音源を記憶します。
+### 音声グループ
 
-クールダウン用の共有クロックにもローカルの変更があります。実装は確認されていますが、このガイドの公開例には含まれていません。リンク先のコミットにあるものとして、これらの API を使用しないでください。
+`AudioManager::CreateGroup` はシーンの効果音と音楽をまとめる `AudioGroup` を作成します。再生中だった音源だけを一時停止・再開し、チャンネルの停止や調整ができます。Runner と Bounce で使用されています。
+
+音源を保持するため、グループをシーン内で保持します。例えば次のように使います。
+
+```cpp
+auto sound = audioGroup.AddSound(ctx.resources.AcquireSound("RunnerJump.wav"), 20.f);
+if (sound) audioGroup.Play(*sound);
+```
 
 <span id="interfaz-tgui" aria-hidden="true"></span>
 
@@ -94,8 +99,10 @@ GuiManager は TGUI を SFML ウィンドウに接続します。`Content/Themes
 
 ## 参照ソース
 
-- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/utils/InputBindings.h)。
-- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/InputManager.cpp)。
-- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Utils/InputBindings.cpp)。
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/AudioManager.cpp)。
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/GuiManager.cpp)。
+- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h)。
+- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp)。
+- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp)。
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp)。
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp)。
+
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).

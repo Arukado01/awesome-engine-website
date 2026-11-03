@@ -41,7 +41,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename) {
 
 これらのオブジェクトの所有権はマネージャーが保持します。利用側は受け取ったポインターを削除してはいけません。公開されたアンロード、キャッシュ無効化、自動再読み込みの操作もありません。
 
-利用前に戻り値を確認してください。最初の読み込みに失敗すると `nullptr` を返します。この実装は読み込みを試す前に項目を挿入するため、後で同じ名前を要求しても自動で再試行しません。現在の実装では、不足していたファイルを補った後にアプリケーションの再起動が必要になることが一般的です。
+使用前に結果を確認してください。テクスチャとフォントは読み込み前に項目を挿入するため、失敗後の再試行に再起動が必要な場合があります。`AcquireSound` は読み込み成功後にバッファーを挿入し、失敗時に再試行できます。
 
 <span id="música-y-sonido" aria-hidden="true"></span>
 
@@ -80,7 +80,7 @@ SaveManager は構築時に `Content/Save.json` を読み込みます。ファ�
 
 ## 参照ソース
 
-- [リソースの読み込みとキャッシュ](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ResourceManager.cpp)。
-- [ResourceManager の API](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Managers/ResourceManager.h)。
-- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp)。
-- [PNG スクリーンショット](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ScreenshotManager.cpp)。
+- [リソースの読み込みとキャッシュ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ResourceManager.cpp)。
+- [ResourceManager の API](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/ResourceManager.h)。
+- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。
+- [PNG スクリーンショット](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ScreenshotManager.cpp)。

@@ -1,6 +1,6 @@
-/** Datos verificados en AwesomeEngine, commit 5a6dfac, 1 de noviembre de 2026. */
+/** Datos verificados en AwesomeEngine, commit f0e88ed, 2 de noviembre de 2026. */
 const sourceRoot =
-  'https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126';
+  'https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa';
 
 export const games = [
   {

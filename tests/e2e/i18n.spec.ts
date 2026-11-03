@@ -1,3 +1,4 @@
+import { updates } from '../../src/data/updates';
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFileSync } from 'node:fs';
@@ -175,7 +176,7 @@ for (const locale of ['en', 'pt', 'ja'] as const) {
     await expect(page.locator('#docs-empty')).toBeVisible();
     await expect(page.locator('#search-count')).toHaveText(countText(locale, 'guides', 0));
     await page.goto(`/${locale}/evolucion/`);
-    await expect(page.locator('#update-count')).toHaveText(countText(locale, 'updates', 14));
+    await expect(page.locator('#update-count')).toHaveText(countText(locale, 'updates', updates.length));
     const category = page.locator('#category-trigger');
     await category.click();
     const categorySearch = page.getByRole('combobox', {
@@ -202,7 +203,7 @@ for (const locale of ['en', 'pt', 'ja'] as const) {
     await page
       .getByRole('button', { name: translated(locale, 'Restablecer filtros'), exact: true })
       .click();
-    await expect(page.locator('[data-update]:visible')).toHaveCount(14);
+    await expect(page.locator('[data-update]:visible')).toHaveCount(updates.length);
     await page.locator('#theme-trigger').click();
     await expect(page.locator('#theme-trigger')).toHaveAccessibleName(
       new RegExp(translated(locale, 'Cambiar tema:')),

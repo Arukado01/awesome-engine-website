@@ -35,7 +35,7 @@ CMake 使用 FetchContent 下载依赖项。连接、代理或 Git 错误可能�
 
 不要先切换到 `Build` 目录。配置、着色器、纹理、字体和音效都使用相对路径。还要确认名称与当前副本中的文件完全一致。
 
-无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Content/Config.json)，并保持预期的数据类型。
+无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json)，并保持预期的数据类型。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -59,7 +59,7 @@ Engine 请求名为 `Menu` 的场景，但 SceneFactory 没有注册该名称。
 
 这是已定义的行为：Engine 在失去焦点时暂停场景。没有焦点时，循环停止渲染但持续更新时钟。如果切回后覆盖层仍然可见，请使用 Resume 或 Escape。
 
-在公开参考修订中，每个场景自行控制暂停响应。在电脑上发现的共享冷却时钟重构当时仍属于本地改动。
+暂停时游戏时钟和关联的冷却计时器停止，真实时钟继续运行。独立的 `Cooldown` 使用真实时间。
 
 <span id="no-aparecen-los-efectos-o-cambia-su-aspecto-al-redimensionar" aria-hidden="true"></span>
 
@@ -99,7 +99,7 @@ F12 将截图保存在 `Content/Screenshots`。请检查写入权限和可用空
 
 ## 源码参考
 
-- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt)。
-- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
-- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp)。
+- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
+- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。

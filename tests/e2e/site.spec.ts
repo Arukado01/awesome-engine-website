@@ -1,3 +1,4 @@
+import { updates } from '../../src/data/updates';
 import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 async function chooseTheme(page: Page, name: string) {
@@ -154,7 +155,7 @@ test('búsquedas, filtros y estados vacíos', async ({ page }) => {
   await page.getByLabel('Buscar una mejora').fill('zzzzsinresultados');
   await expect(page.locator('#updates-empty')).toBeVisible();
   await page.getByRole('button', { name: 'Restablecer filtros' }).click();
-  await expect(page.locator('[data-update]:visible')).toHaveCount(14);
+  await expect(page.locator('[data-update]:visible')).toHaveCount(updates.length);
   await expect(
     page.getByRole('button', { name: 'Categoría: Todas las categorías', exact: true }),
   ).toBeVisible();
@@ -407,5 +408,5 @@ test('categorías: búsqueda dentro del selector, teclado, vacío y cierre en m�
   }
   await trigger.click();
   await page.getByRole('option', { name: 'Todas las categorías', exact: true }).click();
-  await expect(page.locator('[data-update]:visible')).toHaveCount(14);
+  await expect(page.locator('[data-update]:visible')).toHaveCount(updates.length);
 });

@@ -38,6 +38,7 @@ Engine
 ├── sf::RenderWindow
 ├── EngineContext
 │   ├── renderer · resources · particles
+│   ├── animations · collisions
 │   ├── input · cursor · gui
 │   ├── audio · time · random
 │   └── scenes · save · screenshot · clipboard
@@ -70,7 +71,13 @@ The GUI and scene participate in the same processing flow; there is no separate 
 
 The system does not implement a fixed-step accumulator. Games decide how to use delta time and their own timers.
 
-In the reference revision, each scene implements its own response to `OnPause`, including audio and timers. A local cooldown clock refactor exists, marked as **in development**, and is not part of this public reference API.
+`TimeManager` separates real and game time. Engine pauses the game clock with the scene; a bound `Cooldown` uses that clock by default. A standalone cooldown keeps its real-time clock.
+
+A bound cooldown uses game time by default:
+
+```cpp
+auto cooldown = ctx.time.CreateCooldown(1.f, TimeDomain::Game);
+```
 
 <span id="renderizado-y-capas" aria-hidden="true"></span>
 
@@ -98,7 +105,7 @@ Effects are only added when `sf::Shader::isAvailable()` returns true. The GUI an
 - Effects are stored in a vector of `unique_ptr<Effect>`.
 - The active scene is a non-owning pointer; its object still belongs to the registry.
 - Managers are members of `EngineContext` by value.
-- ResourceManager keeps resources by value inside maps.
+- ResourceManager stores textures and fonts by value and shares sound buffers using `shared_ptr`.
 
 The project uses RAII and standard containers. There is no custom memory manager or generic ECS. All registered scenes are constructed in `CreateScenes`; changing scenes does not construct a new instance on every transition.
 
@@ -118,7 +125,7 @@ The project uses RAII and standard containers. There is no custom memory manager
 
 ## Sources
 
-- [Main loop](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Main.cpp).
-- [Engine coordination](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp).
-- [EngineContext definition](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h).
-- [Scene ownership](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/SceneFactory.h).
+- [Main loop](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Main.cpp).
+- [Engine coordination](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [EngineContext definition](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).
+- [Scene ownership](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/SceneFactory.h).

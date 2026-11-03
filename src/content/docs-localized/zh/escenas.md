@@ -96,7 +96,7 @@ ChangeScene(名称)
 
 ## 探索真实实现
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Games/Source/Bounce.cpp) 展示了游戏类如何接收上下文、准备挡板和统计信息、请求音效与音乐，以及使用场景回调。
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) 展示了游戏类如何接收上下文、准备挡板和统计信息、请求音效与音乐，以及使用场景回调。
 
 要在自己的副本中添加场景，请遵循现有分工：在 `Games/Include` 中声明，在 `Games/Source` 中实现，并在 `SceneFactory.cpp` 中显式注册。CMake 使用 `GLOB_RECURSE CONFIGURE_DEPENDS` 发现这些目录中的 `.cpp` 文件。系统不存在运行时加载的场景插件。
 
@@ -112,7 +112,7 @@ ChangeScene(名称)
 
 ## 源码参考
 
-- [Scene 接口约定](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/Scene.h)。
-- [SceneFactory 注册](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [SceneManager 请求](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SceneManager.cpp)。
-- [Engine 中的切换](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
+- [Scene 接口约定](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h)。
+- [SceneFactory 注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [SceneManager 请求](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp)。
+- [Engine 中的切换](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。

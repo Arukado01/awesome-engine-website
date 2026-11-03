@@ -11,7 +11,7 @@ category: はじめに
 
 Awesome Engine は、SFML を基盤とする **C++20** 製のゲームエンジンです。コアはシーンと、描画、リソース、入力、音声、UI、永続化のサービスを結び付けます。リポジトリ内のゲームは、それらのサービスを C++ コードから利用する方法を示しています。
 
-このドキュメントは [コミット `5a6dfac`](https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126) を基準としています。そのリビジョンに含まれる機能を説明し、ローカルの作業ツリーだけで確認された変更は **開発中** と明記します。
+このドキュメントは公開リビジョン [コミット `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa) を基準としています。
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -46,7 +46,7 @@ Awesome Engine は、SFML を基盤とする **C++20** 製のゲームエンジ�
 | 実験的 | コードは存在しますが、統合が無効になっているか、説明対象の通常の処理フローに参加していません。 |
 | 計画中 | プロジェクトによる明文化された意思が必要です。その根拠なしに機能をこの状態に分類することはありません。 |
 
-`AudioGroup`、`SpriteAnimator`、`SweptAabb`、クールダウン用の共有クロックは、ローカルでの作業として確認されています。基準リビジョンをクローンしても、これらの API は含まれていません。
+`AudioGroup`、`SpriteAnimator`、`CollisionManager`、`SweptAabb`、共有クロックは公開基準リビジョンに含まれています。
 
 <span id="alcance-de-la-plataforma" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Awesome Engine は、SFML を基盤とする **C++20** 製のゲームエンジ�
 
 リポジトリには **Windows、MinGW、Ninja、GDB** 向けの作業設定が含まれています。今回の調査では、Linux、macOS、モバイル、ブラウザーでのビルドや実行は確認していません。利用ライブラリの対応範囲だけを根拠に、エンジン全体が対応しているとは判断できません。
 
-エンジンのコードは [MIT ライセンス](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/LICENSE.md)です。履歴の項目名は実際のコミットに対応しており、架空のリリースバージョンではありません。
+エンジンのコードは [MIT ライセンス](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md)です。履歴の項目名は実際のコミットに対応しており、架空のリリースバージョンではありません。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 参照ソース
 
-- [依存関係とビルドオプション](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt)。
-- [シーンの登録](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [EngineContext のサービス](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h)。
+- [依存関係とビルドオプション](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
+- [シーンの登録](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [EngineContext のサービス](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h)。

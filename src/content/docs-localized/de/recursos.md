@@ -41,7 +41,7 @@ sf::Texture *ResourceManager::FetchTexture(const std::string &filename) {
 
 Der Manager behält den Besitz dieser Objekte. Nutzer dürfen die erhaltenen Zeiger nicht löschen. Es gibt auch keine öffentliche Operation zum Entladen, zur Cache-Invalidierung oder zum automatischen Neuladen.
 
-Prüfe das Ergebnis vor der Nutzung: Der erste fehlgeschlagene Ladevorgang gibt `nullptr` zurück. Die Implementierung fügt den Eintrag vor dem Ladeversuch ein; eine spätere Anfrage desselben Namens versucht das Laden daher nicht automatisch erneut. Nach dem Wiederherstellen einer fehlenden Datei ist mit der aktuellen Implementierung meist ein Neustart nötig.
+Prüfe das Ergebnis vor der Nutzung. Texturen und Schriftarten legen vor dem Laden einen Eintrag an; ein Fehler kann einen Neustart erfordern. `AcquireSound` speichert den Puffer erst nach erfolgreichem Laden und erlaubt einen erneuten Versuch.
 
 <span id="música-y-sonido" aria-hidden="true"></span>
 
@@ -80,7 +80,7 @@ Der Name enthält Datum und Uhrzeit samt Millisekunden. Das Ergebnis wird protok
 
 ## Quellen
 
-- [Laden und Caching von Ressourcen](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ResourceManager.cpp).
-- [ResourceManager-API](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Managers/ResourceManager.h).
-- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp).
-- [PNG-Aufnahmen](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ScreenshotManager.cpp).
+- [Laden und Caching von Ressourcen](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ResourceManager.cpp).
+- [ResourceManager-API](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/ResourceManager.h).
+- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).
+- [PNG-Aufnahmen](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ScreenshotManager.cpp).

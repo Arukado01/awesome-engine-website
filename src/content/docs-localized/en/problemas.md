@@ -35,7 +35,7 @@ Run from the root, next to `Content`:
 
 Do not switch to the `Build` directory first. Configuration, shaders, textures, fonts, and sounds use relative paths. Also check that names exactly match the files in your copy.
 
-Invalid JSON or a missing required key may stop startup. Compare with the [reference file](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Content/Config.json) and preserve the expected types.
+Invalid JSON or a missing required key may stop startup. Compare with the [reference file](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json) and preserve the expected types.
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -59,7 +59,7 @@ Avoid the Menu button, M, and controller Select in this revision. Use Escape to 
 
 This is defined behavior: Engine responds to focus loss by pausing the scene. The loop stops rendering while unfocused and keeps the clock updated. If the overlay is still visible when you return, use Resume or Escape.
 
-In the public reference revision, each scene controls its response to pausing. The shared cooldown clock refactor observed on the computer was still a local change.
+The game clock and linked cooldowns stop during a pause; the real clock keeps running. A standalone `Cooldown` uses real time.
 
 <span id="no-aparecen-los-efectos-o-cambia-su-aspecto-al-redimensionar" aria-hidden="true"></span>
 
@@ -99,7 +99,7 @@ When opening an issue in the [repository](https://github.com/Arukado01/AwesomeEn
 
 ## Sources
 
-- [Build configuration](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt).
-- [Engine behavior](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp).
-- [Actual scene registry](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp).
-- [SaveManager persistence](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/SaveManager.cpp).
+- [Build configuration](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
+- [Engine behavior](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [Actual scene registry](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
+- [SaveManager persistence](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).

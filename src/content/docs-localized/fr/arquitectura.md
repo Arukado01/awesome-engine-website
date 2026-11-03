@@ -38,6 +38,7 @@ Engine
 ├── sf::RenderWindow
 ├── EngineContext
 │   ├── renderer · resources · particles
+│   ├── animations · collisions
 │   ├── input · cursor · gui
 │   ├── audio · time · random
 │   └── scenes · save · screenshot · clipboard
@@ -70,7 +71,13 @@ La GUI et la scène participent au même traitement ; aucun bus d’événements
 
 Le système n’implémente pas d’accumulateur à pas fixe. Les jeux décident comment utiliser le delta de temps et leurs propres temporisateurs.
 
-Dans la révision de référence, chaque scène implémente sa réaction à `OnPause`, y compris pour l’audio et les temporisateurs. Une refactorisation locale de l’horloge des délais de récupération est signalée comme **en développement** ; elle ne fait pas partie de cette API publique de référence.
+`TimeManager` distingue le temps réel du temps de jeu. Engine met l’horloge de jeu en pause avec la scène ; un `Cooldown` lié utilise cette horloge par défaut. Un cooldown indépendant garde son horloge réelle.
+
+Un cooldown lié utilise le temps de jeu par défaut :
+
+```cpp
+auto cooldown = ctx.time.CreateCooldown(1.f, TimeDomain::Game);
+```
 
 <span id="renderizado-y-capas" aria-hidden="true"></span>
 
@@ -98,7 +105,7 @@ Les effets ne sont ajoutés que lorsque `sf::Shader::isAvailable()` renvoie vrai
 - Les effets sont stockés dans un vecteur de `unique_ptr<Effect>`.
 - La scène active est un pointeur non propriétaire ; son objet appartient toujours au registre.
 - Les gestionnaires font partie d’`EngineContext` par valeur.
-- ResourceManager conserve les ressources par valeur dans des tables associatives.
+- ResourceManager stocke textures et polices par valeur et partage les tampons audio avec `shared_ptr`.
 
 Le projet utilise RAII et les conteneurs standard. Il n’existe ni gestionnaire de mémoire personnalisé ni ECS générique. Toutes les scènes enregistrées sont construites dans `CreateScenes` ; chaque transition ne crée pas une nouvelle instance.
 
@@ -118,7 +125,7 @@ Le projet utilise RAII et les conteneurs standard. Il n’existe ni gestionnaire
 
 ## Sources
 
-- [Boucle principale](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Main.cpp).
-- [Coordination d’Engine](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp).
-- [Définition d’EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h).
-- [Propriété des scènes](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/SceneFactory.h).
+- [Boucle principale](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Main.cpp).
+- [Coordination d’Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [Définition d’EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).
+- [Propriété des scènes](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/SceneFactory.h).

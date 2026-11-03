@@ -61,7 +61,7 @@ Capturas reales de la interfaz del sitio. Los temas claro y oscuro comparten la 
 
 Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, tarjetas de documentación con iconos y hover estable, búsqueda de guías y de categorías dentro del selector de historial, metadatos sociales, sitemap y página 404.
 
-El contenido técnico se basa en la auditoría de la revisión `5a6dfacd86414c4cdfaa7157b533330f173a3126`. Las funciones observadas únicamente en el árbol local se identifican como trabajo en desarrollo. No se anuncian versiones ni capacidades sin evidencia.
+El contenido técnico se basa en la auditoría de la revisión `f0e88edffae35efb3cc208e8eea651d1b559cbaa`. La documentación incluye los nuevos sistemas de animación, colisiones, audio, partículas y tiempo. No se anuncian versiones ni capacidades sin evidencia.
 
 El formulario utiliza Gmail SMTP, Turnstile y límites de abuso. La función de contacto está desplegada y el propietario confirmó la recepción del mensaje y de la copia en una prueba real. Se envía una copia de confirmación al remitente cuando es posible. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
 

@@ -11,7 +11,7 @@ category: 入门
 
 Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。其核心把场景与渲染、资源、输入、音频、界面和持久化服务连接起来。仓库中的游戏展示了如何通过 C++ 代码使用这些服务。
 
-本文档以 [提交 `5a6dfac`](https://github.com/Arukado01/AwesomeEngine/tree/5a6dfacd86414c4cdfaa7157b533330f173a3126) 为参考，描述该修订包含的功能。仅在本地工作树中发现的改动会标为**开发中**。
+本文档以公开修订 [提交 `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa) 为参考。
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -46,7 +46,7 @@ Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。
 | 实验性 | 代码已经存在，但集成被禁用，或不参与本文描述的常规流程。 |
 | 已计划 | 需要项目提供明确记录的计划依据。没有证据时，不会把功能归为此状态。 |
 
-`AudioGroup`、`SpriteAnimator`、`SweptAabb` 和用于冷却计时的共享时钟是在本地改动中发现的。克隆参考修订时，不应期待其中包含这些 API。
+`AudioGroup`、`SpriteAnimator`、`CollisionManager`、`SweptAabb` 和共享时钟均包含在公开参考修订中。
 
 <span id="alcance-de-la-plataforma" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。
 
 仓库包含适用于 **Windows、MinGW、Ninja 和 GDB** 的开发配置。本次审查未验证 Linux、macOS、移动设备或浏览器上的编译和运行情况。仅凭所用库支持这些平台，不能认定整个引擎完全兼容。
 
-引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
+引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 源码参考
 
-- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/CMakeLists.txt)。
-- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Scene/SceneFactory.cpp)。
-- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h)。
+- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
+- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
+- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h)。

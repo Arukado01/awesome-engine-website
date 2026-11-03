@@ -52,6 +52,8 @@ test('las 54 guías traducidas conservan código, fuentes, enlaces y anclas de l
     'renderer',
     'resources',
     'particles',
+    'animations',
+    'collisions',
     'input',
     'cursor',
     'gui',

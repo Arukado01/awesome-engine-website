@@ -38,6 +38,7 @@ Engine
 ├── sf::RenderWindow
 ├── EngineContext
 │   ├── renderer · resources · particles
+│   ├── animations · collisions
 │   ├── input · cursor · gui
 │   ├── audio · time · random
 │   └── scenes · save · screenshot · clipboard
@@ -70,7 +71,13 @@ GUI とシーンは同じ処理フローに参加します。独立したイベ�
 
 固定ステップを積み重ねるアキュムレーターは実装されていません。各ゲームがデルタ時間や独自のタイマーの使い方を決めます。
 
-基準リビジョンでは、各シーンが音声やタイマーを含めた `OnPause` への応答を実装します。クールダウン用クロックのローカルなリファクタリングは **開発中** とされ、この公開基準 API には含まれていません。
+`TimeManager` は実時間とゲーム時間を区別します。Engine はシーンとともにゲームクロックを停止し、紐付いた `Cooldown` はデフォルトでそのクロックを使います。独立したクールダウンは実時間を使います。
+
+紐付いたクールダウンはデフォルトでゲーム時間を使います。
+
+```cpp
+auto cooldown = ctx.time.CreateCooldown(1.f, TimeDomain::Game);
+```
 
 <span id="renderizado-y-capas" aria-hidden="true"></span>
 
@@ -98,7 +105,7 @@ Bloom → Monitor
 - エフェクトは `unique_ptr<Effect>` のベクターに格納されます。
 - アクティブなシーンは所有権を持たないポインターです。オブジェクトの所有権は登録表に残ります。
 - 各マネージャーは `EngineContext` の値メンバーです。
-- ResourceManager はマップ内にリソースを値で保持します。
+- ResourceManager はテクスチャとフォントを値として保持し、音声バッファーを `shared_ptr` で共有します。
 
 プロジェクトは RAII と標準コンテナーを使用します。独自のメモリマネージャーや汎用 ECS はありません。登録されるシーンはすべて `CreateScenes` で構築され、シーン遷移のたびに新しいインスタンスを作ることはありません。
 
@@ -118,7 +125,7 @@ Bloom → Monitor
 
 ## 参照ソース
 
-- [メインループ](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Main.cpp)。
-- [Engine による調整](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp)。
-- [EngineContext の定義](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h)。
-- [シーンの所有権](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/SceneFactory.h)。
+- [メインループ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Main.cpp)。
+- [Engine による調整](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [EngineContext の定義](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h)。
+- [シーンの所有権](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/SceneFactory.h)。

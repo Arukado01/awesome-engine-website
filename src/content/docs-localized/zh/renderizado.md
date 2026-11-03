@@ -87,11 +87,34 @@ Engine 的尺寸调整方法会记录新的窗口大小，但不会重建渲染�
 
 场景决定何时更新和绘制粒子。Engine 在切换场景时清除它们。Runner 使用该系统呈现移动时的尘土。
 
+`EmitBurst` 使用 `ParticleEmitterConfig` 和 `RandomManager` 创建粒子。它验证取值范围，并将数量限制在可用容量内。
+
+<span id="animación-y-colisiones" aria-hidden="true"></span>
+
+## 动画与碰撞
+
+`SpriteAnimator` 推进循环或单次播放的片段，报告经过的帧并计算精灵图矩形。`AnimationManager` 管理句柄、分组和暂停；Runner 获取动画器并直接推进奔跑动画。
+
+`CollisionManager` 为轴对齐矩形提供 `Intersect` 和 `Sweep`。扫描返回接触时间、法线和初始重叠状态；Runner 和 Bounce 将其用于部分碰撞。它不是通用物理引擎。
+
+动画器只创建和配置一次；保留分组并在每次更新时推进：
+
+```cpp
+const AnimationGroup group = 1;
+const AnimationHandle handle = ctx.animations.Create(group);
+ctx.animations.Configure(handle, {0, 6, 12.f}, SpritePlaybackMode::Loop);
+ctx.animations.AdvanceGroup(group, ctx.time.GetDeltaTime());
+```
+
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 源码参考
 
-- [RenderManager 管线](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/RenderManager.cpp)。
-- [Bloom 实现](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Graphics/Effects/EfflectBloom.cpp)。
-- [Monitor 着色器](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Content/Shaders/Monitor.frag)。
-- [粒子](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Managers/ParticleManager.cpp)。
+- [RenderManager 管线](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/RenderManager.cpp)。
+- [Bloom 实现](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Graphics/Effects/EfflectBloom.cpp)。
+- [Monitor 着色器](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Shaders/Monitor.frag)。
+- [粒子](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/ParticleManager.cpp)。
+
+- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AnimationManager.h).
+- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
+- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/CollisionManager.h).

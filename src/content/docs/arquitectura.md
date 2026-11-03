@@ -34,6 +34,7 @@ Engine
 ├── sf::RenderWindow
 ├── EngineContext
 │   ├── renderer · resources · particles
+│   ├── animations · collisions
 │   ├── input · cursor · gui
 │   ├── audio · time · random
 │   └── scenes · save · screenshot · clipboard
@@ -62,7 +63,13 @@ La GUI y la escena participan en el mismo procesamiento; no hay un bus de evento
 
 El sistema no implementa un acumulador de pasos fijos. Los juegos deciden cómo utilizar el delta de tiempo y sus propios temporizadores.
 
-En la revisión de referencia, cada escena implementa su reacción a `OnPause`, incluido su audio y sus temporizadores. Existe una refactorización local del reloj de cooldowns, identificada como **en desarrollo**, que no forma parte de esta API pública de referencia.
+`TimeManager` distingue tiempo real y tiempo de juego. Engine pausa el reloj de juego con la escena; un `Cooldown` vinculado usa ese reloj por defecto. Un cooldown independiente conserva su reloj real.
+
+Un cooldown vinculado usa tiempo de juego por defecto:
+
+```cpp
+auto cooldown = ctx.time.CreateCooldown(1.f, TimeDomain::Game);
+```
 
 ## Renderizado y capas
 
@@ -86,7 +93,7 @@ Los efectos solo se incorporan cuando `sf::Shader::isAvailable()` devuelve verda
 - Los efectos se almacenan en un vector de `unique_ptr<Effect>`.
 - La escena activa es un puntero sin propiedad; su objeto sigue perteneciendo al registro.
 - Los managers forman parte de `EngineContext` por valor.
-- ResourceManager conserva recursos por valor dentro de mapas.
+- ResourceManager mantiene texturas y fuentes por valor, y comparte los buffers de sonido mediante `shared_ptr`.
 
 El proyecto emplea RAII y contenedores estándar. No hay un gestor de memoria personalizado ni un ECS genérico. Todas las escenas registradas se construyen en `CreateScenes`; el cambio de escena no construye una nueva instancia en cada transición.
 
@@ -102,7 +109,7 @@ El proyecto emplea RAII y contenedores estándar. No hay un gestor de memoria pe
 
 ## Fuentes
 
-- [Bucle principal](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Main.cpp).
-- [Coordinación de Engine](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Source/Core/Engine.cpp).
-- [Definición de EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Core/EngineContext.h).
-- [Propiedad de las escenas](https://github.com/Arukado01/AwesomeEngine/blob/5a6dfacd86414c4cdfaa7157b533330f173a3126/Engine/Include/Scene/SceneFactory.h).
+- [Bucle principal](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Main.cpp).
+- [Coordinación de Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [Definición de EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).
+- [Propiedad de las escenas](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/SceneFactory.h).
