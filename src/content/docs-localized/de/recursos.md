@@ -80,7 +80,7 @@ Der Name enthält Datum und Uhrzeit samt Millisekunden. Das Ergebnis wird protok
 
 ## Quellen
 
-- [Laden und Caching von Ressourcen](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ResourceManager.cpp).
-- [ResourceManager-API](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/ResourceManager.h).
-- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp).
-- [PNG-Aufnahmen](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ScreenshotManager.cpp).
+- [Laden und Caching von Ressourcen](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ResourceManager.cpp).
+- [ResourceManager-API](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/ResourceManager.h).
+- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp).
+- [PNG-Aufnahmen](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ScreenshotManager.cpp).

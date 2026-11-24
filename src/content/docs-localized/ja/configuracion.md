@@ -40,7 +40,7 @@ category: はじめに
 | キー | 効果 |
 | --- | --- |
 | `windowTitle` | SFML ウィンドウのタイトル。 |
-| `windowSize` | 初期サイズ。描画ターゲットやゲーム内の各種計算の基準にもなります。 |
+| `windowSize` | ウィンドウモードの初期サイズと、ゲーム領域の論理サイズです。 |
 | `frameRateLimit` | ウィンドウに指定するフレーム上限。キーがない場合の既定値は 120 です。 |
 | `disableSfmlLogs` | `true` のとき、SFML のエラーストリームの出力を抑制します。 |
 | `maximumDeltaTime` | TimeManager が各フレームで渡すシミュレーションの最大デルタ時間。単位は秒です。 |
@@ -60,7 +60,7 @@ category: はじめに
 
 例と同じキーと型を保ってください。パーサーには検証用スキーマも、すべての項目に対する代替値もありません。ファイルが存在しない場合、JSON が不正な場合、必須キーが不正な場合は、起動できないことがあります。
 
-`windowSize` の変更は `gConfig.windowSize` を使用するゲームコードにも影響します。完全な動的解像度システムがあるという意味ではありません。サイズ変更イベントはポストプロセス用テクスチャを自動で再構築しません。
+`windowSize` は各ゲームの基準サイズです。ウィンドウのサイズを変更すると、描画は実際のサイズに合わせて調整され、基準の座標と縦横比は保たれます。
 
 <span id="configuración-de-cada-juego" aria-hidden="true"></span>
 
@@ -80,6 +80,6 @@ category: はじめに
 
 ## 参照ソース
 
-- [Config.json の元の値](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)。
-- [EngineConfig の読み込み](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp)。
-- [デルタ時間の計算](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp)。
+- [Config.json の元の値](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json)。
+- [EngineConfig の読み込み](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/EngineConfig.cpp)。
+- [デルタ時間の計算](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/TimeManager.cpp)。

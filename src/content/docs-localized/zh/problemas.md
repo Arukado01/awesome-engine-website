@@ -35,7 +35,7 @@ CMake 使用 FetchContent 下载依赖项。连接、代理或 Git 错误可能�
 
 不要先切换到 `Build` 目录。配置、着色器、纹理、字体和音效都使用相对路径。还要确认名称与当前副本中的文件完全一致。
 
-无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)，并保持预期的数据类型。
+无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json)，并保持预期的数据类型。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -69,7 +69,7 @@ Windows 的常见配置可能允许这种差异，其他系统则可能拒绝。
 
 只有 `sf::Shader::isAvailable()` 为真时才会配置效果链。创建后 Bloom 和 Monitor 启用；Glitch 和颜色反转没有连接到常规流程。
 
-渲染纹理按配置尺寸构建。尺寸调整回调不会重建纹理，因此不应期待完整的动态分辨率系统。
+调整窗口尺寸时，引擎会更新主要纹理并保持游戏区域的宽高比。Bloom 的内部纹理在效果创建时根据设计尺寸确定。
 
 <span id="un-mando-responde-de-forma-inesperada" aria-hidden="true"></span>
 
@@ -101,7 +101,7 @@ F12 将截图保存在 `Content/Screenshots`。请检查写入权限和可用空
 
 ## 源码参考
 
-- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
-- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp)。
-- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp)。
+- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
+- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/Engine.cpp)。
+- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp)。

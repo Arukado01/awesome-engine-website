@@ -9,7 +9,7 @@ category: 系统
 
 ## 一个场景，一张中间纹理
 
-RenderManager 提供 `Draw(const sf::Drawable&)` 来绘制场景中的 SFML 对象。它在内部将绘制操作发送至 `target_`，即按配置尺寸创建的 `sf::RenderTexture`。
+`RenderManager` 通过 `Draw(const sf::Drawable&)` 将场景的 SFML 对象绘制到 `target_`。纹理尺寸跟随窗口尺寸。
 
 每帧开始时，`BeginDrawing` 清空目标并绘制背景。`FinishDrawing` 完成纹理更新、应用效果，然后返回由 Engine 显示到窗口的纹理。场景不需要直接管理窗口。
 
@@ -75,7 +75,7 @@ void RenderManager::ResetView() {
 
 它们用于访问 SFML 的 2D 视图。系统没有 `CameraManager`、3D 摄像机或自动跟随系统。`CursorManager` 可以查询转换到指定 `sf::View` 坐标下的光标位置。
 
-Engine 的尺寸调整方法会记录新的窗口大小，但不会重建渲染目标。因此不能将其视为完整的动态分辨率支持。
+`RenderManager::Resize` 按窗口实际尺寸调整场景和后处理的主要纹理。`GetFitView` 让游戏区域居中并保持宽高比。背景填满剩余区域，界面和光标共用内容视图。
 
 <span id="partículas" aria-hidden="true"></span>
 
@@ -110,11 +110,11 @@ ctx.animations.AdvanceGroup(group, ctx.time.GetDeltaTime());
 
 ## 源码参考
 
-- [RenderManager 管线](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/RenderManager.cpp)。
-- [Bloom 实现](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Graphics/Effects/EfflectBloom.cpp)。
-- [Monitor 着色器](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Shaders/Monitor.frag)。
-- [粒子](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ParticleManager.cpp)。
+- [RenderManager 管线](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/RenderManager.cpp)。
+- [Bloom 实现](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Graphics/Effects/EfflectBloom.cpp)。
+- [Monitor 着色器](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Shaders/Monitor.frag)。
+- [粒子](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ParticleManager.cpp)。
 
-- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AnimationManager.h).
-- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
-- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/CollisionManager.h).
+- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/AnimationManager.h).
+- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
+- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/CollisionManager.h).

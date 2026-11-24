@@ -54,6 +54,7 @@ O CursorManager permite mover o cursor com o analógico, respeitando `joystickDe
 | Entrada | Ação |
 | --- | --- |
 | F12 | Salvar uma captura PNG. |
+| Alt + Enter | Alternar tela cheia. Também funciona com Enter do teclado numérico. |
 | R | Reiniciar a cena ativa. |
 | Escape / Start do controle | Alternar o painel de pausa durante a partida. |
 | M / Select do controle | Voltar ao menu principal. |
@@ -99,10 +100,10 @@ A sobreposição cria botões a partir de `OverlaySelection` usando `magic_enum`
 
 ## Fontes
 
-- [Tipos de entrada](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h).
-- [Consulta de bindings](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp).
-- [Mapeamento de controles](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp).
+- [Tipos de entrada](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/utils/InputBindings.h).
+- [Consulta de bindings](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/InputManager.cpp).
+- [Mapeamento de controles](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/GuiManager.cpp).
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/AudioGroup.h).

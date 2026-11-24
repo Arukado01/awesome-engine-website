@@ -6,9 +6,9 @@ import { games, technologies } from '../src/data/engine.ts';
 test('el historial conserva commits únicos, fuentes y fechas descendentes', () => {
   assert.ok(updates.length >= 16);
   assert.deepEqual(
-    updates.slice(0, 11).map((u) => u.id),
+    updates.slice(0, 12).map((u) => u.id),
     [
-      '0ecfdb6', 'e455743', '87fe97c', '370cf74', 'adbda4f', '545c133',
+      '60ce813', '0ecfdb6', 'e455743', '87fe97c', '370cf74', 'adbda4f', '545c133',
       '872388a', '3b48b94', '83a6ec8', '3e043b7', '82fba63',
     ],
   );
@@ -43,7 +43,7 @@ test('las nueve guías tienen orden único, enlaces de fuente y destinos interno
     orders.push(text.match(/^order:\s*(\d+)/m)?.[1]);
     assert.match(
       text,
-      /github.com\/Arukado01\/AwesomeEngine\/blob\/0ecfdb64c14e245e99850fc1bf887a73eef60697/,
+      /github.com\/Arukado01\/AwesomeEngine\/blob\/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/,
     );
     for (const match of text.matchAll(/\]\(\/docs\/([\w-]+)\//g))
       assert.ok(names.includes(`${match[1]}.md`), `${name}: ${match[1]}`);

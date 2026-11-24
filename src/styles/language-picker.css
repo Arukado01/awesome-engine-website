@@ -150,7 +150,6 @@ html:lang(zh) h2 {
   .site-header .main-nav a[aria-current='page']:after {
     display: none;
   }
-  .site-header .mobile-contact,
   .site-header .menu-toggle {
     display: block;
   }

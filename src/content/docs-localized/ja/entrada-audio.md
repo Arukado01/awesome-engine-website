@@ -54,6 +54,7 @@ CursorManager は `joystickDeadzone` を考慮してスティックでカーソ�
 | 入力 | 操作 |
 | --- | --- |
 | F12 | PNG スクリーンショットを保存します。 |
+| Alt + Enter | 全画面表示を切り替えます。テンキーの Enter も使用できます。 |
 | R | アクティブなシーンを再開始します。 |
 | Escape / コントローラーの Start | ゲーム中にポーズパネルを開閉します。 |
 | M / コントローラーの Select | メインメニューに戻ります。 |
@@ -99,10 +100,10 @@ GuiManager は TGUI を SFML ウィンドウに接続します。`Content/Themes
 
 ## 参照ソース
 
-- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h)。
-- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp)。
-- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp)。
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp)。
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp)。
+- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/utils/InputBindings.h)。
+- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/InputManager.cpp)。
+- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Utils/InputBindings.cpp)。
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/AudioManager.cpp)。
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/GuiManager.cpp)。
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/AudioGroup.h).

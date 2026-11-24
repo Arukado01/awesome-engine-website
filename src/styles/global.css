@@ -311,9 +311,6 @@ p:last-child {
   margin: 5px 0;
   background: currentColor;
 }
-.mobile-contact {
-  display: none;
-}
 .site-footer {
   padding: 60px 0 24px;
   border-top: 1px solid var(--border);
@@ -607,9 +604,6 @@ dialog::backdrop {
   }
   .main-nav a[aria-current='page']:after {
     display: none;
-  }
-  .mobile-contact {
-    display: block;
   }
   .menu-toggle {
     display: block;

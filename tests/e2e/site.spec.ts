@@ -141,6 +141,9 @@ test('menú móvil y navegación por teclado', async ({ page }) => {
   await expect(page).toHaveURL(/\/docs\/$/);
   await page.locator('.docs-nav summary').click();
   await expect(page.locator('.docs-nav')).toHaveAttribute('open', '');
+  await toggle.click();
+  await page.locator('#main-nav').getByRole('link', { name: 'Contáctanos' }).click();
+  await expect(page).toHaveURL(/\/contacto\/$/);
 });
 test('búsquedas, filtros y estados vacíos', async ({ page }) => {
   await page.goto('/docs/');

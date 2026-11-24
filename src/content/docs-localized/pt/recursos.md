@@ -80,7 +80,7 @@ O nome contém a data e a hora com milissegundos. O resultado é registrado, e u
 
 ## Fontes
 
-- [Carregamento e cache de recursos](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ResourceManager.cpp).
-- [API do ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/ResourceManager.h).
-- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp).
-- [Capturas PNG](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ScreenshotManager.cpp).
+- [Carregamento e cache de recursos](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ResourceManager.cpp).
+- [API do ResourceManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/ResourceManager.h).
+- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp).
+- [Capturas PNG](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ScreenshotManager.cpp).

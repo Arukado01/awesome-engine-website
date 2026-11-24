@@ -747,5 +747,16 @@
   "23 de noviembre de 2026": "2026年11月23日",
   "Destruir ladrillos puede activar bonificaciones. Breakout incluye vidas, récord guardado y pantallas de victoria y derrota.": "ブロックを壊すとボーナスが発動することがあります。残機、ハイスコアの保存、勝利・敗北画面を備えています。",
   "Volver al menú principal": "メインメニューに戻る",
-  "El menú no muestra un juego": "メニューにゲームが表示されない"
+  "El menú no muestra un juego": "メニューにゲームが表示されない",
+  "Contáctanos": "お問い合わせ",
+  "Pantalla completa y ajuste al tamaño de la ventana": "全画面表示とウィンドウサイズへの対応",
+  "Alt + Enter alterna la pantalla completa. La escena, la interfaz y el cursor comparten un área centrada que conserva las proporciones del juego.": "Alt + Enter で全画面表示を切り替えます。シーン、UI、カーソルは、ゲームの縦横比を保つ中央の領域を共有します。",
+  "Al salir de pantalla completa se restaura el tamaño anterior de la ventana.": "全画面表示を終了すると元のウィンドウサイズに戻ります。",
+  "RenderManager::Resize · GetFitView": "RenderManager::Resize · GetFitView",
+  "60ce813": "60ce813",
+  "33 actualizaciones": "33件の更新",
+  "24 de noviembre de 2026": "2026年11月24日",
+  "Base pública: 60ce813": "公開基準：60ce813",
+  "Referencia: 60ce813": "基準：60ce813",
+  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "sf::RenderTexture にスプライト、図形、文字を描画します。Alt + Enter で全画面表示に切り替え、縦横比を保ち、Bloom と Monitor を適用します。"
 }

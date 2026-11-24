@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { locales } from '../../src/i18n/locales';
 
 const commits = [
+  '60ce813',
   '0ecfdb6',
   'e455743',
   '87fe97c',
@@ -34,9 +35,9 @@ for (const locale of locales) {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(`${prefix}/`);
-    await expect(page.locator('.latest-update').first()).toContainText('0ecfdb6');
+    await expect(page.locator('.latest-update').first()).toContainText('60ce813');
     await expect(page.locator('.latest-update').first().locator('h3')).toHaveText(
-      catalog['Botones redondeados en el menú principal'],
+      catalog['Pantalla completa y ajuste al tamaño de la ventana'],
     );
     await page.goto(`${prefix}/motor/`);
     await expect(page.locator('.system-row')).toHaveCount(10);
@@ -75,7 +76,7 @@ for (const locale of locales) {
     await expect(page.locator('[id="grupos-de-audio"]')).toHaveCount(1);
     await page.goto(`${prefix}/docs/arquitectura/`);
     await expect(page.locator('.docs-article')).toContainText('TimeDomain::Game');
-    await expect(page.locator('.docs-version')).toContainText('0ecfdb6');
+    await expect(page.locator('.docs-version')).toContainText('60ce813');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(
       true,
     );

@@ -40,7 +40,7 @@ Die Engine liest `Content/Config.json` beim Start. Das Beispiel zeigt einen Eint
 | Schlüssel | Wirkung |
 | --- | --- |
 | `windowTitle` | Titel des SFML-Fensters. |
-| `windowSize` | Anfangsgröße und Referenz für Renderziele und verschiedene Berechnungen der Spiele. |
+| `windowSize` | Anfängliche Fenstergröße und logische Größe des Spielbereichs. |
 | `frameRateLimit` | Für das Fenster angeforderte Bildratenbegrenzung; standardmäßig 120, wenn der Schlüssel fehlt. |
 | `disableSfmlLogs` | Unterdrückt den SFML-Fehlerstream, wenn der Wert `true` ist. |
 | `maximumDeltaTime` | Maximaler Simulationszeitschritt in Sekunden, den TimeManager pro Frame liefert. |
@@ -60,7 +60,7 @@ Die Begrenzung auf 120 Frames ist eine Einstellung, **keine Leistungsmessung**. 
 
 Behalte die Schlüssel und Typen des Beispiels bei. Der Parser implementiert weder ein Validierungsschema noch Ersatzwerte für alle Felder. Eine fehlende Datei, ungültiges JSON oder ein falscher Pflichtschlüssel können den Start verhindern.
 
-Änderungen an `windowSize` beeinflussen auch Spielcode, der `gConfig.windowSize` nutzt. Das entspricht keinem vollständigen System für dynamische Auflösung. Das Größenänderungsereignis erstellt die Nachbearbeitungstexturen nicht automatisch neu.
+`windowSize` legt die Referenzgröße für die Spiele fest. Ändert sich die Fenstergröße, passt die Engine die Darstellung an die tatsächliche Größe an und behält die Koordinaten und Proportionen bei.
 
 <span id="configuración-de-cada-juego" aria-hidden="true"></span>
 
@@ -80,6 +80,6 @@ Die Auswahl zwischen hellem, dunklem und System-Design auf dieser Website verän
 
 ## Quellen
 
-- [Originalwerte von Config.json](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json).
-- [Einlesen von EngineConfig](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp).
-- [Berechnung der Delta-Zeit](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp).
+- [Originalwerte von Config.json](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json).
+- [Einlesen von EngineConfig](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/EngineConfig.cpp).
+- [Berechnung der Delta-Zeit](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/TimeManager.cpp).

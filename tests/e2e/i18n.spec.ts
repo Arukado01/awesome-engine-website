@@ -112,6 +112,13 @@ for (const locale of locales.filter((code) => code !== 'es')) {
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('href')))) {
       expect(href).toMatch(new RegExp(`^/${locale}/docs/[\\w-]+/$`));
     }
+    const contact = page.locator('#main-nav').getByRole('link', {
+      name: translated(locale, 'Contáctanos'),
+      exact: true,
+    });
+    await contact.click();
+    await expect(page).toHaveURL(new RegExp('/' + locale + '/contacto/$'));
+    await expect(contact).toHaveAttribute('aria-current', 'page');
     expect(errors).toEqual([]);
   });
 }

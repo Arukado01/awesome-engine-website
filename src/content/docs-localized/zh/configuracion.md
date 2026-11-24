@@ -40,7 +40,7 @@ category: 入门
 | 键 | 作用 |
 | --- | --- |
 | `windowTitle` | SFML 窗口标题。 |
-| `windowSize` | 初始窗口尺寸，也是渲染目标和多种游戏计算的参考尺寸。 |
+| `windowSize` | 窗口模式下的初始尺寸，也是游戏区域的逻辑尺寸。 |
 | `frameRateLimit` | 向窗口请求的帧率上限；缺少该键时默认为 120。 |
 | `disableSfmlLogs` | 为 `true` 时屏蔽 SFML 的错误输出流。 |
 | `maximumDeltaTime` | TimeManager 每帧提供的最大模拟时间增量，单位为秒。 |
@@ -60,7 +60,7 @@ category: 入门
 
 请保留示例中的键名和数据类型。解析器没有实现验证模式，也没有为所有字段提供备用值。文件缺失、JSON 无效或必填键错误都可能导致启动失败。
 
-修改 `windowSize` 还会影响使用 `gConfig.windowSize` 的游戏代码。这并不等同于拥有完整的动态分辨率系统。窗口调整大小事件不会自动重建后处理纹理。
+`windowSize` 设置游戏使用的设计尺寸。窗口尺寸变化时，引擎会按实际尺寸调整渲染，并保留设计坐标和比例。
 
 <span id="configuración-de-cada-juego" aria-hidden="true"></span>
 
@@ -80,6 +80,6 @@ category: 入门
 
 ## 源码参考
 
-- [Config.json 原始值](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)。
-- [EngineConfig 读取逻辑](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp)。
-- [时间增量计算](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp)。
+- [Config.json 原始值](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json)。
+- [EngineConfig 读取逻辑](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/EngineConfig.cpp)。
+- [时间增量计算](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/TimeManager.cpp)。

@@ -33,7 +33,7 @@ cd AwesomeEngine
 Pour consulter exactement le code décrit ici, vous pouvez sélectionner la révision auditée dans une nouvelle copie :
 
 ```sh
-git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
+git checkout 60ce8139fbd36713821bf85debd96bf0bd1c8bb3
 ```
 
 Cette dernière commande place la copie sur un commit précis. Si vous souhaitez développer des changements, créez votre propre branche avant de travailler. Chaque source de la documentation pointe aussi vers cette révision afin de permettre des comparaisons avec les mises à jour futures.
@@ -96,6 +96,6 @@ Consultez le [Dépannage](/fr/docs/problemas/) : les problèmes d’outils, de t
 
 ## Sources
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
-- [Tâches de compilation](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
-- [Débogage et répertoire de travail](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt).
+- [Tâches de compilation](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/tasks.json).
+- [Débogage et répertoire de travail](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/launch.json).

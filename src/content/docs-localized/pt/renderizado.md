@@ -9,7 +9,7 @@ category: Sistemas
 
 ## Uma cena, uma textura intermediária
 
-O RenderManager oferece `Draw(const sf::Drawable&)` para desenhar os objetos SFML de uma cena. Internamente, ele os envia para `target_`, uma `sf::RenderTexture` criada com o tamanho da configuração.
+O `RenderManager` desenha os objetos SFML da cena em `target_` com `Draw(const sf::Drawable&)`. A textura acompanha o tamanho da janela.
 
 No início do quadro, `BeginDrawing` limpa o alvo e desenha o fundo. `FinishDrawing` publica a textura, aplica os efeitos e retorna a textura que o Engine apresenta na janela. As cenas não precisam gerenciar a janela diretamente.
 
@@ -75,7 +75,7 @@ void RenderManager::ResetView() {
 
 Trata-se de acesso às vistas 2D do SFML. Não existe `CameraManager`, câmera 3D nem sistema automático de acompanhamento. `CursorManager` permite consultar a posição do cursor convertida para uma `sf::View`.
 
-O método de redimensionamento do Engine registra o novo tamanho da janela, mas não recria os alvos de renderização. Isso não deve ser interpretado como suporte completo à resolução dinâmica.
+`RenderManager::Resize` ajusta as texturas principais da cena e do pós-processamento ao tamanho real da janela. `GetFitView` centraliza a área de jogo sem esticá-la. O fundo preenche o espaço restante, e a interface e o cursor usam a mesma vista da área de jogo.
 
 ## Partículas
 
@@ -108,11 +108,11 @@ ctx.animations.AdvanceGroup(group, ctx.time.GetDeltaTime());
 
 ## Fontes
 
-- [Pipeline do RenderManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/RenderManager.cpp).
-- [Implementação de Bloom](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Graphics/Effects/EfflectBloom.cpp).
-- [Shader Monitor](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Shaders/Monitor.frag).
-- [Partículas](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/ParticleManager.cpp).
+- [Pipeline do RenderManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/RenderManager.cpp).
+- [Implementação de Bloom](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Graphics/Effects/EfflectBloom.cpp).
+- [Shader Monitor](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Shaders/Monitor.frag).
+- [Partículas](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ParticleManager.cpp).
 
-- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AnimationManager.h).
-- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
-- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/CollisionManager.h).
+- [AnimationManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/AnimationManager.h).
+- [SpriteAnimator](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Graphics/SpriteAnimator/SpriteAnimator.h).
+- [CollisionManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/CollisionManager.h).

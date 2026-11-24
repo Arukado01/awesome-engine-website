@@ -11,7 +11,7 @@ category: 入门
 
 Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。其核心把场景与渲染、资源、输入、音频、界面和持久化服务连接起来。仓库中的游戏展示了如何通过 C++ 代码使用这些服务。
 
-本文档以公开修订 [提交 `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697) 为参考。
+本文档以公开修订 [提交 `60ce813`](https://github.com/Arukado01/AwesomeEngine/tree/60ce8139fbd36713821bf85debd96bf0bd1c8bb3) 为参考。
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。
 
 仓库包含适用于 **Windows、MinGW、Ninja 和 GDB** 的开发配置。本次审查未验证 Linux、macOS、移动设备或浏览器上的编译和运行情况。仅凭所用库支持这些平台，不能认定整个引擎完全兼容。
 
-引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
+引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 源码参考
 
-- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
-- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
-- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h)。
+- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
+- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp)。
+- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Core/EngineContext.h)。

@@ -747,5 +747,16 @@
   "23 de noviembre de 2026": "23 de novembro de 2026",
   "Destruir ladrillos puede activar bonificaciones. Breakout incluye vidas, récord guardado y pantallas de victoria y derrota.": "Quebrar blocos pode ativar bônus. Breakout inclui vidas, recorde salvo e telas de vitória e derrota.",
   "Volver al menú principal": "Voltar ao menu principal",
-  "El menú no muestra un juego": "Um jogo não aparece no menu"
+  "El menú no muestra un juego": "Um jogo não aparece no menu",
+  "Contáctanos": "Fale conosco",
+  "Pantalla completa y ajuste al tamaño de la ventana": "Tela cheia e ajuste ao tamanho da janela",
+  "Alt + Enter alterna la pantalla completa. La escena, la interfaz y el cursor comparten un área centrada que conserva las proporciones del juego.": "Alt + Enter alterna a tela cheia. A cena, a interface e o cursor compartilham uma área centralizada que preserva as proporções do jogo.",
+  "Al salir de pantalla completa se restaura el tamaño anterior de la ventana.": "Ao sair da tela cheia, a janela volta ao tamanho anterior.",
+  "RenderManager::Resize · GetFitView": "RenderManager::Resize · GetFitView",
+  "60ce813": "60ce813",
+  "33 actualizaciones": "33 atualizações",
+  "24 de noviembre de 2026": "24 de novembro de 2026",
+  "Base pública: 60ce813": "Base pública: 60ce813",
+  "Referencia: 60ce813": "Referência: 60ce813",
+  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "Sprites, formas e texto em sf::RenderTexture. Tela cheia com Alt + Enter, ajuste proporcional e pós-processamento Bloom e Monitor."
 }

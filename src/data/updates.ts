@@ -18,6 +18,20 @@ const commit = (sha: string) => `https://github.com/Arukado01/AwesomeEngine/comm
 /** Agregar nuevas entradas al principio, conservar la fecha y enlazar la evidencia del cambio. */
 export const updates: Update[] = [
   {
+    id: '60ce813',
+    date: '2026-11-24T09:42:02-05:00',
+    title: 'Pantalla completa y ajuste al tamaño de la ventana',
+    description:
+      'Alt + Enter alterna la pantalla completa. La escena, la interfaz y el cursor comparten un área centrada que conserva las proporciones del juego.',
+    category: 'Gráficos',
+    status: 'implemented',
+    added: ['Al salir de pantalla completa se restaura el tamaño anterior de la ventana.'],
+    fixed: [],
+    performance: [],
+    architecture: ['RenderManager::Resize · GetFitView'],
+    source: commit('60ce8139fbd36713821bf85debd96bf0bd1c8bb3'),
+  },
+  {
     id: '0ecfdb6',
     date: '2026-11-23T22:18:55-05:00',
     title: 'Botones redondeados en el menú principal',

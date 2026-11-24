@@ -54,6 +54,7 @@ CursorManager permet de déplacer le curseur avec le stick en respectant `joysti
 | Entrée | Action |
 | --- | --- |
 | F12 | Enregistrer une capture PNG. |
+| Alt + Entrée | Basculer en plein écran. La touche Entrée du pavé numérique fonctionne aussi. |
 | R | Redémarrer la scène active. |
 | Échap / Start de la manette | Afficher ou masquer le panneau de pause pendant une partie. |
 | M / Select de la manette | Revenir au menu principal. |
@@ -99,10 +100,10 @@ Le panneau crée ses boutons à partir d’`OverlaySelection` avec `magic_enum`.
 
 ## Sources
 
-- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h).
-- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp).
-- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp).
+- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/utils/InputBindings.h).
+- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/InputManager.cpp).
+- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/GuiManager.cpp).
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/AudioGroup.h).

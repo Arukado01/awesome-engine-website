@@ -747,5 +747,16 @@
   "23 de noviembre de 2026": "2026年11月23日",
   "Destruir ladrillos puede activar bonificaciones. Breakout incluye vidas, récord guardado y pantallas de victoria y derrota.": "击碎砖块可触发加成。Breakout 包含生命值、最高分保存和胜负画面。",
   "Volver al menú principal": "返回主菜单",
-  "El menú no muestra un juego": "菜单中看不到某款游戏"
+  "El menú no muestra un juego": "菜单中看不到某款游戏",
+  "Contáctanos": "联系我们",
+  "Pantalla completa y ajuste al tamaño de la ventana": "全屏与窗口缩放适配",
+  "Alt + Enter alterna la pantalla completa. La escena, la interfaz y el cursor comparten un área centrada que conserva las proporciones del juego.": "Alt + Enter 切换全屏。场景、界面和光标共用居中区域，保持游戏原有宽高比。",
+  "Al salir de pantalla completa se restaura el tamaño anterior de la ventana.": "退出全屏后，窗口恢复到之前的尺寸。",
+  "RenderManager::Resize · GetFitView": "RenderManager::Resize · GetFitView",
+  "60ce813": "60ce813",
+  "33 actualizaciones": "33 项更新",
+  "24 de noviembre de 2026": "2026年11月24日",
+  "Base pública: 60ce813": "公开基准：60ce813",
+  "Referencia: 60ce813": "参考：60ce813",
+  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "通过 sf::RenderTexture 绘制精灵、图形和文字。支持 Alt + Enter 全屏切换、等比缩放及 Bloom 和 Monitor 后处理。"
 }

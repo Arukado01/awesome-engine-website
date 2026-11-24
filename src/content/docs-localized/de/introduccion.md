@@ -11,7 +11,7 @@ category: Erste Schritte
 
 Awesome Engine ist eine in **C++20** geschriebene Spiele-Engine auf Basis von SFML. Ihr Kern verbindet Szenen mit Diensten für Rendering, Ressourcen, Eingabe, Audio, Benutzeroberflächen und Persistenz. Die Spiele im Repository zeigen die Verwendung dieser Dienste aus C++.
 
-Diese Dokumentation verwendet den [Commit `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697) als öffentliche Referenz.
+Diese Dokumentation verwendet den [Commit `60ce813`](https://github.com/Arukado01/AwesomeEngine/tree/60ce8139fbd36713821bf85debd96bf0bd1c8bb3) als öffentliche Referenz.
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Diese Systeme werden über `EngineContext` verbunden. Jedes Spiel implementiert 
 
 Das Repository enthält eine Arbeitskonfiguration für **Windows mit MinGW, Ninja und GDB**. Das Audit bestätigt weder Kompilierung noch Ausführung unter Linux, macOS, auf Mobilgeräten oder im Browser. Die verwendeten Bibliotheken allein belegen keine vollständige Plattformkompatibilität der Engine.
 
-Der Engine-Code steht unter der [MIT-Lizenz](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md). Die Einträge im Änderungsverlauf beziehen sich auf echte Commits, nicht auf erfundene Release-Versionen.
+Der Engine-Code steht unter der [MIT-Lizenz](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/LICENSE.md). Die Einträge im Änderungsverlauf beziehen sich auf echte Commits, nicht auf erfundene Release-Versionen.
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## Quellen
 
-- [Abhängigkeiten und Build-Optionen](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
-- [Registrierung der Szenen](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
-- [Dienste von EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h).
+- [Abhängigkeiten und Build-Optionen](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt).
+- [Registrierung der Szenen](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp).
+- [Dienste von EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Core/EngineContext.h).

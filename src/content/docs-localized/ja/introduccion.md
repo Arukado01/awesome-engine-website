@@ -11,7 +11,7 @@ category: はじめに
 
 Awesome Engine は、SFML を基盤とする **C++20** 製のゲームエンジンです。コアはシーンと、描画、リソース、入力、音声、UI、永続化のサービスを結び付けます。リポジトリ内のゲームは、それらのサービスを C++ コードから利用する方法を示しています。
 
-このドキュメントは公開リビジョン [コミット `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697) を基準としています。
+このドキュメントは公開リビジョン [コミット `60ce813`](https://github.com/Arukado01/AwesomeEngine/tree/60ce8139fbd36713821bf85debd96bf0bd1c8bb3) を基準としています。
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
@@ -54,12 +54,12 @@ Awesome Engine は、SFML を基盤とする **C++20** 製のゲームエンジ�
 
 リポジトリには **Windows、MinGW、Ninja、GDB** 向けの作業設定が含まれています。今回の調査では、Linux、macOS、モバイル、ブラウザーでのビルドや実行は確認していません。利用ライブラリの対応範囲だけを根拠に、エンジン全体が対応しているとは判断できません。
 
-エンジンのコードは [MIT ライセンス](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md)です。履歴の項目名は実際のコミットに対応しており、架空のリリースバージョンではありません。
+エンジンのコードは [MIT ライセンス](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/LICENSE.md)です。履歴の項目名は実際のコミットに対応しており、架空のリリースバージョンではありません。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 参照ソース
 
-- [依存関係とビルドオプション](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
-- [シーンの登録](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
-- [EngineContext のサービス](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h)。
+- [依存関係とビルドオプション](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
+- [シーンの登録](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp)。
+- [EngineContext のサービス](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Core/EngineContext.h)。

@@ -40,7 +40,7 @@ The engine reads `Content/Config.json` on startup. This example shows a single `
 | Key | Effect |
 | --- | --- |
 | `windowTitle` | Title of the SFML window. |
-| `windowSize` | Initial size and reference for render targets and several game calculations. |
+| `windowSize` | Initial windowed size and logical size of the game area. |
 | `frameRateLimit` | Frame limit requested from the window; defaults to 120 if the key is absent. |
 | `disableSfmlLogs` | Silences the SFML error stream when set to `true`. |
 | `maximumDeltaTime` | Maximum simulation delta, in seconds, delivered by TimeManager per frame. |
@@ -60,7 +60,7 @@ Edit the JSON while the application is closed, then run it again from the reposi
 
 Keep the keys and types shown in the example. The parser does not implement a validation schema or fallback values for every field. A missing file, invalid JSON, or an incorrect required key may prevent startup.
 
-Changing `windowSize` also affects game code that uses `gConfig.windowSize`. It does not provide a complete dynamic resolution system. The resize event does not automatically rebuild post-processing textures.
+`windowSize` sets the design size used by games. When the window changes size, the engine adapts rendering to the actual size and keeps the design coordinates and proportions.
 
 <span id="configuración-de-cada-juego" aria-hidden="true"></span>
 
@@ -80,6 +80,6 @@ This site's light, dark, or system selector changes only its web interface. The 
 
 ## Sources
 
-- [Original Config.json values](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json).
-- [EngineConfig loading](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp).
-- [Delta time calculation](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp).
+- [Original Config.json values](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json).
+- [EngineConfig loading](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/EngineConfig.cpp).
+- [Delta time calculation](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/TimeManager.cpp).

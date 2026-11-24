@@ -33,7 +33,7 @@ cd AwesomeEngine
 要查看与本文档完全一致的代码，可以在新克隆的副本中切换到已审查的修订：
 
 ```sh
-git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
+git checkout 60ce8139fbd36713821bf85debd96bf0bd1c8bb3
 ```
 
 最后一条命令会将工作副本切换到特定提交。如果准备开发改动，请在开始前创建自己的分支。文档中的源码链接也指向该修订，方便与后续更新比较。
@@ -96,6 +96,6 @@ cmake --build BuildRelease --parallel
 
 ## 源码参考
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
-- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json)。
-- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
+- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/tasks.json)。
+- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/launch.json)。
