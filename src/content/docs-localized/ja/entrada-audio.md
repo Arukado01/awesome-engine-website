@@ -55,8 +55,8 @@ CursorManager は `joystickDeadzone` を考慮してスティックでカーソ�
 | --- | --- |
 | F12 | PNG スクリーンショットを保存します。 |
 | R | アクティブなシーンを再開始します。 |
-| Escape / コントローラーの Start | 一時停止オーバーレイを切り替えます。 |
-| M / コントローラーの Select | `Menu` を要求します。このシーンは対象リビジョンには登録されていません。 |
+| Escape / コントローラーの Start | ゲーム中にポーズパネルを開閉します。 |
+| M / コントローラーの Select | メインメニューに戻ります。 |
 
 ショートカットは `EngineVisitor` が処理します。フォーカスを失うとシーンは一時停止します。フォーカスが戻っても、オーバーレイが開いていない場合だけ再開します。
 
@@ -99,10 +99,10 @@ GuiManager は TGUI を SFML ウィンドウに接続します。`Content/Themes
 
 ## 参照ソース
 
-- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h)。
-- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp)。
-- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp)。
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp)。
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp)。
+- [入力の型](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h)。
+- [バインディングの問い合わせ](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp)。
+- [コントローラーのマッピング](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp)。
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp)。
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp)。
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).

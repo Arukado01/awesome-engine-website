@@ -11,13 +11,13 @@ category: 入门
 
 Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。其核心把场景与渲染、资源、输入、音频、界面和持久化服务连接起来。仓库中的游戏展示了如何通过 C++ 代码使用这些服务。
 
-本文档以公开修订 [提交 `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa) 为参考。
+本文档以公开修订 [提交 `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697) 为参考。
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
 ## 包含哪些内容
 
-- **七个游戏场景：** Bounce、Clicker、MemoryCard、TicTacToe、MineSweeper、Runner 和 Tetris。
+- **九个游戏场景：** Bounce、Clicker、MemoryCard、TicTacToe、MineSweeper、Runner、Tetris、Pong 和 Breakout. 引擎启动后进入主菜单。
 - **2D 渲染：** SFML 可绘制对象、中间纹理，以及 Bloom 和 Monitor 后处理。
 - **基于动作的输入：** 支持键盘、鼠标和手柄，同一动作可绑定多个输入。
 - **共享服务：** 资源、时间、音频、粒子、JSON 存档和 PNG 截图。
@@ -54,12 +54,12 @@ Awesome Engine 是使用 **C++20** 编写、基于 SFML 构建的游戏引擎。
 
 仓库包含适用于 **Windows、MinGW、Ninja 和 GDB** 的开发配置。本次审查未验证 Linux、macOS、移动设备或浏览器上的编译和运行情况。仅凭所用库支持这些平台，不能认定整个引擎完全兼容。
 
-引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
+引擎代码采用 [MIT 许可证](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md)。历史记录中的条目对应真实提交，并非虚构的发行版本。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 源码参考
 
-- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
-- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
-- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h)。
+- [依赖项与编译选项](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
+- [场景注册](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
+- [EngineContext 服务](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h)。

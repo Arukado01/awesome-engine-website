@@ -46,7 +46,7 @@ El constructor y `Start` no son equivalentes. Las instancias permanecen en el re
 
 ## Registro de juegos
 
-`SceneFactory::Scenes` es un `unordered_map` que asocia nombres con `unique_ptr<Scene>`. La fábrica registra siete instancias:
+`SceneFactory::Scenes` es un `unordered_map` que asocia nombres con `unique_ptr<Scene>`. La fábrica registra nueve juegos y la escena del menú.
 
 ```cpp
 scenes.emplace("Bounce", std::make_unique<Bounce::Game>(context));
@@ -56,9 +56,12 @@ scenes.emplace("TicTacToe", std::make_unique<TicTacToe::Game>(context));
 scenes.emplace("MineSweeper", std::make_unique<MineSweeper::Game>(context));
 scenes.emplace("Runner", std::make_unique<Runner::Game>(context));
 scenes.emplace("Tetris", std::make_unique<Tetris::Game>(context));
+scenes.emplace("Pong", std::make_unique<Pong::Game>(context));
+scenes.emplace("Breakout", std::make_unique<Breakout::Game>(context));
+scenes.emplace("Menu", std::make_unique<Menu::Game>(context));
 ```
 
-La revisión documentada solicita Tetris en el constructor de Engine. Los nombres son claves exactas del registro; una escena desconocida no tiene una ruta de recuperación implementada.
+`Engine` inicia en `Menu`. El menú lee `games` de `Content/Config.json`. Bounce está registrado y puede añadirse a esa lista.
 
 ## Transición diferida
 
@@ -86,19 +89,19 @@ Sincronización de pausa
 
 ## Explorar una implementación real
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) muestra cómo una clase de juego recibe el contexto, prepara su paleta y estadísticas, solicita sonido y música y utiliza los callbacks de escena.
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Games/Source/Bounce.cpp) muestra cómo una clase de juego recibe el contexto, prepara su paleta y estadísticas, solicita sonido y música y utiliza los callbacks de escena.
 
 Para incorporar una escena en tu propia copia, sigue la separación existente: declaración en `Games/Include`, implementación en `Games/Source` y registro explícito en `SceneFactory.cpp`. CMake descubre los `.cpp` de esas carpetas con `GLOB_RECURSE CONFIGURE_DEPENDS`; no existe un plugin de escenas cargado en tiempo de ejecución.
 
-## Limitación del acceso al menú
+<span id="limitación-del-acceso-al-menú" aria-hidden="true"></span>
 
-El overlay incluye un botón **Menu**, y el atajo **M** llama al mismo flujo. Engine solicita una escena llamada `Menu`, pero la fábrica de esta revisión no la registra. Evita esa acción al explorar esta versión: puede activar una aserción o una excepción por clave inexistente.
+## Volver al menú principal
 
-Esta documentación conserva esa limitación de forma explícita; no presenta el menú como un selector de juegos disponible.
+Durante una partida, vuelve al menú con **Menu** en el panel de pausa, con **M** o con **Select** del mando.
 
 ## Fuentes
 
-- [Contrato Scene](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h).
-- [Registro SceneFactory](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [Solicitudes de SceneManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp).
-- [Transiciones en Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [Contrato Scene](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Scene/Scene.h).
+- [Registro SceneFactory](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [Solicitudes de SceneManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SceneManager.cpp).
+- [Transiciones en Engine](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp).

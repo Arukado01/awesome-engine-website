@@ -9,7 +9,7 @@ category: Premiers pas
 
 ## Le fichier de configuration
 
-Le moteur lit `Content/Config.json` lors de la construction de l’objet global `gConfig`. Voici le contenu de la révision de référence :
+Le moteur lit `Content/Config.json` au démarrage. Cet exemple montre une seule entrée de `games`.
 
 ```json
 {
@@ -20,10 +20,16 @@ Le moteur lit `Content/Config.json` lors de la construction de l’objet global 
   "maximumDeltaTime": 0.03,
   "globalVolume": 100,
   "backgroundColor": [100, 100, 100],
-  "cursorRadius": 5,
+  "cursorSize": 21,
   "cursorSpeed": 800,
-  "cursorColor": [255, 100, 0],
-  "joystickDeadzone": 0.1
+  "joystickDeadzone": 0.1,
+  "games": [
+    {
+      "name": "Clicker",
+      "title": "Clicker",
+      "controls": "Hit: Left Click / South"
+    }
+  ]
 }
 ```
 
@@ -40,9 +46,8 @@ Le moteur lit `Content/Config.json` lors de la construction de l’objet global 
 | `maximumDeltaTime` | Delta de simulation maximal, en secondes, fourni par TimeManager pour chaque image. |
 | `globalVolume` | Volume global appliqué à l’écouteur SFML. |
 | `backgroundColor` | Teinte RVB du fond utilisé par RenderManager. |
-| `cursorRadius` | Rayon du curseur circulaire personnalisé. |
+| `cursorSize` | Taille en pixels du côté le plus long du curseur basé sur `Icon.png`. La valeur par défaut est 24. |
 | `cursorSpeed` | Vitesse du curseur lorsqu’il est déplacé avec la manette. |
-| `cursorColor` | Couleur RVB du curseur. |
 | `joystickDeadzone` | Seuil sous lequel les petits mouvements du stick sont ignorés pour déplacer le curseur. |
 
 La limite de 120 images est un réglage, **pas une mesure de performances**. Elle n’implique pas non plus un pas de simulation fixe : le temps varie à chaque image et est borné par `maximumDeltaTime`.
@@ -61,9 +66,9 @@ Modifier `windowSize` affecte aussi le code des jeux qui utilise `gConfig.window
 
 ## Configuration de chaque jeu
 
-Les paramètres spécifiques se trouvent dans `Games/Include/Config` : `BounceConfig.h`, `ClickerConfig.h`, `MemoryCardConfig.h`, `TicTacToeConfig.h`, `MineSweeperConfig.h`, `RunnerConfig.h` et `TetrisConfig.h`.
+La liste `games` définit les jeux du menu et leur ordre. `name` doit correspondre à la clé de `SceneFactory`. `title` est le libellé et `controls` le texte d’aide. Conservez au moins une entrée et redémarrez le moteur après modification.
 
-Ce sont des constantes C++ ; toute modification nécessite une recompilation. La scène initiale n’est pas non plus choisie dans `Config.json` : elle est fixée par `ChangeScene("Tetris")` dans le constructeur d’`Engine`.
+Les règles de chaque jeu se trouvent dans `Games/Include/Config`. Toute modification exige une recompilation. `Engine` lance la scène `Menu`.
 
 <span id="preferencias-del-sitio-y-del-motor" aria-hidden="true"></span>
 
@@ -75,6 +80,6 @@ Le sélecteur clair, sombre ou système de ce site ne modifie que son interface 
 
 ## Sources
 
-- [Valeurs d’origine de Config.json](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json).
-- [Lecture d’EngineConfig](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/EngineConfig.cpp).
-- [Calcul du delta time](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/TimeManager.cpp).
+- [Valeurs d’origine de Config.json](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json).
+- [Lecture d’EngineConfig](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp).
+- [Calcul du delta time](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp).

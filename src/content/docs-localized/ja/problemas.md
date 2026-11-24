@@ -35,7 +35,7 @@ CMake は FetchContent を使用して依存関係をダウンロードします
 
 先に `Build` ディレクトリへ移動しないでください。設定、シェーダー、テクスチャ、フォント、音声は相対パスを使います。名前がローカルのファイルと完全に一致するかも確認します。
 
-不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json)と比較し、想定される型を保ってください。
+不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)と比較し、想定される型を保ってください。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -47,11 +47,13 @@ CMake は FetchContent を使用して依存関係をダウンロードします
 
 <span id="menu-o-la-tecla-m-detienen-la-aplicación" aria-hidden="true"></span>
 
-## Menu や M キーでアプリが停止する
+<span id="menu-や-m-キーでアプリが停止する" aria-hidden="true"></span>
 
-Engine は `Menu` というシーンを要求しますが、SceneFactory にはその名前が登録されていません。Debug ではアサーションが発生する場合があり、ほかの構成でもマップの参照が失敗する可能性があります。
+<span id="el-menú-no-muestra-un-juego" aria-hidden="true"></span>
 
-このリビジョンでは Menu ボタン、M、コントローラーの Select を避けてください。続行は Escape、再開始は R、終了は Quit を使います。このドキュメントで案内できる動作中のシーン選択画面はありません。
+## メニューにゲームが表示されない
+
+`Content/Config.json` の `games` に項目が1つ以上あることと、`name` が `SceneFactory` のキーと一致することを確認してください。保存後に再起動してください。
 
 <span id="el-juego-se-pausa-al-cambiar-de-ventana" aria-hidden="true"></span>
 
@@ -99,7 +101,7 @@ F12 は `Content/Screenshots` に保存します。書き込み権限と空き�
 
 ## 参照ソース
 
-- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
-- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
-- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。
+- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
+- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp)。
+- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp)。

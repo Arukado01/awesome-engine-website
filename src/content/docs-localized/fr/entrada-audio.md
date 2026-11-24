@@ -55,8 +55,8 @@ CursorManager permet de déplacer le curseur avec le stick en respectant `joysti
 | --- | --- |
 | F12 | Enregistrer une capture PNG. |
 | R | Redémarrer la scène active. |
-| Échap / Start de la manette | Afficher ou masquer le panneau de pause. |
-| M / Select de la manette | Demander `Menu` ; cette scène n’est pas enregistrée dans la révision documentée. |
+| Échap / Start de la manette | Afficher ou masquer le panneau de pause pendant une partie. |
+| M / Select de la manette | Revenir au menu principal. |
 
 Les raccourcis sont traités dans `EngineVisitor`. La perte du focus met la scène en pause. Lorsqu’il revient, la scène reprend uniquement si le panneau n’est plus ouvert.
 
@@ -99,10 +99,10 @@ Le panneau crée ses boutons à partir d’`OverlaySelection` avec `magic_enum`.
 
 ## Sources
 
-- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h).
-- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp).
-- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp).
+- [Types d’entrée](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h).
+- [Consultation des associations](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp).
+- [Correspondance des manettes](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp).
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).

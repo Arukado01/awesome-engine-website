@@ -33,7 +33,7 @@ cd AwesomeEngine
 このドキュメントとまったく同じコードを確認するには、新しく取得したコピーで対象リビジョンを選択します。
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 最後のコマンドは作業コピーを特定のコミットに切り替えます。変更を開発する場合は、作業を始める前に自分のブランチを作成してください。各ソースへのリンクも同じリビジョンを指しているため、将来の更新との差分を比較できます。
@@ -74,7 +74,7 @@ cmake --build BuildRelease --parallel
 .\Build\AwesomeEngine.exe
 ```
 
-対象リビジョンは初期シーンとして **Tetris** を指定します。このリビジョンには動作するゲーム選択画面が登録されていません。初期シーンは `Engine.cpp` で定義されています。
+起動するとメインメニューが開きます。左クリックまたはコントローラーの南ボタンでカーソル下のゲームを起動します。右クリックまたは西ボタンで操作方法を表示します。
 
 作業ディレクトリは重要です。設定、シェーダー、フォントなどのリソースは `Content/Config.json` のような相対パスで読み込まれます。`Build` から起動すると、エンジンがそれらを見つけられないことがあります。
 
@@ -96,6 +96,6 @@ cmake --build BuildRelease --parallel
 
 ## 参照ソース
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
-- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json)。
-- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
+- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json)。
+- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json)。

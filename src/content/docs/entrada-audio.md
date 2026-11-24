@@ -49,8 +49,8 @@ CursorManager permite mover el cursor con el stick, respetando `joystickDeadzone
 | --- | --- |
 | F12 | Guardar una captura PNG. |
 | R | Reiniciar la escena activa. |
-| Escape / Start del mando | Alternar el overlay de pausa. |
-| M / Select del mando | Solicitar `Menu`; esa escena no está registrada en la revisión documentada. |
+| Escape / Start del mando | Alternar el panel de pausa durante una partida. |
+| M / Select del mando | Volver al menú principal. |
 
 Los atajos se procesan en `EngineVisitor`. La pérdida de foco pausa la escena. Al recuperarlo, se reanuda únicamente si el overlay no sigue abierto.
 
@@ -85,9 +85,9 @@ El overlay crea botones a partir de `OverlaySelection` usando `magic_enum`. La s
 
 ## Fuentes
 
-- [Tipos de entrada](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h).
-- [Consulta de bindings](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp).
-- [Mapeo de mandos](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp).
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp).
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp).
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).
+- [Tipos de entrada](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h).
+- [Consulta de bindings](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp).
+- [Mapeo de mandos](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp).
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp).
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).

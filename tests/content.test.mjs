@@ -6,8 +6,11 @@ import { games, technologies } from '../src/data/engine.ts';
 test('el historial conserva commits únicos, fuentes y fechas descendentes', () => {
   assert.ok(updates.length >= 16);
   assert.deepEqual(
-    updates.slice(0, 6).map((u) => u.id),
-    ['19264a1', 'f0e88ed', '8e733f0', '5387503', '67f81e3', '509f0bf'],
+    updates.slice(0, 11).map((u) => u.id),
+    [
+      '0ecfdb6', 'e455743', '87fe97c', '370cf74', 'adbda4f', '545c133',
+      '872388a', '3b48b94', '83a6ec8', '3e043b7', '82fba63',
+    ],
   );
   assert.equal(new Set(updates.map((u) => u.id)).size, updates.length);
   for (let i = 0; i < updates.length; i++) {
@@ -24,8 +27,8 @@ test('el historial conserva commits únicos, fuentes y fechas descendentes', () 
   }
 });
 test('la información del motor mantiene alcance y estados verificables', () => {
-  assert.equal(games.length, 7);
-  assert.equal(new Set(games.map((g) => g.id)).size, 7);
+  assert.equal(games.length, 9);
+  assert.equal(new Set(games.map((g) => g.id)).size, 9);
   assert.ok(technologies.some((t) => t.name === 'SFML' && t.version === '3.1.0'));
 });
 test('las nueve guías tienen orden único, enlaces de fuente y destinos internos existentes', () => {
@@ -40,7 +43,7 @@ test('las nueve guías tienen orden único, enlaces de fuente y destinos interno
     orders.push(text.match(/^order:\s*(\d+)/m)?.[1]);
     assert.match(
       text,
-      /github.com\/Arukado01\/AwesomeEngine\/blob\/f0e88edffae35efb3cc208e8eea651d1b559cbaa/,
+      /github.com\/Arukado01\/AwesomeEngine\/blob\/0ecfdb64c14e245e99850fc1bf887a73eef60697/,
     );
     for (const match of text.matchAll(/\]\(\/docs\/([\w-]+)\//g))
       assert.ok(names.includes(`${match[1]}.md`), `${name}: ${match[1]}`);

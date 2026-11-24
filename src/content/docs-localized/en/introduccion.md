@@ -11,13 +11,13 @@ category: Getting started
 
 Awesome Engine is a game engine written in **C++20**, built on SFML. Its core connects scenes to rendering, resource, input, audio, interface, and persistence services. The games in the repository show how to use these services from C++ code.
 
-This documentation uses [commit `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa) as its public reference.
+This documentation uses [commit `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697) as its public reference.
 
 <span id="lo-que-encontrarás" aria-hidden="true"></span>
 
 ## What you will find
 
-- **Seven game scenes:** Bounce, Clicker, MemoryCard, TicTacToe, MineSweeper, Runner, and Tetris.
+- **Nine game scenes:** Bounce, Clicker, MemoryCard, TicTacToe, MineSweeper, Runner, Tetris, Pong, and Breakout. The engine starts in the main menu.
 - **2D rendering:** SFML drawable objects, intermediate textures, and Bloom and Monitor post-processing.
 - **Action-based input:** keyboard, mouse, and controllers, with multiple bindings for the same action.
 - **Shared services:** resources, time, audio, particles, JSON saves, and PNG screenshots.
@@ -54,12 +54,12 @@ These systems connect through `EngineContext`. Each game implements the `Scene` 
 
 The repository includes a working configuration for **Windows with MinGW, Ninja, and GDB**. The audit does not establish successful builds or execution on Linux, macOS, mobile devices, or browsers. The libraries used are not enough on their own to claim full engine compatibility.
 
-The engine code is under the [MIT license](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md). History entry names correspond to real commits, not invented release versions.
+The engine code is under the [MIT license](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md). History entry names correspond to real commits, not invented release versions.
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## Sources
 
-- [Dependencies and build options](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Scene registration](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [EngineContext services](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).
+- [Dependencies and build options](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Scene registration](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [EngineContext services](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h).

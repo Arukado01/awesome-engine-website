@@ -2,7 +2,26 @@ import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { locales } from '../../src/i18n/locales';
 
-const commits = ['19264a1', 'f0e88ed', '8e733f0', '5387503', '67f81e3', '509f0bf', '315669a'];
+const commits = [
+  '0ecfdb6',
+  'e455743',
+  '87fe97c',
+  '370cf74',
+  'adbda4f',
+  '545c133',
+  '872388a',
+  '3b48b94',
+  '83a6ec8',
+  '3e043b7',
+  '82fba63',
+  '19264a1',
+  'f0e88ed',
+  '8e733f0',
+  '5387503',
+  '67f81e3',
+  '509f0bf',
+  '315669a',
+];
 for (const locale of locales) {
   test(`${locale}: los nuevos sistemas, commits y guías están disponibles en móvil`, async ({
     page,
@@ -15,9 +34,9 @@ for (const locale of locales) {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(`${prefix}/`);
-    await expect(page.locator('.latest-update').first()).toContainText('19264a1');
+    await expect(page.locator('.latest-update').first()).toContainText('0ecfdb6');
     await expect(page.locator('.latest-update').first().locator('h3')).toHaveText(
-      catalog['Tetris mejora su audio y su pantalla de derrota'],
+      catalog['Botones redondeados en el menú principal'],
     );
     await page.goto(`${prefix}/motor/`);
     await expect(page.locator('.system-row')).toHaveCount(10);
@@ -56,7 +75,7 @@ for (const locale of locales) {
     await expect(page.locator('[id="grupos-de-audio"]')).toHaveCount(1);
     await page.goto(`${prefix}/docs/arquitectura/`);
     await expect(page.locator('.docs-article')).toContainText('TimeDomain::Game');
-    await expect(page.locator('.docs-version')).toContainText('f0e88ed');
+    await expect(page.locator('.docs-version')).toContainText('0ecfdb6');
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(
       true,
     );

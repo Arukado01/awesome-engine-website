@@ -9,7 +9,7 @@ category: はじめに
 
 ## 設定ファイル
 
-エンジンはグローバルオブジェクト `gConfig` の構築時に `Content/Config.json` を読み込みます。基準リビジョンの内容は次のとおりです。
+起動時に `Content/Config.json` を読み込みます。例では `games` の項目を1つだけ示しています。
 
 ```json
 {
@@ -20,10 +20,16 @@ category: はじめに
   "maximumDeltaTime": 0.03,
   "globalVolume": 100,
   "backgroundColor": [100, 100, 100],
-  "cursorRadius": 5,
+  "cursorSize": 21,
   "cursorSpeed": 800,
-  "cursorColor": [255, 100, 0],
-  "joystickDeadzone": 0.1
+  "joystickDeadzone": 0.1,
+  "games": [
+    {
+      "name": "Clicker",
+      "title": "Clicker",
+      "controls": "Hit: Left Click / South"
+    }
+  ]
 }
 ```
 
@@ -40,9 +46,8 @@ category: はじめに
 | `maximumDeltaTime` | TimeManager が各フレームで渡すシミュレーションの最大デルタ時間。単位は秒です。 |
 | `globalVolume` | SFML のリスナーに適用する全体音量。 |
 | `backgroundColor` | RenderManager が使用する背景の RGB 色。 |
-| `cursorRadius` | カスタムの円形カーソルの半径。 |
+| `cursorSize` | `Icon.png` を使うカーソルの長辺のピクセル数です。既定値は24です。 |
 | `cursorSpeed` | コントローラーで移動させる場合のカーソル速度。 |
-| `cursorColor` | カーソルの RGB 色。 |
 | `joystickDeadzone` | カーソル移動時にスティックの微小な変位を無視するためのしきい値。 |
 
 120 フレームという上限は設定値であり、**性能の測定結果ではありません**。シミュレーションが固定タイムステップを使うことも意味しません。時間はフレームごとに変動し、`maximumDeltaTime` で制限されます。
@@ -61,9 +66,9 @@ category: はじめに
 
 ## 各ゲームの設定
 
-個別のパラメーターは `Games/Include/Config` にあります。ファイル名は `BounceConfig.h`、`ClickerConfig.h`、`MemoryCardConfig.h`、`TicTacToeConfig.h`、`MineSweeperConfig.h`、`RunnerConfig.h`、`TetrisConfig.h` です。
+`games` でメニューに表示するゲームと順序を指定します。`name` は `SceneFactory` の登録キー、`title` は表示名、`controls` は操作説明です。項目を1つ以上残し、編集後に再起動してください。
 
-これらは C++ の定数なので、変更後は再ビルドが必要です。初期シーンも `Config.json` からは選べず、`Engine` のコンストラクターで `ChangeScene("Tetris")` により固定されています。
+ルールは `Games/Include/Config` にあり、変更後は再ビルドが必要です。`Engine` は `Menu` シーンを開きます。
 
 <span id="preferencias-del-sitio-y-del-motor" aria-hidden="true"></span>
 
@@ -75,6 +80,6 @@ category: はじめに
 
 ## 参照ソース
 
-- [Config.json の元の値](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json)。
-- [EngineConfig の読み込み](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/EngineConfig.cpp)。
-- [デルタ時間の計算](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/TimeManager.cpp)。
+- [Config.json の元の値](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)。
+- [EngineConfig の読み込み](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/EngineConfig.cpp)。
+- [デルタ時間の計算](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/TimeManager.cpp)。

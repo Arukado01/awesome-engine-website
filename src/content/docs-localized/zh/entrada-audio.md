@@ -55,8 +55,8 @@ CursorManager 可以通过摇杆移动光标，并遵循 `joystickDeadzone`。�
 | --- | --- |
 | F12 | 保存 PNG 截图。 |
 | R | 重启活动场景。 |
-| Escape / 手柄 Start | 切换暂停覆盖层。 |
-| M / 手柄 Select | 请求 `Menu`；本文所述修订没有注册该场景。 |
+| Escape / 手柄 Start | 在游戏中打开或关闭暂停面板。 |
+| M / 手柄 Select | 返回主菜单。 |
 
 快捷键由 `EngineVisitor` 处理。失去焦点会暂停场景。重新获得焦点后，只有覆盖层不再打开时才会恢复。
 
@@ -99,10 +99,10 @@ GuiManager 将 TGUI 与 SFML 窗口连接，加载 `Content/Themes/Dark.txt`，�
 
 ## 源码参考
 
-- [输入类型](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/utils/InputBindings.h)。
-- [绑定查询](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/InputManager.cpp)。
-- [手柄映射](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Utils/InputBindings.cpp)。
-- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/AudioManager.cpp)。
-- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/GuiManager.cpp)。
+- [输入类型](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/utils/InputBindings.h)。
+- [绑定查询](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/InputManager.cpp)。
+- [手柄映射](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Utils/InputBindings.cpp)。
+- [AudioManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/AudioManager.cpp)。
+- [GuiManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/GuiManager.cpp)。
 
-- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Managers/AudioGroup.h).
+- [AudioGroup](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Managers/AudioGroup.h).

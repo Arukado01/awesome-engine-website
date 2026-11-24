@@ -33,7 +33,7 @@ cd AwesomeEngine
 To inspect exactly the code described in this documentation, you can select the audited revision in a fresh clone:
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 This last command leaves the clone at a specific commit. If you intend to develop changes, create your own branch before working. The documentation also links every source to that revision so you can compare it with future updates.
@@ -74,7 +74,7 @@ Keep the terminal at the **repository root**, next to `Content`:
 .\Build\AwesomeEngine.exe
 ```
 
-The documented revision requests **Tetris** as its initial scene. No working game selector is registered in this revision: the initial scene is set in `Engine.cpp`.
+The engine starts in the main menu. Left-click or press the controller’s South button to launch the game under the cursor. Right-click or press West to see its controls.
 
 The working directory matters. Configuration, shaders, the font, and other resources are loaded through relative paths such as `Content/Config.json`. Running from `Build` may prevent the engine from finding them.
 
@@ -96,6 +96,6 @@ See [Troubleshooting](/en/docs/problemas/), which separates tool, dependency dow
 
 ## Sources
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Build tasks](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json).
-- [Debugging and working directory](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Build tasks](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
+- [Debugging and working directory](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).

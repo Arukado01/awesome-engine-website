@@ -1,6 +1,6 @@
-/** Datos verificados en AwesomeEngine, commit f0e88ed, 2 de noviembre de 2026. */
+/** Datos verificados en AwesomeEngine, commit 0ecfdb6, 23 de noviembre de 2026. */
 const sourceRoot =
-  'https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa';
+  'https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697';
 
 export const games = [
   {
@@ -12,11 +12,27 @@ export const games = [
     source: `${sourceRoot}/Games/Source/Runner.cpp`,
   },
   {
+    id: 'pong',
+    name: 'Pong',
+    genre: 'Arcade · dos palas',
+    description:
+      'Juega contra la IA o con otra persona en el mismo equipo. Elige entre una y nueve vidas y controla tu pala con teclado o mando.',
+    source: `${sourceRoot}/Games/Source/Pong.cpp`,
+  },
+  {
+    id: 'breakout',
+    name: 'Breakout',
+    genre: 'Arcade · ladrillos',
+    description:
+      'Destruye ladrillos y aprovecha bonificaciones como multibola y pala magnética. La escena guarda tu récord y muestra el resultado al terminar.',
+    source: `${sourceRoot}/Games/Source/Breakout.cpp`,
+  },
+  {
     id: 'tetris',
     name: 'Tetris',
     genre: 'Puzle · bloques',
     description:
-      'Mueve y rota las piezas, anticipa la siguiente y completa líneas. Incluye caída suave, caída rápida, puntuación y controles de teclado o gamepad.',
+      'Mueve y rota las piezas, anticipa la siguiente y completa líneas. El juego tiene música, récord guardado y una pantalla de derrota antes de reiniciar.',
     source: `${sourceRoot}/Games/Source/Tetris.cpp`,
   },
   {

@@ -29,7 +29,7 @@ cd AwesomeEngine
 Para consultar exactamente el código descrito en esta documentación, puedes seleccionar la revisión auditada en una copia nueva:
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 Este último comando deja la copia en un commit concreto. Si vas a desarrollar cambios, crea tu propia rama antes de trabajar. La documentación también enlaza cada fuente con esa revisión para que puedas comparar con futuras actualizaciones.
@@ -66,7 +66,7 @@ Mantén la terminal en la **raíz del repositorio**, junto a `Content`:
 .\Build\AwesomeEngine.exe
 ```
 
-La revisión documentada solicita **Tetris** como escena inicial. No existe un selector de juegos operativo registrado en esta revisión: el cambio de escena inicial está definido en `Engine.cpp`.
+El motor inicia en el menú principal. Usa clic izquierdo o el botón Sur del mando para abrir el juego bajo el cursor. Usa clic derecho o el botón Oeste para consultar sus controles.
 
 El directorio de trabajo importa. La configuración, los shaders, la fuente y los demás recursos se cargan mediante rutas relativas como `Content/Config.json`. Ejecutar desde `Build` puede impedir que el motor los encuentre.
 
@@ -82,6 +82,6 @@ Revisa [Solución de problemas](/docs/problemas/): ahí se separan problemas de 
 
 ## Fuentes
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Tareas de construcción](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json).
-- [Depuración y directorio de trabajo](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Tareas de construcción](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
+- [Depuración y directorio de trabajo](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).

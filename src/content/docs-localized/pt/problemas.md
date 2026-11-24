@@ -35,7 +35,7 @@ Execute a partir da raiz, ao lado de `Content`:
 
 Não entre antes no diretório `Build`. A configuração, os shaders, as texturas, as fontes e os sons usam caminhos relativos. Verifique também se os nomes correspondem exatamente aos arquivos da sua cópia.
 
-Um JSON inválido ou uma chave obrigatória ausente pode interromper a inicialização. Compare com o [arquivo de referência](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json) e preserve os tipos esperados.
+Um JSON inválido ou uma chave obrigatória ausente pode interromper a inicialização. Compare com o [arquivo de referência](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json) e preserve os tipos esperados.
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -47,11 +47,13 @@ O Windows pode tolerar essas diferenças em sua configuração habitual. Outros 
 
 <span id="menu-o-la-tecla-m-detienen-la-aplicación" aria-hidden="true"></span>
 
-## Menu ou a tecla M encerram a execução
+<span id="menu-ou-a-tecla-m-encerram-a-execução" aria-hidden="true"></span>
 
-O Engine solicita uma cena chamada `Menu`, mas o SceneFactory não registra esse nome. Em Debug, uma asserção pode ser disparada; em outras configurações, a consulta ao mapa também pode falhar.
+<span id="el-menú-no-muestra-un-juego" aria-hidden="true"></span>
 
-Evite o botão Menu, M e Select do controle nesta revisão. Use Escape para continuar, R para reiniciar ou Quit para fechar. Não há um seletor de cenas funcional que esta documentação possa recomendar.
+## Um jogo não aparece no menu
+
+Confirme que `games` tem ao menos uma entrada em `Content/Config.json` e que `name` corresponde à chave exata de `SceneFactory`. Reinicie o motor após salvar.
 
 <span id="el-juego-se-pausa-al-cambiar-de-ventana" aria-hidden="true"></span>
 
@@ -99,7 +101,7 @@ Ao abrir uma issue no [repositório](https://github.com/Arukado01/AwesomeEngine)
 
 ## Fontes
 
-- [Configuração de compilação](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Comportamento do Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
-- [Registro real de cenas](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).
+- [Configuração de compilação](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Comportamento do Engine](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp).
+- [Registro real de cenas](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp).

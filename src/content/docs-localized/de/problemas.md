@@ -35,7 +35,7 @@ Starte es aus dem Stammverzeichnis neben `Content`:
 
 Wechsle vorher nicht in das Verzeichnis `Build`. Konfiguration, Shader, Texturen, Schriften und Sounds nutzen relative Pfade. Prüfe außerdem, ob die Namen genau mit den Dateien deiner Kopie übereinstimmen.
 
-Ungültiges JSON oder ein fehlender Pflichtschlüssel können den Start stoppen. Vergleiche mit der [Referenzdatei](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json) und behalte die erwarteten Typen bei.
+Ungültiges JSON oder ein fehlender Pflichtschlüssel können den Start stoppen. Vergleiche mit der [Referenzdatei](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json) und behalte die erwarteten Typen bei.
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -47,11 +47,13 @@ Windows kann diese Unterschiede in seiner üblichen Konfiguration tolerieren. An
 
 <span id="menu-o-la-tecla-m-detienen-la-aplicación" aria-hidden="true"></span>
 
-## Menu oder die Taste M stoppen die Anwendung
+<span id="menu-oder-die-taste-m-stoppen-die-anwendung" aria-hidden="true"></span>
 
-Engine fordert eine Szene namens `Menu` an, doch SceneFactory registriert diesen Namen nicht. In Debug kann dadurch eine Assertion auslösen; auch in anderen Konfigurationen kann der Map-Zugriff fehlschlagen.
+<span id="el-menú-no-muestra-un-juego" aria-hidden="true"></span>
 
-Vermeide in dieser Revision den Menu-Button, M und Select am Controller. Mit Escape setzt du fort, mit R startest du neu, und mit Quit beendest du die Anwendung. Es gibt keine funktionierende Szenenauswahl, die diese Dokumentation empfehlen könnte.
+## Ein Spiel fehlt im Menü
+
+Prüfe, ob `games` mindestens einen Eintrag in `Content/Config.json` enthält und `name` genau mit dem Schlüssel in `SceneFactory` übereinstimmt. Starte die Engine nach dem Speichern neu.
 
 <span id="el-juego-se-pausa-al-cambiar-de-ventana" aria-hidden="true"></span>
 
@@ -99,7 +101,7 @@ Gib beim Erstellen eines Issues im [Repository](https://github.com/Arukado01/Awe
 
 ## Quellen
 
-- [Build-Konfiguration](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Verhalten von Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
-- [Tatsächliches Szenenregister](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp).
+- [Build-Konfiguration](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Verhalten von Engine](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp).
+- [Tatsächliches Szenenregister](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [Persistenz mit SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp).

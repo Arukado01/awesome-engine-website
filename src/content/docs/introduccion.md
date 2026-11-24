@@ -9,11 +9,11 @@ category: Primeros pasos
 
 Awesome Engine es un motor de videojuegos escrito en **C++20**, construido sobre SFML. El núcleo conecta escenas con servicios de renderizado, recursos, entrada, audio, interfaces y persistencia. Los juegos del repositorio muestran cómo utilizar esos servicios desde código C++.
 
-La documentación toma como referencia el [commit `f0e88ed`](https://github.com/Arukado01/AwesomeEngine/tree/f0e88edffae35efb3cc208e8eea651d1b559cbaa). Describe los sistemas incluidos en esa revisión pública.
+La documentación toma como referencia el [commit `0ecfdb6`](https://github.com/Arukado01/AwesomeEngine/tree/0ecfdb64c14e245e99850fc1bf887a73eef60697). Describe los sistemas incluidos en esa revisión pública.
 
 ## Lo que encontrarás
 
-- **Siete escenas de juego:** Bounce, Clicker, MemoryCard, TicTacToe, MineSweeper, Runner y Tetris.
+- **Nueve escenas de juego:** Bounce, Clicker, MemoryCard, TicTacToe, MineSweeper, Runner, Tetris, Pong y Breakout. El motor inicia en el menú principal.
 - **Renderizado 2D:** objetos dibujables de SFML, texturas intermedias y posprocesado Bloom y Monitor.
 - **Entrada por acciones:** teclado, ratón y mandos, con múltiples asignaciones para una misma acción.
 - **Servicios compartidos:** recursos, tiempo, audio, partículas, guardado JSON y capturas PNG.
@@ -44,10 +44,10 @@ Estos sistemas se conectan mediante `EngineContext`. Cada juego implementa la in
 
 El repositorio incluye configuración de trabajo para **Windows con MinGW, Ninja y GDB**. La auditoría no acredita compilación o ejecución en Linux, macOS, móviles o navegadores. Las bibliotecas utilizadas no bastan por sí solas para afirmar compatibilidad completa del motor.
 
-El código del motor tiene [licencia MIT](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/LICENSE.md). Los nombres de las entradas del historial corresponden a commits reales, no a versiones de lanzamiento inventadas.
+El código del motor tiene [licencia MIT](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/LICENSE.md). Los nombres de las entradas del historial corresponden a commits reales, no a versiones de lanzamiento inventadas.
 
 ## Fuentes
 
-- [Dependencias y opciones de compilación](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Registro de escenas](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [Servicios de EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Core/EngineContext.h).
+- [Dependencias y opciones de compilación](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Registro de escenas](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [Servicios de EngineContext](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Core/EngineContext.h).

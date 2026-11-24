@@ -35,7 +35,7 @@ CMake 使用 FetchContent 下载依赖项。连接、代理或 Git 错误可能�
 
 不要先切换到 `Build` 目录。配置、着色器、纹理、字体和音效都使用相对路径。还要确认名称与当前副本中的文件完全一致。
 
-无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Content/Config.json)，并保持预期的数据类型。
+无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Content/Config.json)，并保持预期的数据类型。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -47,11 +47,13 @@ Windows 的常见配置可能允许这种差异，其他系统则可能拒绝。
 
 <span id="menu-o-la-tecla-m-detienen-la-aplicación" aria-hidden="true"></span>
 
-## Menu 或 M 键使应用停止
+<span id="menu-或-m-键使应用停止" aria-hidden="true"></span>
 
-Engine 请求名为 `Menu` 的场景，但 SceneFactory 没有注册该名称。Debug 配置下可能触发断言，其他配置下的映射查询也可能失败。
+<span id="el-menú-no-muestra-un-juego" aria-hidden="true"></span>
 
-在此修订中，请避免使用 Menu 按钮、M 和手柄 Select。使用 Escape 继续、R 重启或 Quit 关闭。本文档无法推荐一个可正常工作的场景选择器。
+## 菜单中看不到某款游戏
+
+检查 `Content/Config.json` 的 `games` 至少有一项，并确认 `name` 与 `SceneFactory` 的注册键完全一致。保存后重启引擎。
 
 <span id="el-juego-se-pausa-al-cambiar-de-ventana" aria-hidden="true"></span>
 
@@ -99,7 +101,7 @@ F12 将截图保存在 `Content/Screenshots`。请检查写入权限和可用空
 
 ## 源码参考
 
-- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
-- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
-- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SaveManager.cpp)。
+- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
+- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp)。
+- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SaveManager.cpp)。

@@ -52,7 +52,7 @@ public:
 
 ## ゲームの登録
 
-`SceneFactory::Scenes` は、名前と `unique_ptr<Scene>` を対応付ける `unordered_map` です。ファクトリーは 7 つのインスタンスを登録します。
+`SceneFactory::Scenes` は、名前と `unique_ptr<Scene>` を対応付ける `unordered_map` です。9本のゲームとメニューシーンを登録します。
 
 ```cpp
 scenes.emplace("Bounce", std::make_unique<Bounce::Game>(context));
@@ -62,9 +62,12 @@ scenes.emplace("TicTacToe", std::make_unique<TicTacToe::Game>(context));
 scenes.emplace("MineSweeper", std::make_unique<MineSweeper::Game>(context));
 scenes.emplace("Runner", std::make_unique<Runner::Game>(context));
 scenes.emplace("Tetris", std::make_unique<Tetris::Game>(context));
+scenes.emplace("Pong", std::make_unique<Pong::Game>(context));
+scenes.emplace("Breakout", std::make_unique<Breakout::Game>(context));
+scenes.emplace("Menu", std::make_unique<Menu::Game>(context));
 ```
 
-対象リビジョンは Engine のコンストラクターで Tetris を要求します。名前は登録表の正確なキーです。不明なシーン名に対する復旧処理は実装されていません。
+`Engine` は `Menu` から起動し、`Content/Config.json` の `games` から項目を読み込みます。登録済みの Bounce も追加できます。
 
 <span id="transición-diferida" aria-hidden="true"></span>
 
@@ -96,23 +99,25 @@ ChangeScene(名前)
 
 ## 実際の実装を調べる
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) は、ゲームクラスがコンテキストを受け取り、パドルと統計値を準備し、効果音と音楽を要求して、シーンのコールバックを利用する方法を示しています。
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Games/Source/Bounce.cpp) は、ゲームクラスがコンテキストを受け取り、パドルと統計値を準備し、効果音と音楽を要求して、シーンのコールバックを利用する方法を示しています。
 
 自分のコピーにシーンを追加するには、既存の分離方法に従います。宣言は `Games/Include`、実装は `Games/Source`、明示的な登録は `SceneFactory.cpp` に置きます。CMake は `GLOB_RECURSE CONFIGURE_DEPENDS` でこれらのフォルダーの `.cpp` を検出します。実行時に読み込むシーンプラグインはありません。
 
 <span id="limitación-del-acceso-al-menú" aria-hidden="true"></span>
 
-## メニューへのアクセス制限
+<span id="メニューへのアクセス制限" aria-hidden="true"></span>
 
-オーバーレイには **Menu** ボタンがあり、ショートカット **M** も同じ処理を呼び出します。Engine は `Menu` というシーンを要求しますが、このリビジョンのファクトリーには登録されていません。このバージョンを調べる際は、その操作を避けてください。存在しないキーによってアサーションや例外が発生する可能性があります。
+<span id="volver-al-menú-principal" aria-hidden="true"></span>
 
-このドキュメントでは、その制限を明示しています。利用可能なゲーム選択メニューとしては紹介していません。
+## メインメニューに戻る
+
+ゲーム中はポーズパネルの **Menu**、**M** キー、またはコントローラーの **Select** でメインメニューに戻れます。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 参照ソース
 
-- [Scene の契約](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h)。
-- [SceneFactory の登録](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
-- [SceneManager の要求](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp)。
-- [Engine の遷移処理](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [Scene の契約](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Scene/Scene.h)。
+- [SceneFactory の登録](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
+- [SceneManager の要求](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SceneManager.cpp)。
+- [Engine の遷移処理](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp)。

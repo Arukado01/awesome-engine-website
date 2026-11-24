@@ -33,7 +33,7 @@ cd AwesomeEngine
 Para consultar exatamente o código descrito nesta documentação, você pode selecionar a revisão auditada em uma cópia nova:
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 Esse último comando deixa a cópia em um commit específico. Se você pretende desenvolver alterações, crie sua própria branch antes de trabalhar. A documentação também vincula cada fonte a essa revisão para permitir comparações com futuras atualizações.
@@ -74,7 +74,7 @@ Mantenha o terminal na **raiz do repositório**, ao lado de `Content`:
 .\Build\AwesomeEngine.exe
 ```
 
-A revisão documentada solicita **Tetris** como cena inicial. Não existe um seletor de jogos funcional registrado nessa revisão: a cena inicial é definida em `Engine.cpp`.
+O motor inicia no menu principal. Use o clique esquerdo ou o botão Sul do controle para abrir o jogo sob o cursor. Use o clique direito ou o botão Oeste para ver os controles.
 
 O diretório de trabalho importa. A configuração, os shaders, a fonte e os demais recursos são carregados por caminhos relativos, como `Content/Config.json`. Executar a partir de `Build` pode impedir que o motor os encontre.
 
@@ -96,6 +96,6 @@ Consulte [Solução de problemas](/pt/docs/problemas/): ela separa problemas de 
 
 ## Fontes
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Tarefas de compilação](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json).
-- [Depuração e diretório de trabalho](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Tarefas de compilação](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
+- [Depuração e diretório de trabalho](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).

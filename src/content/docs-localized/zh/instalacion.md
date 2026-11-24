@@ -33,7 +33,7 @@ cd AwesomeEngine
 要查看与本文档完全一致的代码，可以在新克隆的副本中切换到已审查的修订：
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 最后一条命令会将工作副本切换到特定提交。如果准备开发改动，请在开始前创建自己的分支。文档中的源码链接也指向该修订，方便与后续更新比较。
@@ -74,7 +74,7 @@ cmake --build BuildRelease --parallel
 .\Build\AwesomeEngine.exe
 ```
 
-本文描述的修订将 **Tetris** 指定为初始场景。该修订没有注册可用的游戏选择器，初始场景在 `Engine.cpp` 中定义。
+引擎启动后进入主菜单。点击鼠标左键或按手柄南键可启动光标下的游戏。点击鼠标右键或按西键可查看操作说明。
 
 工作目录很重要。配置、着色器、字体及其他资源通过 `Content/Config.json` 等相对路径加载。从 `Build` 目录启动可能导致引擎找不到资源。
 
@@ -96,6 +96,6 @@ cmake --build BuildRelease --parallel
 
 ## 源码参考
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt)。
-- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json)。
-- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt)。
+- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json)。
+- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json)。

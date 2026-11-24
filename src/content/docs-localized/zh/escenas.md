@@ -52,7 +52,7 @@ public:
 
 ## 游戏注册
 
-`SceneFactory::Scenes` 是将名称与 `unique_ptr<Scene>` 关联的 `unordered_map`。工厂注册了七个实例：
+`SceneFactory::Scenes` 是将名称与 `unique_ptr<Scene>` 关联的 `unordered_map`。工厂注册了九个游戏和一个菜单场景。
 
 ```cpp
 scenes.emplace("Bounce", std::make_unique<Bounce::Game>(context));
@@ -62,9 +62,12 @@ scenes.emplace("TicTacToe", std::make_unique<TicTacToe::Game>(context));
 scenes.emplace("MineSweeper", std::make_unique<MineSweeper::Game>(context));
 scenes.emplace("Runner", std::make_unique<Runner::Game>(context));
 scenes.emplace("Tetris", std::make_unique<Tetris::Game>(context));
+scenes.emplace("Pong", std::make_unique<Pong::Game>(context));
+scenes.emplace("Breakout", std::make_unique<Breakout::Game>(context));
+scenes.emplace("Menu", std::make_unique<Menu::Game>(context));
 ```
 
-本文描述的修订在 Engine 构造函数中请求 Tetris。名称必须与注册表的键完全一致；未知场景没有已实现的恢复路径。
+`Engine` 从 `Menu` 启动。菜单读取 `Content/Config.json` 中的 `games` 列表。已注册的 Bounce 可以加入列表。
 
 <span id="transición-diferida" aria-hidden="true"></span>
 
@@ -96,23 +99,25 @@ ChangeScene(名称)
 
 ## 探索真实实现
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) 展示了游戏类如何接收上下文、准备挡板和统计信息、请求音效与音乐，以及使用场景回调。
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Games/Source/Bounce.cpp) 展示了游戏类如何接收上下文、准备挡板和统计信息、请求音效与音乐，以及使用场景回调。
 
 要在自己的副本中添加场景，请遵循现有分工：在 `Games/Include` 中声明，在 `Games/Source` 中实现，并在 `SceneFactory.cpp` 中显式注册。CMake 使用 `GLOB_RECURSE CONFIGURE_DEPENDS` 发现这些目录中的 `.cpp` 文件。系统不存在运行时加载的场景插件。
 
 <span id="limitación-del-acceso-al-menú" aria-hidden="true"></span>
 
-## 菜单访问的限制
+<span id="菜单访问的限制" aria-hidden="true"></span>
 
-覆盖层包含 **Menu** 按钮，快捷键 **M** 也调用相同流程。Engine 会请求名为 `Menu` 的场景，但此修订的工厂没有注册它。探索该版本时请避免此操作，否则可能因键不存在而触发断言或异常。
+<span id="volver-al-menú-principal" aria-hidden="true"></span>
 
-本文档明确保留了这一限制，不将该菜单描述为可用的游戏选择器。
+## 返回主菜单
+
+游戏中可用暂停面板上的 **Menu**、**M** 键或手柄 **Select** 返回主菜单。
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## 源码参考
 
-- [Scene 接口约定](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h)。
-- [SceneFactory 注册](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp)。
-- [SceneManager 请求](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp)。
-- [Engine 中的切换](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp)。
+- [Scene 接口约定](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Scene/Scene.h)。
+- [SceneFactory 注册](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp)。
+- [SceneManager 请求](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SceneManager.cpp)。
+- [Engine 中的切换](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp)。

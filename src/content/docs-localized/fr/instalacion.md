@@ -33,7 +33,7 @@ cd AwesomeEngine
 Pour consulter exactement le code décrit ici, vous pouvez sélectionner la révision auditée dans une nouvelle copie :
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 Cette dernière commande place la copie sur un commit précis. Si vous souhaitez développer des changements, créez votre propre branche avant de travailler. Chaque source de la documentation pointe aussi vers cette révision afin de permettre des comparaisons avec les mises à jour futures.
@@ -74,7 +74,7 @@ Gardez le terminal à la **racine du dépôt**, à côté de `Content` :
 .\Build\AwesomeEngine.exe
 ```
 
-La révision documentée demande **Tetris** comme scène initiale. Aucun sélecteur de jeux fonctionnel n’y est enregistré : la scène de départ est définie dans `Engine.cpp`.
+Le moteur démarre dans le menu principal. Utilisez le clic gauche ou le bouton Sud de la manette pour lancer le jeu sous le curseur. Le clic droit ou le bouton Ouest affiche ses commandes.
 
 Le répertoire de travail est important. La configuration, les shaders, la police et les autres ressources sont chargés avec des chemins relatifs tels que `Content/Config.json`. Un lancement depuis `Build` peut empêcher le moteur de les trouver.
 
@@ -96,6 +96,6 @@ Consultez le [Dépannage](/fr/docs/problemas/) : les problèmes d’outils, de t
 
 ## Sources
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Tâches de compilation](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json).
-- [Débogage et répertoire de travail](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Tâches de compilation](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
+- [Débogage et répertoire de travail](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).

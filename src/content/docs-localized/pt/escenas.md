@@ -50,7 +50,7 @@ O construtor e `Start` não são equivalentes. As instâncias permanecem no regi
 
 ## Registro de jogos
 
-`SceneFactory::Scenes` é um `unordered_map` que associa nomes a `unique_ptr<Scene>`. A fábrica registra sete instâncias:
+`SceneFactory::Scenes` é um `unordered_map` que associa nomes a `unique_ptr<Scene>`. A fábrica registra nove jogos e a cena do menu.
 
 ```cpp
 scenes.emplace("Bounce", std::make_unique<Bounce::Game>(context));
@@ -60,9 +60,12 @@ scenes.emplace("TicTacToe", std::make_unique<TicTacToe::Game>(context));
 scenes.emplace("MineSweeper", std::make_unique<MineSweeper::Game>(context));
 scenes.emplace("Runner", std::make_unique<Runner::Game>(context));
 scenes.emplace("Tetris", std::make_unique<Tetris::Game>(context));
+scenes.emplace("Pong", std::make_unique<Pong::Game>(context));
+scenes.emplace("Breakout", std::make_unique<Breakout::Game>(context));
+scenes.emplace("Menu", std::make_unique<Menu::Game>(context));
 ```
 
-A revisão documentada solicita Tetris no construtor do Engine. Os nomes são chaves exatas do registro; não há um caminho de recuperação implementado para uma cena desconhecida.
+O `Engine` inicia em `Menu`. O menu lê `games` de `Content/Config.json`. Bounce está registrado e pode ser adicionado à lista.
 
 <span id="transición-diferida" aria-hidden="true"></span>
 
@@ -94,23 +97,25 @@ Sincronização da pausa
 
 ## Explorar uma implementação real
 
-[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Games/Source/Bounce.cpp) mostra como uma classe de jogo recebe o contexto, prepara sua raquete e estatísticas, solicita som e música e usa os callbacks da cena.
+[Bounce](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Games/Source/Bounce.cpp) mostra como uma classe de jogo recebe o contexto, prepara sua raquete e estatísticas, solicita som e música e usa os callbacks da cena.
 
 Para adicionar uma cena à sua própria cópia, siga a separação existente: declaração em `Games/Include`, implementação em `Games/Source` e registro explícito em `SceneFactory.cpp`. O CMake descobre os arquivos `.cpp` dessas pastas com `GLOB_RECURSE CONFIGURE_DEPENDS`; não existe plugin de cenas carregado em tempo de execução.
 
 <span id="limitación-del-acceso-al-menú" aria-hidden="true"></span>
 
-## Limitação de acesso ao menu
+<span id="limitação-de-acesso-ao-menu" aria-hidden="true"></span>
 
-A sobreposição inclui um botão **Menu**, e o atalho **M** chama o mesmo fluxo. O Engine solicita uma cena chamada `Menu`, mas a fábrica dessa revisão não a registra. Evite essa ação ao explorar esta versão: ela pode disparar uma asserção ou uma exceção por chave inexistente.
+<span id="volver-al-menú-principal" aria-hidden="true"></span>
 
-Esta documentação mantém essa limitação explícita; ela não apresenta o menu como um seletor de jogos disponível.
+## Voltar ao menu principal
+
+Durante a partida, volte ao menu com **Menu** no painel de pausa, **M** ou **Select** no controle.
 
 <span id="fuentes" aria-hidden="true"></span>
 
 ## Fontes
 
-- [Contrato Scene](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Include/Scene/Scene.h).
-- [Registro SceneFactory](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Scene/SceneFactory.cpp).
-- [Solicitações do SceneManager](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Managers/SceneManager.cpp).
-- [Transições no Engine](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/Engine/Source/Core/Engine.cpp).
+- [Contrato Scene](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Include/Scene/Scene.h).
+- [Registro SceneFactory](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Scene/SceneFactory.cpp).
+- [Solicitações do SceneManager](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Managers/SceneManager.cpp).
+- [Transições no Engine](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/Engine/Source/Core/Engine.cpp).

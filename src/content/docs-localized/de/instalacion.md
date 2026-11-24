@@ -33,7 +33,7 @@ cd AwesomeEngine
 Um genau den hier beschriebenen Code anzusehen, kannst du in einer neuen Kopie die geprüfte Revision auswählen:
 
 ```sh
-git checkout f0e88edffae35efb3cc208e8eea651d1b559cbaa
+git checkout 0ecfdb64c14e245e99850fc1bf887a73eef60697
 ```
 
 Dieser letzte Befehl setzt die Kopie auf einen bestimmten Commit. Wenn du Änderungen entwickeln möchtest, erstelle vor Beginn einen eigenen Branch. Die Dokumentation verlinkt jede Quelle ebenfalls auf diese Revision, damit du sie mit späteren Aktualisierungen vergleichen kannst.
@@ -74,7 +74,7 @@ Lass das Terminal im **Stammverzeichnis des Repositorys**, neben `Content`:
 .\Build\AwesomeEngine.exe
 ```
 
-Die dokumentierte Revision fordert **Tetris** als Startszene an. In dieser Revision ist keine funktionsfähige Spielauswahl registriert: Die Startszene wird in `Engine.cpp` festgelegt.
+Die Engine startet im Hauptmenü. Mit der linken Maustaste oder der Süd-Taste am Controller startest du das Spiel unter dem Zeiger. Ein Rechtsklick oder die West-Taste zeigt die Steuerung.
 
 Das Arbeitsverzeichnis ist wichtig. Konfiguration, Shader, Schrift und andere Ressourcen werden über relative Pfade wie `Content/Config.json` geladen. Ein Start aus `Build` kann verhindern, dass die Engine sie findet.
 
@@ -96,6 +96,6 @@ Sieh unter [Fehlerbehebung](/de/docs/problemas/) nach: Dort werden Werkzeugprobl
 
 ## Quellen
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/CMakeLists.txt).
-- [Build-Aufgaben](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/tasks.json).
-- [Debugging und Arbeitsverzeichnis](https://github.com/Arukado01/AwesomeEngine/blob/f0e88edffae35efb3cc208e8eea651d1b559cbaa/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/CMakeLists.txt).
+- [Build-Aufgaben](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/tasks.json).
+- [Debugging und Arbeitsverzeichnis](https://github.com/Arukado01/AwesomeEngine/blob/0ecfdb64c14e245e99850fc1bf887a73eef60697/.vscode/launch.json).
