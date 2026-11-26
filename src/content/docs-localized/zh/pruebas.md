@@ -39,3 +39,20 @@ ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tes
 `core.collision` 无需打开窗口即可检查六个用例。`core.collision.detects_failure` 通过 `AE_TEST_FORCE_FAIL` 触发失败，并验证可执行文件返回非零退出码。
 
 [测试源码](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest 注册配置](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+
+<span id="animación-de-sprites" aria-hidden="true"></span>
+
+### 精灵动画
+
+十个用例覆盖初始状态、帧推进、完整循环、`Once` 模式结束、暂停与恢复、重置、通过回调取消推进、每帧矩形、无效参数以及模式切换。
+
+若只编译并运行此套件，请使用 `ae_sprite_animator_tests` 目标并按名称筛选。
+
+```sh
+cmake --build Build --target ae_sprite_animator_tests --parallel
+ctest --test-dir Build -R '^core[.]sprite_animator$' --output-on-failure --no-tests=error
+```
+
+`core.sprite_animator` 无需打开窗口即可检查十个用例：以 `Loop` 和 `Once` 模式播放、暂停时保留帧进度、忽略无效的时长或速度，并通过 `FrameRect` 计算活动帧的矩形。
+
+[测试源码](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/Core/SpriteAnimatorTests.cpp) · [CTest 注册配置](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/CMakeLists.txt)

@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { locales } from '../../src/i18n/locales';
 
 const commits = [
+  '34702d1',
   '61a3244',
   '60ce813',
   '0ecfdb6',
@@ -36,9 +37,9 @@ for (const locale of locales) {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto(`${prefix}/`);
-    await expect(page.locator('.latest-update').first()).toContainText('61a3244');
+    await expect(page.locator('.latest-update').first()).toContainText('34702d1');
     await expect(page.locator('.latest-update').first().locator('h3')).toHaveText(
-      catalog['Pruebas unitarias de colisión 2D'],
+      catalog['Pruebas unitarias de animación de sprites'],
     );
     await page.goto(`${prefix}/motor/`);
     await expect(page.locator('.system-row')).toHaveCount(10);

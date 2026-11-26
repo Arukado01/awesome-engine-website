@@ -39,3 +39,20 @@ Um nur den Haupttest (ohne den Negativtest) auszuführen, verwenden Sie `-R '^co
 `core.collision` prüft die sechs Fälle ohne Fenster. `core.collision.detects_failure` löst mit `AE_TEST_FORCE_FAIL` einen Fehler aus und prüft, ob das Programm einen Exitcode ungleich null liefert.
 
 [Testquellcode](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [Registrierung in CTest](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+
+<span id="animación-de-sprites" aria-hidden="true"></span>
+
+### Sprite-Animation
+
+Zehn Fälle prüfen den Anfangszustand, das Fortschreiten der Frames, eine komplette Schleife, das Ende des `Once`-Modus, das Pausieren und Fortsetzen, das Zurücksetzen, den Abbruch des Fortschritts über einen Callback, das Rechteck jedes Frames, ungültige Parameter und den Moduswechsel.
+
+Um nur diese Suite zu bauen und auszuführen, nutze das Ziel `ae_sprite_animator_tests` und filtere nach Namen.
+
+```sh
+cmake --build Build --target ae_sprite_animator_tests --parallel
+ctest --test-dir Build -R '^core[.]sprite_animator$' --output-on-failure --no-tests=error
+```
+
+`core.sprite_animator` prüft die zehn Fälle ohne Fenster: Er spielt im `Loop`- und `Once`-Modus, behält beim Pausieren den Frame-Anteil, ignoriert ungültige Dauern oder Geschwindigkeiten und berechnet das Rechteck des aktiven Frames mit `FrameRect`.
+
+[Testquellcode](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/Core/SpriteAnimatorTests.cpp) · [Registrierung in CTest](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/CMakeLists.txt)

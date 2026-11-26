@@ -18,6 +18,20 @@ const commit = (sha: string) => `https://github.com/Arukado01/AwesomeEngine/comm
 /** Agregar nuevas entradas al principio, conservar la fecha y enlazar la evidencia del cambio. */
 export const updates: Update[] = [
   {
+    id: '34702d1',
+    date: '2026-11-26T15:39:39-05:00',
+    title: 'Pruebas unitarias de animación de sprites',
+    description:
+      'Diez casos comprueban el SpriteAnimator: los modos Loop y Once, la pausa, la reanudación, el reinicio y el rectángulo de cada cuadro.',
+    category: 'Pruebas',
+    status: 'implemented',
+    added: ['Se ejecutan sin abrir una ventana mediante el objetivo ae_sprite_animator_tests.'],
+    fixed: [],
+    performance: [],
+    architecture: ['CTest · TestSupport'],
+    source: commit('34702d1447e3252b156df7e71cda3030dd80cdf9'),
+  },
+  {
     id: '61a3244',
     date: '2026-11-25T20:17:42-05:00',
     title: 'Pruebas unitarias de colisión 2D',

@@ -8,8 +8,8 @@ test('el historial conserva commits únicos, fuentes y fechas descendentes', () 
   assert.deepEqual(
     updates.slice(0, 13).map((u) => u.id),
     [
-      '61a3244', '60ce813', '0ecfdb6', 'e455743', '87fe97c', '370cf74', 'adbda4f', '545c133',
-      '872388a', '3b48b94', '83a6ec8', '3e043b7', '82fba63',
+      '34702d1', '61a3244', '60ce813', '0ecfdb6', 'e455743', '87fe97c', '370cf74', 'adbda4f',
+      '545c133', '872388a', '3b48b94', '83a6ec8', '3e043b7',
     ],
   );
   assert.equal(new Set(updates.map((u) => u.id)).size, updates.length);

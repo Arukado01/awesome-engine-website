@@ -39,3 +39,20 @@ ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tes
 `core.collision` はウィンドウを開かずに6ケースを確認します。`core.collision.detects_failure` は `AE_TEST_FORCE_FAIL` で意図的に失敗させ、実行ファイルが0以外の終了コードを返すことを確認します。
 
 [テストのソースコード](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest への登録](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+
+<span id="animación-de-sprites" aria-hidden="true"></span>
+
+### スプライトアニメーション
+
+初期状態、フレームの進行、ループ一周、`Once` モードの終了、一時停止と再開、リセット、コールバックによる進行の中断、各フレームの矩形、無効な引数、モード変更の10ケースを確認します。
+
+このスイートだけをビルドして実行するには、`ae_sprite_animator_tests` ターゲットを使い、名前で絞り込みます。
+
+```sh
+cmake --build Build --target ae_sprite_animator_tests --parallel
+ctest --test-dir Build -R '^core[.]sprite_animator$' --output-on-failure --no-tests=error
+```
+
+`core.sprite_animator` はウィンドウを開かずに10ケースを確認します。`Loop` と `Once` の両モードで再生し、一時停止中はフレーム位置を保持し、無効な時間や速度を無視し、`FrameRect` でアクティブフレームの矩形を計算することを確認します。
+
+[テストのソースコード](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/Core/SpriteAnimatorTests.cpp) · [CTest への登録](https://github.com/Arukado01/AwesomeEngine/blob/34702d1447e3252b156df7e71cda3030dd80cdf9/Tests/CMakeLists.txt)
