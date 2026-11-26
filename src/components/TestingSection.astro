@@ -1,5 +1,10 @@
 ---
 const { variant = 'panel' } = Astro.props;
+const tests = [
+  { name: 'core.collision', href: '/docs/pruebas/#colisiones-2d' },
+  { name: 'core.collision.detects_failure', href: '/docs/pruebas/#colisiones-2d' },
+  { name: 'core.sprite_animator', href: '/docs/pruebas/#animación-de-sprites' },
+];
 ---
 
 {
@@ -33,6 +38,13 @@ const { variant = 'panel' } = Astro.props;
         <span class="testing-eyebrow">Calidad verificable</span>
         <h2 id="testing-title">Pruebas del motor</h2>
         <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
+        <div class="test-chips">
+          {tests.map((test) => (
+            <a class="test-chip" href={test.href}>
+              <code>{test.name}</code>
+            </a>
+          ))}
+        </div>
         <a class="button" href="/docs/pruebas/">
           Ver guía de pruebas <span aria-hidden="true">→</span>
         </a>
@@ -145,6 +157,28 @@ const { variant = 'panel' } = Astro.props;
     font-size: 12px;
     line-height: 2;
     max-width: 62ch;
+  }
+  .test-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .test-chip {
+    font: 10px var(--font-mono);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 7px 10px;
+    border-radius: 3px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .test-chip:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .test-chip code {
+    font: inherit;
+    color: inherit;
   }
   .testing-panel .button {
     margin-top: 8px;
