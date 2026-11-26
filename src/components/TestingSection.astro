@@ -1,15 +1,48 @@
-<section class="testing-section" id="pruebas" aria-labelledby="testing-title">
-  <div class="testing-panel">
-    <span class="testing-eyebrow">Calidad verificable</span>
-    <h2 id="testing-title">Pruebas del motor</h2>
-    <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
-    <a class="button" href="/docs/pruebas/">
-      Ver guía de pruebas <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</section>
+---
+const { variant = 'panel' } = Astro.props;
+---
+
+{
+  variant === 'card' ? (
+    <div class="testing-feature" id="pruebas" aria-labelledby="testing-title">
+      <a class="feature testing-card" href="/docs/pruebas/">
+        <div class="feature-top">
+          <span class="mono">04 — CALIDAD</span>
+          <span class="pill live">Implementado</span>
+        </div>
+        <div class="feature-bottom">
+          <div>
+            <h3 id="testing-title">Pruebas del motor</h3>
+            <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
+          </div>
+          <span class="feature-arrow">↗</span>
+        </div>
+      </a>
+    </div>
+  ) : (
+    <section class="testing-section" id="pruebas" aria-labelledby="testing-title">
+      <div class="testing-panel">
+        <span class="testing-eyebrow">Calidad verificable</span>
+        <h2 id="testing-title">Pruebas del motor</h2>
+        <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
+        <a class="button" href="/docs/pruebas/">
+          Ver guía de pruebas <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+  )
+}
 
 <style>
+  .testing-feature {
+    margin-top: 25px;
+  }
+  .testing-card {
+    width: 100%;
+  }
+  .testing-card h3 {
+    margin: 0 0 12px;
+  }
   .testing-panel {
     display: grid;
     justify-items: start;
