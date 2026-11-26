@@ -68,17 +68,7 @@ cmake --build BuildRelease --parallel
 
 ## 运行单元测试
 
-当前测试套件检查六个 AABB 碰撞场景，包括边界框相交与分离、初始重叠、运动中发生碰撞、扫掠时无碰撞，以及角点接触。
-
-```sh
-cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -L headless --output-on-failure --no-tests=error
-```
-
-`core.collision` 运行这六个用例。`core.collision.detects_failure` 设置 `AE_TEST_FORCE_FAIL` 来触发失败。CTest 预期第二项测试返回非零退出码。
-
-[测试源码](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest 注册配置](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+请参阅[引擎测试指南](/zh/docs/pruebas/)查看命令和可用的测试套件。
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 

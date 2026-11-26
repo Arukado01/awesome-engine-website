@@ -60,17 +60,7 @@ El proyecto también contempla opciones del compilador MSVC, pero los pasos ante
 
 ## Ejecutar las pruebas unitarias
 
-La suite actual comprueba seis casos de colisión AABB. Incluye cajas que se cruzan o quedan separadas, solapamiento inicial, impacto durante el movimiento, barrido sin impacto y contacto en una esquina.
-
-```sh
-cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -L headless --output-on-failure --no-tests=error
-```
-
-`core.collision` ejecuta los seis casos. `core.collision.detects_failure` activa `AE_TEST_FORCE_FAIL` para provocar un fallo. CTest espera un código de salida distinto de cero en esa segunda prueba.
-
-[Código de las pruebas](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [Registro en CTest](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+Consulta la [guía de pruebas del motor](/docs/pruebas/) para ver los comandos y las suites disponibles.
 
 ## Ejecutar en Windows
 

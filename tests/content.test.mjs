@@ -31,9 +31,9 @@ test('la información del motor mantiene alcance y estados verificables', () => 
   assert.equal(new Set(games.map((g) => g.id)).size, 9);
   assert.ok(technologies.some((t) => t.name === 'SFML' && t.version === '3.1.0'));
 });
-test('las nueve guías tienen orden único, enlaces de fuente y destinos internos existentes', () => {
+test('las diez guías tienen orden único, enlaces de fuente y destinos internos existentes', () => {
   const names = readdirSync('src/content/docs').filter((x) => x.endsWith('.md'));
-  assert.equal(names.length, 9);
+  assert.equal(names.length, 10);
   const orders = [];
   for (const name of names) {
     const text = readFileSync(`src/content/docs/${name}`, 'utf8');

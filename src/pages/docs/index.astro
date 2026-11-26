@@ -1,5 +1,6 @@
 ---
 import Docs from '../../layouts/Docs.astro';
+import TestingSection from '../../components/TestingSection.astro';
 import { getDocs } from '../../i18n/docs';
 import { getLocale } from '../../i18n/locales';
 const locale = getLocale(Astro.url.pathname);
@@ -7,6 +8,7 @@ const guideIcons: Record<string, string> = {
   introduccion:
     'M4 5h6a3 3 0 0 1 3 3v13a4 4 0 0 0-4-2H4V5Zm16 0h-5a2 2 0 0 0-2 2v14a4 4 0 0 1 4-2h3V5Z',
   instalacion: 'M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5',
+  pruebas: 'M8 3h8m-6 0v7l-5 8a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-8V3M8 15h8',
   configuracion: 'M4 7h16M4 17h16M8 4v6M16 14v6',
   arquitectura: 'M9 3h6v5H9zM3 16h6v5H3zM15 16h6v5h-6zM12 8v4M6 16v-4h12v4',
   renderizado: 'm12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5',
@@ -30,6 +32,9 @@ const docs = await getDocs(locale);
     <a class="button primary" href="/docs/instalacion/">
       Guía de instalación <span>→</span>
     </a>
+  </div>
+  <div class="docs-testing">
+    <TestingSection />
   </div>
   <label class="search-label" for="docs-search">
     Buscar una guía
@@ -165,6 +170,9 @@ const docs = await getDocs(locale);
     text-decoration: none;
     color: var(--on-accent);
     font-size: 12px;
+  }
+  .docs-testing {
+    margin-bottom: 36px;
   }
   .search-label {
     display: block;

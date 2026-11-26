@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import TestingSection from '../components/TestingSection.astro';
 import { getLocale, localeInfo } from '../i18n/locales';
 const currentLocale = localeInfo[getLocale(Astro.url.pathname)].html;
 import '../styles/home.css';
@@ -208,6 +209,9 @@ const formatUpdateDate = (value: string) =>
       </a>
     </div>
   </section>
+  <div class="section container">
+    <TestingSection />
+  </div>
   <section class="architecture-band section">
     <div class="container">
       <div class="section-heading">

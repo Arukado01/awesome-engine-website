@@ -31,7 +31,7 @@ Sitio de presentación, documentación y evolución de **Awesome Engine**, el mo
 
 ## Idiomas
 
-La interfaz, las nueve guías, el historial, el showcase y los mensajes de los controles están disponibles en siete idiomas:
+La interfaz, las diez guías, el historial, el showcase y los mensajes de los controles están disponibles en siete idiomas:
 
 | Idioma             | Ruta   |
 | ------------------ | ------ |
@@ -59,7 +59,7 @@ Capturas reales de la interfaz del sitio. Los temas claro y oscuro comparten la 
 
 ## Qué incluye
 
-Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, tarjetas de documentación con iconos y hover estable, búsqueda de guías y de categorías dentro del selector de historial, metadatos sociales, sitemap y página 404.
+Presentación del motor, capacidades verificadas, arquitectura, galería, diez guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, tarjetas de documentación con iconos y hover estable, búsqueda de guías y de categorías dentro del selector de historial, metadatos sociales, sitemap y página 404.
 
 El contenido técnico se basa en la auditoría de la revisión `61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2`. La documentación describe cómo ejecutar las pruebas unitarias de colisión y cubre la pantalla completa, el ajuste de la ventana, el menú configurable, Pong y Breakout, además de los sistemas de animación, colisiones, audio, partículas y tiempo. No se anuncian versiones ni capacidades sin evidencia.
 

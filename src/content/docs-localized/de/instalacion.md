@@ -68,17 +68,7 @@ Das Projekt sieht auch Optionen für den MSVC-Compiler vor, die obigen Schritte 
 
 ## Unit-Tests ausführen
 
-Die Testsuite prüft sechs AABB-Kollisionsfälle. Dazu gehören sich schneidende und getrennte Boxen, anfängliche Überlappung, ein Treffer während der Bewegung, eine Bewegung ohne Treffer und eine Eckberührung.
-
-```sh
-cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -L headless --output-on-failure --no-tests=error
-```
-
-`core.collision` führt die sechs Fälle aus. `core.collision.detects_failure` setzt `AE_TEST_FORCE_FAIL`, um einen Fehler auszulösen. CTest erwartet beim zweiten Test einen Exitcode ungleich null.
-
-[Testquellcode](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [Registrierung in CTest](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+Befehle und verfügbare Testsuiten findest du in der [Testanleitung der Engine](/de/docs/pruebas/).
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 

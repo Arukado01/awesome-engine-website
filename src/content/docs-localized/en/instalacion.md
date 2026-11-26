@@ -68,17 +68,7 @@ The project also includes MSVC compiler options, but the steps above use Ninja a
 
 ## Run the unit tests
 
-The current suite checks six AABB collision cases. These cover intersecting and separate boxes, initial overlap, an impact during motion, a sweep with no impact, and corner contact.
-
-```sh
-cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -L headless --output-on-failure --no-tests=error
-```
-
-`core.collision` runs the six cases. `core.collision.detects_failure` sets `AE_TEST_FORCE_FAIL` to trigger a failure. CTest expects a nonzero exit code from the second test.
-
-[Test source](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest registration](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+See the [engine testing guide](/en/docs/pruebas/) for the commands and available suites.
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 

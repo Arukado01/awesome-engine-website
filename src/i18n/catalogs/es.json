@@ -770,5 +770,13 @@
   "61a3244": "61a3244",
   "Base pública: 61a3244": "Base pública: 61a3244",
   "Referencia: 61a3244": "Referencia: 61a3244",
-  "9 opciones disponibles": "9 opciones disponibles"
+  "9 opciones disponibles": "9 opciones disponibles",
+  "Pruebas del motor": "Pruebas del motor",
+  "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.": "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.",
+  "Compilar y ejecutar las pruebas": "Compilar y ejecutar las pruebas",
+  "Suites disponibles": "Suites disponibles",
+  "Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.": "Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.",
+  "Ver guía de pruebas": "Ver guía de pruebas",
+  "10 guías disponibles": "10 guías disponibles",
+  "Pruebas del motor — Documentación · Awesome Engine": "Pruebas del motor — Documentación · Awesome Engine"
 }

@@ -68,17 +68,7 @@ cmake --build BuildRelease --parallel
 
 ## 単体テストを実行する
 
-現在のスイートは AABB 衝突の6ケースを確認します。ボックスの交差と分離、初期の重なり、移動中の衝突、衝突しない掃引、角での接触が対象です。
-
-```sh
-cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
-cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -L headless --output-on-failure --no-tests=error
-```
-
-`core.collision` は6ケースを実行します。`core.collision.detects_failure` は `AE_TEST_FORCE_FAIL` を設定して意図的に失敗させます。CTest は2つ目のテストが0以外の終了コードを返すことを期待します。
-
-[テストのソースコード](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest への登録](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
+コマンドと利用できるスイートは[エンジンのテストガイド](/ja/docs/pruebas/)を参照してください。
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 

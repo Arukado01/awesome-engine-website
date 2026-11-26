@@ -770,5 +770,13 @@
   "61a3244": "61a3244",
   "Base pública: 61a3244": "公开基准：61a3244",
   "Referencia: 61a3244": "参考：61a3244",
-  "9 opciones disponibles": "9 个可用选项"
+  "9 opciones disponibles": "9 个可用选项",
+  "Pruebas del motor": "引擎测试",
+  "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.": "了解如何使用 CMake 和 CTest 运行测试，以及各测试套件的覆盖范围。",
+  "Compilar y ejecutar las pruebas": "编译并运行测试",
+  "Suites disponibles": "可用测试套件",
+  "Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.": "查看各测试套件的覆盖范围，以及使用 CMake 和 CTest 运行它们的方法。",
+  "Ver guía de pruebas": "查看测试指南",
+  "10 guías disponibles": "10 篇可用指南",
+  "Pruebas del motor — Documentación · Awesome Engine": "引擎测试 — 文档 · Awesome Engine"
 }

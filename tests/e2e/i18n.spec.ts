@@ -58,6 +58,7 @@ for (const locale of locales.filter((code) => code !== 'es')) {
     page.on('pageerror', (error) => errors.push(error.message));
     const response = await page.goto(`/${locale}/`);
     expect(response?.status()).toBe(200);
+    await expect(page.locator('#pruebas a')).toHaveAttribute('href', '/' + locale + '/docs/pruebas/');
     await expect(page.locator('html')).toHaveAttribute('lang', localeInfo[locale].html);
     await expect(page).toHaveTitle(
       translated(locale, 'Ideas en código. Mundos en movimiento. · Awesome Engine'),
@@ -91,6 +92,7 @@ for (const locale of locales.filter((code) => code !== 'es')) {
       .getByRole('link', { name: translated(locale, 'El motor'), exact: true })
       .click();
     await expect(page).toHaveURL(new RegExp(`/${locale}/motor/$`));
+    await expect(page.locator('#pruebas a')).toHaveAttribute('href', '/' + locale + '/docs/pruebas/');
     await expect(page.locator('#tecnologias .technology-link')).toHaveCount(8);
     expect(
       await page
@@ -106,12 +108,16 @@ for (const locale of locales.filter((code) => code !== 'es')) {
       .getByRole('link', { name: translated(locale, 'Documentación'), exact: true })
       .click();
     await expect(page).toHaveURL(new RegExp(`/${locale}/docs/$`));
-    await expect(page.locator('[data-doc-card]')).toHaveCount(9);
+    await expect(page.locator('[data-doc-card]')).toHaveCount(10);
     for (const href of await page
       .locator('[data-doc-card]')
       .evaluateAll((nodes) => nodes.map((node) => node.getAttribute('href')))) {
       expect(href).toMatch(new RegExp(`^/${locale}/docs/[\\w-]+/$`));
     }
+    await expect(page.locator('#pruebas a')).toHaveAttribute('href', '/' + locale + '/docs/pruebas/');
+    await page.locator('#pruebas a').click();
+    await expect(page.locator('h1')).toHaveText(translated(locale, 'Pruebas del motor'));
+    await expect(page.locator('.docs-article pre')).toContainText(['--no-tests=error', 'ae_collision_tests']);
     const contact = page.locator('#main-nav').getByRole('link', {
       name: translated(locale, 'Contáctanos'),
       exact: true,
@@ -171,7 +177,7 @@ for (const locale of ['en', 'pt', 'ja'] as const) {
       name: translated(locale, 'Buscar una guía'),
       exact: true,
     });
-    await expect(page.locator('#search-count')).toHaveText(countText(locale, 'guides', 9));
+    await expect(page.locator('#search-count')).toHaveText(countText(locale, 'guides', 10));
     const target = page.locator(`[data-doc-card][href="/${locale}/docs/instalacion/"]`);
     const title = (await target.locator('h3').textContent())!.trim();
     await search.fill(title);

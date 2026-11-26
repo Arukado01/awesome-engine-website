@@ -34,11 +34,11 @@ test('los siete catálogos cubren los textos estáticos y dinámicos sin perder 
   }
 });
 
-test('las 54 guías traducidas conservan código, fuentes, enlaces y anclas de las nueve originales', () => {
+test('las 60 guías traducidas conservan código, fuentes, enlaces y anclas de las diez originales', () => {
   const names = readdirSync('src/content/docs')
     .filter((name) => name.endsWith('.md'))
     .sort();
-  assert.equal(names.length, 9);
+  assert.equal(names.length, 10);
   const blocks = (text) =>
     [...text.matchAll(/```([^\n]*)\n([\s\S]*?)```/g)].map((match) => ({
       language: match[1].trim(),
