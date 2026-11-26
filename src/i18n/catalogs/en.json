@@ -758,5 +758,17 @@
   "24 de noviembre de 2026": "November 24, 2026",
   "Base pública: 60ce813": "Public baseline: 60ce813",
   "Referencia: 60ce813": "Reference: 60ce813",
-  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "Sprites, shapes, and text on sf::RenderTexture. Alt + Enter for fullscreen, aspect-ratio fitting, and Bloom and Monitor post-processing."
+  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "Sprites, shapes, and text on sf::RenderTexture. Alt + Enter for fullscreen, aspect-ratio fitting, and Bloom and Monitor post-processing.",
+  "Pruebas unitarias de colisión 2D": "2D collision unit tests",
+  "Seis casos comprueban la intersección y el barrido de cajas AABB. Una prueba negativa verifica que CTest detecte un fallo forzado.": "Six cases check AABB intersection and sweeping. A negative test verifies that CTest detects a forced failure.",
+  "Pruebas": "Testing",
+  "Se ejecutan sin abrir una ventana mediante el objetivo ae_collision_tests.": "Run without opening a window using the ae_collision_tests target.",
+  "CTest · TestSupport": "CTest · TestSupport",
+  "Ejecutar las pruebas unitarias": "Run the unit tests",
+  "34 actualizaciones": "34 updates",
+  "25 de noviembre de 2026": "November 25, 2026",
+  "61a3244": "61a3244",
+  "Base pública: 61a3244": "Public baseline: 61a3244",
+  "Referencia: 61a3244": "Reference: 61a3244",
+  "9 opciones disponibles": "9 options available"
 }

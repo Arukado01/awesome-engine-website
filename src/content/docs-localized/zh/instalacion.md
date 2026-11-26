@@ -33,7 +33,7 @@ cd AwesomeEngine
 要查看与本文档完全一致的代码，可以在新克隆的副本中切换到已审查的修订：
 
 ```sh
-git checkout 60ce8139fbd36713821bf85debd96bf0bd1c8bb3
+git checkout 61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2
 ```
 
 最后一条命令会将工作副本切换到特定提交。如果准备开发改动，请在开始前创建自己的分支。文档中的源码链接也指向该修订，方便与后续更新比较。
@@ -63,6 +63,22 @@ cmake --build BuildRelease --parallel
 ```
 
 项目也考虑了 MSVC 编译器选项，但上述步骤使用 Ninja 和当前环境中的编译器。不要在同一个构建目录中混用生成器或编译器。
+
+<span id="ejecutar-las-pruebas-unitarias" aria-hidden="true"></span>
+
+## 运行单元测试
+
+当前测试套件检查六个 AABB 碰撞场景，包括边界框相交与分离、初始重叠、运动中发生碰撞、扫掠时无碰撞，以及角点接触。
+
+```sh
+cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+cmake --build Build --target ae_collision_tests --parallel
+ctest --test-dir Build -L headless --output-on-failure --no-tests=error
+```
+
+`core.collision` 运行这六个用例。`core.collision.detects_failure` 设置 `AE_TEST_FORCE_FAIL` 来触发失败。CTest 预期第二项测试返回非零退出码。
+
+[测试源码](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest 注册配置](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 
@@ -96,6 +112,6 @@ cmake --build BuildRelease --parallel
 
 ## 源码参考
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
-- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/tasks.json)。
-- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt)。
+- [构建任务](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/tasks.json)。
+- [调试与工作目录](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/launch.json)。

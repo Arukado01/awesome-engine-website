@@ -35,7 +35,7 @@ Execute a partir da raiz, ao lado de `Content`:
 
 Não entre antes no diretório `Build`. A configuração, os shaders, as texturas, as fontes e os sons usam caminhos relativos. Verifique também se os nomes correspondem exatamente aos arquivos da sua cópia.
 
-Um JSON inválido ou uma chave obrigatória ausente pode interromper a inicialização. Compare com o [arquivo de referência](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json) e preserve os tipos esperados.
+Um JSON inválido ou uma chave obrigatória ausente pode interromper a inicialização. Compare com o [arquivo de referência](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Content/Config.json) e preserve os tipos esperados.
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -101,7 +101,7 @@ Ao abrir uma issue no [repositório](https://github.com/Arukado01/AwesomeEngine)
 
 ## Fontes
 
-- [Configuração de compilação](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt).
-- [Comportamento do Engine](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/Engine.cpp).
-- [Registro real de cenas](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp).
-- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp).
+- [Configuração de compilação](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt).
+- [Comportamento do Engine](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Core/Engine.cpp).
+- [Registro real de cenas](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Scene/SceneFactory.cpp).
+- [Persistência do SaveManager](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/SaveManager.cpp).

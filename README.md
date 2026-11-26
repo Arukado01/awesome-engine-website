@@ -61,7 +61,7 @@ Capturas reales de la interfaz del sitio. Los temas claro y oscuro comparten la 
 
 Presentación del motor, capacidades verificadas, arquitectura, galería, nueve guías técnicas y una línea de tiempo alimentada por datos centralizados. El sitio ofrece temas claro, oscuro y sistema con un panel accesible de iconos, animaciones de entrada y al recorrer las secciones que respetan el movimiento reducido, navegación adaptable, tarjetas de documentación con iconos y hover estable, búsqueda de guías y de categorías dentro del selector de historial, metadatos sociales, sitemap y página 404.
 
-El contenido técnico se basa en la auditoría de la revisión `60ce8139fbd36713821bf85debd96bf0bd1c8bb3`. La documentación describe la pantalla completa, el ajuste de la ventana, el menú configurable, Pong y Breakout, además de los sistemas de animación, colisiones, audio, partículas y tiempo. No se anuncian versiones ni capacidades sin evidencia.
+El contenido técnico se basa en la auditoría de la revisión `61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2`. La documentación describe cómo ejecutar las pruebas unitarias de colisión y cubre la pantalla completa, el ajuste de la ventana, el menú configurable, Pong y Breakout, además de los sistemas de animación, colisiones, audio, partículas y tiempo. No se anuncian versiones ni capacidades sin evidencia.
 
 El formulario utiliza Gmail SMTP, Turnstile y límites de abuso. La función de contacto está desplegada y el propietario confirmó la recepción del mensaje y de la copia en una prueba real. Se envía una copia de confirmación al remitente cuando es posible. Consulta [la integración de contacto](docs/CONTACT.md) y [el procedimiento de despliegue](docs/DEPLOYMENT.md).
 

@@ -80,7 +80,7 @@ SaveManager 在构造时读取 `Content/Save.json`；文件不存在时，从空
 
 ## 源码参考
 
-- [资源加载与缓存](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ResourceManager.cpp)。
-- [ResourceManager API](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Include/Managers/ResourceManager.h)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp)。
-- [PNG 截图](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/ScreenshotManager.cpp)。
+- [资源加载与缓存](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/ResourceManager.cpp)。
+- [ResourceManager API](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Include/Managers/ResourceManager.h)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/SaveManager.cpp)。
+- [PNG 截图](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/ScreenshotManager.cpp)。

@@ -35,7 +35,7 @@ CMake は FetchContent を使用して依存関係をダウンロードします
 
 先に `Build` ディレクトリへ移動しないでください。設定、シェーダー、テクスチャ、フォント、音声は相対パスを使います。名前がローカルのファイルと完全に一致するかも確認します。
 
-不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json)と比較し、想定される型を保ってください。
+不正な JSON や必須キーの欠落は起動を妨げることがあります。[基準ファイル](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Content/Config.json)と比較し、想定される型を保ってください。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -101,7 +101,7 @@ F12 は `Content/Screenshots` に保存します。書き込み権限と空き�
 
 ## 参照ソース
 
-- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
-- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/Engine.cpp)。
-- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp)。
+- [ビルド設定](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt)。
+- [Engine の動作](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Core/Engine.cpp)。
+- [実際のシーン登録](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager の永続化](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/SaveManager.cpp)。

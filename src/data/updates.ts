@@ -18,6 +18,20 @@ const commit = (sha: string) => `https://github.com/Arukado01/AwesomeEngine/comm
 /** Agregar nuevas entradas al principio, conservar la fecha y enlazar la evidencia del cambio. */
 export const updates: Update[] = [
   {
+    id: '61a3244',
+    date: '2026-11-25T20:17:42-05:00',
+    title: 'Pruebas unitarias de colisión 2D',
+    description:
+      'Seis casos comprueban la intersección y el barrido de cajas AABB. Una prueba negativa verifica que CTest detecte un fallo forzado.',
+    category: 'Pruebas',
+    status: 'implemented',
+    added: ['Se ejecutan sin abrir una ventana mediante el objetivo ae_collision_tests.'],
+    fixed: [],
+    performance: [],
+    architecture: ['CTest · TestSupport'],
+    source: commit('61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2'),
+  },
+  {
     id: '60ce813',
     date: '2026-11-24T09:42:02-05:00',
     title: 'Pantalla completa y ajuste al tamaño de la ventana',

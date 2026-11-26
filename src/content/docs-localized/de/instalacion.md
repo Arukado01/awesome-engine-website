@@ -33,7 +33,7 @@ cd AwesomeEngine
 Um genau den hier beschriebenen Code anzusehen, kannst du in einer neuen Kopie die geprüfte Revision auswählen:
 
 ```sh
-git checkout 60ce8139fbd36713821bf85debd96bf0bd1c8bb3
+git checkout 61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2
 ```
 
 Dieser letzte Befehl setzt die Kopie auf einen bestimmten Commit. Wenn du Änderungen entwickeln möchtest, erstelle vor Beginn einen eigenen Branch. Die Dokumentation verlinkt jede Quelle ebenfalls auf diese Revision, damit du sie mit späteren Aktualisierungen vergleichen kannst.
@@ -63,6 +63,22 @@ cmake --build BuildRelease --parallel
 ```
 
 Das Projekt sieht auch Optionen für den MSVC-Compiler vor, die obigen Schritte verwenden jedoch Ninja und den Compiler deiner Umgebung. Mische keine Generatoren oder Compiler im selben Build-Verzeichnis.
+
+<span id="ejecutar-las-pruebas-unitarias" aria-hidden="true"></span>
+
+## Unit-Tests ausführen
+
+Die Testsuite prüft sechs AABB-Kollisionsfälle. Dazu gehören sich schneidende und getrennte Boxen, anfängliche Überlappung, ein Treffer während der Bewegung, eine Bewegung ohne Treffer und eine Eckberührung.
+
+```sh
+cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+cmake --build Build --target ae_collision_tests --parallel
+ctest --test-dir Build -L headless --output-on-failure --no-tests=error
+```
+
+`core.collision` führt die sechs Fälle aus. `core.collision.detects_failure` setzt `AE_TEST_FORCE_FAIL`, um einen Fehler auszulösen. CTest erwartet beim zweiten Test einen Exitcode ungleich null.
+
+[Testquellcode](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [Registrierung in CTest](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 
@@ -96,6 +112,6 @@ Sieh unter [Fehlerbehebung](/de/docs/problemas/) nach: Dort werden Werkzeugprobl
 
 ## Quellen
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt).
-- [Build-Aufgaben](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/tasks.json).
-- [Debugging und Arbeitsverzeichnis](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/launch.json).
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt).
+- [Build-Aufgaben](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/tasks.json).
+- [Debugging und Arbeitsverzeichnis](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/launch.json).

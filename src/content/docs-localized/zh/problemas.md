@@ -35,7 +35,7 @@ CMake 使用 FetchContent 下载依赖项。连接、代理或 Git 错误可能�
 
 不要先切换到 `Build` 目录。配置、着色器、纹理、字体和音效都使用相对路径。还要确认名称与当前副本中的文件完全一致。
 
-无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Content/Config.json)，并保持预期的数据类型。
+无效的 JSON 或缺少必填键可能阻止启动。请对照[参考文件](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Content/Config.json)，并保持预期的数据类型。
 
 <span id="fallos-en-sistemas-sensibles-a-mayúsculas" aria-hidden="true"></span>
 
@@ -101,7 +101,7 @@ F12 将截图保存在 `Content/Screenshots`。请检查写入权限和可用空
 
 ## 源码参考
 
-- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
-- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Core/Engine.cpp)。
-- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Scene/SceneFactory.cpp)。
-- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/Engine/Source/Managers/SaveManager.cpp)。
+- [构建配置](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt)。
+- [Engine 行为](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Core/Engine.cpp)。
+- [实际场景注册](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Scene/SceneFactory.cpp)。
+- [SaveManager 持久化](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Engine/Source/Managers/SaveManager.cpp)。

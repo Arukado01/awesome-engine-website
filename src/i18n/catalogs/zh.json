@@ -758,5 +758,17 @@
   "24 de noviembre de 2026": "2026年11月24日",
   "Base pública: 60ce813": "公开基准：60ce813",
   "Referencia: 60ce813": "参考：60ce813",
-  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "通过 sf::RenderTexture 绘制精灵、图形和文字。支持 Alt + Enter 全屏切换、等比缩放及 Bloom 和 Monitor 后处理。"
+  "Sprites, formas y texto sobre sf::RenderTexture. Pantalla completa con Alt + Enter, ajuste proporcional y posprocesado Bloom y Monitor.": "通过 sf::RenderTexture 绘制精灵、图形和文字。支持 Alt + Enter 全屏切换、等比缩放及 Bloom 和 Monitor 后处理。",
+  "Pruebas unitarias de colisión 2D": "2D 碰撞单元测试",
+  "Seis casos comprueban la intersección y el barrido de cajas AABB. Una prueba negativa verifica que CTest detecte un fallo forzado.": "六个用例检查 AABB 的相交和扫掠检测。一个负向测试验证 CTest 能否检测到人为触发的失败。",
+  "Pruebas": "测试",
+  "Se ejecutan sin abrir una ventana mediante el objetivo ae_collision_tests.": "通过 ae_collision_tests 目标运行，无需打开窗口。",
+  "CTest · TestSupport": "CTest · TestSupport",
+  "Ejecutar las pruebas unitarias": "运行单元测试",
+  "34 actualizaciones": "34 项更新",
+  "25 de noviembre de 2026": "2026年11月25日",
+  "61a3244": "61a3244",
+  "Base pública: 61a3244": "公开基准：61a3244",
+  "Referencia: 61a3244": "参考：61a3244",
+  "9 opciones disponibles": "9 个可用选项"
 }

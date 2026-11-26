@@ -33,7 +33,7 @@ cd AwesomeEngine
 このドキュメントとまったく同じコードを確認するには、新しく取得したコピーで対象リビジョンを選択します。
 
 ```sh
-git checkout 60ce8139fbd36713821bf85debd96bf0bd1c8bb3
+git checkout 61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2
 ```
 
 最後のコマンドは作業コピーを特定のコミットに切り替えます。変更を開発する場合は、作業を始める前に自分のブランチを作成してください。各ソースへのリンクも同じリビジョンを指しているため、将来の更新との差分を比較できます。
@@ -63,6 +63,22 @@ cmake --build BuildRelease --parallel
 ```
 
 プロジェクトには MSVC 向けのコンパイラーオプションもありますが、上記の手順では Ninja と環境内のコンパイラーを使用します。同じビルドディレクトリで異なるジェネレーターやコンパイラーを混在させないでください。
+
+<span id="ejecutar-las-pruebas-unitarias" aria-hidden="true"></span>
+
+## 単体テストを実行する
+
+現在のスイートは AABB 衝突の6ケースを確認します。ボックスの交差と分離、初期の重なり、移動中の衝突、衝突しない掃引、角での接触が対象です。
+
+```sh
+cmake -S . -B Build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON
+cmake --build Build --target ae_collision_tests --parallel
+ctest --test-dir Build -L headless --output-on-failure --no-tests=error
+```
+
+`core.collision` は6ケースを実行します。`core.collision.detects_failure` は `AE_TEST_FORCE_FAIL` を設定して意図的に失敗させます。CTest は2つ目のテストが0以外の終了コードを返すことを期待します。
+
+[テストのソースコード](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/Core/CollisionTests.cpp) · [CTest への登録](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/Tests/CMakeLists.txt)
 
 <span id="ejecutar-en-windows" aria-hidden="true"></span>
 
@@ -96,6 +112,6 @@ cmake --build BuildRelease --parallel
 
 ## 参照ソース
 
-- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/CMakeLists.txt)。
-- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/tasks.json)。
-- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/60ce8139fbd36713821bf85debd96bf0bd1c8bb3/.vscode/launch.json)。
+- [CMakeLists.txt](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/CMakeLists.txt)。
+- [ビルドタスク](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/tasks.json)。
+- [デバッグと作業ディレクトリ](https://github.com/Arukado01/AwesomeEngine/blob/61a3244690f7763d41a8f0ba6f0f2ac3deb53ee2/.vscode/launch.json)。
