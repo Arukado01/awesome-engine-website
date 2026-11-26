@@ -1,9 +1,8 @@
 ---
 const { variant = 'panel' } = Astro.props;
-const tests = [
-  { name: 'core.collision', href: '/docs/pruebas/#colisiones-2d' },
-  { name: 'core.collision.detects_failure', href: '/docs/pruebas/#colisiones-2d' },
-  { name: 'core.sprite_animator', href: '/docs/pruebas/#animación-de-sprites' },
+const suites = [
+  { name: 'Colisiones 2D', href: '/docs/pruebas/#colisiones-2d' },
+  { name: 'Animación de sprites', href: '/docs/pruebas/#animación-de-sprites' },
 ];
 ---
 
@@ -39,9 +38,9 @@ const tests = [
         <h2 id="testing-title">Pruebas del motor</h2>
         <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
         <div class="test-chips">
-          {tests.map((test) => (
-            <a class="test-chip" href={test.href}>
-              <code>{test.name}</code>
+          {suites.map((suite) => (
+            <a class="test-chip" href={suite.href}>
+              {suite.name}
             </a>
           ))}
         </div>

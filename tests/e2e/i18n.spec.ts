@@ -93,7 +93,7 @@ for (const locale of locales.filter((code) => code !== 'es')) {
       .click();
     await expect(page).toHaveURL(new RegExp(`/${locale}/motor/$`));
     await expect(page.locator('#pruebas a.button')).toHaveAttribute('href', '/' + locale + '/docs/pruebas/');
-    await expect(page.locator('#pruebas .test-chip')).toHaveCount(3);
+    await expect(page.locator('#pruebas .test-chip')).toHaveCount(2);
     await expect(page.locator('#tecnologias .technology-link')).toHaveCount(8);
     expect(
       await page
