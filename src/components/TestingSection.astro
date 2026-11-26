@@ -10,20 +10,13 @@ const { variant = 'panel' } = Astro.props;
           <span class="mono">04 — CALIDAD</span>
           <span class="pill live">Implementado</span>
         </div>
-        <div class="test-visual" aria-hidden="true" data-no-translate>
-          <span class="test-caption">ctest → 100% passed</span>
-          <div class="test-chips">
-            <span><i>✓</i> render</span>
-            <span><i>✓</i> scenes</span>
-            <span><i>✓</i> resources</span>
-            <span><i>✓</i> input</span>
-            <span><i>✓</i> audio</span>
-            <span><i>✓</i> animation</span>
-            <span><i>✓</i> collision</span>
-            <span><i>✓</i> particles</span>
-            <span><i>✓</i> time</span>
-            <span><i>✓</i> save</span>
+        <div class="collision-visual" aria-hidden="true">
+          <div class="collision-stage">
+            <span class="cbox box-a"></span>
+            <span class="cbox box-b"></span>
+            <span class="cbox box-hit"></span>
           </div>
+          <span class="collision-caption">AABB → INTERSECCIÓN → RESOLUCIÓN</span>
         </div>
         <div class="feature-bottom">
           <div>
@@ -58,33 +51,74 @@ const { variant = 'panel' } = Astro.props;
   .testing-card h3 {
     margin: 0 0 12px;
   }
-  .test-visual {
+  .collision-visual {
     display: grid;
-    gap: 10px;
-    justify-items: start;
-    margin-block: 22px;
-  }
-  .test-caption {
-    font: 10px var(--font-mono);
-    letter-spacing: 0.08em;
-    color: var(--muted);
-  }
-  .test-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .test-chips span {
-    font: 10px var(--font-mono);
-    background: var(--surface-2);
+    gap: 14px;
+    margin-block: 20px;
+    padding: 16px;
     border: 1px solid var(--border);
-    padding: 7px 10px;
-    border-radius: 3px;
+    border-radius: 6px;
+    background-color: color-mix(in srgb, var(--surface-2) 45%, transparent);
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 26px 26px;
+    overflow: hidden;
+  }
+  .collision-stage {
+    position: relative;
+    height: 88px;
+    --sweep: 120px;
+  }
+  .cbox {
+    position: absolute;
+    inset-block: 12px;
+    width: 120px;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+  .box-a {
+    left: 50%;
+    margin-left: -220px;
+  }
+  .box-b {
+    right: 50%;
+    margin-right: -220px;
+    border-color: var(--mint);
+    background: color-mix(in srgb, var(--mint) 8%, transparent);
+  }
+  .box-hit {
+    inset-block: 12px;
+    left: 50%;
+    width: 44px;
+    translate: -50% 0;
+    border: 1px dashed var(--accent);
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    opacity: 0;
+  }
+  .collision-caption {
+    font: 8px var(--font-mono);
+    letter-spacing: 0.15em;
     color: var(--muted);
   }
-  .test-chips i {
-    font-style: normal;
-    color: var(--mint);
+  @media (max-width: 700px) {
+    .cbox {
+      width: 90px;
+      inset-block: 20px;
+    }
+    .box-a {
+      margin-left: -140px;
+    }
+    .box-b {
+      margin-right: -140px;
+    }
+    .collision-stage {
+      --sweep: 55px;
+    }
+    .box-hit {
+      width: 30px;
+    }
   }
   .testing-panel {
     display: grid;
