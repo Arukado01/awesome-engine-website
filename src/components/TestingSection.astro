@@ -10,6 +10,21 @@ const { variant = 'panel' } = Astro.props;
           <span class="mono">04 — CALIDAD</span>
           <span class="pill live">Implementado</span>
         </div>
+        <div class="test-visual" aria-hidden="true" data-no-translate>
+          <span class="test-caption">ctest → 100% passed</span>
+          <div class="test-chips">
+            <span><i>✓</i> render</span>
+            <span><i>✓</i> scenes</span>
+            <span><i>✓</i> resources</span>
+            <span><i>✓</i> input</span>
+            <span><i>✓</i> audio</span>
+            <span><i>✓</i> animation</span>
+            <span><i>✓</i> collision</span>
+            <span><i>✓</i> particles</span>
+            <span><i>✓</i> time</span>
+            <span><i>✓</i> save</span>
+          </div>
+        </div>
         <div class="feature-bottom">
           <div>
             <h3 id="testing-title">Pruebas del motor</h3>
@@ -42,6 +57,34 @@ const { variant = 'panel' } = Astro.props;
   }
   .testing-card h3 {
     margin: 0 0 12px;
+  }
+  .test-visual {
+    display: grid;
+    gap: 10px;
+    justify-items: start;
+    margin-block: 22px;
+  }
+  .test-caption {
+    font: 10px var(--font-mono);
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+  .test-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .test-chips span {
+    font: 10px var(--font-mono);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: 7px 10px;
+    border-radius: 3px;
+    color: var(--muted);
+  }
+  .test-chips i {
+    font-style: normal;
+    color: var(--mint);
   }
   .testing-panel {
     display: grid;
