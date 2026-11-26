@@ -1,18 +1,44 @@
 <section class="testing-section" id="pruebas" aria-labelledby="testing-title">
-  <div class="section-heading">
-    <div>
-      <span class="eyebrow">Calidad verificable</span>
-      <h2 id="testing-title">Pruebas del motor</h2>
-    </div>
+  <div class="testing-panel">
+    <span class="testing-eyebrow">Calidad verificable</span>
+    <h2 id="testing-title">Pruebas del motor</h2>
     <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
+    <a class="button" href="/docs/pruebas/">
+      Ver guía de pruebas <span aria-hidden="true">→</span>
+    </a>
   </div>
-  <a class="button" href="/docs/pruebas/">
-    Ver guía de pruebas <span aria-hidden="true">→</span>
-  </a>
 </section>
 
 <style>
-  .testing-section .button {
+  .testing-panel {
+    display: grid;
+    justify-items: start;
+    gap: 16px;
+    padding: clamp(24px, 4vw, 40px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 12px;
+  }
+  .testing-eyebrow {
+    font: 500 9px var(--font-mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .testing-panel h2 {
+    margin: 0;
+    font: 500 24px var(--font-display);
+  }
+  .testing-panel p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 2;
+    max-width: 62ch;
+  }
+  .testing-panel .button {
+    margin-top: 8px;
     max-width: 100%;
+    text-decoration: none;
   }
 </style>
