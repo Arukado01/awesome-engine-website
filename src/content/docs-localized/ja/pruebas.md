@@ -31,8 +31,10 @@ AABB の交差と分離、初期の重なり、移動中の衝突、衝突しな
 
 ```sh
 cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -R '^core[.]collision([.]|$)' --output-on-failure --no-tests=error
+ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tests=error
 ```
+
+メインテストのみ（ネガティブテストを除く）を実行するには、`-R '^core[.]collision$'` を使用してください。
 
 `core.collision` はウィンドウを開かずに6ケースを確認します。`core.collision.detects_failure` は `AE_TEST_FORCE_FAIL` で意図的に失敗させ、実行ファイルが0以外の終了コードを返すことを確認します。
 

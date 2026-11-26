@@ -31,8 +31,10 @@ Para compilar e executar apenas esta suíte, use o alvo `ae_collision_tests` e f
 
 ```sh
 cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -R '^core[.]collision([.]|$)' --output-on-failure --no-tests=error
+ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tests=error
 ```
+
+Para executar apenas o teste principal (sem o teste negativo), use `-R '^core[.]collision$'`.
 
 `core.collision` verifica os seis casos sem abrir uma janela. `core.collision.detects_failure` força uma falha com `AE_TEST_FORCE_FAIL` e verifica se o executável retorna um código diferente de zero.
 

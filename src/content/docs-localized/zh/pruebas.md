@@ -31,8 +31,10 @@ ctest --test-dir Build --output-on-failure --no-tests=error
 
 ```sh
 cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -R '^core[.]collision([.]|$)' --output-on-failure --no-tests=error
+ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tests=error
 ```
+
+如需只运行主测试（不含负面测试），请使用 `-R '^core[.]collision$'`。
 
 `core.collision` 无需打开窗口即可检查六个用例。`core.collision.detects_failure` 通过 `AE_TEST_FORCE_FAIL` 触发失败，并验证可执行文件返回非零退出码。
 

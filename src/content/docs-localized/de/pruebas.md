@@ -31,8 +31,10 @@ Um nur diese Suite zu bauen und auszuführen, nutze das Ziel `ae_collision_tests
 
 ```sh
 cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -R '^core[.]collision([.]|$)' --output-on-failure --no-tests=error
+ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tests=error
 ```
+
+Um nur den Haupttest (ohne den Negativtest) auszuführen, verwenden Sie `-R '^core[.]collision$'`.
 
 `core.collision` prüft die sechs Fälle ohne Fenster. `core.collision.detects_failure` löst mit `AE_TEST_FORCE_FAIL` einen Fehler aus und prüft, ob das Programm einen Exitcode ungleich null liefert.
 

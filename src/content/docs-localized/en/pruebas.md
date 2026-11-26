@@ -31,8 +31,10 @@ To build and run just this suite, use the `ae_collision_tests` target and filter
 
 ```sh
 cmake --build Build --target ae_collision_tests --parallel
-ctest --test-dir Build -R '^core[.]collision([.]|$)' --output-on-failure --no-tests=error
+ctest --test-dir Build -R '^core[.]collision(\.|$)' --output-on-failure --no-tests=error
 ```
+
+To run only the main test (without the negative test), use `-R '^core[.]collision$'`.
 
 `core.collision` checks the six cases without opening a window. `core.collision.detects_failure` uses `AE_TEST_FORCE_FAIL` to trigger a failure and verifies that the executable exits with a nonzero code.
 
