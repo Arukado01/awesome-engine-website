@@ -771,6 +771,7 @@
   "Base pública: 61a3244": "公开基准：61a3244",
   "Referencia: 61a3244": "参考：61a3244",
   "9 opciones disponibles": "9 个可用选项",
+  "Calidad verificable": "可验证的质量",
   "Pruebas del motor": "引擎测试",
   "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.": "了解如何使用 CMake 和 CTest 运行测试，以及各测试套件的覆盖范围。",
   "Compilar y ejecutar las pruebas": "编译并运行测试",

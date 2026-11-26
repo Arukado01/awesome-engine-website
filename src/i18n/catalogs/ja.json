@@ -771,6 +771,7 @@
   "Base pública: 61a3244": "公開基準：61a3244",
   "Referencia: 61a3244": "基準：61a3244",
   "9 opciones disponibles": "9件の選択肢",
+  "Calidad verificable": "検証可能な品質",
   "Pruebas del motor": "エンジンのテスト",
   "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.": "CMake と CTest でテストを実行する方法と、各テストスイートの対象を確認します。",
   "Compilar y ejecutar las pruebas": "テストのビルドと実行",

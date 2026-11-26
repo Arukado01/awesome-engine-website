@@ -1,6 +1,9 @@
-<section class="testing-panel" id="pruebas" aria-labelledby="testing-title">
-  <div class="testing-copy">
-    <h2 id="testing-title">Pruebas del motor</h2>
+<section class="testing-section" id="pruebas" aria-labelledby="testing-title">
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow">Calidad verificable</span>
+      <h2 id="testing-title">Pruebas del motor</h2>
+    </div>
     <p>Consulta qué cubre cada suite y cómo ejecutar las pruebas con CMake y CTest.</p>
   </div>
   <a class="button" href="/docs/pruebas/">
@@ -9,32 +12,7 @@
 </section>
 
 <style>
-  .testing-panel {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px 32px;
-    padding: clamp(22px, 4vw, 48px);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-inline-start: 3px solid var(--accent);
-    border-radius: 12px;
-  }
-  .testing-copy {
-    flex: 1 1 20rem;
-    min-width: 0;
-  }
-  .testing-copy h2 {
-    font-size: clamp(24px, 3vw, 38px);
-    margin: 0 0 10px;
-  }
-  .testing-copy p {
-    margin: 0;
-    max-width: 48ch;
-  }
-  .testing-panel .button {
+  .testing-section .button {
     max-width: 100%;
-    text-decoration: none;
   }
 </style>

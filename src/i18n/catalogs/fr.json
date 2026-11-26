@@ -771,6 +771,7 @@
   "Base pública: 61a3244": "Base publique : 61a3244",
   "Referencia: 61a3244": "Référence : 61a3244",
   "9 opciones disponibles": "9 options disponibles",
+  "Calidad verificable": "Qualité vérifiable",
   "Pruebas del motor": "Tests du moteur",
   "Cómo ejecutar las pruebas del motor con CMake y CTest y consultar qué cubre cada suite.": "Exécuter les tests avec CMake et CTest et consulter la couverture de chaque suite.",
   "Compilar y ejecutar las pruebas": "Compiler et exécuter les tests",
