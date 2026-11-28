@@ -18,6 +18,56 @@ const commit = (sha: string) => `https://github.com/Arukado01/AwesomeEngine/comm
 /** Agregar nuevas entradas al principio, conservar la fecha y enlazar la evidencia del cambio. */
 export const updates: Update[] = [
   {
+    id: '2cab4bb',
+    date: '2026-11-28T08:18:01-05:00',
+    title: 'Perfilador de frames opcional',
+    description:
+      'La nueva clase FrameProfiler registra en un CSV el intervalo de cada cuadro. Se activa con la variable de entorno AE_FRAME_LOG; sin ella no abre archivo ni añade trabajo al bucle.',
+    category: 'Arquitectura',
+    status: 'implemented',
+    added: [
+      'FrameProfiler en Engine/Utils con steady_clock y una fila por frame.',
+      'Medición tras Render en Main.cpp, solo cuando la ventana tiene foco.',
+    ],
+    fixed: [],
+    performance: [],
+    architecture: ['C++20 · steady_clock · CSV'],
+    source: commit('2cab4bba09462f1236271cbd1d93e15cc207573b'),
+  },
+  {
+    id: 'd20cf00',
+    date: '2026-11-27T18:09:45-05:00',
+    title: 'Pruebas unitarias de configuración',
+    description:
+      'Dos escenarios CTest comprueban la carga de Config.json: uno completo con juegos y límite de cuadros, y uno mínimo que confirma los valores por defecto como 120 FPS y cursor de 24 px.',
+    category: 'Pruebas',
+    status: 'implemented',
+    added: [
+      'Objetivo ae_engine_config_tests con los casos core.engine_config.valid y core.engine_config.minimal.',
+      'Fixtures de configuración en Tests/Fixtures/Config seleccionados con AE_CONFIG_CASE.',
+    ],
+    fixed: [],
+    performance: [],
+    architecture: ['CTest · Fixtures/Config'],
+    source: commit('d20cf006b765bbc7c9f09c2726d99e5f34746610'),
+  },
+  {
+    id: 'c72ae6f',
+    date: '2026-11-26T21:09:03-05:00',
+    title: 'Pruebas unitarias de guardado',
+    description:
+      'Siete casos caracterizan SaveManager con un directorio temporal: creación de Save.json al destruir, claves conservadas al modificar, borrado entre varias claves y JSON corrupto que propaga la excepción. Dos fallos conocidos quedan caracterizados: borrar la última clave y Clear no persisten.',
+    category: 'Pruebas',
+    status: 'implemented',
+    added: [
+      'Objetivo ae_save_manager_tests con el caso core.save_manager, sin abrir una ventana.',
+    ],
+    fixed: [],
+    performance: [],
+    architecture: ['CTest · TempWorkspace'],
+    source: commit('c72ae6fef8a324b4cfd5e73e2e4928d2201a81b3'),
+  },
+  {
     id: '34702d1',
     date: '2026-11-26T15:39:39-05:00',
     title: 'Pruebas unitarias de animación de sprites',
