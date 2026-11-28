@@ -9,6 +9,7 @@ export default defineConfig(
       '.e2e-dist/**',
       '.astro/**',
       'node_modules/**',
+      '.agents/**',
       'functions/**',
       '.capture-work/**',
       'playwright-report/**',

@@ -22,53 +22,71 @@ const steps = [
 <style>
   .pipeline {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--surface);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
   }
   .pipeline-step {
-    padding: 28px;
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    position: relative;
+    gap: 0.5rem;
+    padding: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  }
+  .pipeline-step:first-child {
+    border-radius: calc(var(--radius-lg) - 1px) 0 0 calc(var(--radius-lg) - 1px);
+  }
+  .pipeline-step:last-child {
+    border-radius: 0 calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0;
   }
   .pipeline-step:not(:last-child) {
     border-right: 1px solid var(--border);
   }
-  .pipeline-step:not(:last-child):after {
+  .pipeline-step:not(:last-child)::after {
     content: '→';
     position: absolute;
-    right: -11px;
     top: 50%;
-    background: var(--surface);
-    color: var(--accent);
-    padding: 0 4px;
+    right: -0.8125rem;
     z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    translate: 0 -50%;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--bg);
+    color: var(--accent);
+    font-size: var(--text-xs);
+    line-height: 1;
   }
   .pipeline-number {
-    font: 11px var(--font-mono);
+    margin-bottom: 1rem;
     color: var(--accent);
-    margin-bottom: 16px;
+    font: var(--text-xs) var(--font-mono);
   }
   .pipeline-step strong {
     font-family: var(--font-display);
-    font-size: 17px;
-    font-weight: 500;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
   .pipeline-step > span:last-child {
-    font-size: 11px;
     color: var(--muted);
+    font-size: var(--text-sm);
   }
   @media (max-width: 900px) {
     .pipeline {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .pipeline-step:nth-child(n) {
+      border-radius: 0;
     }
     .pipeline-step:nth-child(2) {
       border-right: 0;
     }
-    .pipeline-step:nth-child(2):after {
+    .pipeline-step:nth-child(2)::after {
       display: none;
     }
     .pipeline-step:nth-child(-n + 2) {
@@ -77,13 +95,13 @@ const steps = [
   }
   @media (max-width: 450px) {
     .pipeline-step {
-      padding: 20px 16px;
+      padding: 1.125rem 1rem;
     }
     .pipeline-step strong {
-      font-size: 15px;
+      font-size: var(--text-md);
     }
     .pipeline-step > span:last-child {
-      font-size: 10px;
+      font-size: var(--text-xs);
     }
   }
 </style>

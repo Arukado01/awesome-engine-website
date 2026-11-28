@@ -28,31 +28,26 @@ import Base from '../layouts/Base.astro';
 </Base>
 <style>
   .error-page {
-    min-height: 70vh;
-    padding-block: 80px;
     position: relative;
+    min-height: 70vh;
+    padding-block: clamp(3.5rem, 2rem + 5vw, 6rem);
   }
   .error-number {
-    font: 500 120px/0.9 var(--font-display);
-    color: var(--border);
     display: block;
-    margin-bottom: 40px;
+    margin-bottom: 2rem;
+    color: transparent;
+    font: 600 clamp(6rem, 4rem + 8vw, 10rem) / 0.9 var(--font-display);
+    letter-spacing: -0.04em;
+    -webkit-text-stroke: 1px var(--border-strong);
   }
   .error-page h1 {
-    font-size: clamp(2.6rem, 6vw, 4.5rem);
-    margin-bottom: 24px;
+    max-width: 16ch;
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
   }
   .error-page p {
-    max-width: 460px;
-    font-size: 14px;
-    margin-bottom: 30px;
-  }
-  @media (max-width: 640px) {
-    .error-page {
-      padding-block: 50px;
-    }
-    .error-number {
-      font-size: 90px;
-    }
+    max-width: 30rem;
+    margin-bottom: 2rem;
+    font-size: var(--text-lead);
   }
 </style>

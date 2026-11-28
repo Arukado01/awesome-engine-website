@@ -282,255 +282,260 @@ const systems = [
   .about-layout,
   .limits {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 100px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: clamp(2.5rem, 1rem + 6vw, 7rem);
   }
   .about-layout p,
   .limits p {
-    font-size: 14px;
+    max-width: 62ch;
+    font-size: var(--text-base);
   }
+  .about-layout code {
+    padding: 0.125rem 0.375rem;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-xs);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.85em;
+  }
+  .about-layout .small-note,
   .small-note {
-    font-size: 11px !important;
     color: var(--muted);
+    font-size: var(--text-sm);
   }
   .system-section,
   .tech-section {
-    background: var(--surface);
     border-block: 1px solid var(--border);
+    background: var(--surface);
   }
   .system-row {
     display: grid;
-    grid-template-columns: 35px 1fr 1.3fr 100px 20px;
+    grid-template-columns: 2.5rem minmax(0, 0.9fr) minmax(0, 1.3fr) auto 1.25rem;
     align-items: center;
-    gap: 25px;
-    padding: 30px 0;
+    gap: 1.5rem;
+    margin-inline: -0.75rem;
+    padding: 1.375rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .system-row:first-child {
     border-top: 1px solid var(--border);
   }
-  .system-row:last-child {
-    border-bottom: 1px solid var(--border);
+  .system-row:hover {
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
   }
   .system-row:hover h3 {
     color: var(--accent);
   }
   .system-number {
-    font: 11px var(--font-mono);
     color: var(--muted);
+    font: var(--text-xs) var(--font-mono);
   }
   .system-row h3 {
-    font-size: 22px;
+    font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
   }
   .system-row p {
-    font-size: 12px;
     margin: 0;
-    line-height: 1.8;
+    font-size: var(--text-sm);
+    line-height: 1.65;
   }
   .system-row .pill {
-    font-size: 9px;
     justify-self: start;
   }
+  .system-row > span:last-child {
+    color: var(--muted);
+    transition:
+      color var(--transition),
+      transform var(--duration) var(--ease-out);
+  }
+  .system-row:hover > span:last-child {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
   .architecture-diagram {
+    padding: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 40px;
+    border-radius: var(--radius-xl);
     background: var(--surface);
   }
   .engine-node {
-    width: 320px;
-    margin: auto;
-    text-align: center;
-    border: 1px solid var(--accent);
-    padding: 24px;
-    border-radius: 6px;
     display: grid;
-    gap: 14px;
-    background: color-mix(in srgb, var(--accent) 5%, transparent);
+    gap: 0.75rem;
+    width: min(22rem, 100%);
+    margin: auto;
+    padding: 1.5rem;
+    border: 1px solid var(--accent-line);
+    border-radius: var(--radius-lg);
+    background: var(--accent-soft);
+    text-align: center;
   }
   .engine-node .mono,
   .arch-node > .mono {
     color: var(--accent);
-    font-size: 9px;
-    letter-spacing: 0.1em;
+    font-size: var(--text-2xs);
+    letter-spacing: 0.12em;
   }
   .engine-node strong {
-    font: 500 24px var(--font-display);
+    font: 600 1.5rem var(--font-display);
+    letter-spacing: -0.02em;
   }
   .engine-node small {
-    font: 10px var(--font-mono);
     color: var(--muted);
+    font: var(--text-xs) var(--font-mono);
   }
   .connector {
     width: 1px;
-    height: 40px;
-    background: var(--accent);
+    height: 2.5rem;
     margin: auto;
+    background: linear-gradient(var(--accent), var(--accent-line));
   }
   .architecture-columns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
     position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
   }
   .arch-node {
+    padding: 1.75rem;
     border: 1px solid var(--border);
-    border-top-color: var(--accent);
-    padding: 28px;
-    border-radius: 6px;
+    border-radius: var(--radius-lg);
+    background: var(--bg);
   }
   .arch-node h3 {
-    margin: 16px 0 20px;
-    font-size: 24px;
+    margin: 1rem 0 1.25rem;
+    font-size: var(--text-2xl);
   }
   .arch-node p {
-    font-size: 12px;
-    line-height: 2;
+    font-size: var(--text-sm);
+    line-height: 1.9;
   }
-  .manager-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .manager-grid span,
-  .scene-flow span {
-    font: 10px var(--font-mono);
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    padding: 7px 10px;
-    border-radius: 3px;
-    color: var(--muted);
-  }
+  .manager-grid,
   .scene-flow {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
+  }
+  .manager-grid span,
+  .scene-flow span {
+    padding: 0.375rem 0.625rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    color: var(--text-soft);
+    font: var(--text-xs) var(--font-mono);
   }
   .diagram-caption {
-    margin-top: 28px;
-    text-align: center;
-    font-size: 10px;
+    margin-top: 1.75rem;
     color: var(--muted);
+    font-size: var(--text-sm);
+    text-align: center;
   }
   .diagram-caption a {
     color: var(--accent);
   }
   .pipeline-title {
-    margin: 56px 0 24px;
+    margin: 3.5rem 0 1.5rem;
+    font-size: var(--text-2xl);
   }
   .pipeline-note {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   .section-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
     width: 100%;
+    margin: 0;
+    border: 0;
+    border-top: 1px solid var(--border);
   }
   .technology-list {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 56px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(2rem, 1rem + 3vw, 3.5rem);
   }
   .technology-list > div {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 12px;
-    padding: 25px 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    padding: 1.5rem 0;
     border-top: 1px solid var(--border);
   }
   .technology-link {
     grid-column: 1/-1;
     justify-self: start;
-    min-height: 44px;
+    min-height: 2.75rem;
     max-width: 100%;
-    gap: 12px;
+    gap: 0.5rem;
     text-decoration: underline;
-    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
   }
   .technology-list strong {
-    font: 500 24px var(--font-display);
+    font: 600 clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem) var(--font-display);
+    letter-spacing: -0.02em;
   }
   .technology-list .mono {
     color: var(--accent);
-    align-self: center;
   }
   .technology-list p {
     grid-column: 1/-1;
-    font-size: 12px;
+    margin: 0;
+    font-size: var(--text-sm);
   }
   .limits .notice {
-    margin-block: 24px;
+    margin-block: 1.5rem;
   }
   .limits .text-link {
-    margin-top: 8px;
+    margin-top: 0.5rem;
   }
   @media (max-width: 900px) {
-    .about-layout,
-    .limits {
-      gap: 40px;
-    }
     .system-row {
-      grid-template-columns: 25px 1fr 1.3fr 20px;
-      gap: 18px;
+      grid-template-columns: 2rem minmax(0, 1fr) 1.25rem;
+      grid-template-areas:
+        'num title arrow'
+        'num desc arrow'
+        'num pill arrow';
+      align-items: start;
+      gap: 0.5rem 1rem;
+    }
+    .system-number {
+      grid-area: num;
+      padding-top: 0.3rem;
+    }
+    .system-row h3 {
+      grid-area: title;
+    }
+    .system-row p {
+      grid-area: desc;
     }
     .system-row .pill {
-      display: none;
+      grid-area: pill;
+      margin-top: 0.25rem;
     }
-    .architecture-diagram {
-      padding: 24px;
-    }
-    .arch-node {
-      padding: 20px;
+    .system-row > span:last-child {
+      grid-area: arrow;
+      align-self: center;
     }
     .architecture-columns {
-      gap: 16px;
+      gap: 1rem;
     }
-    .technology-list {
-      gap: 0 30px;
+    .arch-node {
+      padding: 1.25rem;
     }
   }
   @media (max-width: 640px) {
     .about-layout,
     .limits {
-      grid-template-columns: 1fr;
-      gap: 28px;
-    }
-    .system-row {
-      grid-template-columns: 24px 1fr 20px;
-      gap: 14px;
-      padding: 24px 0;
-    }
-    .system-row h3 {
-      font-size: 22px;
-    }
-    .system-row p {
-      grid-column: 2;
-      grid-row: 2;
-    }
-    .system-row > span:last-child {
-      grid-column: 3;
-      grid-row: 1;
-    }
-    .architecture-diagram {
-      padding: 20px 14px;
-    }
-    .engine-node {
-      width: 100%;
-      padding: 20px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.75rem;
     }
     .architecture-columns {
-      grid-template-columns: 1fr;
-    }
-    .arch-node h3 {
-      font-size: 22px;
+      grid-template-columns: minmax(0, 1fr);
     }
     .diagram-caption {
-      text-align: left;
       line-height: 1.8;
+      text-align: left;
     }
     .technology-list {
-      grid-template-columns: 1fr;
-    }
-    .technology-list strong {
-      font-size: 22px;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
 </style>

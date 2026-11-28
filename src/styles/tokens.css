@@ -1,37 +1,94 @@
 :root {
-  --font-body: 'Inter Variable', sans-serif;
-  --font-display: 'Space Grotesk Variable', sans-serif;
-  --font-mono: Consolas, 'Courier New', monospace;
+  /* Typefaces: the brand pair plus a mono stack that avoids Courier on macOS and Linux. */
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Inter Variable', system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'Courier New',
+    monospace;
+
+  /* Surfaces and text */
   --bg: #101218;
   --surface: #171a22;
   --surface-2: #20242e;
+  --surface-3: #292e3a;
   --text: #f2f2f5;
+  --text-soft: #c8cbd6;
   --muted: #a4a8b7;
   --border: #303440;
+  --border-soft: #252935;
+  --border-strong: #474d5e;
+
+  /* Brand */
   --accent: #c2b2ff;
   --accent-strong: #a68dff;
+  --accent-soft: #c2b2ff1c;
+  --accent-line: #c2b2ff66;
   --mint: #b7efce;
   --warning: #e8bd7c;
   --danger: #ff9c9c;
   --on-accent: #191327;
+
+  /* Code stays dark in both themes, as it does in the engine's own tools. */
+  --code-bg: #11141d;
+  --code-border: #2b2f3b;
+  --code-text: #d5d9e5;
+  --code-muted: #a4a8b7;
+
+  /* Spacing (4px base) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
+  --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
+  --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
   --space-24: 96px;
-  --radius: 8px;
-  --radius-lg: 14px;
-  --max-width: 1280px;
+  --gutter: clamp(1.25rem, 0.55rem + 3vw, 3rem);
+  --section-y: clamp(4rem, 2.4rem + 6vw, 7.5rem);
+  --stack-heading: clamp(2rem, 1.4rem + 2vw, 3.5rem);
+
+  /* Type roles */
+  --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
+  --text-md: 0.9375rem;
   --text-base: 1rem;
   --text-lg: 1.125rem;
-  --shadow: 0 20px 60px #0003;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-h3: clamp(1.25rem, 1.12rem + 0.45vw, 1.5rem);
+  --text-h2: clamp(2rem, 1.4rem + 2.3vw, 3.25rem);
+  --text-h1: clamp(2.5rem, 1.5rem + 4vw, 4.75rem);
+  --tracking-display: -0.04em;
+  --tracking-heading: -0.03em;
+  --tracking-label: 0.14em;
+  --measure: 68ch;
+
+  /* Shape */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 999px;
+
+  /* Elevation: borders carry structure; shadows only lift what floats or responds. */
+  --shadow: 0 24px 60px -20px #000000b3;
+  --shadow-hover: 0 18px 36px -18px #000000cc;
+  --shadow-pop: 0 22px 50px -14px #000000c2, 0 2px 8px #0000004d;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --transition: 180ms ease;
+  --duration: 220ms;
+
+  /* Layout */
+  --max-width: 1280px;
+  --header-h: 4.5rem;
   --z-header: 30;
   --z-dialog: 100;
   --breakpoint-mobile: 640px;
@@ -42,15 +99,23 @@
   --bg: #f7f7fa;
   --surface: #fff;
   --surface-2: #ebedf3;
+  --surface-3: #e1e4ec;
   --text: #20222b;
+  --text-soft: #3b3f4c;
   --muted: #5c6171;
   --border: #d9dbe4;
+  --border-soft: #e6e8ef;
+  --border-strong: #b5b9c7;
   --accent: #6240c3;
   --accent-strong: #5130b3;
+  --accent-soft: #6240c314;
+  --accent-line: #6240c366;
   --mint: #216345;
   --warning: #865513;
   --danger: #aa262b;
   --on-accent: #fff;
-  --shadow: 0 20px 60px #25253610;
+  --shadow: 0 24px 60px -24px #2b2d4a40;
+  --shadow-hover: 0 18px 36px -20px #2b2d4a4d;
+  --shadow-pop: 0 22px 50px -18px #2b2d4a59, 0 2px 8px #2b2d4a14;
   color-scheme: light;
 }
