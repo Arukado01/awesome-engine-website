@@ -20,3 +20,6 @@ functions/.env.*
 functions/.secret.local
 !functions/.secret.local.example
 .e2e-dist/
+
+.yarn/
+yarn-error.log*
