@@ -43,6 +43,8 @@ Si no existe sesión, ejecuta `firebase login`. No confundas una compilación co
 firebase deploy --only hosting --project awesome-engine-web-arukado
 ```
 
+> **Advertencia:** si el backend de contacto ya está desplegado y la interfaz está habilitada (`CONTACT_BACKEND_DEPLOYED=true`), **no uses este comando**: restauraría el rewrite al JSON de indisponibilidad y el formulario dejaría de enviar. Usa en su lugar el comando con `--config firebase.functions.json` de la sección 4.
+
 El endpoint `/api/contact` se redirige internamente al JSON de indisponibilidad. Hosting estático puede responder HTTP 200 al servir ese archivo; **el cuerpo contiene `ok: false`** y nunca constituye un envío. El frontend exige una respuesta HTTP correcta y `ok === true`, y mantiene el formulario desactivado por defecto.
 
 No se impone una redirección global de barra final: podría alterar un POST a `/api/contact`. Las páginas de Astro ya se generan como directorios con su URL correspondiente.
