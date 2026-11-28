@@ -705,8 +705,14 @@ dialog::backdrop {
   font-size: 0.85em;
   overflow-wrap: anywhere;
 }
+/* Markdown tables have no wrapper, so the table is its own scroll container: it hugs short
+   tables, fills the column for long ones and scrolls instead of splitting words or code. */
 .prose table {
-  width: 100%;
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
   margin: 1.5rem 0 2rem;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -721,7 +727,11 @@ dialog::backdrop {
   border-bottom: 1px solid var(--border-soft);
   text-align: left;
   vertical-align: top;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+}
+.prose th code,
+.prose td code {
+  overflow-wrap: normal;
 }
 .prose th {
   color: var(--text);
@@ -856,9 +866,15 @@ dialog::backdrop {
   .notice {
     padding: 1rem;
   }
+  /* Narrow screens: readable column widths; the table scrolls sideways when they do not fit. */
   .prose th,
   .prose td {
+    min-width: 8.5rem;
     padding: 0.625rem 0.75rem;
+  }
+  .prose th code,
+  .prose td code {
+    white-space: nowrap;
   }
 }
 @media (prefers-reduced-motion: reduce) {

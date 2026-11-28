@@ -42,7 +42,10 @@ const engineCodeTheme = {
       ],
       settings: { foreground: '#f2f2f5' },
     },
-    { scope: ['punctuation', 'keyword.operator', 'meta.brace'], settings: { foreground: '#a4a8b7' } },
+    {
+      scope: ['punctuation', 'keyword.operator', 'meta.brace'],
+      settings: { foreground: '#a4a8b7' },
+    },
   ],
 };
 

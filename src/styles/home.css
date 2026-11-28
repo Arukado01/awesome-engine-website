@@ -32,10 +32,23 @@
   margin-left: 0.25rem;
   background: var(--border-strong);
 }
+/* The three hand-set lines must fit their column: size = column width / widest line ratio
+   (measured for each language, plus a 3% margin). */
 .hero h1 {
-  font-size: clamp(2.75rem, 1.2rem + 4.6vw, 5.25rem);
+  --hero-ratio: 7.6;
+  font-size: min(
+    5.25rem,
+    (48vw - 3.5rem) / var(--hero-ratio),
+    (var(--max-width) - 72px) / (2 * var(--hero-ratio))
+  );
   line-height: 1.02;
   letter-spacing: var(--tracking-display);
+}
+html:lang(pt) .hero h1 {
+  --hero-ratio: 8.1;
+}
+html:lang(fr) .hero h1 {
+  --hero-ratio: 8.7;
 }
 .hero h1 > span {
   color: var(--accent);
@@ -568,7 +581,7 @@
 
 @media (max-width: 1100px) {
   .hero h1 {
-    font-size: clamp(2.25rem, 0.8rem + 4.2vw, 3.75rem);
+    font-size: min(3.75rem, (45vw - 1.05rem) / var(--hero-ratio));
   }
   .showcase-copy {
     padding: 2.25rem;
@@ -610,7 +623,7 @@
     padding-top: 2.25rem;
   }
   .hero h1 {
-    font-size: clamp(2.5rem, 0.5rem + 10vw, 4rem);
+    font-size: clamp(2rem, min(100vw - 2.5rem, 94vw - 1.1rem) / var(--hero-ratio), 4rem);
   }
   .hero-description {
     margin-block: 1.5rem 1.75rem;

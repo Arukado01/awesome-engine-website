@@ -352,7 +352,7 @@ const date = (value: string) =>
     .history-sidebar {
       position: static;
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
       gap: 0 1rem;
     }
     .history-sidebar .eyebrow,
